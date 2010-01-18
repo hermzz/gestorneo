@@ -11,7 +11,8 @@
 |	http://example.com/
 |
 */
-$config['base_url']	= "http://gestorneo.toffee/";
+$host = $_SERVER['SERVER_NAME'] . ($_SERVER['SERVER_PORT'] != '80' ? (':' . $_SERVER['SERVER_PORT']) : '');
+$config['base_url']    = 'http://' . $host. '/';
 
 /*
 |--------------------------------------------------------------------------
