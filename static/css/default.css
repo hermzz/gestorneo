@@ -1,4 +1,32 @@
 body {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 12px;
+	padding: 0;
+	margin: 0;
+}
+
+a:link, a:visited, a:hover, a:active {
+    color: #00f;
+}
+
+#navbar {
+    background-color: #ddd;
+    border-bottom: 1px solid #aaa;
+    height: 35px;
+}
+
+#navbar ul {
+    margin: 0 0 0 20px;
+    padding: 10px 0 0 0;
+}
+
+#navbar li {
+    float: left;
+    margin: 0 10px 0 0;
+    padding: 0;
+}
+
+#content {
+    clear: both;
+    padding: 0 20px;
 }

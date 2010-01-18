@@ -9,7 +9,9 @@
 			<?php $this->load->view('navbar'); ?>
 		</div>
 		
-		<?php $this->load->view($content_view); ?>
+		<div id="content">
+		    <?php $this->load->view($content_view); ?>
+		</div>
 		
 		<div id="footer">
 			<?php $this->load->view('footer'); ?>
