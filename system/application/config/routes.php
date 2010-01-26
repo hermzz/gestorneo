@@ -43,7 +43,7 @@
 $route['default_controller'] = "tournament";
 $route['scaffolding_trigger'] = "scaffolding";
 
-//$route['tournament/view/:num'] = 'tournament/view';
+$route['tournament/new'] = 'tournament/new_tournament';
 
 
 /* End of file routes.php */

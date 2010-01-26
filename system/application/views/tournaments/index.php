@@ -1,3 +1,5 @@
+<p>Add a <a href="/tournament/new/">new tournament</a></p>
+
 <h2>Upcoming tournaments</h2>
 
 <?php if(count($future_tournaments) > 0): ?>

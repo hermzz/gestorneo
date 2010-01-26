@@ -38,12 +38,13 @@ class Tournament_model extends Model
 	
 	function countSignedUp($id)
 	{
-		$query = $this->db->query('SELECT 
-			COUNT(*) AS cnt
-		FROM 
-			player2tournament
-		WHERE 
-			tid='.$id);
+		$query = $this->db->query(
+			'SELECT 
+				COUNT(*) AS cnt
+			FROM 
+				player2tournament
+			WHERE 
+				tid='.$id);
 			
 		$row = $query->row();
 		
@@ -52,16 +53,23 @@ class Tournament_model extends Model
 	
 	function getPlayers($id)
 	{
-		$query = $this->db->query('SELECT 
-			p.*
-		FROM 
-			players AS p, 
-			player2tournament AS p2t 
-		WHERE 
-			p.id=p2t.pid AND 
-			p2t.tid='.$id);
+		$query = $this->db->query(
+			'SELECT 
+				p.*
+			FROM 
+				players AS p, 
+				player2tournament AS p2t 
+			WHERE 
+				p.id=p2t.pid AND 
+				p2t.tid='.$id);
 			
 		return $query->num_rows ? $query->result() : FALSE;
+	}
+	
+	function create($name, $notes, $date)
+	{
+		$this->db->query('INSERT INTO tournaments (name, notes, date) VALUES (?, ?, ?)',
+			array($name, $notes, $date));
 	}
 }
 
