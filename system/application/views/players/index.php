@@ -1,3 +1,5 @@
+<p>Add a <a href="/player/create/">new player</a></p>
+
 <h2>Players</h2>
 
 <?php if(count($players) > 0): ?>

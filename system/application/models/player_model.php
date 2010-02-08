@@ -29,6 +29,15 @@ class Player_model extends Model
 		
 		return $query->num_rows > 0 ? $query : FALSE;
 	}
+	
+	function create($name, $joined=false)
+	{
+		if(!$joined)
+			$joined = date('Y-m-d');
+			
+		$this->db->query('INSERT INTO players (name, joined) VALUES (?, ?)',
+			array($name, $joined));
+	}
 }
 
 ?>
