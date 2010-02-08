@@ -1,4 +1,4 @@
-<p>Add a <a href="/tournament/new/">new tournament</a></p>
+<p>Add a <a href="/tournament/create/">new tournament</a></p>
 
 <h2>Upcoming tournaments</h2>
 

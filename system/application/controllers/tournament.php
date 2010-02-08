@@ -31,7 +31,7 @@ class Tournament extends Controller {
 		$this->load->view('skeleton', $data);
 	}
 
-	function new_tournament()
+	function create()
 	{
 		$data['title'] = 'New tournament';
 		
@@ -43,7 +43,7 @@ class Tournament extends Controller {
 		
 		if($this->form_validation->run() == FALSE)
 		{
-			$data['content_view'] = 'tournaments/new';
+			$data['content_view'] = 'tournaments/create';
 			$this->load->view('skeleton', $data);
 		} else {
 			$this->tournament_model->create(
