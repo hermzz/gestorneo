@@ -48,11 +48,8 @@ class Player extends Controller {
 			$this->load->view('skeleton', $data);
 		} else {
 			$this->player_model->create(
-				$this->input->post('name'),preg_replace(
-					'/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', 
-					'\3-\1-\2', 
-					$this->input->post('joined')
-				)
+				$this->input->post('name'),
+				$this->input->post('joined')
 			);
 			
 			header('Location: /player/');

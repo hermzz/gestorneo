@@ -4,6 +4,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#datepicker").datepicker({
+			dateFormat: 'dd/mm/yy',
 			onSelect: function(dateText, inst) {
 				$('#joined').attr('value', dateText);
 			}
