@@ -11,7 +11,7 @@ class Player_model extends Model
 	
 	function getAll()
 	{
-		$players = $this->db->query('SELECT * FROM players  ORDER BY joined ASC');
+		$players = $this->db->query('SELECT * FROM players ORDER BY joined ASC');
 		
 		return $players->num_rows > 0 ? $players : FALSE;
 	}
@@ -19,6 +19,7 @@ class Player_model extends Model
 	function getTournaments($id)
 	{
 		$query = $this->db->query('SELECT
+		    UNIX_TIMESTAMP(t.date) AS u_date,
 			t.*
 		FROM 
 			tournaments AS t,

@@ -6,7 +6,7 @@
 	<?php if($tournaments): ?>
 		<ul>
 			<?php foreach($tournaments->result() as $tournament): ?>
-				<li><?=$tournament->name?></li>
+				<li><?=$tournament->name?> - <?=date('F Y', $tournament->u_date)?></li>
 			<?php endforeach; ?>
 		</ul>
 	<?php else: ?>
