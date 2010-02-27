@@ -2,7 +2,7 @@
 
 <h2>Upcoming tournaments</h2>
 
-<?php if(count($future_tournaments) > 0): ?>
+<?php if($future_tournaments): ?>
 	<ul>
 		<?php foreach($future_tournaments->result() as $tournament): ?>
 			<li><a href="<?=site_url('/tournament/view/'.$tournament->id)?>">
@@ -17,7 +17,7 @@
 
 <h2>Past tournaments</h2>
 
-<?php if(count($past_tournaments) > 0): ?>
+<?php if($past_tournaments): ?>
 	<ul>
 		<?php foreach($past_tournaments->result() as $tournament): ?>
 			<li><a href="<?=site_url('/tournament/view/'.$tournament->id)?>">
