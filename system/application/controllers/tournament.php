@@ -49,7 +49,7 @@ class Tournament extends Controller {
 			$this->tournament_model->create(
 				$this->input->post('name'),
 				$this->input->post('notes'),
-				$this->input->post('date')
+				preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $this->input->post('date'))
 			);
 			
 			header('Location: /');
