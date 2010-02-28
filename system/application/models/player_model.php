@@ -4,14 +4,14 @@ class Player_model extends Model
 {
 	function get($id)
 	{
-		$query = $this->db->query('SELECT * FROM players WHERE id='.$id);
+		$query = $this->db->query('SELECT * FROM users WHERE id='.$id);
 		
 		return $query->num_rows > 0 ? $query->row() : FALSE;
 	}
 	
 	function getAll()
 	{
-		$players = $this->db->query('SELECT * FROM players ORDER BY joined ASC');
+		$players = $this->db->query('SELECT * FROM users ORDER BY created ASC');
 		
 		return $players->num_rows > 0 ? $players : FALSE;
 	}
@@ -29,15 +29,6 @@ class Player_model extends Model
 			p2t.pid = '.$id);
 		
 		return $query->num_rows > 0 ? $query : FALSE;
-	}
-	
-	function create($name, $joined=false)
-	{
-		if(!$joined)
-			$joined = date('Y-m-d');
-			
-		$this->db->query('INSERT INTO players (name, joined) VALUES (?, ?)',
-			array($name, $joined));
 	}
 }
 

@@ -82,6 +82,13 @@ class Users extends Model
 		if ($query->num_rows() == 1) return $query->row();
 		return NULL;
 	}
+	
+	function get_all()
+	{
+	    $this->db->get(self::TABLE);
+		if ($query->num_rows() > 0) return $query;
+		return NULL;
+	}
 
 	/**
 	 * Check if username available for registering

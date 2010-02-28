@@ -9,7 +9,6 @@ class Tournament extends Controller {
 		$this->load->scaffolding('tournaments');
 		$this->load->library('tank_auth');
 		
-		
 		if(!$this->tank_auth->is_logged_in())
 		    redirect('/auth/login/');
 	}
