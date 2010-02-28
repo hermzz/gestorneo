@@ -7,6 +7,10 @@ class Player extends Controller {
 		parent::__construct();	
 
 		$this->load->scaffolding('players');
+		$this->load->library('tank_auth');
+		
+		if(!$this->tank_auth->is_logged_in())
+		    redirect('/auth/login/');
 	}
 	
 	function index()
