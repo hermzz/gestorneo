@@ -27,10 +27,12 @@ class Tournament extends Controller {
 	function view($id)
 	{
 		$data['tournament'] = $this->tournament_model->get($id);
-		$data['players'] = $this->tournament_model->getPlayers($id);
+		$data['players_confirmed'] = $this->tournament_model->getPlayers($id, true);
+		$data['players_waiting'] = $this->tournament_model->getPlayers($id, false);
 
 		$data['title'] = $data['tournament'] ?  $data['tournament']->name : "Tournament not found";
-
+		
+		$data['tank_auth'] = $this->tank_auth;
 		$data['content_view'] = 'tournaments/view';
 		$this->load->view('skeleton', $data);
 	}

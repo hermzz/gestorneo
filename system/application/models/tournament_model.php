@@ -51,7 +51,7 @@ class Tournament_model extends Model
 		return $row->cnt;
 	}
 	
-	function getPlayers($id)
+	function getPlayers($id, $confirmed=true)
 	{
 		$query = $this->db->query(
 			'SELECT 
@@ -60,7 +60,8 @@ class Tournament_model extends Model
 				players AS p, 
 				player2tournament AS p2t 
 			WHERE 
-				p.id=p2t.pid AND 
+				p.id=p2t.pid AND
+				p2t.confirmed = '.($confirmed ? 1 : 0).' AND
 				p2t.tid='.$id);
 			
 		return $query->num_rows ? $query->result() : FALSE;
