@@ -26,6 +26,12 @@ a:link, a:visited, a:hover, a:active {
     padding: 0;
 }
 
+#auth {
+	position: absolute;
+	top: 10px;
+	right: 20px;
+}
+
 #content {
     clear: both;
     padding: 0 20px;

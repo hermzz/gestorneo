@@ -18,6 +18,14 @@
 			<?php $this->load->view('navbar'); ?>
 		</div>
 		
+		<div id="auth">
+			<?php if($this->tank_auth->is_logged_in()): ?>
+				<a href="/auth/logout">Logout</a>
+			<?php else: ?>
+				<a href="/auth/login">Login</a>
+			<?php endif; ?>
+		</div>
+		
 		<div id="content">
 		    <?php $this->load->view($content_view); ?>
 		</div>
