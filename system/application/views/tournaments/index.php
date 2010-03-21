@@ -9,7 +9,9 @@
 		<?php foreach($future_tournaments->result() as $tournament): ?>
 			<li><a href="<?=site_url('/tournament/view/'.$tournament->id)?>">
 				<?=$tournament->name?></a> on <?=mdate('%F %j%S, %Y', mysql_to_unix($tournament->date))?>
-				(Players: <?=$this->tournament_model->countSignedUp($tournament->id)?>)
+				(Players: <?=$this->tournament_model->countSignedUp($tournament->id)?>
+					[<?=$this->tournament_model->countSignedUp($tournament->id, 'M')?>M/
+					<?=$this->tournament_model->countSignedUp($tournament->id, 'F')?>F])
 			</li>
 		<?php endforeach; ?>
 	</ul>
@@ -24,7 +26,9 @@
 		<?php foreach($past_tournaments->result() as $tournament): ?>
 			<li><a href="<?=site_url('/tournament/view/'.$tournament->id)?>">
 				<?=$tournament->name?></a> on <?=mdate('%F %j%S, %Y', mysql_to_unix($tournament->date))?>
-				(Players: <?=$this->tournament_model->countSignedUp($tournament->id)?>)
+				(Players: <?=$this->tournament_model->countSignedUp($tournament->id)?>
+					[<?=$this->tournament_model->countSignedUp($tournament->id, 'M')?>M/
+					<?=$this->tournament_model->countSignedUp($tournament->id, 'F')?>F])
 			</li>
 		<?php endforeach; ?>
 	</ul>

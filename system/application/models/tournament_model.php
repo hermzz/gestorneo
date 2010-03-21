@@ -36,18 +36,31 @@ class Tournament_model extends Model
 		return $tournaments->num_rows > 0 ? $tournaments : FALSE;
 	}
 	
-	function countSignedUp($id)
+	function countSignedUp($id, $sex=false)
 	{
-		$query = $this->db->query(
-			'SELECT 
-				COUNT(*) AS cnt
-			FROM 
-				player2tournament
-			WHERE 
-				tid='.$id);
-			
-		$row = $query->row();
+		if($sex)
+		{
+			$query = $this->db->query('SELECT 
+					COUNT(*) AS cnt
+				FROM
+					users AS u,
+					player2tournament AS p2t
+				WHERE 
+					p2t.tid = ? AND
+					p2t.pid = u.id AND
+					u.sex = ?',
+				array($id, $sex));
+		} else {
+			$query = $this->db->query('SELECT 
+					COUNT(*) AS cnt
+				FROM 
+					player2tournament
+				WHERE 
+					tid=?',
+				array($id));
+		}
 		
+		$row = $query->row();
 		return $row->cnt;
 	}
 	

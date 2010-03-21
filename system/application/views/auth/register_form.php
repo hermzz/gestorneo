@@ -29,6 +29,11 @@ $confirm_password = array(
 	'maxlength'	=> $this->config->item('password_max_length', 'tank_auth'),
 	'size'	=> 30,
 );
+$sex = array(
+	'name'	=> 'sex',
+	'id'	=> 'sex',
+	'value'	=> set_value('sex'),
+);
 $captcha = array(
 	'name'	=> 'captcha',
 	'id'	=> 'captcha',
@@ -58,6 +63,11 @@ $captcha = array(
 		<td><?php echo form_label('Confirm Password', $confirm_password['id']); ?></td>
 		<td><?php echo form_password($confirm_password); ?></td>
 		<td style="color: red;"><?php echo form_error($confirm_password['name']); ?></td>
+	</tr>
+	<tr>
+		<td><?php echo form_label('Sex', $sex['id']); ?></td>
+		<td><?php echo form_dropdown('sex', array('M' => 'Dude', 'F' => 'Chick'), 'M', 'id="sex"'); ?></td>
+		<td style="color: red;"><?php echo form_error($sex['name']); ?></td>
 	</tr>
 
 	<?php if ($captcha_registration) {
