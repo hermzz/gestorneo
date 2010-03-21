@@ -28,7 +28,7 @@ class Player extends Controller {
 		if($data['player'])
 		{
 			$data['title'] = $data['player']->username;
-			$data['tournaments'] = $this->player_model->getTournaments($id);
+			$data['tournaments'] = $this->player_model->getTournaments($id, true);
 		} else {
 			$data['title'] = "Player not found";
 		}

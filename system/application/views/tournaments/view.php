@@ -32,7 +32,7 @@
 			<?php endforeach; ?>
 		</ul>
 	<?php else: ?>
-		<p>No players confirmed yet.</p>
+		<p>No one's been left out, yay!</p>
 	<?php endif; ?>
 	
 <?php else: ?>

@@ -16,9 +16,9 @@ class Player_model extends Model
 		return $players->num_rows > 0 ? $players : FALSE;
 	}
 	
-	function getTournaments($id)
+	function getTournaments($id, $only_confirmed=false)
 	{
-		$query = $this->db->query('SELECT
+		$sql = 'SELECT
 		    UNIX_TIMESTAMP(t.date) AS u_date,
 			t.*
 		FROM 
@@ -26,7 +26,13 @@ class Player_model extends Model
 			player2tournament AS p2t
 		WHERE
 			t.id = p2t.tid AND
-			p2t.pid = '.$id);
+			p2t.pid = ? '
+		. ($only_confirmed ? ' AND p2t.confirmed = 1' : '') . 
+		' ORDER BY
+			t.date DESC';
+			
+		$query = $this->db->query($sql,
+			array($id));
 		
 		return $query->num_rows > 0 ? $query : FALSE;
 	}
