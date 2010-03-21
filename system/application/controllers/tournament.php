@@ -7,7 +7,6 @@ class Tournament extends Controller {
 		parent::__construct();	
 
 		$this->load->scaffolding('tournaments');
-		$this->load->library('tank_auth');
 		
 		if(!$this->tank_auth->is_logged_in())
 		    redirect('/auth/login/');
@@ -17,8 +16,6 @@ class Tournament extends Controller {
 	{
 		$data['future_tournaments'] = $this->tournament_model->getAll('future');
 		$data['past_tournaments'] = $this->tournament_model->getAll('past');
-		
-		$data['tank_auth'] = $this->tank_auth;
 		
 		$data['title'] = 'Tournaments';
 		$data['content_view'] = 'tournaments/index';
@@ -31,8 +28,6 @@ class Tournament extends Controller {
 		$data['tournament'] = $this->tournament_model->get($id);
 		$data['players_confirmed'] = $this->tournament_model->getPlayers($id, true);
 		$data['players_waiting'] = $this->tournament_model->getPlayers($id, false);
-		
-		$data['tank_auth'] = $this->tank_auth;
 
 		$data['title'] = $data['tournament'] ?  $data['tournament']->name : "Tournament not found";
 		

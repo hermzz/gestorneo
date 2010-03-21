@@ -10,7 +10,7 @@
 		<ul>
 			<?php foreach($players_confirmed as $player): ?>
 				<li><a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
-					<?php if($tank_auth->is_admin()): ?>
+					<?php if($this->tank_auth->is_admin()): ?>
 						 - <a href="/tournament/drop_player/<?=$tournament->id;?>/<?=$player->id;?>">Drop</a>
 					<?php endif; ?>
 				</li>
@@ -25,7 +25,7 @@
 		<ul>
 			<?php foreach($players_waiting as $player): ?>
 				<li><a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
-					<?php if($tank_auth->is_admin()): ?>
+					<?php if($this->tank_auth->is_admin()): ?>
 						 - <a href="/tournament/approve_player/<?=$tournament->id;?>/<?=$player->id;?>">Approve</a>
 					<?php endif; ?>
 				</li>

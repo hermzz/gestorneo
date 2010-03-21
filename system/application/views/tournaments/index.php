@@ -1,4 +1,4 @@
-<?php if($tank_auth->is_admin()): ?>
+<?php if($this->tank_auth->is_admin()): ?>
 	<p>Add a <a href="/tournament/create/">new tournament</a></p>
 <?php endif; ?>
 
