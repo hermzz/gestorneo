@@ -38,7 +38,7 @@ CREATE TABLE `ci_sessions` (
 
 LOCK TABLES `ci_sessions` WRITE;
 /*!40000 ALTER TABLE `ci_sessions` DISABLE KEYS */;
-INSERT INTO `ci_sessions` VALUES ('55b6df1b46289b80623ff5bea923d00c','127.0.0.1','Mozilla/5.0 (X11; U; Linux x86_64; en-US) AppleWeb',1267356705,'a:3:{s:7:\"user_id\";s:1:\"1\";s:8:\"username\";s:7:\"Hermann\";s:6:\"status\";s:1:\"1\";}');
+INSERT INTO `ci_sessions` VALUES ('5c3755808eaaca9372262261ff4d76d6','127.0.0.1','Mozilla/5.0 (X11; U; Linux x86_64; en-US) AppleWeb',1269201188,'a:4:{s:7:\"user_id\";s:1:\"1\";s:8:\"username\";s:7:\"Hermann\";s:6:\"status\";s:1:\"1\";s:5:\"level\";s:5:\"admin\";}');
 /*!40000 ALTER TABLE `ci_sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -77,6 +77,7 @@ DROP TABLE IF EXISTS `player2tournament`;
 CREATE TABLE `player2tournament` (
   `pid` int(11) NOT NULL DEFAULT '0',
   `tid` int(11) NOT NULL DEFAULT '0',
+  `confirmed` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`pid`,`tid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -87,33 +88,8 @@ CREATE TABLE `player2tournament` (
 
 LOCK TABLES `player2tournament` WRITE;
 /*!40000 ALTER TABLE `player2tournament` DISABLE KEYS */;
-INSERT INTO `player2tournament` VALUES (1,1),(1,3),(1,4),(1,5);
+INSERT INTO `player2tournament` VALUES (1,1,0),(1,3,1),(1,4,0),(1,5,0);
 /*!40000 ALTER TABLE `player2tournament` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `players`
---
-
-DROP TABLE IF EXISTS `players`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `players` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `joined` date DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `players`
---
-
-LOCK TABLES `players` WRITE;
-/*!40000 ALTER TABLE `players` DISABLE KEYS */;
-INSERT INTO `players` VALUES (1,'Hermann','2008-02-01'),(2,'Justin','2007-06-01'),(3,'Jose Antonio','2000-10-12'),(4,'Alberto','2006-03-22');
-/*!40000 ALTER TABLE `players` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -216,6 +192,7 @@ CREATE TABLE `users` (
   `last_login` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `level` enum('user','t_admin','admin') COLLATE utf8_bin NOT NULL DEFAULT 'user',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -226,7 +203,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Hermann','$P$BvAan8tBKA4CDjtrgRQF.iqK3Zt.Ke/','hermann.kaser@gmail.com',1,0,NULL,NULL,NULL,NULL,'766ec0e8b4630f2014e4ca70e5d83e4d','127.0.0.1','2010-02-28 12:02:12','2010-02-28 11:58:00','2010-02-28 11:02:12');
+INSERT INTO `users` VALUES (1,'Hermann','$P$BvAan8tBKA4CDjtrgRQF.iqK3Zt.Ke/','hermann.kaser@gmail.com',1,0,NULL,NULL,NULL,NULL,'766ec0e8b4630f2014e4ca70e5d83e4d','127.0.0.1','2010-03-21 20:40:35','2010-02-28 11:58:00','2010-03-21 19:40:35','admin');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -239,4 +216,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2010-02-28 12:33:22
+-- Dump completed on 2010-03-21 21:00:28

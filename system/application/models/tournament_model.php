@@ -55,14 +55,14 @@ class Tournament_model extends Model
 	{
 		$query = $this->db->query(
 			'SELECT 
-				p.*
+				u.*
 			FROM 
-				players AS p, 
+				users AS u, 
 				player2tournament AS p2t 
 			WHERE 
-				p.id=p2t.pid AND
+				u.id = p2t.pid AND
 				p2t.confirmed = '.($confirmed ? 1 : 0).' AND
-				p2t.tid='.$id);
+				p2t.tid = '.$id);
 			
 		return $query->num_rows ? $query->result() : FALSE;
 	}
@@ -71,6 +71,18 @@ class Tournament_model extends Model
 	{
 		$this->db->query('INSERT INTO tournaments (name, notes, date) VALUES (?, ?, ?)',
 			array($name, $notes, $date));
+	}
+	
+	function approve_player($tournament_id, $player_id)
+	{
+		$this->db->query('UPDATE player2tournament SET confirmed=1 WHERE pid=? AND tid=?',
+			array($player_id, $tournament_id));
+	}
+	
+	function drop_player($tournament_id, $player_id)
+	{
+		$this->db->query('UPDATE player2tournament SET confirmed=0 WHERE pid=? AND tid=?',
+			array($player_id, $tournament_id));
 	}
 }
 

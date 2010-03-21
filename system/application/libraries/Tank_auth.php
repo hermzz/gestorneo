@@ -72,6 +72,7 @@ class Tank_auth
 								'user_id'	=> $user->id,
 								'username'	=> $user->username,
 								'status'	=> ($user->activated == 1) ? STATUS_ACTIVATED : STATUS_NOT_ACTIVATED,
+								'level'		=> $user->level
 						));
 
 						if ($user->activated == 0) {							// fail - not activated
@@ -128,6 +129,25 @@ class Tank_auth
 	{
 		return $this->ci->session->userdata('status') === ($activated ? STATUS_ACTIVATED : STATUS_NOT_ACTIVATED);
 	}
+	
+	/**
+	 * Check if the user is an admin
+	 *
+	 * @return	bool
+	 */
+	function is_admin()
+	{
+		return $this->ci->session->userdata('level') == 'admin';
+	}
+	
+	/**
+	 * Check if the user is an admin for a given tournament (currently only a stub)
+	 *
+	 * @param	int		$tournament_id
+	 *
+	 * @return	bool
+	 */
+	function is_tournament_admin($tournament_id) { return false; }
 
 	/**
 	 * Get user_id

@@ -9,7 +9,11 @@
 	<?php if($players_confirmed): ?>
 		<ul>
 			<?php foreach($players_confirmed as $player): ?>
-				<li><a href="/player/view/<?=$player->id?>"><?=$player->name?></li>
+				<li><a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
+					<?php if($tank_auth->is_admin()): ?>
+						 - <a href="/tournament/drop_player/<?=$tournament->id;?>/<?=$player->id;?>">Drop</a>
+					<?php endif; ?>
+				</li>
 			<?php endforeach; ?>
 		</ul>
 	<?php else: ?>
@@ -20,7 +24,11 @@
 	<?php if($players_waiting): ?>
 		<ul>
 			<?php foreach($players_waiting as $player): ?>
-				<li><a href="/player/view/<?=$player->id?>"><?=$player->name?></a></li>
+				<li><a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
+					<?php if($tank_auth->is_admin()): ?>
+						 - <a href="/tournament/approve_player/<?=$tournament->id;?>/<?=$player->id;?>">Approve</a>
+					<?php endif; ?>
+				</li>
 			<?php endforeach; ?>
 		</ul>
 	<?php else: ?>
