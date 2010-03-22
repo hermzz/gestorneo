@@ -20,6 +20,7 @@
 		
 		<div id="auth">
 			<?php if($this->tank_auth->is_logged_in()): ?>
+				<span>Hello <?=$this->tank_auth->get_username();?>,</span>
 				<a href="/auth/logout">Logout</a>
 			<?php else: ?>
 				<a href="/auth/login">Login</a>
