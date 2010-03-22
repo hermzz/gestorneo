@@ -85,6 +85,32 @@ class Tournament extends Controller {
 			return false;
 		}
 	}
+	
+	function sign_up()
+	{
+		if($this->tank_auth->get_user_id() == $this->input->post('player_id'))
+		{
+			$this->tournament_model->add_player(
+				$this->input->post('tournament_id'),
+				$this->input->post('player_id')
+			);
+		}
+		
+		header('Location: /tournament/view/'.$this->input->post('tournament_id'));
+	}
+	
+	function cancel_sign_up()
+	{
+		if($this->tank_auth->get_user_id() == $this->input->post('player_id'))
+		{
+			$this->tournament_model->remove_player(
+				$this->input->post('tournament_id'),
+				$this->input->post('player_id')
+			);
+		}
+		
+		header('Location: /tournament/view/'.$this->input->post('tournament_id'));
+	}
 }
 
 ?>

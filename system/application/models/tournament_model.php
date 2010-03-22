@@ -86,6 +86,18 @@ class Tournament_model extends Model
 			array($name, $notes, $date));
 	}
 	
+	function add_player($tournament_id, $player_id)
+	{
+		$this->db->query('INSERT INTO player2tournament VALUES (?, ?, 0)',
+			array($player_id, $tournament_id));
+	}
+	
+	function remove_player($tournament_id, $player_id)
+	{
+		$this->db->query('DELETE FROM player2tournament WHERE pid=? AND tid=?',
+			array($player_id, $tournament_id));
+	}
+	
 	function approve_player($tournament_id, $player_id)
 	{
 		$this->db->query('UPDATE player2tournament SET confirmed=1 WHERE pid=? AND tid=?',
@@ -96,6 +108,24 @@ class Tournament_model extends Model
 	{
 		$this->db->query('UPDATE player2tournament SET confirmed=0 WHERE pid=? AND tid=?',
 			array($player_id, $tournament_id));
+	}
+	
+	function is_signed_up($tournament_id, $player_id) 
+	{
+		$query = $this->db->query('SELECT * FROM player2tournament WHERE tid=? AND pid=?',
+			array($tournament_id, $player_id));
+			
+		return $query->num_rows ? $query->result() : FALSE;
+	}
+	
+	function can_sign_up($tournament_id, $player_id)
+	{
+		// is the user already signed up?
+		return !$this->is_signed_up($tournament_id, $player_id);
+		
+		//TODO: more stuff to add here:
+		//	- Sex limitation (ie: womens only tournament)
+		//	- Tournament regstration deadline has passed
 	}
 }
 
