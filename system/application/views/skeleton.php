@@ -15,7 +15,9 @@
 	</head>
 	<body>
 		<div id="navbar">
-			<?php $this->load->view('navbar'); ?>
+			<?php if($this->tank_auth->is_logged_in()): ?>
+				<?php $this->load->view('navbar'); ?>
+			<?php endif; ?>
 		</div>
 		
 		<div id="auth">
