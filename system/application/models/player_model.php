@@ -23,11 +23,11 @@ class Player_model extends Model
 			t.*
 		FROM 
 			tournaments AS t,
-			player2tournament AS p2t
+			tournament_players AS tp
 		WHERE
-			t.id = p2t.tid AND
-			p2t.pid = ? '
-		. ($only_confirmed ? ' AND p2t.confirmed = 1' : '') . 
+			t.id = tp.tid AND
+			tp.pid = ? '
+		. ($only_confirmed ? ' AND tp.confirmed = 1' : '') . 
 		' ORDER BY
 			t.date DESC';
 			

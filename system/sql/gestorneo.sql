@@ -68,13 +68,13 @@ LOCK TABLES `login_attempts` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `player2tournament`
+-- Table structure for table `tournament_players`
 --
 
-DROP TABLE IF EXISTS `player2tournament`;
+DROP TABLE IF EXISTS `tournament_players`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `player2tournament` (
+CREATE TABLE `tournament_players` (
   `pid` int(11) NOT NULL DEFAULT '0',
   `tid` int(11) NOT NULL DEFAULT '0',
   `confirmed` tinyint(4) DEFAULT '0',
@@ -83,13 +83,13 @@ CREATE TABLE `player2tournament` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `player2tournament`
+-- Dumping data for table `tournament_players`
 --
 
-LOCK TABLES `player2tournament` WRITE;
-/*!40000 ALTER TABLE `player2tournament` DISABLE KEYS */;
-INSERT INTO `player2tournament` VALUES (1,1,0),(1,3,1),(1,4,1),(1,5,1);
-/*!40000 ALTER TABLE `player2tournament` ENABLE KEYS */;
+LOCK TABLES `tournament_players` WRITE;
+/*!40000 ALTER TABLE `tournament_players` DISABLE KEYS */;
+INSERT INTO `tournament_players` VALUES (1,1,0),(1,3,1),(1,4,1),(1,5,1);
+/*!40000 ALTER TABLE `tournament_players` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --

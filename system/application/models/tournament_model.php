@@ -44,17 +44,17 @@ class Tournament_model extends Model
 					COUNT(*) AS cnt
 				FROM
 					users AS u,
-					player2tournament AS p2t
+					tournament_players AS tp
 				WHERE 
-					p2t.tid = ? AND
-					p2t.pid = u.id AND
+					tp.tid = ? AND
+					tp.pid = u.id AND
 					u.sex = ?',
 				array($id, $sex));
 		} else {
 			$query = $this->db->query('SELECT 
 					COUNT(*) AS cnt
 				FROM 
-					player2tournament
+					tournament_players
 				WHERE 
 					tid=?',
 				array($id));
@@ -71,11 +71,11 @@ class Tournament_model extends Model
 				u.*
 			FROM 
 				users AS u, 
-				player2tournament AS p2t 
+				tournament_players AS tp
 			WHERE 
-				u.id = p2t.pid AND
-				p2t.confirmed = '.($confirmed ? 1 : 0).' AND
-				p2t.tid = '.$id);
+				u.id = tp.pid AND
+				tp.confirmed = '.($confirmed ? 1 : 0).' AND
+				tp.tid = '.$id);
 			
 		return $query->num_rows ? $query->result() : FALSE;
 	}
@@ -88,31 +88,31 @@ class Tournament_model extends Model
 	
 	function add_player($tournament_id, $player_id)
 	{
-		$this->db->query('INSERT INTO player2tournament VALUES (?, ?, 0)',
+		$this->db->query('INSERT INTO tournament_players VALUES (?, ?, 0)',
 			array($player_id, $tournament_id));
 	}
 	
 	function remove_player($tournament_id, $player_id)
 	{
-		$this->db->query('DELETE FROM player2tournament WHERE pid=? AND tid=?',
+		$this->db->query('DELETE FROM tournament_players WHERE pid=? AND tid=?',
 			array($player_id, $tournament_id));
 	}
 	
 	function approve_player($tournament_id, $player_id)
 	{
-		$this->db->query('UPDATE player2tournament SET confirmed=1 WHERE pid=? AND tid=?',
+		$this->db->query('UPDATE tournament_players SET confirmed=1 WHERE pid=? AND tid=?',
 			array($player_id, $tournament_id));
 	}
 	
 	function drop_player($tournament_id, $player_id)
 	{
-		$this->db->query('UPDATE player2tournament SET confirmed=0 WHERE pid=? AND tid=?',
+		$this->db->query('UPDATE tournament_players SET confirmed=0 WHERE pid=? AND tid=?',
 			array($player_id, $tournament_id));
 	}
 	
 	function is_signed_up($tournament_id, $player_id) 
 	{
-		$query = $this->db->query('SELECT * FROM player2tournament WHERE tid=? AND pid=?',
+		$query = $this->db->query('SELECT * FROM tournament_players WHERE tid=? AND pid=?',
 			array($tournament_id, $player_id));
 			
 		return $query->num_rows ? $query->result() : FALSE;
