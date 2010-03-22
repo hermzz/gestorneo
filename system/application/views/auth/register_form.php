@@ -44,7 +44,7 @@ $captcha = array(
 <table>
 	<?php if ($use_username) { ?>
 	<tr>
-		<td><?php echo form_label('Username', $username['id']); ?></td>
+		<td><?php echo form_label('Name', $username['id']); ?></td>
 		<td><?php echo form_input($username); ?></td>
 		<td style="color: red;"><?php echo form_error($username['name']); ?><?php echo isset($errors[$username['name']])?$errors[$username['name']]:''; ?></td>
 	</tr>
