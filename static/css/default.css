@@ -32,6 +32,10 @@ a:link, a:visited, a:hover, a:active {
 	right: 20px;
 }
 
+#auth select {
+	margin-right: 20px;
+}
+
 #content {
     clear: both;
     padding: 0 20px;

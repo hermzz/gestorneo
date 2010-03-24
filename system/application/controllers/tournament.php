@@ -1,39 +1,39 @@
 <?php
 
-class Tournament extends Controller {
+class Tournament extends GS_Controller {
 
 	function __construct()
 	{
 		parent::__construct();	
 
 		$this->load->scaffolding('tournaments');
-		
+        
 		if(!$this->tank_auth->is_logged_in())
 		    redirect('/auth/login/');
 	}
 	
 	function index()
 	{
-		$data['future_tournaments'] = $this->tournament_model->getAll('future');
-		$data['past_tournaments'] = $this->tournament_model->getAll('past');
+		$this->data['future_tournaments'] = $this->tournament_model->getAll('future');
+		$this->data['past_tournaments'] = $this->tournament_model->getAll('past');
 		
-		$data['title'] = 'Tournaments';
-		$data['content_view'] = 'tournaments/index';
+		$this->data['title'] = 'Tournaments';
+		$this->data['content_view'] = 'tournaments/index';
 		
-		$this->load->view('skeleton', $data);
+		$this->load->view('skeleton', $this->data);
 	}
 	
 	function view($id)
 	{
-		$data['tournament'] = $this->tournament_model->get($id);
-		$data['players_confirmed'] = $this->tournament_model->getPlayers($id, true);
-		$data['players_waiting'] = $this->tournament_model->getPlayers($id, false);
+		$this->data['tournament'] = $this->tournament_model->get($id);
+		$this->data['players_confirmed'] = $this->tournament_model->getPlayers($id, true);
+		$this->data['players_waiting'] = $this->tournament_model->getPlayers($id, false);
 
-		$data['title'] = $data['tournament'] ?  $data['tournament']->name : "Tournament not found";
+		$this->data['title'] = $this->data['tournament'] ?  $this->data['tournament']->name : "Tournament not found";
 		
-		$data['tank_auth'] = $this->tank_auth;
-		$data['content_view'] = 'tournaments/view';
-		$this->load->view('skeleton', $data);
+		$this->data['tank_auth'] = $this->tank_auth;
+		$this->data['content_view'] = 'tournaments/view';
+		$this->load->view('skeleton', $this->data);
 	}
 	
 	function approve_player($tournament_id, $player_id)
@@ -52,7 +52,7 @@ class Tournament extends Controller {
 
 	function create()
 	{
-		$data['title'] = 'New tournament';
+		$this->data['title'] = 'New tournament';
 		
 		$this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
@@ -62,8 +62,8 @@ class Tournament extends Controller {
 		
 		if($this->form_validation->run() == FALSE)
 		{
-			$data['content_view'] = 'tournaments/create';
-			$this->load->view('skeleton', $data);
+			$this->data['content_view'] = 'tournaments/create';
+			$this->load->view('skeleton', $this->data);
 		} else {
 			$this->tournament_model->create(
 				$this->input->post('name'),

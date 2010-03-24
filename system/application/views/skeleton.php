@@ -11,6 +11,15 @@
 			google.load("jquery","1.4.0");
 			google.load("jqueryui", "1.7.2");
 		</script>
+		
+		<script>
+		$(document).ready(function() {
+			$('[name="language_chooser"]').change(function(e) {
+				document.cookie = document.cookie.replace(/language=[a-z]+/, 'language='+$(e.target).val());
+				location.reload();
+			});
+		});
+		</script>
         
 	</head>
 	<body>
@@ -21,11 +30,19 @@
 		</div>
 		
 		<div id="auth">
+				<select name="language_chooser">
+					<?php foreach($languages as $key => $name): ?>
+						<option value="<?=$key?>" <?=$key==$selected_language?'selected="selected"':'';?>>
+							<?=$name;?>
+						</option>
+					<?php endforeach; ?>
+				</select>
+			
 			<?php if($this->tank_auth->is_logged_in()): ?>
-				<span>Hello <?=$this->tank_auth->get_username();?>,</span>
-				<a href="/auth/logout">Logout</a>
+				<span><?=sprintf(_('Hello %s'), $this->tank_auth->get_username());?>,</span>
+				<a href="/auth/logout"><?=_('Logout');?></a>
 			<?php else: ?>
-				<a href="/auth/login">Login</a>
+				<a href="/auth/login"><?=_('Login');?></a>
 			<?php endif; ?>
 		</div>
 		

@@ -1,6 +1,6 @@
 <?php
 
-class Player extends Controller {
+class Player extends GS_Controller {
 
 	function __construct()
 	{
@@ -14,26 +14,26 @@ class Player extends Controller {
 	
 	function index()
 	{
-		$data['title'] = "Players";
-		$data['players'] = $this->player_model->getAll();
+		$this->data['title'] = "Players";
+		$this->data['players'] = $this->player_model->getAll();
 		
-		$data['content_view'] = 'players/index';
-		$this->load->view('skeleton', $data);
+		$this->data['content_view'] = 'players/index';
+		$this->load->view('skeleton', $this->data);
 	}
 	
 	function view($id)
 	{
-		$data['player'] = $this->player_model->get($id);
-		if($data['player'])
+		$this->data['player'] = $this->player_model->get($id);
+		if($this->data['player'])
 		{
-			$data['title'] = $data['player']->username;
-			$data['tournaments'] = $this->player_model->getTournaments($id, true);
+			$this->data['title'] = $this->data['player']->username;
+			$this->data['tournaments'] = $this->player_model->getTournaments($id, true);
 		} else {
-			$data['title'] = "Player not found";
+			$this->data['title'] = "Player not found";
 		}
 		
-		$data['content_view'] = 'players/view';
-		$this->load->view('skeleton', $data);
+		$this->data['content_view'] = 'players/view';
+		$this->load->view('skeleton', $this->data);
 	}
 }
 	
