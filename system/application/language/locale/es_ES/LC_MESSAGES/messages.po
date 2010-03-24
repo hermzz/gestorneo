@@ -1,2 +1,142 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Hermann Kaser <hermann.kaser@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#: views/skeleton.php:42
+#, php-format
 msgid "Hello %s"
 msgstr "Hola %s"
+
+#: libraries/GS_Controller.php:45
+msgid "Spanish"
+msgstr "Español"
+
+#: libraries/GS_Controller.php:46
+msgid "English"
+msgstr "Inglés"
+
+#: views/tournaments/create.php:1
+#: controllers/tournament.php:55
+msgid "New tournament"
+msgstr "Nuevo torneo"
+
+#: views/tournaments/create.php:18
+#: controllers/tournament.php:60
+msgid "Name"
+msgstr "Nombre"
+
+#: views/tournaments/create.php:21
+#: controllers/tournament.php:61
+msgid "Date"
+msgstr "Fecha"
+
+#: views/tournaments/create.php:26
+msgid "Notes"
+msgstr "Notas"
+
+#: views/tournaments/create.php:29
+msgid "Add"
+msgstr "Añadir"
+
+#: views/tournaments/view.php:19
+msgid "No notes"
+msgstr "No hay notas"
+
+#: views/tournaments/view.php:28
+msgid "Drop"
+msgstr "Eliminar"
+
+#: views/tournaments/view.php:34
+msgid "No players confirmed yet."
+msgstr "No hay jugadores confirmados."
+
+#: views/tournaments/view.php:43
+msgid "Approve"
+msgstr "Aceptar"
+
+#: views/tournaments/view.php:49
+msgid "No one's been left out, yay!"
+msgstr "Nadie se queda fuera!"
+
+#: views/tournaments/view.php:53
+msgid "Tournament not found."
+msgstr "No existe este torneo."
+
+#: views/tournaments/index.php:2
+msgid "Add a <a href=\"/tournament/create/\">new tournament</a>"
+msgstr "Añadir un <a href=\"/tournament/create/\">torneo nuevo</a>"
+
+#: views/tournaments/index.php:5
+msgid "Upcoming tournaments"
+msgstr "Torneos futuros"
+
+#: views/tournaments/index.php:11
+#: views/tournaments/index.php:28
+#, php-format
+msgid "<a href=\"%s\">%s</a> on %s"
+msgstr "<a href=\"%s\">%s</a> el %s"
+
+#: views/tournaments/index.php:12
+#: views/tournaments/index.php:29
+#: controllers/player.php:17
+msgid "Players"
+msgstr "Jugadores"
+
+#: views/tournaments/index.php:19
+msgid "No upcoming tournaments found."
+msgstr "No hay torneos futuros."
+
+#: views/tournaments/index.php:22
+msgid "Past tournaments"
+msgstr "Torneos pasados"
+
+#: views/tournaments/index.php:36
+msgid "No past tournaments found."
+msgstr "No hay torneos pasados."
+
+#: views/skeleton.php:43
+msgid "Logout"
+msgstr "Salir"
+
+#: views/skeleton.php:45
+msgid "Login"
+msgstr "Entrar"
+
+#: controllers/tournament.php:20
+msgid "Tournaments"
+msgstr "Torneos"
+
+#: controllers/tournament.php:32
+#: views/tournaments/view.php:53
+msgid "Tournament not found"
+msgstr "No existe este torneo"
+
+#: controllers/tournament.php:84
+#, php-format
+msgid "The %s is not a valid date"
+msgstr "%s no es una fecha valida"
+
+#: controllers/player.php:32
+msgid "Player not found"
+msgstr "Jugador no encontrado"
+
+#: views/tournaments/view.php:22
+msgid "Players confirmed"
+msgstr "Jugadores confirmados"
+
+#: views/tournaments/view.php:37
+msgid "Waiting list"
+msgstr "Lista de espera"
+

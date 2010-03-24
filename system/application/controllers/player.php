@@ -14,7 +14,7 @@ class Player extends GS_Controller {
 	
 	function index()
 	{
-		$this->data['title'] = "Players";
+		$this->data['title'] = _("Players");
 		$this->data['players'] = $this->player_model->getAll();
 		
 		$this->data['content_view'] = 'players/index';
@@ -29,7 +29,7 @@ class Player extends GS_Controller {
 			$this->data['title'] = $this->data['player']->username;
 			$this->data['tournaments'] = $this->player_model->getTournaments($id, true);
 		} else {
-			$this->data['title'] = "Player not found";
+			$this->data['title'] = _("Player not found");
 		}
 		
 		$this->data['content_view'] = 'players/view';

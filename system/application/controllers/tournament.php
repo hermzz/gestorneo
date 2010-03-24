@@ -17,7 +17,7 @@ class Tournament extends GS_Controller {
 		$this->data['future_tournaments'] = $this->tournament_model->getAll('future');
 		$this->data['past_tournaments'] = $this->tournament_model->getAll('past');
 		
-		$this->data['title'] = 'Tournaments';
+		$this->data['title'] = _('Tournaments');
 		$this->data['content_view'] = 'tournaments/index';
 		
 		$this->load->view('skeleton', $this->data);
@@ -29,7 +29,7 @@ class Tournament extends GS_Controller {
 		$this->data['players_confirmed'] = $this->tournament_model->getPlayers($id, true);
 		$this->data['players_waiting'] = $this->tournament_model->getPlayers($id, false);
 
-		$this->data['title'] = $this->data['tournament'] ?  $this->data['tournament']->name : "Tournament not found";
+		$this->data['title'] = $this->data['tournament'] ?  $this->data['tournament']->name : _("Tournament not found");
 		
 		$this->data['tank_auth'] = $this->tank_auth;
 		$this->data['content_view'] = 'tournaments/view';
@@ -52,13 +52,13 @@ class Tournament extends GS_Controller {
 
 	function create()
 	{
-		$this->data['title'] = 'New tournament';
+		$this->data['title'] = _('New tournament');
 		
 		$this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
 		
-		$this->form_validation->set_rules('name', 'Name', 'required');
-		$this->form_validation->set_rules('date', 'Date', 'callback_date_check');
+		$this->form_validation->set_rules('name', _('Name'), 'required');
+		$this->form_validation->set_rules('date', _('Date'), 'callback_date_check');
 		
 		if($this->form_validation->run() == FALSE)
 		{
@@ -81,7 +81,7 @@ class Tournament extends GS_Controller {
 		{
 			return true;
 		} else {
-			$this->form_validation->set_message('date_check', 'The %s is not a valid date');
+			$this->form_validation->set_message('date_check', _('The %s is not a valid date'));
 			return false;
 		}
 	}

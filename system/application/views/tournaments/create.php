@@ -1,4 +1,4 @@
-<h2>New tournament</h2>
+<h2><?=_('New tournament');?></h2>
 
 <link href="/static/css/base/ui.datepicker.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript">
@@ -15,16 +15,16 @@
 <?=validation_errors()?>
 
 <form action="#" method="post">
-    <label for="name">Name</label>
+    <label for="name"><?=_('Name');?></label>
     <input type="text" id="name" name="name" /><br />
 
-    <label for="name">Date</label>
+    <label for="name"><?=_('Date');?></label>
     <input type="text" id="date" name="date" /><br />
     
     <div id="datepicker">&nbsp;</div>
     
-    <label for="notes">Notes</label><br />
+    <label for="notes"><?=_('Notes');?></label><br />
     <textarea id="notes" name="notes"></textarea><br />
 
-    <input type="submit" name="submitNewTournament" value="Add" />
+    <input type="submit" name="submitNewTournament" value="<?=_('Add');?>" />
 </form>

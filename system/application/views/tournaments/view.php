@@ -16,39 +16,39 @@
 	<?php endif; ?>
 	
 	<p>
-		<?=$tournament->notes ? $tournament->notes : "No notes" ?>
+		<?=$tournament->notes ? $tournament->notes : _('No notes') ?>
 	</p>
 	
-	<h3>Players confirmed</h3>
+	<h3><?=_('Players confirmed');?></h3>
 	<?php if($players_confirmed): ?>
 		<ul>
 			<?php foreach($players_confirmed as $player): ?>
 				<li><a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
 					<?php if($this->tank_auth->is_admin()): ?>
-						 - <a href="/tournament/drop_player/<?=$tournament->id;?>/<?=$player->id;?>">Drop</a>
+						 - <a href="/tournament/drop_player/<?=$tournament->id;?>/<?=$player->id;?>"><?=_('Drop');?></a>
 					<?php endif; ?>
 				</li>
 			<?php endforeach; ?>
 		</ul>
 	<?php else: ?>
-		<p>No players confirmed yet.</p>
+		<p><?=_('No players confirmed yet.');?></p>
 	<?php endif; ?>
 	
-	<h3>Waiting list</h3>
+	<h3><?=_('Waiting list');?></h3>
 	<?php if($players_waiting): ?>
 		<ul>
 			<?php foreach($players_waiting as $player): ?>
 				<li><a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
 					<?php if($this->tank_auth->is_admin()): ?>
-						 - <a href="/tournament/approve_player/<?=$tournament->id;?>/<?=$player->id;?>">Approve</a>
+						 - <a href="/tournament/approve_player/<?=$tournament->id;?>/<?=$player->id;?>"><?=_('Approve');?></a>
 					<?php endif; ?>
 				</li>
 			<?php endforeach; ?>
 		</ul>
 	<?php else: ?>
-		<p>No one's been left out, yay!</p>
+		<p><?=_('No one\'s been left out, yay!');?></p>
 	<?php endif; ?>
 	
 <?php else: ?>
-	<p>Tournament not found.</p>
+	<p><?=_('Tournament not found');?></p>
 <?php endif; ?>
