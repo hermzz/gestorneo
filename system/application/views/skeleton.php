@@ -11,11 +11,12 @@
 			google.load("jquery","1.4.0");
 			google.load("jqueryui", "1.7.2");
 		</script>
+		<script src="/static/javascript/jquery.cookie.js" language="javascript"></script>
 		
 		<script>
 		$(document).ready(function() {
 			$('[name="language_chooser"]').change(function(e) {
-				document.cookie = document.cookie.replace(/language=[a-z]+/, 'language='+$(e.target).val());
+				$.cookie('language', $(e.target).val());
 				location.reload();
 			});
 		});
