@@ -1,5 +1,5 @@
 <?php if($tournament): ?>
-	<h2><?=$tournament->name?>, <?=mdate('%F %j%S %Y', mysql_to_unix($tournament->date))?></h2>
+	<h2><?=$tournament->name?>, <?=strftime('%a %e, %B %Y', mysql_to_unix($tournament->date))?></h2>
 	
 	<?php if($this->tournament_model->is_signed_up($tournament->id, $this->tank_auth->get_user_id())): ?>
 		<form action="/tournament/cancel_sign_up" method="post">
