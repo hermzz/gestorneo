@@ -1,12 +1,18 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-04-11 22:51+0200\n"
+"PO-Revision-Date: 2010-04-11 22:52+0100\n"
 "Last-Translator: Hermann Kaser <hermann.kaser@gmail.com>\n"
-"Language-Team: \n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 # SOME DESCRIPTIVE TITLE.
@@ -15,6 +21,7 @@ msgstr ""
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #: views/skeleton.php:42
+#: views/skeleton.php:43
 #, php-format
 msgid "Hello %s"
 msgstr "Hola %s"
@@ -91,6 +98,7 @@ msgstr "<a href=\"%s\">%s</a> el %s"
 #: views/tournaments/index.php:12
 #: views/tournaments/index.php:29
 #: controllers/player.php:17
+#: views/players/index.php:1
 msgid "Players"
 msgstr "Jugadores"
 
@@ -107,14 +115,17 @@ msgid "No past tournaments found."
 msgstr "No hay torneos pasados."
 
 #: views/skeleton.php:43
+#: views/skeleton.php:44
 msgid "Logout"
 msgstr "Salir"
 
 #: views/skeleton.php:45
+#: views/skeleton.php:46
 msgid "Login"
 msgstr "Entrar"
 
 #: controllers/tournament.php:20
+#: views/players/view.php:4
 msgid "Tournaments"
 msgstr "Torneos"
 
@@ -139,4 +150,41 @@ msgstr "Jugadores confirmados"
 #: views/tournaments/view.php:37
 msgid "Waiting list"
 msgstr "Lista de espera"
+
+#: views/players/view.php:14
+msgid "No tournaments for this player."
+msgstr "Este jugador no está apuntado a ningún torneo."
+
+#: views/players/view.php:17
+msgid "Player not found."
+msgstr "Jugador inexistente."
+
+#: views/players/index.php:12
+msgid "No players found."
+msgstr "No hay jugadores."
+
+#: views/tournaments/view.php:8
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: views/tournaments/view.php:14
+msgid "Signup"
+msgstr "Apuntarse"
+
+#: views/navbar.php:2
+msgid "home"
+msgstr "inicio"
+
+#: views/navbar.php:3
+msgid "tournaments"
+msgstr "torneos"
+
+#: views/navbar.php:4
+msgid "players"
+msgstr "jugadores"
+
+#: views/players/index.php:7
+#, php-format
+msgid "joined %s"
+msgstr "registrado en %s"
 

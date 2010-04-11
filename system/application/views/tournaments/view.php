@@ -5,13 +5,13 @@
 		<form action="/tournament/cancel_sign_up" method="post">
 			<input type="hidden" name="tournament_id" value="<?=$tournament->id;?>" />
 			<input type="hidden" name="player_id" value="<?=$this->tank_auth->get_user_id();?>" />
-			<input type="submit" name="submitCancel" value="Cancel" />
+			<input type="submit" name="submitCancel" value="<?=_('Cancel');?>" />
 		</form>
 	<?php elseif($this->tournament_model->can_sign_up($tournament->id, $this->tank_auth->get_user_id())): ?>
 		<form action="/tournament/sign_up" method="post">
 			<input type="hidden" name="tournament_id" value="<?=$tournament->id;?>" />
 			<input type="hidden" name="player_id" value="<?=$this->tank_auth->get_user_id();?>" />
-			<input type="submit" name="submitSignup" value="Signup" />
+			<input type="submit" name="submitSignup" value="<?=_('Signup');?>" />
 		</form>
 	<?php endif; ?>
 	
