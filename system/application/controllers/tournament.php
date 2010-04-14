@@ -94,6 +94,25 @@ class Tournament extends GS_Controller {
 				$this->input->post('tournament_id'),
 				$this->input->post('player_id')
 			);
+			
+			// notify admins
+			$player = $this->player_model->get($this->input->post('player_id'));
+			$tournament = $this->tournament_model->get($this->input->post('tournament_id'));
+			
+			$this->load->library('email');
+			
+			$this->email->from($this->config->config['tank_auth']['webmaster_email'], 'Gestorneo Gremlin');
+			
+			foreach($this->player_model->getAdmins() as $admin)
+				$this->email->to($admin->email);
+			
+			$this->email->subject($player->username.' signed up to '.$tournament->name);
+			$this->email->message(
+				$player->username.' has signed up to play at '.$tournament->name.'
+				'.$this->config->config['base_url'].'tournament/view/'.$tournament->id
+			);
+			
+			$this->email->send();
 		}
 		
 		header('Location: /tournament/view/'.$this->input->post('tournament_id'));
@@ -107,6 +126,25 @@ class Tournament extends GS_Controller {
 				$this->input->post('tournament_id'),
 				$this->input->post('player_id')
 			);
+			
+			// notify admins
+			$player = $this->player_model->get($this->input->post('player_id'));
+			$tournament = $this->tournament_model->get($this->input->post('tournament_id'));
+			
+			$this->load->library('email');
+			
+			$this->email->from($this->config->config['tank_auth']['webmaster_email'], 'Gestorneo Gremlin');
+			
+			foreach($this->player_model->getAdmins() as $admin)
+				$this->email->to($admin->email);
+			
+			$this->email->subject($player->username.' cancelled attendance to '.$tournament->name);
+			$this->email->message(
+				$player->username.' has cancelled attendance to play at '.$tournament->name.'
+				'.$this->config->config['base_url'].'tournament/view/'.$tournament->id
+			);
+			
+			$this->email->send();
 		}
 		
 		header('Location: /tournament/view/'.$this->input->post('tournament_id'));

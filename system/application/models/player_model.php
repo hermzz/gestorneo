@@ -36,6 +36,12 @@ class Player_model extends Model
 		
 		return $query->num_rows > 0 ? $query : FALSE;
 	}
+	
+	function getAdmins()
+	{
+		$query = $this->db->query('SELECT * FROM users WHERE level=?', array('admin'));
+		return $query->num_rows > 0 ? $query : FALSE;
+	}
 }
 
 ?>
