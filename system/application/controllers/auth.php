@@ -252,7 +252,22 @@ class Auth extends Controller
 		if ($this->tank_auth->activate_user($user_id, $new_email_key)) {		// success
 			$this->tank_auth->logout();
 			$this->_show_message($this->lang->line('auth_message_activation_completed').' '.anchor('/auth/login/', 'Login'));
-
+			
+			$player = $this->player_model->get($user_id);
+			$this->load->library('email');
+			
+			$this->email->from($this->config->config['tank_auth']['webmaster_email'], 'Gestorneo Gremlin');
+			
+			foreach($this->player_model->getAdmins() as $admin)
+				$this->email->to($admin->email);
+			
+			$this->email->subject('New user: '.$player->username);
+			$this->email->message(
+				'A new player has joined: '.$player->name.'
+				'.$this->config->config['base_url'].'player/view/'.$player->id
+			);
+			
+			$this->email->send();
 		} else {																// fail
 			$this->_show_message($this->lang->line('auth_message_activation_failed'));
 		}
