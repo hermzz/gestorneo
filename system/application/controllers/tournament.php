@@ -25,6 +25,8 @@ class Tournament extends GS_Controller {
 	
 	function view($id)
 	{
+		$this->load->helper('markdown');
+	
 		$this->data['tournament'] = $this->tournament_model->get($id);
 		$this->data['players_confirmed'] = $this->tournament_model->getPlayers($id, true);
 		$this->data['players_waiting'] = $this->tournament_model->getPlayers($id, false);

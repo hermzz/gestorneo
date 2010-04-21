@@ -20,7 +20,7 @@
 	<?php endif; ?>
 	
 	<p>
-		<?=$tournament->notes ? $tournament->notes : _('No notes') ?>
+		<?=$tournament->notes ? markdown($tournament->notes) : _('No notes') ?>
 	</p>
 	
 	<h3><?=_('Players confirmed');?></h3>

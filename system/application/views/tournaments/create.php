@@ -24,7 +24,7 @@
     <div id="datepicker">&nbsp;</div>
     
     <label for="notes"><?=_('Notes');?></label><br />
-    <textarea id="notes" name="notes"></textarea><br />
+    <textarea id="notes" name="notes" rows="20" cols="60"></textarea><br />
 
     <input type="submit" name="submitNewTournament" value="<?=_('Add');?>" />
 </form>
