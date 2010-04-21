@@ -263,7 +263,7 @@ class Auth extends Controller
 			
 			$this->email->subject('New user: '.$player->username);
 			$this->email->message(
-				'A new player has joined: '.$player->name.'
+				'A new player has joined: '.$player->username.'
 				'.$this->config->config['base_url'].'player/view/'.$player->id
 			);
 			
