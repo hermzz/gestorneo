@@ -1,6 +1,10 @@
 <?php if($tournament): ?>
 	<h2><?=$tournament->name?>, <?=strftime('%a %e, %B %Y', mysql_to_unix($tournament->date))?></h2>
 	
+	<?php if($this->tank_auth->is_admin()): ?>
+		<p><a href="/tournament/email/<?=$tournament->id;?>">Email team</a></p>
+	<?php endif; ?>
+	
 	<?php if($this->tournament_model->is_signed_up($tournament->id, $this->tank_auth->get_user_id())): ?>
 		<form action="/tournament/cancel_sign_up" method="post">
 			<input type="hidden" name="tournament_id" value="<?=$tournament->id;?>" />

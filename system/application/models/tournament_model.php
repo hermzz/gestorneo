@@ -77,7 +77,7 @@ class Tournament_model extends Model
 				tp.confirmed = '.($confirmed ? 1 : 0).' AND
 				tp.tid = '.$id);
 			
-		return $query->num_rows ? $query->result() : FALSE;
+		return $query->num_rows ? $query->result() : array();
 	}
 	
 	function create($name, $notes, $date)

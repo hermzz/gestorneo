@@ -95,7 +95,6 @@ class Tournament extends GS_Controller {
 				$this->input->post('player_id')
 			);
 			
-			// notify admins
 			$player = $this->player_model->get($this->input->post('player_id'));
 			$tournament = $this->tournament_model->get($this->input->post('tournament_id'));
 			
@@ -127,7 +126,6 @@ class Tournament extends GS_Controller {
 				$this->input->post('player_id')
 			);
 			
-			// notify admins
 			$player = $this->player_model->get($this->input->post('player_id'));
 			$tournament = $this->tournament_model->get($this->input->post('tournament_id'));
 			
@@ -148,6 +146,43 @@ class Tournament extends GS_Controller {
 		}
 		
 		header('Location: /tournament/view/'.$this->input->post('tournament_id'));
+	}
+	
+	function email($tournament_id)
+	{
+		$this->load->helper(array('form', 'url'));
+		$this->load->library('form_validation');
+		
+		$this->form_validation->set_rules('subject', _('Subject'), 'required');
+		$this->form_validation->set_rules('message', _('Message'), 'required');
+		
+		if($this->form_validation->run() == FALSE)
+		{
+			$this->data['title'] = _("Email team");
+			
+			$this->data['tank_auth'] = $this->tank_auth;
+			$this->data['content_view'] = 'tournaments/email';
+			$this->load->view('skeleton', $this->data);
+		} else {
+			$players = array_merge(
+				$this->tournament_model->getPlayers($tournament_id, true),
+				$this->tournament_model->getPlayers($tournament_id, false)
+			);
+			
+			$this->load->library('email');
+			
+			$this->email->from($this->config->config['tank_auth']['webmaster_email'], 'Gestorneo Gremlin');
+			
+			foreach($players as $player)
+				$this->email->to($player->email);
+			
+			$this->email->subject($this->input->post('subject'));
+			$this->email->message($this->input->post('message'));
+			
+			$this->email->send();
+			
+			header('Location: /tournament/view/'.$tournament_id);
+		}
 	}
 }
 
