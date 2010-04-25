@@ -14,6 +14,18 @@
 				$('#start_datepicker').hide();
 			}
 		});
+		
+		$('#end_calendar').click(function() {
+			$('#end_datepicker').toggle();
+		});
+		
+		$("#end_datepicker").datepicker({
+			dateFormat: 'dd/mm/yy',
+			onSelect: function(dateText, inst) {
+				$('#end_date').attr('value', dateText);
+				$('#end_datepicker').hide();
+			}
+		});
 	});
 </script>
 
@@ -21,16 +33,22 @@
 
 <form action="#" method="post">
     <label for="name"><?=_('Name');?></label>
-    <input type="text" id="name" name="name" /><br />
+    <input type="text" id="name" name="name" value="<?=set_value('name');?>" /><br />
 
     <label for="start_date"><?=_('Start date');?></label>
-    <input type="text" id="start_date" name="start_date" />
+    <input type="text" id="start_date" name="start_date" value="<?=set_value('start_date');?>" />
     <a href="#" id="start_calendar"><img src="/static/images/calendar.png" /></a>
     
     <div class="datepicker" id="start_datepicker">&nbsp;</div><br />
+
+    <label for="end_date"><?=_('End date');?></label>
+    <input type="text" id="end_date" name="end_date" value="<?=set_value('end_date');?>" />
+    <a href="#" id="end_calendar"><img src="/static/images/calendar.png" /></a>
+    
+    <div class="datepicker" id="end_datepicker">&nbsp;</div><br />
     
     <label for="notes"><?=_('Notes');?></label><br />
-    <textarea id="notes" name="notes" rows="20" cols="60"></textarea><br />
+    <textarea id="notes" name="notes" rows="20" cols="60"><?=set_value('notes');?></textarea><br />
 
     <input type="submit" name="submitNewTournament" value="<?=_('Add');?>" />
 </form>

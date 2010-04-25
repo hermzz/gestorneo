@@ -19,7 +19,7 @@ class Player_model extends Model
 	function getTournaments($id, $only_confirmed=false)
 	{
 		$sql = 'SELECT
-		    UNIX_TIMESTAMP(t.date) AS u_date,
+		    UNIX_TIMESTAMP(t.start_date) AS u_date,
 			t.*
 		FROM 
 			tournaments AS t,
@@ -29,7 +29,7 @@ class Player_model extends Model
 			tp.pid = ? '
 		. ($only_confirmed ? ' AND tp.confirmed = 1' : '') . 
 		' ORDER BY
-			t.date DESC';
+			t.start_date DESC';
 			
 		$query = $this->db->query($sql,
 			array($id));

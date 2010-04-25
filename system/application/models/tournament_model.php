@@ -15,11 +15,11 @@ class Tournament_model extends Model
 		switch($type)
 		{
 			case 'past':
-				$where = ' date < NOW()';
+				$where = ' start_date < NOW()';
 				break;
 				
 			case 'future':
-				$where = ' date > NOW()';
+				$where = ' start_date > NOW()';
 				break;
 				
 			case 'all':
@@ -30,7 +30,7 @@ class Tournament_model extends Model
 		
 		$sql = 'SELECT * FROM tournaments ' . 
 			( $where ? ' WHERE '.$where : '' ) . 
-		' ORDER BY date ASC';
+		' ORDER BY start_date ASC';
 		$tournaments = $this->db->query($sql);
 		
 		return $tournaments->num_rows > 0 ? $tournaments : FALSE;
@@ -80,10 +80,10 @@ class Tournament_model extends Model
 		return $query->num_rows ? $query->result() : array();
 	}
 	
-	function create($name, $notes, $date)
+	function create($name, $notes, $start_date, $end_date)
 	{
-		$this->db->query('INSERT INTO tournaments (name, notes, date) VALUES (?, ?, ?)',
-			array($name, $notes, $date));
+		$this->db->query('INSERT INTO tournaments (name, notes, start_date, end_date) VALUES (?, ?, ?, ?)',
+			array($name, $notes, $start_date, $end_date));
 	}
 	
 	function add_player($tournament_id, $player_id)

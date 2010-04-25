@@ -60,7 +60,8 @@ class Tournament extends GS_Controller {
 		$this->load->library('form_validation');
 		
 		$this->form_validation->set_rules('name', _('Name'), 'required');
-		$this->form_validation->set_rules('date', _('Date'), 'callback_date_check');
+		$this->form_validation->set_rules('start_date', _('Start date'), 'callback_date_check');
+		$this->form_validation->set_rules('end_date', _('End date'), 'callback_date_check|callback_is_after[start_date]');
 		
 		if($this->form_validation->run() == FALSE)
 		{
@@ -70,7 +71,8 @@ class Tournament extends GS_Controller {
 			$this->tournament_model->create(
 				$this->input->post('name'),
 				$this->input->post('notes'),
-				preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $this->input->post('date'))
+				preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $this->input->post('start_date')),
+				preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $this->input->post('end_date'))
 			);
 			
 			header('Location: /');
@@ -85,6 +87,17 @@ class Tournament extends GS_Controller {
 		} else {
 			$this->form_validation->set_message('date_check', _('The %s is not a valid date'));
 			return false;
+		}
+	}
+	
+	function is_after($a, $b)
+	{		
+		if(strtotime(preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $a)) < strtotime(preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $this->input->post($b))))
+		{
+			$this->form_validation->set_message('is_after', _('Start date must be before end date'));
+			return false;
+		} else {
+			return true;
 		}
 	}
 	

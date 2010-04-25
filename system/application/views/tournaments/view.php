@@ -1,5 +1,5 @@
 <?php if($tournament): ?>
-	<h2><?=$tournament->name?>, <?=strftime('%a %e, %B %Y', mysql_to_unix($tournament->date))?></h2>
+	<h2><?=$tournament->name?>, <?=strftime('%a %e, %B %Y', mysql_to_unix($tournament->start_date))?></h2>
 	
 	<div id="tournament_content">
 		<?php if($this->tank_auth->is_admin()): ?>
