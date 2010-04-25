@@ -55,3 +55,8 @@ a:link, a:visited, a:hover, a:active {
 	border: 1px solid #ccc;
 	padding: 5px 10px;
 }
+
+.datepicker {
+	position: absolute;
+	display: none;
+}
