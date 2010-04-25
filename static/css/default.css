@@ -42,3 +42,16 @@ a:link, a:visited, a:hover, a:active {
     clear: both;
     padding: 0 20px;
 }
+
+#tournament_content {
+	float: left;
+	width: 500px;
+}
+
+#tournament_notes {
+	float: left;
+	width: 500px;
+	background-color: #eee;
+	border: 1px solid #ccc;
+	padding: 5px 10px;
+}
