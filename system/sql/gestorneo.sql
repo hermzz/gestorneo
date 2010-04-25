@@ -38,7 +38,7 @@ CREATE TABLE `ci_sessions` (
 
 LOCK TABLES `ci_sessions` WRITE;
 /*!40000 ALTER TABLE `ci_sessions` DISABLE KEYS */;
-INSERT INTO `ci_sessions` VALUES ('032a25760ee8f96fa1469a4cba57beea','127.0.0.1','Mozilla/5.0 (X11; U; Linux x86_64; en-US) AppleWeb',1271020385,'a:4:{s:7:\"user_id\";s:1:\"1\";s:8:\"username\";s:7:\"Hermann\";s:6:\"status\";s:1:\"1\";s:5:\"level\";s:5:\"admin\";}'),('6c68e91d491b922b6e1d4f148a60982b','127.0.0.1','Mozilla/5.0 (X11; U; Linux x86_64; en-US) AppleWeb',1271018047,''),('c8bf3968c9ff70110c01bc104ed68c45','213.37.236.186','Mozilla/5.0 (X11; U; Linux x86_64; en-US) AppleWeb',1271019713,'a:4:{s:7:\"user_id\";s:1:\"1\";s:8:\"username\";s:7:\"Hermann\";s:6:\"status\";s:1:\"1\";s:5:\"level\";s:5:\"admin\";}'),('e2aee72c47b506c7db4e9f161e04fe90','127.0.0.1','Mozilla/5.0 (X11; U; Linux x86_64; en-US) AppleWeb',1271018045,'a:4:{s:7:\"user_id\";s:1:\"1\";s:8:\"username\";s:7:\"Hermann\";s:6:\"status\";s:1:\"1\";s:5:\"level\";s:5:\"admin\";}');
+INSERT INTO `ci_sessions` VALUES ('c0d52e4858ddba6bb2d9117a5cdde928','127.0.0.1','Mozilla/5.0 (X11; U; Linux x86_64; en-US) AppleWeb',1272228582,'a:4:{s:7:\"user_id\";s:1:\"1\";s:8:\"username\";s:7:\"Hermann\";s:6:\"status\";s:1:\"1\";s:5:\"level\";s:5:\"admin\";}');
 /*!40000 ALTER TABLE `ci_sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -55,7 +55,7 @@ CREATE TABLE `login_attempts` (
   `login` varchar(50) COLLATE utf8_bin NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -138,7 +138,7 @@ CREATE TABLE `tournament_players` (
 
 LOCK TABLES `tournament_players` WRITE;
 /*!40000 ALTER TABLE `tournament_players` DISABLE KEYS */;
-INSERT INTO `tournament_players` VALUES (1,1,0),(1,3,1),(1,4,1),(1,5,1),(2,3,0),(2,5,1),(3,3,0),(3,5,1),(3,6,0);
+INSERT INTO `tournament_players` VALUES (1,1,0),(1,3,0),(1,4,1),(1,5,0),(2,3,0),(2,5,1),(3,3,0),(3,5,1),(3,6,0);
 /*!40000 ALTER TABLE `tournament_players` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -153,9 +153,10 @@ CREATE TABLE `tournaments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `notes` text,
-  `date` date NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -164,7 +165,7 @@ CREATE TABLE `tournaments` (
 
 LOCK TABLES `tournaments` WRITE;
 /*!40000 ALTER TABLE `tournaments` DISABLE KEYS */;
-INSERT INTO `tournaments` VALUES (1,'1ª CAC','','2010-03-13'),(2,'Cremas Beach Challenge','Women only.','2010-03-05'),(3,'Costa Brava Tourney','','2010-03-27'),(4,'Horadada In&Out','','2010-01-30'),(5,'La Abuela','','2010-04-17'),(6,'La Liga Open','','2010-05-29');
+INSERT INTO `tournaments` VALUES (1,'1ª CAC','','2010-05-15','2010-05-15'),(2,'Cremas Beach Challenge','Women only.','2010-03-05','2010-03-06'),(3,'Costa Brava Tourney','','2010-03-27','2010-03-29'),(4,'Horadada In&Out','','2010-01-30','2010-01-31'),(5,'La Abuela','','2010-04-17','2010-04-18'),(6,'La Liga Open','','2010-05-29','2010-05-30');
 /*!40000 ALTER TABLE `tournaments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -255,7 +256,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Hermann','$P$BvAan8tBKA4CDjtrgRQF.iqK3Zt.Ke/','hermann.kaser@gmail.com',1,0,NULL,NULL,NULL,NULL,'766ec0e8b4630f2014e4ca70e5d83e4d','127.0.0.1','2010-04-11 22:34:11','2010-02-28 11:58:00','2010-04-11 20:34:11','admin','M'),(2,'JPalm','$P$BjCSllVIK5yyHQXfAB/15n1iksHMWm1','ajpalmer@gmail.com',1,0,NULL,NULL,NULL,NULL,NULL,'88.26.196.160','2010-03-23 17:37:06','2010-03-23 17:36:34','2010-03-23 16:37:06','admin','M'),(3,'Jose','$P$B5.jIAeWHDz29BxsmS5GfkjlpvZmiH1','joseantoniodelosrios@yahoo.fr',1,0,NULL,NULL,NULL,NULL,NULL,'213.97.255.249','2010-03-24 11:13:24','2010-03-24 11:12:53','2010-03-24 10:13:24','admin','M');
+INSERT INTO `users` VALUES (1,'Hermann','$P$BvAan8tBKA4CDjtrgRQF.iqK3Zt.Ke/','hermann.kaser@gmail.com',1,0,NULL,NULL,NULL,NULL,'766ec0e8b4630f2014e4ca70e5d83e4d','127.0.0.1','2010-04-25 20:12:32','2010-02-28 11:58:00','2010-04-25 18:12:33','admin','M'),(2,'JPalm','$P$BjCSllVIK5yyHQXfAB/15n1iksHMWm1','ajpalmer@gmail.com',1,0,NULL,NULL,NULL,NULL,NULL,'88.26.196.160','2010-03-23 17:37:06','2010-03-23 17:36:34','2010-04-14 21:17:09','user','M'),(3,'Jose','$P$B5.jIAeWHDz29BxsmS5GfkjlpvZmiH1','joseantoniodelosrios@yahoo.fr',1,0,NULL,NULL,NULL,NULL,NULL,'213.97.255.249','2010-03-24 11:13:24','2010-03-24 11:12:53','2010-04-14 21:17:09','user','M');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -268,4 +269,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2010-04-11 23:15:38
+-- Dump completed on 2010-04-25 22:53:51
