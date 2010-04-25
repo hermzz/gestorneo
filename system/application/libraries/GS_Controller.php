@@ -26,7 +26,14 @@ class GS_Controller extends Controller
 		if(!$language || !isset($language_configs[$language]))
 		{
 			$language = 'en';
-			set_cookie('language', $language, 60*60*24*30);
+			set_cookie(
+				array(
+					'name' => 'language', 
+					'value' => $language, 
+					'expire' => 60*60*24*30,
+					'path' => '/'
+				)
+			);
 		}
 		
 		setlocale(
