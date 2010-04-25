@@ -40,6 +40,9 @@ class Tournament extends GS_Controller {
 	
 	function approve_player($tournament_id, $player_id)
 	{
+		if(!$this->tank_auth->is_admin())
+			header('Location: /');
+			
 		$this->tournament_model->approve_player($tournament_id, $player_id);
 		
 		header('Location: /tournament/view/'.$tournament_id);
@@ -47,6 +50,9 @@ class Tournament extends GS_Controller {
 	
 	function drop_player($tournament_id, $player_id)
 	{
+		if(!$this->tank_auth->is_admin())
+			header('Location: /');
+			
 		$this->tournament_model->drop_player($tournament_id, $player_id);
 		
 		header('Location: /tournament/view/'.$tournament_id);
@@ -54,6 +60,9 @@ class Tournament extends GS_Controller {
 
 	function create()
 	{
+		if(!$this->tank_auth->is_admin())
+			header('Location: /');
+			
 		$this->data['title'] = _('New tournament');
 		
 		$this->load->helper(array('form', 'url'));
@@ -81,6 +90,9 @@ class Tournament extends GS_Controller {
 
 	function edit($id)
 	{
+		if(!$this->tank_auth->is_admin())
+			header('Location: /');
+			
 		$this->data['title'] = _('Edit tournament');
 	
 		$this->data['tournament'] = $this->tournament_model->get($id);
@@ -195,6 +207,9 @@ class Tournament extends GS_Controller {
 	
 	function email($tournament_id)
 	{
+		if(!$this->tank_auth->is_admin())
+			header('Location: /');
+			
 		$this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
 		
