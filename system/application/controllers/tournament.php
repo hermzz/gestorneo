@@ -78,6 +78,36 @@ class Tournament extends GS_Controller {
 			header('Location: /');
 		}
 	}
+
+	function edit($id)
+	{
+		$this->data['title'] = _('Edit tournament');
+	
+		$this->data['tournament'] = $this->tournament_model->get($id);
+			
+		$this->load->helper(array('form', 'url'));
+		$this->load->library('form_validation');
+		
+		$this->form_validation->set_rules('name', _('Name'), 'required');
+		$this->form_validation->set_rules('start_date', _('Start date'), 'callback_date_check');
+		$this->form_validation->set_rules('end_date', _('End date'), 'callback_date_check|callback_is_after[start_date]');
+		
+		if($this->form_validation->run() == FALSE)
+		{
+			$this->data['content_view'] = 'tournaments/edit';
+			$this->load->view('skeleton', $this->data);
+		} else {
+			$this->tournament_model->edit(
+				$id,
+				$this->input->post('name'),
+				$this->input->post('notes'),
+				preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $this->input->post('start_date')),
+				preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $this->input->post('end_date'))
+			);
+			
+			header('Location: /tournament/view/'.$id);
+		}
+	}
 	
 	function date_check($date)
 	{

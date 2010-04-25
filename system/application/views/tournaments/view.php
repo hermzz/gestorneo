@@ -3,7 +3,10 @@
 	
 	<div id="tournament_content">
 		<?php if($this->tank_auth->is_admin()): ?>
-			<p><a href="/tournament/email/<?=$tournament->id;?>">Email team</a></p>
+			<p>
+				<a href="/tournament/email/<?=$tournament->id;?>">Email team</a> | 
+				<a href="/tournament/edit/<?=$tournament->id;?>">Edit tournament</a>
+			</p>
 		<?php endif; ?>
 	
 		<?php if($this->tournament_model->is_signed_up($tournament->id, $this->tank_auth->get_user_id())): ?>

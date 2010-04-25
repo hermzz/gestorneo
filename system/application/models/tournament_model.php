@@ -86,6 +86,12 @@ class Tournament_model extends Model
 			array($name, $notes, $start_date, $end_date));
 	}
 	
+	function edit($id, $name, $notes, $start_date, $end_date)
+	{
+		$this->db->query('UPDATE tournaments SET name=?, notes=?, start_date=?, end_date=? WHERE id=?',
+			array($name, $notes, $start_date, $end_date, $id));
+	}
+	
 	function add_player($tournament_id, $player_id)
 	{
 		$this->db->query('INSERT INTO tournament_players VALUES (?, ?, 0)',
