@@ -60,3 +60,22 @@ a:link, a:visited, a:hover, a:active {
 	position: absolute;
 	display: none;
 }
+
+.message {
+	padding: 5px;
+}
+
+.good {
+	background-color: #a6ef7b;
+	border: 1px solid #76c83f;
+}
+
+.neutral {
+	background-color: #f7fdcb;
+	border: 1px solid #c2d071;
+}
+
+.bad {
+	background-color: #ef9398;
+	border: 1px solid #dc5757;
+}

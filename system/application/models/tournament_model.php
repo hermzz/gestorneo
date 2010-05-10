@@ -5,7 +5,15 @@ class Tournament_model extends Model
 	// get tournament by ID
 	function get($id)
 	{
-		$query = $this->db->query('SELECT * FROM tournaments WHERE id='.$id);
+		$query = $this->db->query(
+			'SELECT 
+				*,
+				UNIX_TIMESTAMP(start_date) AS u_start_date,
+				UNIX_TIMESTAMP(end_date) AS u_end_date
+			FROM 
+				tournaments 
+			WHERE 
+				id='.$id);
 		
 		return $query->num_rows > 0 ? $query->row() : FALSE;
 	}
@@ -132,6 +140,11 @@ class Tournament_model extends Model
 		//TODO: more stuff to add here:
 		//	- Sex limitation (ie: womens only tournament)
 		//	- Tournament regstration deadline has passed
+	}
+	
+	function is_old($tournament)
+	{
+		return mktime() > $tournament->u_start_date;
 	}
 }
 
