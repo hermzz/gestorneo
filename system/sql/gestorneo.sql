@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.1.37, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.1.41, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: gestorneo
 -- ------------------------------------------------------
--- Server version	5.1.37-1ubuntu5.1
+-- Server version	5.1.41-3ubuntu12
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -38,7 +38,7 @@ CREATE TABLE `ci_sessions` (
 
 LOCK TABLES `ci_sessions` WRITE;
 /*!40000 ALTER TABLE `ci_sessions` DISABLE KEYS */;
-INSERT INTO `ci_sessions` VALUES ('c0d52e4858ddba6bb2d9117a5cdde928','127.0.0.1','Mozilla/5.0 (X11; U; Linux x86_64; en-US) AppleWeb',1272228582,'a:4:{s:7:\"user_id\";s:1:\"1\";s:8:\"username\";s:7:\"Hermann\";s:6:\"status\";s:1:\"1\";s:5:\"level\";s:5:\"admin\";}');
+INSERT INTO `ci_sessions` VALUES ('056e537d60bfb255839fd9684cdff9a3','127.0.0.1','Mozilla/5.0 (X11; U; Linux x86_64; en-US) AppleWeb',1273528209,'a:4:{s:7:\"user_id\";s:1:\"1\";s:8:\"username\";s:7:\"Hermann\";s:6:\"status\";s:1:\"1\";s:5:\"level\";s:5:\"admin\";}');
 /*!40000 ALTER TABLE `ci_sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -155,8 +155,9 @@ CREATE TABLE `tournaments` (
   `notes` text,
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
+  `signup_deadline` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -165,7 +166,7 @@ CREATE TABLE `tournaments` (
 
 LOCK TABLES `tournaments` WRITE;
 /*!40000 ALTER TABLE `tournaments` DISABLE KEYS */;
-INSERT INTO `tournaments` VALUES (1,'1ª CAC','','2010-05-15','2010-05-15'),(2,'Cremas Beach Challenge','Women only.','2010-03-05','2010-03-06'),(3,'Costa Brava Tourney','','2010-03-27','2010-03-29'),(4,'Horadada In&Out','','2010-01-30','2010-01-31'),(5,'La Abuela','','2010-04-17','2010-04-18'),(6,'La Liga Open','','2010-05-29','2010-05-30');
+INSERT INTO `tournaments` VALUES (1,'1ª CAC','','2010-05-15','2010-05-15','2010-05-06'),(2,'Cremas Beach Challenge','Women only.','2010-03-05','2010-03-06','2010-02-26'),(3,'Costa Brava Tourney','','2010-03-27','2010-03-29','2010-03-19'),(4,'Horadada In&Out','','2010-01-30','2010-01-31','2010-01-22'),(5,'La Abuela','','2010-04-17','2010-04-18','2010-04-02'),(6,'La Liga Open','','2010-05-29','2010-05-30','2010-05-14');
 /*!40000 ALTER TABLE `tournaments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -256,7 +257,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Hermann','$P$BvAan8tBKA4CDjtrgRQF.iqK3Zt.Ke/','hermann.kaser@gmail.com',1,0,NULL,NULL,NULL,NULL,'766ec0e8b4630f2014e4ca70e5d83e4d','127.0.0.1','2010-04-25 20:12:32','2010-02-28 11:58:00','2010-04-25 18:12:33','admin','M'),(2,'JPalm','$P$BjCSllVIK5yyHQXfAB/15n1iksHMWm1','ajpalmer@gmail.com',1,0,NULL,NULL,NULL,NULL,NULL,'88.26.196.160','2010-03-23 17:37:06','2010-03-23 17:36:34','2010-04-14 21:17:09','user','M'),(3,'Jose','$P$B5.jIAeWHDz29BxsmS5GfkjlpvZmiH1','joseantoniodelosrios@yahoo.fr',1,0,NULL,NULL,NULL,NULL,NULL,'213.97.255.249','2010-03-24 11:13:24','2010-03-24 11:12:53','2010-04-14 21:17:09','user','M');
+INSERT INTO `users` VALUES (1,'Hermann','$P$BvAan8tBKA4CDjtrgRQF.iqK3Zt.Ke/','hermann.kaser@gmail.com',1,0,NULL,NULL,NULL,NULL,'766ec0e8b4630f2014e4ca70e5d83e4d','127.0.0.1','2010-05-10 23:04:55','2010-02-28 11:58:00','2010-05-10 21:04:55','admin','M'),(2,'JPalm','$P$BjCSllVIK5yyHQXfAB/15n1iksHMWm1','ajpalmer@gmail.com',1,0,NULL,NULL,NULL,NULL,NULL,'88.26.196.160','2010-03-23 17:37:06','2010-03-23 17:36:34','2010-04-14 21:17:09','user','M'),(3,'Jose','$P$B5.jIAeWHDz29BxsmS5GfkjlpvZmiH1','joseantoniodelosrios@yahoo.fr',1,0,NULL,NULL,NULL,NULL,NULL,'213.97.255.249','2010-03-24 11:13:24','2010-03-24 11:12:53','2010-04-14 21:17:09','user','M');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -269,4 +270,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2010-04-25 22:53:51
+-- Dump completed on 2010-05-10 23:51:51
