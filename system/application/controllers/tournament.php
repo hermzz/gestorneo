@@ -71,6 +71,7 @@ class Tournament extends GS_Controller {
 		$this->form_validation->set_rules('name', _('Name'), 'required');
 		$this->form_validation->set_rules('start_date', _('Start date'), 'callback_date_check');
 		$this->form_validation->set_rules('end_date', _('End date'), 'callback_date_check|callback_is_after[start_date]');
+		$this->form_validation->set_rules('deadline_date', _('Deadline date'), 'callback_date_check|callback_is_before[end_date]');
 		
 		if($this->form_validation->run() == FALSE)
 		{
@@ -81,7 +82,8 @@ class Tournament extends GS_Controller {
 				$this->input->post('name'),
 				$this->input->post('notes'),
 				preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $this->input->post('start_date')),
-				preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $this->input->post('end_date'))
+				preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $this->input->post('end_date')),
+				preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $this->input->post('deadline_date'))
 			);
 			
 			header('Location: /');
@@ -103,6 +105,7 @@ class Tournament extends GS_Controller {
 		$this->form_validation->set_rules('name', _('Name'), 'required');
 		$this->form_validation->set_rules('start_date', _('Start date'), 'callback_date_check');
 		$this->form_validation->set_rules('end_date', _('End date'), 'callback_date_check|callback_is_after[start_date]');
+		$this->form_validation->set_rules('deadline_date', _('Deadline date'), 'callback_date_check|callback_is_before[end_date]');
 		
 		if($this->form_validation->run() == FALSE)
 		{
@@ -114,7 +117,8 @@ class Tournament extends GS_Controller {
 				$this->input->post('name'),
 				$this->input->post('notes'),
 				preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $this->input->post('start_date')),
-				preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $this->input->post('end_date'))
+				preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $this->input->post('end_date')),
+				preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $this->input->post('deadline_date'))
 			);
 			
 			header('Location: /tournament/view/'.$id);
@@ -137,6 +141,17 @@ class Tournament extends GS_Controller {
 		if(strtotime(preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $a)) < strtotime(preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $this->input->post($b))))
 		{
 			$this->form_validation->set_message('is_after', _('Start date must be before end date'));
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	function is_before($a, $b)
+	{		
+		if(strtotime(preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $a)) > strtotime(preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $this->input->post($b))))
+		{
+			$this->form_validation->set_message('is_before', _('Deadline date must be before end date'));
 			return false;
 		} else {
 			return true;

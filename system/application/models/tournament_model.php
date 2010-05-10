@@ -9,7 +9,8 @@ class Tournament_model extends Model
 			'SELECT 
 				*,
 				UNIX_TIMESTAMP(start_date) AS u_start_date,
-				UNIX_TIMESTAMP(end_date) AS u_end_date
+				UNIX_TIMESTAMP(end_date) AS u_end_date,
+				UNIX_TIMESTAMP(signup_deadline) AS u_signup_deadline
 			FROM 
 				tournaments 
 			WHERE 
@@ -88,16 +89,16 @@ class Tournament_model extends Model
 		return $query->num_rows ? $query->result() : array();
 	}
 	
-	function create($name, $notes, $start_date, $end_date)
+	function create($name, $notes, $start_date, $end_date, $signup_deadline)
 	{
-		$this->db->query('INSERT INTO tournaments (name, notes, start_date, end_date) VALUES (?, ?, ?, ?)',
-			array($name, $notes, $start_date, $end_date));
+		$this->db->query('INSERT INTO tournaments (name, notes, start_date, end_date, signup_deadline) VALUES (?, ?, ?, ?, ?)',
+			array($name, $notes, $start_date, $end_date, $signup_deadline));
 	}
 	
-	function edit($id, $name, $notes, $start_date, $end_date)
+	function edit($id, $name, $notes, $start_date, $end_date, $signup_deadline)
 	{
-		$this->db->query('UPDATE tournaments SET name=?, notes=?, start_date=?, end_date=? WHERE id=?',
-			array($name, $notes, $start_date, $end_date, $id));
+		$this->db->query('UPDATE tournaments SET name=?, notes=?, start_date=?, end_date=?, signup_deadline=? WHERE id=?',
+			array($name, $notes, $start_date, $end_date, $signup_deadline, $id));
 	}
 	
 	function add_player($tournament_id, $player_id)
@@ -145,6 +146,11 @@ class Tournament_model extends Model
 	function is_old($tournament)
 	{
 		return mktime() > $tournament->u_start_date;
+	}
+	
+	function undeadlined($tournament)
+	{
+		return mktime() < $tournament->u_signup_deadline;
 	}
 }
 

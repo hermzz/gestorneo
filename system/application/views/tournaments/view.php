@@ -1,6 +1,6 @@
 <?php if($tournament): ?>
 	<?php if($this->tournament_model->is_old($tournament)):?>
-		<p class="message neutral"><?=_('This tournament has already passed');?>
+		<p class="message neutral"><?=_('This tournament has already passed');?></p>
 	<?php endif;?>
 	
 	<h2><?=$tournament->name?>, <?=strftime('%a %e, %B %Y', mysql_to_unix($tournament->start_date))?></h2>
@@ -12,8 +12,14 @@
 				<a href="/tournament/edit/<?=$tournament->id;?>">Edit tournament</a>
 			</p>
 		<?php endif; ?>
-	
+		
 		<?php if(!$this->tournament_model->is_old($tournament)):?>
+			<?php if($this->tournament_model->undeadlined($tournament)):?>
+				<p><?=sprintf(_('The signup deadline for this tournament is %s'), strftime('%a %e, %B %Y', mysql_to_unix($tournament->signup_deadline)));?></p>
+			<?php else: ?>
+				<p><?=_('The signup deadline for this tournament has already passed, you\'re too late!');?></p>
+			<?php endif; ?>
+			
 			<?php if($this->tournament_model->is_signed_up($tournament->id, $this->tank_auth->get_user_id())): ?>
 				<form action="/tournament/cancel_sign_up" method="post">
 					<input type="hidden" name="tournament_id" value="<?=$tournament->id;?>" />

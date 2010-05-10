@@ -26,6 +26,18 @@
 				$('#end_datepicker').hide();
 			}
 		});
+		
+		$('#deadline_calendar').click(function() {
+			$('#deadline_datepicker').toggle();
+		});
+		
+		$("#deadline_datepicker").datepicker({
+			dateFormat: 'dd/mm/yy',
+			onSelect: function(dateText, inst) {
+				$('#deadline_date').attr('value', dateText);
+				$('#deadline_datepicker').hide();
+			}
+		});
 	});
 </script>
 
@@ -46,6 +58,12 @@
     <a href="#" id="end_calendar"><img src="/static/images/calendar.png" /></a>
     
     <div class="datepicker" id="end_datepicker">&nbsp;</div><br />
+
+    <label for="deadline_date"><?=_('Signup deadline');?></label>
+    <input type="text" id="deadline_date" name="deadline_date" value="<?=set_value('deadline_date', strftime('%d/%m/%Y', mysql_to_unix($tournament->signup_deadline)));?>" />
+    <a href="#" id="deadline_calendar"><img src="/static/images/calendar.png" /></a>
+    
+    <div class="datepicker" id="deadline_datepicker">&nbsp;</div><br />
     
     <label for="notes"><?=_('Notes');?></label><br />
     <textarea id="notes" name="notes" rows="20" cols="60"><?=set_value('notes', $tournament->notes);?></textarea><br />
