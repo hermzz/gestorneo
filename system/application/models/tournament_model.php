@@ -140,7 +140,6 @@ class Tournament_model extends Model
 		
 		//TODO: more stuff to add here:
 		//	- Sex limitation (ie: womens only tournament)
-		//	- Tournament regstration deadline has passed
 	}
 	
 	function is_old($tournament)
@@ -150,7 +149,7 @@ class Tournament_model extends Model
 	
 	function undeadlined($tournament)
 	{
-		return mktime() < $tournament->u_signup_deadline;
+		return mktime(0, 0, 0, date('n'), date('j'), date('Y')) <= $tournament->u_signup_deadline;
 	}
 }
 
