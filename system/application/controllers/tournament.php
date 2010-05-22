@@ -222,9 +222,14 @@ class Tournament extends GS_Controller {
 	
 	function email($tournament_id)
 	{
+		$this->load->helper('markdown');
+		
 		if(!$this->tank_auth->is_admin())
 			header('Location: /');
 			
+		$tournament = $this->tournament_model->get($tournament_id);
+		$this->data['tournament'] = $tournament;
+		
 		$this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
 		
@@ -233,7 +238,7 @@ class Tournament extends GS_Controller {
 		
 		if($this->form_validation->run() == FALSE)
 		{
-			$this->data['title'] = _("Email team");
+			$this->data['title'] = sprintf(_('Email team for %s'), $tournament->name);
 			
 			$this->data['tank_auth'] = $this->tank_auth;
 			$this->data['content_view'] = 'tournaments/email';
@@ -252,12 +257,28 @@ class Tournament extends GS_Controller {
 				$this->email->to($player->email);
 			
 			$this->email->subject($this->input->post('subject'));
-			$this->email->message($this->input->post('message'));
+			$this->email->message(markdown($this->input->post('message')));
 			
 			$this->email->send();
 			
 			header('Location: /tournament/view/'.$tournament_id);
 		}
+	}
+	
+	function email_preview($tournament_id)
+	{
+		$this->load->helper('markdown');
+		
+		$tournament = $this->tournament_model->get($tournament_id);
+		$this->data['tournament'] = $tournament;
+		
+		$this->data['title'] = _('Preview email');
+		$this->data['content_view'] = 'tournaments/preview_email';
+		
+		$this->data['subject'] = $this->input->post('subject');
+		$this->data['message'] = $this->input->post('message');
+		
+		$this->load->view('skeleton', $this->data);
 	}
 }
 

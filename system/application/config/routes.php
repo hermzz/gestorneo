@@ -43,6 +43,7 @@
 $route['default_controller'] = "tournament";
 $route['scaffolding_trigger'] = "scaffolding";
 
+$route['tournament/email/(:num)/preview'] = 'tournament/email_preview/$1';
 
 /* End of file routes.php */
 /* Location: ./system/application/config/routes.php */
