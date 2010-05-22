@@ -16,22 +16,22 @@
 		<?php if(!$this->tournament_model->is_old($tournament)):?>
 			<?php if($this->tournament_model->undeadlined($tournament)):?>
 				<p><?=sprintf(_('The signup deadline for this tournament is %s'), strftime('%a %e, %B %Y', mysql_to_unix($tournament->signup_deadline)));?></p>
+			
+				<?php if($this->tournament_model->is_signed_up($tournament->id, $this->tank_auth->get_user_id())): ?>
+					<form action="/tournament/cancel_sign_up" method="post">
+						<input type="hidden" name="tournament_id" value="<?=$tournament->id;?>" />
+						<input type="hidden" name="player_id" value="<?=$this->tank_auth->get_user_id();?>" />
+						<input type="submit" name="submitCancel" value="<?=_('Cancel');?>" />
+					</form>
+				<?php elseif($this->tournament_model->can_sign_up($tournament->id, $this->tank_auth->get_user_id())): ?>
+					<form action="/tournament/sign_up" method="post">
+						<input type="hidden" name="tournament_id" value="<?=$tournament->id;?>" />
+						<input type="hidden" name="player_id" value="<?=$this->tank_auth->get_user_id();?>" />
+						<input type="submit" name="submitSignup" value="<?=_('Signup');?>" />
+					</form>
+				<?php endif; ?>
 			<?php else: ?>
 				<p><?=_('The signup deadline for this tournament has already passed, you\'re too late!');?></p>
-			<?php endif; ?>
-			
-			<?php if($this->tournament_model->is_signed_up($tournament->id, $this->tank_auth->get_user_id())): ?>
-				<form action="/tournament/cancel_sign_up" method="post">
-					<input type="hidden" name="tournament_id" value="<?=$tournament->id;?>" />
-					<input type="hidden" name="player_id" value="<?=$this->tank_auth->get_user_id();?>" />
-					<input type="submit" name="submitCancel" value="<?=_('Cancel');?>" />
-				</form>
-			<?php elseif($this->tournament_model->can_sign_up($tournament->id, $this->tank_auth->get_user_id())): ?>
-				<form action="/tournament/sign_up" method="post">
-					<input type="hidden" name="tournament_id" value="<?=$tournament->id;?>" />
-					<input type="hidden" name="player_id" value="<?=$this->tank_auth->get_user_id();?>" />
-					<input type="submit" name="submitSignup" value="<?=_('Signup');?>" />
-				</form>
 			<?php endif; ?>
 		<?php endif; ?>
 	
