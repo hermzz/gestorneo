@@ -1,0 +1,20 @@
+<h2><?=_('Markdown help');?></h2>
+
+<p><pre>
+
+# <?=_('h1 header');?> 
+## <?=_('h2 header');?> 
+### etc...
+
+**<?=_('bold text');?>** or __<?=_('bold text');?>__
+*<?=_('italic text');?>* or _<?=_('italic text');?>_
+
+[http://www.google.com](<?=_('link title');?>)
+
+* <?=_('unordered list');?> 
+1. <?=_('ordered list');?> 
+
+> <?=_('indented text');?> 
+>> <?=_('nested indented text');?> 
+
+</pre></p>

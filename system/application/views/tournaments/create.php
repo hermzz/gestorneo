@@ -67,6 +67,8 @@
     
     <label for="notes"><?=_('Notes');?></label><br />
     <textarea id="notes" name="notes" rows="20" cols="60"><?=set_value('notes');?></textarea><br />
+    
+    <p><a href="/misc/page/markdown_help" target="_blank"><?=_('markdown help');?></a></p>
 
     <input type="submit" name="submitNewTournament" value="<?=_('Add');?>" />
 </form>
