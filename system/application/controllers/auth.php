@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Auth extends Controller
+class Auth extends GS_Controller
 {
 	function __construct()
 	{
@@ -91,7 +91,8 @@ class Auth extends Controller
 			
 			$data['title'] = 'Login';
 		    $data['content_view'] = 'auth/login_form';
-		    $this->load->view('skeleton', $data);
+		    
+		    $this->load->view('skeleton', array_merge($data, $this->data));
 		}
 	}
 
@@ -197,7 +198,7 @@ class Auth extends Controller
 			
 			$data['title'] = 'Register';
 		    $data['content_view'] = 'auth/register_form';
-		    $this->load->view('skeleton', $data);
+		    $this->load->view('skeleton', array_merge($data, $this->data));
 		}
 	}
 
@@ -232,7 +233,7 @@ class Auth extends Controller
 					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
 				}
 			}
-			$this->load->view('auth/send_again_form', $data);
+			$this->load->view('auth/send_again_form', array_merge($data, $this->data));
 		}
 	}
 
@@ -308,7 +309,7 @@ class Auth extends Controller
 					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
 				}
 			}
-			$this->load->view('auth/forgot_password_form', $data);
+			$this->load->view('auth/forgot_password_form', array_merge($data, $this->data));
 		}
 	}
 
@@ -357,7 +358,7 @@ class Auth extends Controller
 				return;
 			}
 		}
-		$this->load->view('auth/reset_password_form', $data);
+		$this->load->view('auth/reset_password_form', array_merge($data, $this->data));
 	}
 
 	/**
@@ -389,7 +390,7 @@ class Auth extends Controller
 					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
 				}
 			}
-			$this->load->view('auth/change_password_form', $data);
+			$this->load->view('auth/change_password_form', array_merge($data, $this->data));
 		}
 	}
 
@@ -427,7 +428,7 @@ class Auth extends Controller
 					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
 				}
 			}
-			$this->load->view('auth/change_email_form', $data);
+			$this->load->view('auth/change_email_form', array_merge($data, $this->data));
 		}
 	}
 
@@ -479,7 +480,7 @@ class Auth extends Controller
 					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
 				}
 			}
-			$this->load->view('auth/unregister_form', $data);
+			$this->load->view('auth/unregister_form', array_merge($data, $this->data));
 		}
 	}
 
@@ -509,8 +510,8 @@ class Auth extends Controller
 		$this->email->reply_to($this->config->item('webmaster_email', 'tank_auth'), $this->config->item('website_name', 'tank_auth'));
 		$this->email->to($email);
 		$this->email->subject(sprintf($this->lang->line('auth_subject_'.$type), $this->config->item('website_name', 'tank_auth')));
-		$this->email->message($this->load->view('email/'.$type.'-html', $data, TRUE));
-		$this->email->set_alt_message($this->load->view('email/'.$type.'-txt', $data, TRUE));
+		$this->email->message($this->load->view('email/'.$type.'-html', array_merge($data, $this->data), TRUE));
+		$this->email->set_alt_message($this->load->view('email/'.$type.'-txt', array_merge($data, $this->data), TRUE));
 		$this->email->send();
 	}
 
