@@ -2,109 +2,23 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: Gestorneo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-20 19:31+0100\n"
-"PO-Revision-Date: 2010-06-20 19:35+0100\n"
+"POT-Creation-Date: 2010-09-01 21:47+0100\n"
+"PO-Revision-Date: 2010-09-01 21:48+0100\n"
 "Last-Translator: Hermann Kaser <hermann.kaser@gmail.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language-Team: es <hermann.kaser@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Basepath: .\n"
-"X-Poedit-SearchPath-0: /var/www/gestorneo\n"
-
-#: /var/www/gestorneo/system/application/controllers/tournament.php:20
-msgid "Tournaments"
-msgstr "Torneos"
-
-#: /var/www/gestorneo/system/application/controllers/tournament.php:34
-msgid "Tournament not found"
-msgstr "No existe este torneo"
-
-#: /var/www/gestorneo/system/application/controllers/tournament.php:66
-msgid "New tournament"
-msgstr "Nuevo torneo"
-
-#: /var/www/gestorneo/system/application/controllers/tournament.php:71
-#: /var/www/gestorneo/system/application/controllers/tournament.php:105
-msgid "Name"
-msgstr "Nombre"
-
-#: /var/www/gestorneo/system/application/controllers/tournament.php:72
-#: /var/www/gestorneo/system/application/controllers/tournament.php:106
-msgid "Start date"
-msgstr "Fecha de inicio"
-
-#: /var/www/gestorneo/system/application/controllers/tournament.php:73
-#: /var/www/gestorneo/system/application/controllers/tournament.php:107
-msgid "End date"
-msgstr "Fecha de fin"
-
-#: /var/www/gestorneo/system/application/controllers/tournament.php:74
-#: /var/www/gestorneo/system/application/controllers/tournament.php:108
-msgid "Deadline date"
-msgstr "Fecha limite de inscripción"
-
-#: /var/www/gestorneo/system/application/controllers/tournament.php:98
-msgid "Edit tournament"
-msgstr "Editar torneo"
-
-#: /var/www/gestorneo/system/application/controllers/tournament.php:134
-#, php-format
-msgid "The %s is not a valid date"
-msgstr "%s no es una fecha valida"
-
-#: /var/www/gestorneo/system/application/controllers/tournament.php:143
-msgid "Start date must be before end date"
-msgstr "La fecha de inicio debe ser anterior a la de fin"
-
-#: /var/www/gestorneo/system/application/controllers/tournament.php:154
-msgid "Deadline date must be before end date"
-msgstr "La fecha limite debe ser anterior a la fecha de fin"
-
-#: /var/www/gestorneo/system/application/controllers/tournament.php:236
-msgid "Subject"
-msgstr "Tema"
-
-#: /var/www/gestorneo/system/application/controllers/tournament.php:237
-msgid "Message"
-msgstr "Mensaje"
-
-#: /var/www/gestorneo/system/application/controllers/tournament.php:241
-#, php-format
-msgid "Email team for %s"
-msgstr "Enviar correo al equipo para %s"
-
-#: /var/www/gestorneo/system/application/controllers/tournament.php:275
-msgid "Preview email"
-msgstr "Previsualizar correo"
-
-#: /var/www/gestorneo/system/application/controllers/misc.php:8
-msgid "Markdown help"
-msgstr "Ayuda markdown"
-
-#: /var/www/gestorneo/system/application/controllers/player.php:17
-msgid "Players"
-msgstr "Jugadores"
-
-#: /var/www/gestorneo/system/application/controllers/player.php:32
-msgid "Player not found"
-msgstr "Jugador no encontrado"
-
-#: /var/www/gestorneo/system/application/views/navbar.php:2
-msgid "home"
-msgstr "inicio"
-
-#: /var/www/gestorneo/system/application/views/navbar.php:3
-msgid "tournaments"
-msgstr "torneos"
-
-#: /var/www/gestorneo/system/application/views/navbar.php:4
-msgid "players"
-msgstr "jugadores"
+"X-Poedit-Language: es_ES\n"
+"X-Poedit-Country: Spain\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: /var/www/gestorneo/system\n"
 
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
@@ -124,68 +38,54 @@ msgstr "Salir"
 msgid "Login"
 msgstr "Entrar"
 
-#: /var/www/gestorneo/system/application/views/misc/markdown_help.php:5
-msgid "h1 header"
-msgstr "cabecera h1"
+#: /var/www/gestorneo/system/application/views/navbar.php:2
+msgid "home"
+msgstr "inicio"
 
-#: /var/www/gestorneo/system/application/views/misc/markdown_help.php:6
-msgid "h2 header"
-msgstr "cabecera h2"
+#: /var/www/gestorneo/system/application/views/navbar.php:3
+msgid "tournaments"
+msgstr "torneos"
 
-#: /var/www/gestorneo/system/application/views/misc/markdown_help.php:9
-msgid "bold text"
-msgstr "texto en negrita"
+#: /var/www/gestorneo/system/application/views/navbar.php:4
+msgid "players"
+msgstr "jugadores"
 
-#: /var/www/gestorneo/system/application/views/misc/markdown_help.php:10
-msgid "italic text"
-msgstr "texto en italico"
+#: /var/www/gestorneo/system/application/views/tournaments/edit.php:1
+msgid "Edit tournament"
+msgstr "Editar torneo"
 
-#: /var/www/gestorneo/system/application/views/misc/markdown_help.php:12
-msgid "link title"
-msgstr "título del enlace"
+#: /var/www/gestorneo/system/application/views/tournaments/edit.php:47
+#: /var/www/gestorneo/system/application/views/tournaments/create.php:47
+msgid "Name"
+msgstr "Nombre"
 
-#: /var/www/gestorneo/system/application/views/misc/markdown_help.php:14
-msgid "unordered list"
-msgstr "lista sin ordenar"
+#: /var/www/gestorneo/system/application/views/tournaments/edit.php:50
+#: /var/www/gestorneo/system/application/views/tournaments/create.php:50
+msgid "Start date"
+msgstr "Fecha de inicio"
 
-#: /var/www/gestorneo/system/application/views/misc/markdown_help.php:15
-msgid "ordered list"
-msgstr "lista ordenada"
+#: /var/www/gestorneo/system/application/views/tournaments/edit.php:56
+#: /var/www/gestorneo/system/application/views/tournaments/create.php:56
+msgid "End date"
+msgstr "Fecha de fin"
 
-#: /var/www/gestorneo/system/application/views/misc/markdown_help.php:17
-msgid "indented text"
-msgstr "texto indentado"
-
-#: /var/www/gestorneo/system/application/views/misc/markdown_help.php:18
-msgid "nested indented text"
-msgstr "texto indentado anidado"
-
-#: /var/www/gestorneo/system/application/views/players/index.php:7
-#, php-format
-msgid "joined %s"
-msgstr "registrado en %s"
-
-#: /var/www/gestorneo/system/application/views/players/index.php:12
-msgid "No players found."
-msgstr "No hay jugadores."
-
-#: /var/www/gestorneo/system/application/views/players/view.php:14
-msgid "No tournaments for this player."
-msgstr "Este jugador no está apuntado a ningún torneo."
-
-#: /var/www/gestorneo/system/application/views/players/view.php:17
-msgid "Player not found."
-msgstr "Jugador inexistente."
-
-#: /var/www/gestorneo/system/application/views/tournaments/create.php:62
 #: /var/www/gestorneo/system/application/views/tournaments/edit.php:62
+#: /var/www/gestorneo/system/application/views/tournaments/create.php:62
 msgid "Signup deadline"
 msgstr "Fecha limite de inscripción"
 
-#: /var/www/gestorneo/system/application/views/tournaments/create.php:68
 #: /var/www/gestorneo/system/application/views/tournaments/edit.php:68
+#: /var/www/gestorneo/system/application/views/tournaments/create.php:68
 msgid "Notes"
 msgstr "Notas"
+
+#: /var/www/gestorneo/system/application/views/tournaments/edit.php:71
+msgid "Edit"
+msgstr "Editar"
+
+#: /var/www/gestorneo/system/application/views/tournaments/create.php:1
+msgid "New tournament"
+msgstr "Nuevo torneo"
 
 #: /var/www/gestorneo/system/application/views/tournaments/create.php:71
 #: /var/www/gestorneo/system/application/views/tournaments/email.php:30
@@ -196,9 +96,18 @@ msgstr "ayuda markdown"
 msgid "Add"
 msgstr "Añadir"
 
-#: /var/www/gestorneo/system/application/views/tournaments/edit.php:71
-msgid "Edit"
-msgstr "Editar"
+#: /var/www/gestorneo/system/application/views/tournaments/email.php:1
+#, php-format
+msgid "Email team for %s"
+msgstr "Enviar correo al equipo para %s"
+
+#: /var/www/gestorneo/system/application/views/tournaments/email.php:24
+msgid "Subject"
+msgstr "Tema"
+
+#: /var/www/gestorneo/system/application/views/tournaments/email.php:27
+msgid "Message"
+msgstr "Mensaje"
 
 #: /var/www/gestorneo/system/application/views/tournaments/email.php:32
 msgid "Send"
@@ -221,6 +130,11 @@ msgstr "Torneos futuros"
 #, php-format
 msgid "<a href=\"%s\">%s</a> on %s"
 msgstr "<a href=\"%s\">%s</a> el %s"
+
+#: /var/www/gestorneo/system/application/views/tournaments/index.php:12
+#: /var/www/gestorneo/system/application/views/tournaments/index.php:29
+msgid "Players"
+msgstr "Jugadores"
 
 #: /var/www/gestorneo/system/application/views/tournaments/index.php:19
 msgid "No upcoming tournaments found."
@@ -283,6 +197,208 @@ msgstr "Nadie se queda fuera!"
 msgid "No notes"
 msgstr "No hay notas"
 
+#: /var/www/gestorneo/system/application/views/tournaments/view.php:74
+msgid "Tournament not found"
+msgstr "No existe este torneo"
+
+#: /var/www/gestorneo/system/application/views/tournaments/preview_email.php:1
+msgid "Preview email"
+msgstr "Previsualizar correo"
+
+#: /var/www/gestorneo/system/application/views/auth/login_form.php:10
+#: /var/www/gestorneo/system/application/views/auth/forgot_password_form.php:10
+msgid "Email or login"
+msgstr "Correo o usuario"
+
+#: /var/www/gestorneo/system/application/views/auth/login_form.php:14
+#: /var/www/gestorneo/system/application/views/auth/forgot_password_form.php:12
+msgid "Email"
+msgstr "Email"
+
+#: /var/www/gestorneo/system/application/views/auth/login_form.php:54
+msgid "Get another CAPTCHA"
+msgstr "Generar otro CAPTCHA"
+
+#: /var/www/gestorneo/system/application/views/auth/login_form.php:55
+msgid "Get an audio CAPTCHA"
+msgstr "Generar un CAPTCHA de audio"
+
+#: /var/www/gestorneo/system/application/views/auth/login_form.php:56
+msgid "Get an image CAPTCHA"
+msgstr "Generar un CAPTCHA de imagen"
+
+#: /var/www/gestorneo/system/application/views/auth/login_form.php:61
+msgid "Enter the words above"
+msgstr "Escribe las palabras de arriba"
+
+#: /var/www/gestorneo/system/application/views/auth/login_form.php:62
+msgid "Enter the numbers you hear"
+msgstr "Escribe el numero que escuches"
+
+#: /var/www/gestorneo/system/application/views/auth/login_form.php:71
+#: /var/www/gestorneo/system/application/views/auth/register_form.php:97
+msgid "Enter the code exactly as it appears"
+msgstr "Introduzca el código tal y como aparece"
+
+#: /var/www/gestorneo/system/application/views/auth/login_form.php:76
+#: /var/www/gestorneo/system/application/views/auth/register_form.php:102
+msgid "Confirmation Code"
+msgstr "Código de confirmación"
+
+#: /var/www/gestorneo/system/application/views/auth/login_form.php:86
+msgid "Remember me"
+msgstr "Recuerdame"
+
+#: /var/www/gestorneo/system/application/views/auth/login_form.php:87
+msgid "Forgot password"
+msgstr "Olvidé la contraseña"
+
+#: /var/www/gestorneo/system/application/views/auth/login_form.php:88
+#: /var/www/gestorneo/system/application/views/auth/register_form.php:109
+msgid "Register"
+msgstr "Registrar"
+
+#: /var/www/gestorneo/system/application/views/auth/login_form.php:92
+msgid "Let me in"
+msgstr "Dejame entrar"
+
+#: /var/www/gestorneo/system/application/views/auth/forgot_password_form.php:23
+msgid "Get a new password"
+msgstr "Elegir una nueva contraseña"
+
+#: /var/www/gestorneo/system/application/views/auth/register_form.php:53
+msgid "Email Address"
+msgstr "Correo electrónico"
+
+#: /var/www/gestorneo/system/application/views/auth/register_form.php:58
+msgid "Password"
+msgstr "Contraseña"
+
+#: /var/www/gestorneo/system/application/views/auth/register_form.php:63
+msgid "Confirm Password"
+msgstr "Confirmar contraseña"
+
+#: /var/www/gestorneo/system/application/views/auth/register_form.php:68
+msgid "Sex"
+msgstr "Sexo"
+
+#: /var/www/gestorneo/system/application/views/auth/register_form.php:69
+msgid "Dude"
+msgstr "Chico"
+
+#: /var/www/gestorneo/system/application/views/auth/register_form.php:69
+msgid "Chick"
+msgstr "Chica"
+
+#: /var/www/gestorneo/system/application/views/auth/change_email_form.php:23
+msgid "New email address"
+msgstr "Nuevo correo electrónico"
+
+#: /var/www/gestorneo/system/application/views/auth/change_email_form.php:28
+msgid "Send confirmation email"
+msgstr "Enviar correo de confirmación"
+
+#: /var/www/gestorneo/system/application/views/auth/change_password_form.php:24
+msgid "Old Password"
+msgstr "Vieja contraseña"
+
+#: /var/www/gestorneo/system/application/views/auth/change_password_form.php:29
+msgid "New Password"
+msgstr "Nueva contraseña"
+
+#: /var/www/gestorneo/system/application/views/auth/change_password_form.php:34
+msgid "Confirm New Password"
+msgstr "Confirmar nueva contraseña"
+
+#: /var/www/gestorneo/system/application/views/auth/change_password_form.php:39
+msgid "Change Password"
+msgstr "Cambiar contraseña"
+
+#: /var/www/gestorneo/system/application/views/players/index.php:7
+#, php-format
+msgid "joined %s"
+msgstr "registrado en %s"
+
+#: /var/www/gestorneo/system/application/views/players/index.php:12
+msgid "No players found."
+msgstr "No hay jugadores."
+
+#: /var/www/gestorneo/system/application/views/players/view.php:4
+#: /var/www/gestorneo/system/application/controllers/tournament.php:20
+msgid "Tournaments"
+msgstr "Torneos"
+
+#: /var/www/gestorneo/system/application/views/players/view.php:14
+msgid "No tournaments for this player."
+msgstr "Este jugador no está apuntado a ningún torneo."
+
+#: /var/www/gestorneo/system/application/views/players/view.php:17
+msgid "Player not found."
+msgstr "Jugador inexistente."
+
+#: /var/www/gestorneo/system/application/views/misc/markdown_help.php:1
+#: /var/www/gestorneo/system/application/controllers/misc.php:8
+msgid "Markdown help"
+msgstr "Ayuda markdown"
+
+#: /var/www/gestorneo/system/application/views/misc/markdown_help.php:5
+msgid "h1 header"
+msgstr "cabecera h1"
+
+#: /var/www/gestorneo/system/application/views/misc/markdown_help.php:6
+msgid "h2 header"
+msgstr "cabecera h2"
+
+#: /var/www/gestorneo/system/application/views/misc/markdown_help.php:9
+msgid "bold text"
+msgstr "texto en negrita"
+
+#: /var/www/gestorneo/system/application/views/misc/markdown_help.php:10
+msgid "italic text"
+msgstr "texto en italico"
+
+#: /var/www/gestorneo/system/application/views/misc/markdown_help.php:12
+msgid "link title"
+msgstr "título del enlace"
+
+#: /var/www/gestorneo/system/application/views/misc/markdown_help.php:14
+msgid "unordered list"
+msgstr "lista sin ordenar"
+
+#: /var/www/gestorneo/system/application/views/misc/markdown_help.php:15
+msgid "ordered list"
+msgstr "lista ordenada"
+
+#: /var/www/gestorneo/system/application/views/misc/markdown_help.php:17
+msgid "indented text"
+msgstr "texto indentado"
+
+#: /var/www/gestorneo/system/application/views/misc/markdown_help.php:18
+msgid "nested indented text"
+msgstr "texto indentado anidado"
+
+#: /var/www/gestorneo/system/application/controllers/tournament.php:74
+#: /var/www/gestorneo/system/application/controllers/tournament.php:108
+msgid "Deadline date"
+msgstr "Fecha limite de inscripción"
+
+#: /var/www/gestorneo/system/application/controllers/tournament.php:134
+#, php-format
+msgid "The %s is not a valid date"
+msgstr "%s no es una fecha valida"
+
+#: /var/www/gestorneo/system/application/controllers/tournament.php:143
+msgid "Start date must be before end date"
+msgstr "La fecha de inicio debe ser anterior a la de fin"
+
+#: /var/www/gestorneo/system/application/controllers/tournament.php:154
+msgid "Deadline date must be before end date"
+msgstr "La fecha limite debe ser anterior a la fecha de fin"
+
+#: /var/www/gestorneo/system/application/controllers/player.php:32
+msgid "Player not found"
+msgstr "Jugador no encontrado"
+
 #: /var/www/gestorneo/system/application/libraries/GS_Controller.php:52
 msgid "Spanish"
 msgstr "Español"
@@ -290,9 +406,4 @@ msgstr "Español"
 #: /var/www/gestorneo/system/application/libraries/GS_Controller.php:53
 msgid "English"
 msgstr "Inglés"
-
-#~ msgid "Date"
-#~ msgstr "Fecha"
-#~ msgid "Tournament not found."
-#~ msgstr "No existe este torneo."
 
