@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gestorneo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-01 21:47+0100\n"
-"PO-Revision-Date: 2010-09-01 21:48+0100\n"
+"POT-Creation-Date: 2010-09-01 21:55+0100\n"
+"PO-Revision-Date: 2010-09-01 21:56+0100\n"
 "Last-Translator: Hermann Kaser <hermann.kaser@gmail.com>\n"
 "Language-Team: es <hermann.kaser@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -25,16 +25,16 @@ msgstr ""
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: /var/www/gestorneo/system/application/views/skeleton.php:43
+#: /var/www/gestorneo/system/application/views/skeleton.php:41
 #, php-format
 msgid "Hello %s"
 msgstr "Hola %s"
 
-#: /var/www/gestorneo/system/application/views/skeleton.php:44
+#: /var/www/gestorneo/system/application/views/skeleton.php:42
 msgid "Logout"
 msgstr "Salir"
 
-#: /var/www/gestorneo/system/application/views/skeleton.php:46
+#: /var/www/gestorneo/system/application/views/skeleton.php:44
 msgid "Login"
 msgstr "Entrar"
 
@@ -42,11 +42,11 @@ msgstr "Entrar"
 msgid "home"
 msgstr "inicio"
 
-#: /var/www/gestorneo/system/application/views/navbar.php:3
+#: /var/www/gestorneo/system/application/views/navbar.php:5
 msgid "tournaments"
 msgstr "torneos"
 
-#: /var/www/gestorneo/system/application/views/navbar.php:4
+#: /var/www/gestorneo/system/application/views/navbar.php:6
 msgid "players"
 msgstr "jugadores"
 
@@ -205,6 +205,15 @@ msgstr "No existe este torneo"
 msgid "Preview email"
 msgstr "Previsualizar correo"
 
+#: /var/www/gestorneo/system/application/views/auth/unregister_form.php:11
+#: /var/www/gestorneo/system/application/views/auth/register_form.php:58
+msgid "Password"
+msgstr "Contraseña"
+
+#: /var/www/gestorneo/system/application/views/auth/unregister_form.php:16
+msgid "Delete account"
+msgstr "Eliminar cuenta"
+
 #: /var/www/gestorneo/system/application/views/auth/login_form.php:10
 #: /var/www/gestorneo/system/application/views/auth/forgot_password_form.php:10
 msgid "Email or login"
@@ -216,22 +225,27 @@ msgid "Email"
 msgstr "Email"
 
 #: /var/www/gestorneo/system/application/views/auth/login_form.php:54
+#: /var/www/gestorneo/system/application/views/auth/register_form.php:80
 msgid "Get another CAPTCHA"
 msgstr "Generar otro CAPTCHA"
 
 #: /var/www/gestorneo/system/application/views/auth/login_form.php:55
+#: /var/www/gestorneo/system/application/views/auth/register_form.php:81
 msgid "Get an audio CAPTCHA"
 msgstr "Generar un CAPTCHA de audio"
 
 #: /var/www/gestorneo/system/application/views/auth/login_form.php:56
+#: /var/www/gestorneo/system/application/views/auth/register_form.php:82
 msgid "Get an image CAPTCHA"
 msgstr "Generar un CAPTCHA de imagen"
 
 #: /var/www/gestorneo/system/application/views/auth/login_form.php:61
+#: /var/www/gestorneo/system/application/views/auth/register_form.php:87
 msgid "Enter the words above"
 msgstr "Escribe las palabras de arriba"
 
 #: /var/www/gestorneo/system/application/views/auth/login_form.php:62
+#: /var/www/gestorneo/system/application/views/auth/register_form.php:88
 msgid "Enter the numbers you hear"
 msgstr "Escribe el numero que escuches"
 
@@ -270,10 +284,6 @@ msgstr "Elegir una nueva contraseña"
 msgid "Email Address"
 msgstr "Correo electrónico"
 
-#: /var/www/gestorneo/system/application/views/auth/register_form.php:58
-msgid "Password"
-msgstr "Contraseña"
-
 #: /var/www/gestorneo/system/application/views/auth/register_form.php:63
 msgid "Confirm Password"
 msgstr "Confirmar contraseña"
@@ -298,21 +308,24 @@ msgstr "Nuevo correo electrónico"
 msgid "Send confirmation email"
 msgstr "Enviar correo de confirmación"
 
-#: /var/www/gestorneo/system/application/views/auth/change_password_form.php:24
-msgid "Old Password"
-msgstr "Vieja contraseña"
-
+#: /var/www/gestorneo/system/application/views/auth/reset_password_form.php:18
 #: /var/www/gestorneo/system/application/views/auth/change_password_form.php:29
 msgid "New Password"
 msgstr "Nueva contraseña"
 
+#: /var/www/gestorneo/system/application/views/auth/reset_password_form.php:23
 #: /var/www/gestorneo/system/application/views/auth/change_password_form.php:34
 msgid "Confirm New Password"
 msgstr "Confirmar nueva contraseña"
 
+#: /var/www/gestorneo/system/application/views/auth/reset_password_form.php:28
 #: /var/www/gestorneo/system/application/views/auth/change_password_form.php:39
 msgid "Change Password"
 msgstr "Cambiar contraseña"
+
+#: /var/www/gestorneo/system/application/views/auth/change_password_form.php:24
+msgid "Old Password"
+msgstr "Vieja contraseña"
 
 #: /var/www/gestorneo/system/application/views/players/index.php:7
 #, php-format
