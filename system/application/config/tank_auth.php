@@ -8,7 +8,7 @@
 |--------------------------------------------------------------------------
 */
 $config['website_name'] = 'Gestorneo';
-$config['webmaster_email'] = 'webmaster@example.com';
+$config['webmaster_email'] = 'hermann.kaser@gmail.com';
 
 /*
 |--------------------------------------------------------------------------
