@@ -16,7 +16,15 @@
 		<script>
 		$(document).ready(function() {
 			$('[name="language_chooser"]').change(function(e) {
-				$.cookie('language', $(e.target).val());
+				$.cookie(
+					'language', 
+					$(e.target).val(), 
+					{
+						path: '/', 
+						domain: window.location.host
+					}
+				);
+				
 				location.reload();
 			});
 		});

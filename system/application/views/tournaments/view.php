@@ -3,7 +3,7 @@
 		<p class="message neutral"><?=_('This tournament has already passed');?></p>
 	<?php endif;?>
 	
-	<h2><?=$tournament->name?>, <?=strftime('%a %e, %B %Y', mysql_to_unix($tournament->start_date))?></h2>
+	<h2><?=$tournament->name?>, <?=strftime('%A %e, %B %Y', mysql_to_unix($tournament->start_date))?></h2>
 	
 	<div id="tournament_content">
 		<?php if($this->tank_auth->is_admin()): ?>
@@ -15,7 +15,7 @@
 		
 		<?php if(!$this->tournament_model->is_old($tournament)):?>
 			<?php if($this->tournament_model->undeadlined($tournament)):?>
-				<p><?=sprintf(_('The signup deadline for this tournament is %s'), strftime('%a %e, %B %Y', mysql_to_unix($tournament->signup_deadline)));?></p>
+				<p><?=sprintf(_('The signup deadline for this tournament is %s'), strftime('%A %e, %B %Y', mysql_to_unix($tournament->signup_deadline)));?></p>
 			
 				<?php if($this->tournament_model->is_signed_up($tournament->id, $this->tank_auth->get_user_id())): ?>
 					<form action="/tournament/cancel_sign_up" method="post">

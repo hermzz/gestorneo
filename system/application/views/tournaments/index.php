@@ -8,7 +8,7 @@
 	<ul>
 		<?php foreach($future_tournaments->result() as $tournament): ?>
 			<li>
-				<?=sprintf(_('<a href="%s">%s</a> on %s'), site_url('/tournament/view/'.$tournament->id), $tournament->name, strftime('%a %e, %B %Y', mysql_to_unix($tournament->start_date)));?>
+				<?=sprintf(_('<a href="%s">%s</a> on %s'), site_url('/tournament/view/'.$tournament->id), $tournament->name, strftime('%A %e, %B %Y', mysql_to_unix($tournament->start_date)));?>
 				(<?=_('Players');?>: <?=$this->tournament_model->countSignedUp($tournament->id)?>
 					[<?=$this->tournament_model->countSignedUp($tournament->id, 'M')?>M/
 					<?=$this->tournament_model->countSignedUp($tournament->id, 'F')?>F])
@@ -25,7 +25,7 @@
 	<ul>
 		<?php foreach($past_tournaments->result() as $tournament): ?>
 			<li>
-				<?=sprintf(_('<a href="%s">%s</a> on %s'), site_url('/tournament/view/'.$tournament->id), $tournament->name, strftime('%a %e, %B %Y', mysql_to_unix($tournament->start_date)));?>
+				<?=sprintf(_('<a href="%s">%s</a> on %s'), site_url('/tournament/view/'.$tournament->id), $tournament->name, strftime('%A %e, %B %Y', mysql_to_unix($tournament->start_date)));?>
 				(<?=_('Players');?>: <?=$this->tournament_model->countSignedUp($tournament->id)?>
 					[<?=$this->tournament_model->countSignedUp($tournament->id, 'M')?>M/
 					<?=$this->tournament_model->countSignedUp($tournament->id, 'F')?>F])

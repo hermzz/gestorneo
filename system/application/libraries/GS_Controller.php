@@ -31,6 +31,7 @@ class GS_Controller extends Controller
 					'name' => 'language', 
 					'value' => $language, 
 					'expire' => 60*60*24*30,
+					'domain' => $_SERVER['SERVER_NAME'],
 					'path' => '/'
 				)
 			);
