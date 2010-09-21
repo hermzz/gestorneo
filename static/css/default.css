@@ -56,6 +56,12 @@ a:link, a:visited, a:hover, a:active {
 	padding: 5px 10px;
 }
 
+h2 .header-small {
+	font-size: 0.8em;
+	color: #999;
+	font-weight: normal;
+}
+
 .datepicker {
 	position: absolute;
 	display: none;

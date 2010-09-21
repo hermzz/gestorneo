@@ -1,5 +1,5 @@
 <?php if($player): ?>
-	<h2><?=$player->username?></h2>
+	<h2><?=$player->username?> <span class="header-small">(<?=$player->email;?>)</span></h2>
 	
 	<h3><?=_('Tournaments');?></h3>
 	
