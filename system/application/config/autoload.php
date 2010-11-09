@@ -108,7 +108,7 @@ $autoload['language'] = array();
 |
 */
 
-$autoload['model'] = array('tournament_model', 'player_model');
+$autoload['model'] = array('tournament_model', 'player_model', 'team_model');
 
 
 
