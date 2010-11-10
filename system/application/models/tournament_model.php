@@ -106,13 +106,19 @@ class Tournament_model extends Model
 		return $query->num_rows ? $query->result() : array();
 	}
 	
-	function create($name, $notes, $start_date, $end_date, $signup_deadline)
+	function create($name, $notes, $start_date, $end_date, $signup_deadline, $team_ids)
 	{
 		$this->db->query('INSERT INTO tournaments (name, notes, start_date, end_date, signup_deadline) VALUES (?, ?, ?, ?, ?)',
 			array($name, $notes, $start_date, $end_date, $signup_deadline));
+			
+		$tournament_id = $this->db->insert_id();
+			
+		foreach($team_ids as $team_id)
+			$this->db->query('INSERT INTO tournament_teams (tid, teid) VALUES (?, ?)', 
+				array($tournament_id, $team_id));
 	}
 	
-	function edit($id, $name, $notes, $start_date, $end_date, $signup_deadline)
+	function edit($id, $name, $notes, $start_date, $end_date, $signup_deadline, $team_ids)
 	{
 		$this->db->query('UPDATE tournaments SET name=?, notes=?, start_date=?, end_date=?, signup_deadline=? WHERE id=?',
 			array($name, $notes, $start_date, $end_date, $signup_deadline, $id));

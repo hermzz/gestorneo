@@ -70,6 +70,8 @@ class Tournament extends GS_Controller {
 			
 		$this->data['title'] = _('New tournament');
 		
+		$this->data['teams'] = $this->team_model->getAll();
+		
 		$this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
 		
@@ -77,6 +79,8 @@ class Tournament extends GS_Controller {
 		$this->form_validation->set_rules('start_date', _('Start date'), 'callback_date_check');
 		$this->form_validation->set_rules('end_date', _('End date'), 'callback_date_check|callback_is_after[start_date]');
 		$this->form_validation->set_rules('deadline_date', _('Deadline date'), 'callback_date_check|callback_is_before[end_date]');
+		$this->form_validation->set_rules('notes', _('Notes'), 'trim');
+		$this->form_validation->set_rules('teams[]', _('Teams'), 'required');
 		
 		if($this->form_validation->run() == FALSE)
 		{
@@ -88,7 +92,8 @@ class Tournament extends GS_Controller {
 				$this->input->post('notes'),
 				preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $this->input->post('start_date')),
 				preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $this->input->post('end_date')),
-				preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $this->input->post('deadline_date'))
+				preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $this->input->post('deadline_date')),
+				$this->input->post('teams')
 			);
 			
 			header('Location: /');
