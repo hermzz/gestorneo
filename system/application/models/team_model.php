@@ -13,10 +13,10 @@ class Team_model extends Model
 	function getAll()
 	{
 		
-		$sql = 'SELECT * FROM teams ORDER BY name DESC';
+		$sql = 'SELECT * FROM teams ORDER BY name ASC';
 		$teams = $this->db->query($sql);
 		
-		return $teams->num_rows > 0 ? $teams : FALSE;
+		return $teams->num_rows > 0 ? $teams->result() : FALSE;
 	}
 	
 	function create($name, $description)
