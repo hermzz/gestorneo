@@ -137,9 +137,6 @@ class Tank_auth
 	 */
 	function is_admin()
 	{
-		echo "<pre>";
-		var_dump($this->ci->session->userdata);
-		exit();
 		return $this->ci->session->userdata('level') == 'admin';
 	}
 	
