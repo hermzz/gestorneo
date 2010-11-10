@@ -63,7 +63,11 @@
 				<?php foreach($players_unassigned as $player): ?>
 					<li><a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
 						<?php if($this->tank_auth->is_admin() && !$this->tournament_model->is_old($tournament)): ?>
-							 - <a href="/tournament/drop_player/<?=$tournament->id;?>/<?=$player->id;?>"><?=_('Drop');?></a>
+							 <br /><?=_('Assign to');?>:
+							 <?php foreach($teams as $team): ?>
+							 	<a href="/tournament/approve_player/<?=$tournament->id;?>/<?=$team->id;?>/<?=$player->id;?>"><?=$team->name;?></a>
+							 <?php endforeach; ?>
+							 or <a href="/tournament/drop_player/<?=$tournament->id;?>/<?=$player->id;?>"><?=_('Drop');?></a>
 						<?php endif; ?>
 					</li>
 				<?php endforeach; ?>
