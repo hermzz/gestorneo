@@ -122,6 +122,26 @@ class Tournament_model extends Model
 	{
 		$this->db->query('UPDATE tournaments SET name=?, notes=?, start_date=?, end_date=?, signup_deadline=? WHERE id=?',
 			array($name, $notes, $start_date, $end_date, $signup_deadline, $id));
+		
+		$this->db->query('DELETE FROM tournament_teams WHERE tid=?', $id);
+		
+		foreach($team_ids as $team_id)
+			$this->db->query('INSERT INTO tournament_teams (tid, teid) VALUES (?, ?)', 
+				array($id, $team_id));
+		
+		// unset team id for player with a team that has been removed, ie: leave them as unassigned
+		$this->db->query(
+			'UPDATE 
+				tournament_players AS tp 
+					LEFT JOIN tournament_teams AS tt 
+						ON tp.tid=tt.tid AND tp.team_id=tt.teid 
+			SET 
+				tp.team_id = null 
+			WHERE 
+				tp.tid = ? AND 
+				tt.tid IS NULL', 
+			$id
+		);
 	}
 	
 	function add_player($tournament_id, $player_id)

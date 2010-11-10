@@ -67,6 +67,14 @@
     
     <label for="notes"><?=_('Notes');?></label><br />
     <textarea id="notes" name="notes" rows="20" cols="60"><?=set_value('notes', $tournament->notes);?></textarea><br />
+    
+    <fieldset>
+    	<legend>Teams</legend>
+		<?php foreach($teams as $team): ?>
+			<input type="checkbox" id="team-<?=$team->id;?>" name="teams[]" value="<?=$team->id;?>" <?=set_checkbox('teams[]', $team->id, in_array($team->id, $selected_teams));?> />
+			<label for="team-<?=$team->id;?>"><?=$team->name;?></label><br />
+		<?php endforeach; ?>
+    </fieldset>
 
     <input type="submit" name="submitNewTournament" value="<?=_('Edit');?>" />
 </form>
