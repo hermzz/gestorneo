@@ -89,6 +89,23 @@ class Tournament_model extends Model
 		return $query->num_rows ? $query->result() : array();
 	}
 	
+	function getUnassignedPlayers($id)
+	{
+		$query = $this->db->query(
+			'SELECT 
+				u.*
+			FROM 
+				users AS u, 
+				tournament_players AS tp
+			WHERE 
+				u.id = tp.pid AND
+				tp.confirmed = 1 AND
+				tp.team_id IS NULL AND
+				tp.tid = '.$id);
+			
+		return $query->num_rows ? $query->result() : array();
+	}
+	
 	function create($name, $notes, $start_date, $end_date, $signup_deadline)
 	{
 		$this->db->query('INSERT INTO tournaments (name, notes, start_date, end_date, signup_deadline) VALUES (?, ?, ?, ?, ?)',
@@ -103,7 +120,7 @@ class Tournament_model extends Model
 	
 	function add_player($tournament_id, $player_id)
 	{
-		$this->db->query('INSERT INTO tournament_players VALUES (?, ?, 0)',
+		$this->db->query('INSERT INTO tournament_players VALUES (?, ?, 0, NULL)',
 			array($player_id, $tournament_id));
 	}
 	
@@ -113,15 +130,18 @@ class Tournament_model extends Model
 			array($player_id, $tournament_id));
 	}
 	
-	function approve_player($tournament_id, $player_id)
+	function approve_player($tournament_id, $team_id, $player_id)
 	{
-		$this->db->query('UPDATE tournament_players SET confirmed=1 WHERE pid=? AND tid=?',
-			array($player_id, $tournament_id));
+		if(!$team_id)
+			$team_id = null;
+		
+		$this->db->query('UPDATE tournament_players SET confirmed=1, team_id=? WHERE pid=? AND tid=?',
+			array($team_id, $player_id, $tournament_id));
 	}
 	
 	function drop_player($tournament_id, $player_id)
 	{
-		$this->db->query('UPDATE tournament_players SET confirmed=0 WHERE pid=? AND tid=?',
+		$this->db->query('UPDATE tournament_players SET confirmed=0, team_id=NULL WHERE pid=? AND tid=?',
 			array($player_id, $tournament_id));
 	}
 	
@@ -150,6 +170,21 @@ class Tournament_model extends Model
 	function undeadlined($tournament)
 	{
 		return mktime(0, 0, 0, date('n'), date('j'), date('Y')) <= $tournament->u_signup_deadline;
+	}
+	
+	function getTeams($tournament_id)
+	{
+		$query = $this->db->query(
+			'SELECT 
+				t.*
+			FROM 
+				tournament_teams AS tt,
+				teams AS t
+			WHERE 
+				tt.teid = t.id AND
+				tt.tid = '.$tournament_id);
+			
+		return $query->num_rows ? $query->result() : array();
 	}
 }
 

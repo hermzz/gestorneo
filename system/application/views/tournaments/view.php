@@ -36,9 +36,31 @@
 		<?php endif; ?>
 	
 		<h3><?=_('Players confirmed');?></h3>
-		<?php if($players_confirmed): ?>
+		
+		<?php if($teams): ?>
+			<?php foreach($teams as $team): ?>
+				<h4><?=$team->name;?></h4>
+				
+				<ul>
+					<?php if($team->players): ?>
+						<?php foreach($team->players as $player): ?>
+							<li><a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
+								<?php if($this->tank_auth->is_admin() && !$this->tournament_model->is_old($tournament)): ?>
+									 - <a href="/tournament/drop_player/<?=$tournament->id;?>/<?=$player->id;?>"><?=_('Drop');?></a>
+								<?php endif; ?>
+							</li>
+						<?php endforeach; ?>
+					<?php else: ?>
+						<li><?=_('No players assigned to this team yet');?></li>
+					<?php endif; ?>
+				</ul>
+			<?php endforeach; ?>
+		<?php endif; ?>
+		
+		<?php if($players_unassigned): ?>
+			<h4><?=_('Unassigned players');?></h4>
 			<ul>
-				<?php foreach($players_confirmed as $player): ?>
+				<?php foreach($players_unassigned as $player): ?>
 					<li><a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
 						<?php if($this->tank_auth->is_admin() && !$this->tournament_model->is_old($tournament)): ?>
 							 - <a href="/tournament/drop_player/<?=$tournament->id;?>/<?=$player->id;?>"><?=_('Drop');?></a>
@@ -46,8 +68,6 @@
 					</li>
 				<?php endforeach; ?>
 			</ul>
-		<?php else: ?>
-			<p><?=_('No players confirmed yet.');?></p>
 		<?php endif; ?>
 	
 		<h3><?=_('Waiting list');?></h3>
@@ -56,7 +76,11 @@
 				<?php foreach($players_waiting as $player): ?>
 					<li><a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
 						<?php if($this->tank_auth->is_admin() && !$this->tournament_model->is_old($tournament)): ?>
-							 - <a href="/tournament/approve_player/<?=$tournament->id;?>/<?=$player->id;?>"><?=_('Approve');?></a>
+							 <br /><?=_('Assign to');?>:
+							 <?php foreach($teams as $team): ?>
+							 	<a href="/tournament/approve_player/<?=$tournament->id;?>/<?=$team->id;?>/<?=$player->id;?>"><?=$team->name;?></a>
+							 <?php endforeach; ?>
+							 <a href="/tournament/approve_player/<?=$tournament->id;?>/0/<?=$player->id;?>"><?=_('no team');?></a>
 						<?php endif; ?>
 					</li>
 				<?php endforeach; ?>

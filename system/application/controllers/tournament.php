@@ -28,7 +28,12 @@ class Tournament extends GS_Controller {
 		$this->load->helper('markdown');
 		
 		$this->data['tournament'] = $this->tournament_model->get($id);
-		$this->data['players_confirmed'] = $this->tournament_model->getPlayers($id, true);
+		
+		$this->data['teams'] = $this->tournament_model->getTeams($id);
+		foreach($this->data['teams'] as $team)
+			$team->players = $this->team_model->getTournamentPlayers($id, $team->id);
+		
+		$this->data['players_unassigned'] = $this->tournament_model->getUnassignedPlayers($id);
 		$this->data['players_waiting'] = $this->tournament_model->getPlayers($id, false);
 
 		$this->data['title'] = $this->data['tournament'] ?  $this->data['tournament']->name : _("Tournament not found");
@@ -38,12 +43,12 @@ class Tournament extends GS_Controller {
 		$this->load->view('skeleton', $this->data);
 	}
 	
-	function approve_player($tournament_id, $player_id)
+	function approve_player($tournament_id, $team_id, $player_id)
 	{
 		if(!$this->tank_auth->is_admin())
 			header('Location: /');
-			
-		$this->tournament_model->approve_player($tournament_id, $player_id);
+		
+		$this->tournament_model->approve_player($tournament_id, $team_id, $player_id);
 		
 		header('Location: /tournament/view/'.$tournament_id);
 	}

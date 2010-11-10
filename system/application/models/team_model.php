@@ -24,6 +24,23 @@ class Team_model extends Model
 		$this->db->query('INSERT INTO teams (name, description) VALUES (?, ?)',
 			array($name, $description));
 	}
+	
+	function getTournamentPlayers($tournament_id, $team_id)
+	{
+		$players = $this->db->query(
+			'SELECT
+				u.*
+			FROM
+				tournament_players AS tp,
+				users AS u
+			WHERE
+				tp.tid = '.$tournament_id.' AND
+				tp.pid = u.id AND
+				tp.team_id = '.$team_id
+		);
+		
+		return $players->num_rows > 0 ? $players->result() : FALSE;
+	}
 } 
 
 ?>
