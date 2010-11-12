@@ -75,6 +75,16 @@
 			<label for="team-<?=$team->id;?>"><?=$team->name;?></label><br />
 		<?php endforeach; ?>
     </fieldset>
+    
+    <fieldset>
+    	<legend>Admins</legend>
+		<?php foreach($users as $user): ?>
+			<?php if($user->level == 'user'): ?>
+				<input type="checkbox" id="user-<?=$user->id;?>" name="admin_users[]" value="<?=$user->id;?>" <?=set_checkbox('admin_users[]', $user->id, in_array($user->id, $tournament_admins));?> />
+				<label for="user-<?=$user->id;?>"><?=$user->username;?></label><br />
+			<?php endif; ?>
+		<?php endforeach; ?>
+    </fieldset>
 
     <input type="submit" name="submitNewTournament" value="<?=_('Edit');?>" />
 </form>

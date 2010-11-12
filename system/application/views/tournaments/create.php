@@ -76,6 +76,16 @@
 		<?php endforeach; ?>
     </fieldset>
     
+    <fieldset>
+    	<legend>Admins</legend>
+		<?php foreach($users as $user): ?>
+			<?php if($user->level == 'user'): ?>
+				<input type="checkbox" id="user-<?=$user->id;?>" name="admin_users[]" value="<?=$user->id;?>" <?=set_checkbox('admin_users[]', $user->id);?> />
+				<label for="user-<?=$user->id;?>"><?=$user->username;?></label><br />
+			<?php endif; ?>
+		<?php endforeach; ?>
+    </fieldset>
+    
     <p><a href="/misc/page/markdown_help" target="_blank"><?=_('markdown help');?></a></p>
 
     <input type="submit" name="submitNewTournament" value="<?=_('Add');?>" />

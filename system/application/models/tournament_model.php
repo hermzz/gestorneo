@@ -106,19 +106,23 @@ class Tournament_model extends Model
 		return $query->num_rows ? $query->result() : array();
 	}
 	
-	function create($name, $notes, $start_date, $end_date, $signup_deadline, $team_ids)
+	function create($name, $notes, $start_date, $end_date, $signup_deadline, $team_ids, $admin_ids)
 	{
 		$this->db->query('INSERT INTO tournaments (name, notes, start_date, end_date, signup_deadline) VALUES (?, ?, ?, ?, ?)',
 			array($name, $notes, $start_date, $end_date, $signup_deadline));
 			
 		$tournament_id = $this->db->insert_id();
-			
+		
 		foreach($team_ids as $team_id)
 			$this->db->query('INSERT INTO tournament_teams (tid, teid) VALUES (?, ?)', 
 				array($tournament_id, $team_id));
+		
+		foreach($admin_ids as $admin_id)
+			$this->db->query('INSERT INTO tournament_admins (uid, tid) VALUES (?, ?)', 
+				array($admin_id, $tournament_id));
 	}
 	
-	function edit($id, $name, $notes, $start_date, $end_date, $signup_deadline, $team_ids)
+	function edit($id, $name, $notes, $start_date, $end_date, $signup_deadline, $team_ids, $admin_ids)
 	{
 		$this->db->query('UPDATE tournaments SET name=?, notes=?, start_date=?, end_date=?, signup_deadline=? WHERE id=?',
 			array($name, $notes, $start_date, $end_date, $signup_deadline, $id));
@@ -142,6 +146,13 @@ class Tournament_model extends Model
 				tt.tid IS NULL', 
 			$id
 		);
+		
+		// set tournament admins
+		$this->db->query('DELETE FROM tournament_admins WHERE tid='.$id);
+		
+		foreach($admin_ids as $admin_id)
+			$this->db->query('INSERT INTO tournament_admins (uid, tid) VALUES (?, ?)', 
+				array($admin_id, $id));
 	}
 	
 	function add_player($tournament_id, $player_id)
@@ -209,6 +220,22 @@ class Tournament_model extends Model
 			WHERE 
 				tt.teid = t.id AND
 				tt.tid = '.$tournament_id);
+			
+		return $query->num_rows ? $query->result() : array();
+	}
+	
+	function getAdmins($tournament_id)
+	{
+		$query = $this->db->query(
+			'SELECT
+				u.*
+			FROM
+				users AS u,
+				tournament_admins AS ta
+			WHERE
+				ta.uid = u.id AND
+				ta.tid='.$tournament_id
+		);
 			
 		return $query->num_rows ? $query->result() : array();
 	}

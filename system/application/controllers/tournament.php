@@ -69,6 +69,7 @@ class Tournament extends GS_Controller {
 		$this->data['title'] = _('New tournament');
 		
 		$this->data['teams'] = $this->team_model->getAll();
+		$this->data['users'] = $this->player_model->getAll();
 		
 		$this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
@@ -91,7 +92,8 @@ class Tournament extends GS_Controller {
 				preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $this->input->post('start_date')),
 				preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $this->input->post('end_date')),
 				preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $this->input->post('deadline_date')),
-				$this->input->post('teams')
+				$this->input->post('teams'),
+				$this->input->post('admin_users')
 			);
 			
 			header('Location: /');
@@ -113,6 +115,15 @@ class Tournament extends GS_Controller {
 		$team_ids = array();
 		foreach($selected_teams as $team)
 			$team_ids[] = $team->id;
+		
+		$this->data['users'] = $this->player_model->getAll();
+		$tournament_admins = $this->tournament_model->getAdmins($id);
+		
+		$admin_ids = array();
+		foreach($tournament_admins as $tournament_admin)
+			$admin_ids[] = $tournament_admin->id;
+			
+		$this->data['tournament_admins'] = $admin_ids;
 		
 		$this->data['selected_teams'] = $team_ids;
 			
@@ -138,7 +149,8 @@ class Tournament extends GS_Controller {
 				preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $this->input->post('start_date')),
 				preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $this->input->post('end_date')),
 				preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $this->input->post('deadline_date')),
-				$this->input->post('teams')
+				$this->input->post('teams'),
+				$this->input->post('admin_users')
 			);
 			
 			header('Location: /tournament/view/'.$id);
