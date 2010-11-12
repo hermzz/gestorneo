@@ -371,6 +371,22 @@ class Users extends Model
 			'ban_reason'	=> NULL,
 		));
 	}
+	
+	function is_tournament_admin($uid, $tid)
+	{
+		$result = $this->db->query(
+			'SELECT 
+				* 
+			FROM 
+				tournament_admins 
+			WHERE
+				tid=? AND
+				uid=?',
+			array($tid, $uid)
+		);
+		
+		return ($result->num_rows > 0);
+	}
 
 	/**
 	 * Create an empty profile for a new user

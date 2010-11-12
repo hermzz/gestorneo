@@ -3,10 +3,14 @@
 		<p class="message neutral"><?=_('This tournament has already passed');?></p>
 	<?php endif;?>
 	
+	<?php
+		$is_tournament_admin = $this->tank_auth->is_admin(array('tournament' => $tournament->id));
+	?>
+	
 	<h2><?=$tournament->name?>, <?=strftime('%A %e, %B %Y', mysql_to_unix($tournament->start_date))?></h2>
 	
 	<div id="tournament_content">
-		<?php if($this->tank_auth->is_admin()): ?>
+		<?php if($is_tournament_admin): ?>
 			<p>
 				<a href="/tournament/email/<?=$tournament->id;?>">Email team</a> | 
 				<a href="/tournament/edit/<?=$tournament->id;?>">Edit tournament</a>
@@ -45,7 +49,7 @@
 					<?php if($team->players): ?>
 						<?php foreach($team->players as $player): ?>
 							<li><a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
-								<?php if($this->tank_auth->is_admin() && !$this->tournament_model->is_old($tournament)): ?>
+								<?php if($is_tournament_admin && !$this->tournament_model->is_old($tournament)): ?>
 									 - <a href="/tournament/drop_player/<?=$tournament->id;?>/<?=$player->id;?>"><?=_('Drop');?></a>
 								<?php endif; ?>
 							</li>
@@ -62,7 +66,7 @@
 			<ul>
 				<?php foreach($players_unassigned as $player): ?>
 					<li><a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
-						<?php if($this->tank_auth->is_admin() && !$this->tournament_model->is_old($tournament)): ?>
+						<?php if($is_tournament_admin && !$this->tournament_model->is_old($tournament)): ?>
 							 <br /><?=_('Assign to');?>:
 							 <?php foreach($teams as $team): ?>
 							 	<a href="/tournament/approve_player/<?=$tournament->id;?>/<?=$team->id;?>/<?=$player->id;?>"><?=$team->name;?></a>
@@ -79,7 +83,7 @@
 			<ul>
 				<?php foreach($players_waiting as $player): ?>
 					<li><a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
-						<?php if($this->tank_auth->is_admin() && !$this->tournament_model->is_old($tournament)): ?>
+						<?php if($is_tournament_admin && !$this->tournament_model->is_old($tournament)): ?>
 							 <br /><?=_('Assign to');?>:
 							 <?php foreach($teams as $team): ?>
 							 	<a href="/tournament/approve_player/<?=$tournament->id;?>/<?=$team->id;?>/<?=$player->id;?>"><?=$team->name;?></a>

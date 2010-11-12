@@ -135,19 +135,27 @@ class Tank_auth
 	 *
 	 * @return	bool
 	 */
-	function is_admin()
+	function is_admin($extras=array())
 	{
-		return $this->ci->session->userdata('level') == 'admin';
+		$local_admin = null;
+		
+		foreach($extras as $what => $id)
+		{
+			switch($what)
+			{
+				case 'tournament':
+					$result = $this->ci->users->is_tournament_admin($this->get_user_id(), $id);
+					break;
+				
+				default:
+					$result = false;
+			}
+			
+			$local_admin = isset($local_admin) ? ($local_admin && $result) : $result ;
+		}
+		
+		return ($this->ci->session->userdata('level') == 'admin') || $local_admin;
 	}
-	
-	/**
-	 * Check if the user is an admin for a given tournament (currently only a stub)
-	 *
-	 * @param	int		$tournament_id
-	 *
-	 * @return	bool
-	 */
-	function is_tournament_admin($tournament_id) { return false; }
 
 	/**
 	 * Get user_id

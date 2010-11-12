@@ -43,7 +43,7 @@ class Tournament extends GS_Controller {
 	
 	function approve_player($tournament_id, $team_id, $player_id)
 	{
-		if(!$this->tank_auth->is_admin())
+		if(!$this->tank_auth->is_admin(array('tournament' => $tournament_id)))
 			header('Location: /');
 		
 		$this->tournament_model->approve_player($tournament_id, $team_id, $player_id);
@@ -53,7 +53,7 @@ class Tournament extends GS_Controller {
 	
 	function drop_player($tournament_id, $player_id)
 	{
-		if(!$this->tank_auth->is_admin())
+		if(!$this->tank_auth->is_admin(array('tournament' => $tournament_id)))
 			header('Location: /');
 			
 		$this->tournament_model->drop_player($tournament_id, $player_id);
@@ -102,11 +102,11 @@ class Tournament extends GS_Controller {
 
 	function edit($id)
 	{
-		if(!$this->tank_auth->is_admin())
+		if(!$this->tank_auth->is_admin(array('tournament' => $id)))
 			header('Location: /');
 			
 		$this->data['title'] = _('Edit tournament');
-	
+		
 		$this->data['tournament'] = $this->tournament_model->get($id);
 		
 		$this->data['teams'] = $this->team_model->getAll();
