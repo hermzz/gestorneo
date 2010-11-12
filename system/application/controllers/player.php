@@ -4,9 +4,7 @@ class Player extends GS_Controller {
 
 	function __construct()
 	{
-		parent::__construct();	
-
-		$this->load->scaffolding('players');
+		parent::__construct();
 		
 		if(!$this->tank_auth->is_logged_in())
 		    redirect('/auth/login/');
