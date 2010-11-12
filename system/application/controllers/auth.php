@@ -260,7 +260,7 @@ class Auth extends GS_Controller
 			$this->email->from($this->config->config['tank_auth']['webmaster_email'], 'Gestorneo Gremlin');
 			
 			foreach($this->player_model->getAdmins() as $admin)
-				$this->email->to($admin->email);
+				$this->email->cc($admin->email);
 			
 			$this->email->subject('New user: '.$player->username);
 			$this->email->message(

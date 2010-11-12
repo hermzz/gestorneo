@@ -197,7 +197,7 @@ class Tournament extends GS_Controller {
 			$this->email->from($this->config->config['tank_auth']['webmaster_email'], 'Gestorneo Gremlin');
 			
 			foreach($this->player_model->getAdmins() as $admin)
-				$this->email->to($admin->email);
+				$this->email->cc($admin->email);
 			
 			$this->email->subject($player->username.' signed up to '.$tournament->name);
 			$this->email->message(
@@ -228,7 +228,7 @@ class Tournament extends GS_Controller {
 			$this->email->from($this->config->config['tank_auth']['webmaster_email'], 'Gestorneo Gremlin');
 			
 			foreach($this->player_model->getAdmins() as $admin)
-				$this->email->to($admin->email);
+				$this->email->cc($admin->email);
 			
 			$this->email->subject($player->username.' cancelled attendance to '.$tournament->name);
 			$this->email->message(
@@ -276,7 +276,7 @@ class Tournament extends GS_Controller {
 			$this->email->from($this->config->config['tank_auth']['webmaster_email'], 'Gestorneo Gremlin');
 			
 			foreach($players as $player)
-				$this->email->to($player->email);
+				$this->email->cc($player->email);
 			
 			$this->email->subject($this->input->post('subject'));
 			$this->email->message(markdown($this->input->post('message')));
