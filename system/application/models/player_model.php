@@ -13,7 +13,7 @@ class Player_model extends Model
 	{
 		$players = $this->db->query('SELECT * FROM users ORDER BY created ASC');
 		
-		return $players->num_rows > 0 ? $players : FALSE;
+		return $players->num_rows > 0 ? $players->result() : FALSE;
 	}
 	
 	function getTournaments($id, $only_confirmed=false)
@@ -34,13 +34,13 @@ class Player_model extends Model
 		$query = $this->db->query($sql,
 			array($id));
 		
-		return $query->num_rows > 0 ? $query : FALSE;
+		return $query->num_rows > 0 ? $query->result() : FALSE;
 	}
 	
 	function getAdmins()
 	{
 		$query = $this->db->query('SELECT * FROM users WHERE level=?', array('admin'));
-		return $query->num_rows > 0 ? $query : FALSE;
+		return $query->num_rows > 0 ? $query->result() : FALSE;
 	}
 }
 

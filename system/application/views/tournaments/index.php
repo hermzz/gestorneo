@@ -6,7 +6,7 @@
 
 <?php if($future_tournaments): ?>
 	<ul>
-		<?php foreach($future_tournaments->result() as $tournament): ?>
+		<?php foreach($future_tournaments as $tournament): ?>
 			<li>
 				<?=sprintf(_('<a href="%s">%s</a> on %s'), site_url('/tournament/view/'.$tournament->id), $tournament->name, strftime('%A %e, %B %Y', mysql_to_unix($tournament->start_date)));?>
 				(<?=_('Players');?>: <?=$this->tournament_model->countSignedUp($tournament->id)?>
@@ -23,7 +23,7 @@
 
 <?php if($past_tournaments): ?>
 	<ul>
-		<?php foreach($past_tournaments->result() as $tournament): ?>
+		<?php foreach($past_tournaments as $tournament): ?>
 			<li>
 				<?=sprintf(_('<a href="%s">%s</a> on %s'), site_url('/tournament/view/'.$tournament->id), $tournament->name, strftime('%A %e, %B %Y', mysql_to_unix($tournament->start_date)));?>
 				(<?=_('Players');?>: <?=$this->tournament_model->countSignedUp($tournament->id)?>

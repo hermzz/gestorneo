@@ -5,7 +5,7 @@
 	
 	<?php if($tournaments): ?>
 		<ul>
-			<?php foreach($tournaments->result() as $tournament): ?>
+			<?php foreach($tournaments as $tournament): ?>
 				<li><a href="/tournament/view/<?=$tournament->id?>"><?=$tournament->name?></a>
 					 - <?=strftime('%A %e, %B %Y', $tournament->u_date)?></li>
 			<?php endforeach; ?>

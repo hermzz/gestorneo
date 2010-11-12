@@ -42,7 +42,7 @@ class Tournament_model extends Model
 		' ORDER BY start_date ASC';
 		$tournaments = $this->db->query($sql);
 		
-		return $tournaments->num_rows > 0 ? $tournaments : FALSE;
+		return $tournaments->num_rows > 0 ? $tournaments->result() : FALSE;
 	}
 	
 	function countSignedUp($id, $sex=false)

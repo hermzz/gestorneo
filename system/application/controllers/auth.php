@@ -259,7 +259,7 @@ class Auth extends GS_Controller
 			
 			$this->email->from($this->config->config['tank_auth']['webmaster_email'], 'Gestorneo Gremlin');
 			
-			foreach($this->player_model->getAdmins()->result() as $admin)
+			foreach($this->player_model->getAdmins() as $admin)
 				$this->email->to($admin->email);
 			
 			$this->email->subject('New user: '.$player->username);
@@ -269,7 +269,7 @@ class Auth extends GS_Controller
 			);
 			
 			$this->email->send();
-		} else {																// fail
+		} else {
 			$this->_show_message($this->lang->line('auth_message_activation_failed'));
 		}
 	}
@@ -451,6 +451,7 @@ class Auth extends GS_Controller
 
 		} else {																// fail
 			$this->_show_message($this->lang->line('auth_message_new_email_failed'));
+
 		}
 	}
 
