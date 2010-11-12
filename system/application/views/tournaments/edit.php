@@ -69,7 +69,7 @@
     <textarea id="notes" name="notes" rows="20" cols="60"><?=set_value('notes', $tournament->notes);?></textarea><br />
     
     <fieldset>
-    	<legend>Teams</legend>
+    	<legend><?=_('Teams');?></legend>
 		<?php foreach($teams as $team): ?>
 			<input type="checkbox" id="team-<?=$team->id;?>" name="teams[]" value="<?=$team->id;?>" <?=set_checkbox('teams[]', $team->id, in_array($team->id, $selected_teams));?> />
 			<label for="team-<?=$team->id;?>"><?=$team->name;?></label><br />
@@ -77,7 +77,7 @@
     </fieldset>
     
     <fieldset>
-    	<legend>Admins</legend>
+    	<legend><?=_('Admins');?></legend>
 		<?php foreach($users as $user): ?>
 			<?php if($user->level == 'user'): ?>
 				<input type="checkbox" id="user-<?=$user->id;?>" name="admin_users[]" value="<?=$user->id;?>" <?=set_checkbox('admin_users[]', $user->id, in_array($user->id, $tournament_admins));?> />
