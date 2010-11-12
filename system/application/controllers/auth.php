@@ -106,6 +106,8 @@ class Auth extends GS_Controller
 		$this->tank_auth->logout();
 
 		$this->_show_message($this->lang->line('auth_message_logged_out'));
+		
+		header('Location: /');
 	}
 
 	/**
