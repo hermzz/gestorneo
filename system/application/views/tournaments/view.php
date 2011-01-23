@@ -46,7 +46,7 @@
 		
 		<?php if($teams): ?>
 			<?php foreach($teams as $team): ?>
-				<h4><?=$team->name;?></h4>
+				<h4><?=$team->name;?> (<?=$team->males;?>M / <?=$team->females;?>F)</h4>
 				
 				<ul>
 					<?php if($team->players): ?>
