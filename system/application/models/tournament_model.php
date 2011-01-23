@@ -39,7 +39,7 @@ class Tournament_model extends Model
 		
 		$sql = 'SELECT * FROM tournaments ' . 
 			( $where ? ' WHERE '.$where : '' ) . 
-		' ORDER BY start_date ASC';
+		' ORDER BY start_date DESC';
 		$tournaments = $this->db->query($sql);
 		
 		return $tournaments->num_rows > 0 ? $tournaments->result() : FALSE;
