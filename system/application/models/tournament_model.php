@@ -129,9 +129,10 @@ class Tournament_model extends Model
 		
 		$this->db->query('DELETE FROM tournament_teams WHERE tid=?', $id);
 		
-		foreach($team_ids as $team_id)
-			$this->db->query('INSERT INTO tournament_teams (tid, teid) VALUES (?, ?)', 
-				array($id, $team_id));
+		if($team_ids)
+			foreach($team_ids as $team_id)
+				$this->db->query('INSERT INTO tournament_teams (tid, teid) VALUES (?, ?)', 
+					array($id, $team_id));
 		
 		// unset team id for player with a team that has been removed, ie: leave them as unassigned
 		$this->db->query(
@@ -150,9 +151,10 @@ class Tournament_model extends Model
 		// set tournament admins
 		$this->db->query('DELETE FROM tournament_admins WHERE tid='.$id);
 		
-		foreach($admin_ids as $admin_id)
-			$this->db->query('INSERT INTO tournament_admins (uid, tid) VALUES (?, ?)', 
-				array($admin_id, $id));
+		if($admin_ids)
+			foreach($admin_ids as $admin_id)
+				$this->db->query('INSERT INTO tournament_admins (uid, tid) VALUES (?, ?)', 
+					array($admin_id, $id));
 	}
 	
 	function add_player($tournament_id, $player_id)
