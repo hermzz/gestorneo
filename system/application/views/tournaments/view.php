@@ -7,7 +7,10 @@
 		$is_tournament_admin = $this->tank_auth->is_admin(array('tournament' => $tournament->id));
 	?>
 	
-	<h2><?=$tournament->name?>, <?=strftime('%A %e, %B %Y', mysql_to_unix($tournament->start_date))?></h2>
+	<h1>
+		<?=$tournament->name?>
+		<span class="tournament_date"><?=strftime('%A %e, %B %Y', mysql_to_unix($tournament->start_date))?></span>
+	</h1>
 	
 	<div id="tournament_content">
 		<?php if($is_tournament_admin): ?>

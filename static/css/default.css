@@ -62,6 +62,12 @@ h2 .header-small {
 	font-weight: normal;
 }
 
+span.tournament_date {
+	font-size: 14px;
+	padding: 5px;
+	background-color: #ddd;
+}
+
 .datepicker {
 	position: absolute;
 	display: none;
