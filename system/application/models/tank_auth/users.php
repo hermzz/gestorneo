@@ -387,6 +387,11 @@ class Users extends Model
 		
 		return ($result->num_rows > 0);
 	}
+	
+	function is_player_admin($uid, $pid)
+	{
+		return $uid == $pid;
+	}
 
 	/**
 	 * Create an empty profile for a new user

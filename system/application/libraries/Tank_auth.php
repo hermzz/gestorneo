@@ -146,6 +146,10 @@ class Tank_auth
 				case 'tournament':
 					$result = $this->ci->users->is_tournament_admin($this->get_user_id(), $id);
 					break;
+					
+				case 'player':
+					$result = $this->ci->users->is_player_admin($this->get_user_id(), $id);
+					break;
 				
 				default:
 					$result = false;
