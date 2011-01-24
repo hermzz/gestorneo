@@ -8,8 +8,7 @@
 	?>
 	
 	<h1>
-		<?=$tournament->name?>
-		<span class="tournament_date"><?=strftime('%A %e, %B %Y', mysql_to_unix($tournament->start_date))?></span>
+		<?=sprintf(_('%s <span class="header-small">on %s</span>'), $tournament->name, strftime('%A %e, %B %Y', mysql_to_unix($tournament->start_date)));?>
 	</h1>
 	
 	<div id="tournament_content">
