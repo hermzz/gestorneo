@@ -16,6 +16,20 @@ class Player_model extends Model
 		return $players->num_rows > 0 ? $players->result() : FALSE;
 	}
 	
+	function edit($id, $username, $email, $password, $sex)
+	{
+		$this->db->query('UPDATE users SET username=?, email=?, sex=? WHERE id=?',
+			array($username, $email, $sex, $id));
+			
+		if($password)
+		{
+			$hasher = new PasswordHash(PHPASS_HASH_STRENGTH, PHPASS_HASH_PORTABLE);
+			$hashed_password = $hasher->HashPassword($password);
+			
+			$this->db->query('UPDATE users SET password=? WHERE id=?', array($hashed_password));
+		}
+	}
+	
 	function getTournaments($id, $only_confirmed=false)
 	{
 		$sql = 'SELECT

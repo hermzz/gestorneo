@@ -33,6 +33,41 @@ class Player extends GS_Controller {
 		$this->data['content_view'] = 'players/view';
 		$this->load->view('skeleton', $this->data);
 	}
+	
+	function edit($id)
+	{
+		if(!$this->tank_auth->is_admin(array('player' => $id)))
+			header('Location: /');
+		
+		$this->load->helper(array('form', 'url'));
+		$this->load->library('form_validation');
+		
+		$this->data['player'] = $this->player_model->get($id);
+		
+		$this->data['title'] = sprintf(_('Edit player %s'), $this->data['player']->username);
+		
+		$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean|min_length['.$this->config->item('username_min_length', 'tank_auth').']|max_length['.$this->config->item('username_max_length', 'tank_auth').']');
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email');
+		$this->form_validation->set_rules('password', 'Password', 'trim|xss_clean|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
+		$this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|xss_clean|matches[password]');
+		$this->form_validation->set_rules('sex', 'Sex', 'required|xss_clean');
+		
+		if($this->form_validation->run() == FALSE)
+		{
+			$this->data['content_view'] = 'players/edit';
+			$this->load->view('skeleton', $this->data);
+		} else {
+			$this->player_model->edit(
+				$id,
+				$this->input->post('username'),
+				$this->input->post('email'),
+				$this->input->post('password'),
+				$this->input->post('sex')
+			);
+			
+			header('Location: /player/view/'.$id);
+		}
+	}
 }
 	
 ?>

@@ -3,6 +3,10 @@
 	
 	<h3><?=_('Tournaments');?></h3>
 	
+	<?php if($this->tank_auth->is_admin(array('player' => $player->id))): ?>
+		<p><a href="/player/edit/<?=$player->id;?>">Edit player</a></p>
+	<?php endif; ?>
+	
 	<?php if($tournaments): ?>
 		<ul>
 			<?php foreach($tournaments as $tournament): ?>
