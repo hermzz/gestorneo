@@ -32,8 +32,14 @@ class Tournament extends GS_Controller {
 		{
 			$team->players = $this->team_model->getTournamentPlayers($id, $team->id);
 			
-			$team->males = count(array_filter($team->players, function($p) { return $p->sex == 'M'; }));
-			$team->females = count(array_filter($team->players, function($p) { return $p->sex == 'F'; }));
+			if($team->players)
+			{
+				$team->males = count(array_filter($team->players, function($p) { return $p->sex == 'M'; }));
+				$team->females = count(array_filter($team->players, function($p) { return $p->sex == 'F'; }));
+			} else {
+				$team->males = 0;
+				$team->females = 0;
+			}
 		}
 		
 		$this->data['players_unassigned'] = $this->tournament_model->getUnassignedPlayers($id);
