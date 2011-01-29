@@ -25,6 +25,12 @@ class Team_model extends Model
 			array($name, $description));
 	}
 	
+	function edit($id, $name, $description)
+	{
+		$this->db->query('UPDATE teams SET name=?, description=? WHERE id=?', 
+			array($name, $description, $id));
+	}
+	
 	function getTournamentPlayers($tournament_id, $team_id)
 	{
 		$players = $this->db->query(

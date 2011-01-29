@@ -45,4 +45,32 @@ class Team extends GS_Controller {
 			header('Location: /team');
 		}
 	}
+	
+	function edit($id)
+	{
+		if(!$this->tank_auth->is_admin())
+			header('Location: /');
+		
+		$this->load->helper(array('form', 'url'));
+		$this->load->library('form_validation');
+		
+		$this->data['team'] = $this->team_model->get($id);
+		$this->data['title'] = sprintf(_('Edit team "%s"'), $this->data['team']->name);
+		
+		$this->form_validation->set_rules('name', _('Name'), 'required');
+		
+		if($this->form_validation->run() == FALSE)
+		{
+			$this->data['content_view'] = 'teams/edit';
+			$this->load->view('skeleton', $this->data);
+		} else {
+			$this->team_model->edit(
+				$id,
+				$this->input->post('name'),
+				$this->input->post('description')
+			);
+			
+			header('Location: /team/edit/'.$this->data['team']->id);
+		}
+	}
 }
