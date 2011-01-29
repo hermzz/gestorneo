@@ -11,7 +11,7 @@ class Player_model extends Model
 	
 	function getAll()
 	{
-		$players = $this->db->query('SELECT * FROM users ORDER BY created ASC');
+		$players = $this->db->query('SELECT * FROM users ORDER BY username ASC');
 		
 		return $players->num_rows > 0 ? $players->result() : FALSE;
 	}
