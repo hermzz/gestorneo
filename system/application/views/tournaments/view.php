@@ -3,6 +3,14 @@
 		<p class="message neutral"><?=_('This tournament has already passed');?></p>
 	<?php endif;?>
 	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('form.approve_player select').change(function(e) {
+				$(e.target).parent().submit();
+			});
+		});
+	</script>
+	
 	<?php
 		$is_tournament_admin = $this->tank_auth->is_admin(array('tournament' => $tournament->id));
 	?>
@@ -69,11 +77,16 @@
 				<?php foreach($players_unassigned as $player): ?>
 					<li><a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
 						<?php if($is_tournament_admin && !$this->tournament_model->is_old($tournament)): ?>
-							 <br /><?=_('Assign to');?>:
-							 <?php foreach($teams as $team): ?>
-							 	<a href="/tournament/approve_player/<?=$tournament->id;?>/<?=$team->id;?>/<?=$player->id;?>"><?=$team->name;?></a>
-							 <?php endforeach; ?>
-							 or <a href="/tournament/drop_player/<?=$tournament->id;?>/<?=$player->id;?>"><?=_('Drop');?></a>
+							
+							 <form class="approve_player" action="/tournament/approve_player/<?=$tournament->id;?>/<?=$player->id;?>" method="post">
+							 	<select name="team_id">
+							 		<option value="0"><?=_('no team');?></value>
+									 <?php foreach($teams as $team): ?>
+									 	<option value="<?=$team->id;?>"><?=$team->name;?></option>
+									 <?php endforeach; ?>
+								</select>
+								or <a href="/tournament/drop_player/<?=$tournament->id;?>/<?=$player->id;?>"><?=_('Drop');?></a>
+							 </form>
 						<?php endif; ?>
 					</li>
 				<?php endforeach; ?>
@@ -86,11 +99,15 @@
 				<?php foreach($players_waiting as $player): ?>
 					<li><a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
 						<?php if($is_tournament_admin && !$this->tournament_model->is_old($tournament)): ?>
-							 <br /><?=_('Assign to');?>:
-							 <?php foreach($teams as $team): ?>
-							 	<a href="/tournament/approve_player/<?=$tournament->id;?>/<?=$team->id;?>/<?=$player->id;?>"><?=$team->name;?></a>
-							 <?php endforeach; ?>
-							 <a href="/tournament/approve_player/<?=$tournament->id;?>/0/<?=$player->id;?>"><?=_('no team');?></a>
+							 <form class="approve_player" action="/tournament/approve_player/<?=$tournament->id;?>/<?=$player->id;?>" method="post">
+							 	<select name="team_id">
+							 		<option value="invalid"><?=_('Assign to');?></value>
+									 <?php foreach($teams as $team): ?>
+									 	<option value="<?=$team->id;?>"><?=$team->name;?></option>
+									 <?php endforeach; ?>
+									 <option value="0"><?=_('no team');?></option>
+								</select>
+							 </form>
 						<?php endif; ?>
 					</li>
 				<?php endforeach; ?>

@@ -52,12 +52,13 @@ class Tournament extends GS_Controller {
 		$this->load->view('skeleton', $this->data);
 	}
 	
-	function approve_player($tournament_id, $team_id, $player_id)
+	function approve_player($tournament_id, $player_id)
 	{
 		if(!$this->tank_auth->is_admin(array('tournament' => $tournament_id)))
 			header('Location: /');
 		
-		$this->tournament_model->approve_player($tournament_id, $team_id, $player_id);
+		if($this->input->post('team_id') != 'invalid')
+			$this->tournament_model->approve_player($tournament_id, $this->input->post('team_id'), $player_id);
 		
 		header('Location: /tournament/view/'.$tournament_id);
 	}
