@@ -58,8 +58,13 @@ a:link, a:visited, a:hover, a:active {
 
 .header-small {
 	font-size: 0.8em;
-	color: #999;
+	color: #999;f
 	font-weight: normal;
+}
+
+form.approve_player {
+	margin: 0px;
+	display: inline;
 }
 
 .datepicker {
