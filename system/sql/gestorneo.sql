@@ -49,6 +49,20 @@ CREATE TABLE `login_attempts` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `player_trip_leg`
+--
+
+DROP TABLE IF EXISTS `player_trip_leg`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `player_trip_leg` (
+  `pid` int(11) NOT NULL,
+  `tlid` int(11) NOT NULL,
+  PRIMARY KEY (`pid`,`tlid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `teams`
 --
 
@@ -60,7 +74,7 @@ CREATE TABLE `teams` (
   `name` varchar(255) NOT NULL,
   `description` text,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -74,7 +88,7 @@ CREATE TABLE `tournament_admins` (
   `uid` int(11) NOT NULL,
   `tid` int(11) NOT NULL,
   PRIMARY KEY (`uid`,`tid`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -104,7 +118,7 @@ CREATE TABLE `tournament_teams` (
   `tid` int(11) NOT NULL,
   `teid` int(11) NOT NULL,
   PRIMARY KEY (`tid`,`teid`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -122,7 +136,28 @@ CREATE TABLE `tournaments` (
   `end_date` date NOT NULL,
   `signup_deadline` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `trip_leg`
+--
+
+DROP TABLE IF EXISTS `trip_leg`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `trip_leg` (
+  `leg_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `tid` int(11) NOT NULL,
+  `trip_type` enum('airplane','bus','train','boat','car') NOT NULL,
+  `company_name` varchar(255) DEFAULT NULL,
+  `trip_number` varchar(255) DEFAULT NULL,
+  `origin` varchar(255) NOT NULL,
+  `destination` varchar(255) NOT NULL,
+  `departure_time` datetime DEFAULT NULL,
+  `arrival_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`leg_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -155,7 +190,7 @@ CREATE TABLE `user_profiles` (
   `country` varchar(20) COLLATE utf8_bin DEFAULT NULL,
   `website` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -184,7 +219,7 @@ CREATE TABLE `users` (
   `level` enum('user','t_admin','admin') COLLATE utf8_bin NOT NULL DEFAULT 'user',
   `sex` enum('M','F') COLLATE utf8_bin NOT NULL DEFAULT 'M',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -196,4 +231,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2010-11-13  0:30:46
+-- Dump completed on 2011-03-06  0:24:28
