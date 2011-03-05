@@ -7,31 +7,31 @@ class Tripleg_model extends Model
 	function create($pid, $tid, $type, $company, $number, $origin, $departure, $destination, $arrival)
 	{
 		$this->db->query('INSERT INTO trip_leg 
-			(trip_type, company_name, trip_number, origin, departure_time, destination, arrival_time) 
-			VALUES (?, ?, ?, ?, ?, ?, ?)',
-			array($type, $company, $number, $origin, $departure, $destination, $arrival));
+			(tid, trip_type, company_name, trip_number, origin, departure_time, destination, arrival_time) 
+			VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+			array($tid, $type, $company, $number, $origin, $departure, $destination, $arrival));
 			
 		$tlid = $this->db->insert_id();
 		
-		$this->addPlayer($tlid, $tid, $pid);
+		$this->addPlayer($tlid, $pid);
 	}
 	
-	function addPlayer($tlid, $tid, $pid)
+	function addPlayer($tlid, $pid)
 	{
-		$this->db->query('INSERT IGNORE INTO player_trip_leg (pid, tlid, tid) VALUES (?, ?, ?)',
-			array($pid, $tlid, $tid));
+		$this->db->query('INSERT IGNORE INTO player_trip_leg (pid, tlid) VALUES (?, ?)',
+			array($pid, $tlid));
 	}
 	
-	function removePlayer($tlid, $tid, $pid)
+	function removePlayer($tlid, $pid)
 	{
-		$this->db->query('DELETE FROM player_trip_leg WHERE pid=? AND tlid=? AND tid=?',
-			array($pid, $tlid, $tid));
+		$this->db->query('DELETE FROM player_trip_leg WHERE pid=? AND tlid=?',
+			array($pid, $tlid));
 	}
 	
 	function getTripsForTournament($tid)
 	{
 		$trips = $this->db->query(
-			'SELECT tl.* FROM trip_leg AS tl, player_trip_leg AS ptl WHERE ptl.tid=? AND ptl.tlid = tl.leg_id GROUP BY tl.leg_id', 
+			'SELECT * FROM trip_leg WHERE tid=? GROUP BY leg_id', 
 			array($tid)
 		);
 		

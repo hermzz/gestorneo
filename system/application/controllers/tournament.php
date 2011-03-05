@@ -31,8 +31,7 @@ class Tournament extends GS_Controller {
 		if($this->input->post('signupToTrip'))
 		{
 			$this->tripleg_model->addPlayer(
-				$this->input->post('tlid'), 
-				$id,
+				$this->input->post('tlid'),
 				$this->tank_auth->get_user_id()
 			);
 		}
@@ -41,7 +40,6 @@ class Tournament extends GS_Controller {
 		{
 			$this->tripleg_model->removePlayer(
 				$this->input->post('tlid'), 
-				$id,
 				$this->tank_auth->get_user_id()
 			);
 		}
