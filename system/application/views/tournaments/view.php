@@ -150,7 +150,9 @@
 										<?php break; ?>
 								<?php endswitch; ?><br />
 								<?=_('On this trip');?>:
-								<?=implode(', ', array_map(function($p){ return $p->username; }, $trip->passengers));?><br />
+								<?php if($trip->passengers): ?>
+									<?=implode(', ', array_map(function($p){ return $p->username; }, $trip->passengers));?><br />
+								<?php endif; ?>
 								<form action="#" method="post"  class="trip_signup">
 									<input type="hidden" name="tlid" value="<?=$trip->leg_id;?>" />
 							
