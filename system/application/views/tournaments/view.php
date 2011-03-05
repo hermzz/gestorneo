@@ -127,41 +127,44 @@
 		<p><a href="/tournament/add_trip_leg/<?=$tournament->id;?>"><?=_('Add trip leg');?></a></p>
 		
 		<?php if($trips): ?>
-			<ul>
-				<?php foreach($trips as $trip): ?>
-					<li>
-						<?php switch($trip->trip_type):
-							case 'car': ?> 
-								(<?=_('Car');?>)
-								<?=sprintf(
-									_('From %s to %s, leaving on %s'), 
-									$trip->origin, 
-									$trip->destination, 
-									strftime('%A %e, %B %Y @%R', mysql_to_unix($trip->departure_time)));
-								?>
-								<?php break; ?>
-							<?php default: ?>
-								<?=$trip->company_name;?>, <?=$trip->trip_number;?>,
-								<?=$trip->origin;?> &rarr; <?=$trip->destination;?>, 
-								<?=strftime('%a %e, %R-', mysql_to_unix($trip->departure_time));?><?=strftime('%R', mysql_to_unix($trip->arrival_time));?>
-								<?php break; ?>
-						<?php endswitch; ?><br />
-						<?=_('On this trip');?>:
-						<?=implode(', ', array_map(function($p){ return $p->username; }, $trip->passengers));?><br />
-						<span class="trip_signup">
-							<form action="#" method="post">
-								<input type="hidden" name="tlid" value="<?=$trip->leg_id;?>" />
-								
-								<?php if($trip->player_on_it): ?>
-									<input type="submit" name="signoffFromTrip" value="Not going" />
-								<?php else: ?>
-									<input type="submit" name="signupToTrip" value="Going" />
-								<?php endif; ?>
-							</form>
-						</span>
-					</li>
-				<?php endforeach; ?>
-			</ul>
+			<?php foreach(array('way', 'return') as $direction): ?>
+				<?php if(isset($trips[$direction])): ?>
+					<h2><?=$direction;?></h2>
+					<ul>
+						<?php foreach($trips[$direction] as $trip): ?>
+							<li>
+								<?php switch($trip->trip_type):
+									case 'car': ?> 
+										(<?=_('Car');?>)
+										<?=sprintf(
+											_('From %s to %s, leaving on %s'), 
+											$trip->origin, 
+											$trip->destination, 
+											strftime('%A %e, %B %Y @%R', mysql_to_unix($trip->departure_time)));
+										?>
+										<?php break; ?>
+									<?php default: ?>
+										<?=$trip->company_name;?>, <?=$trip->trip_number;?>,
+										<?=$trip->origin;?> &rarr; <?=$trip->destination;?>, 
+										<?=strftime('%a %e, %R-', mysql_to_unix($trip->departure_time));?><?=strftime('%R', mysql_to_unix($trip->arrival_time));?>
+										<?php break; ?>
+								<?php endswitch; ?><br />
+								<?=_('On this trip');?>:
+								<?=implode(', ', array_map(function($p){ return $p->username; }, $trip->passengers));?><br />
+								<form action="#" method="post"  class="trip_signup">
+									<input type="hidden" name="tlid" value="<?=$trip->leg_id;?>" />
+							
+									<?php if($trip->player_on_it): ?>
+										<input type="submit" name="signoffFromTrip" value="Not going" />
+									<?php else: ?>
+										<input type="submit" name="signupToTrip" value="Going" />
+									<?php endif; ?>
+								</form>
+							</li>
+						<?php endforeach; ?>
+					</ul>
+				<?php endif; ?>
+			<?php endforeach; ?>
 		<?php endif; ?>
 	</div>
 	

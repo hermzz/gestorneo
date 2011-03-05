@@ -64,13 +64,22 @@ class Tournament extends GS_Controller {
 		$this->data['players_unassigned'] = $this->tournament_model->getUnassignedPlayers($id);
 		$this->data['players_waiting'] = $this->tournament_model->getPlayers($id, false);
 		
-		$this->data['trips'] = $this->tripleg_model->getTripsForTournament($id);
-		if($this->data['trips'])
+		$last_day = mktime(
+			0, 0, 0,
+			date('m', $this->data['tournament']->u_end_date),
+			date('d', $this->data['tournament']->u_end_date),
+			date('Y', $this->data['tournament']->u_end_date)
+		);
+		
+		$trips= $this->tripleg_model->getTripsForTournament($id);
+		if($trips)
 		{
-			foreach($this->data['trips'] as $trip)
+			foreach($trips as $trip)
 			{
 				$trip->passengers = $this->tripleg_model->getTripPassengers($trip->leg_id);
 				$trip->player_on_it  =$this->tripleg_model->isPlayerOnIt($trip->leg_id, $this->tank_auth->get_user_id());
+				
+				$this->data['trips'][$trip->u_departure_time < $last_day ? 'way' : 'return'][] = $trip;
 			}
 		}
 

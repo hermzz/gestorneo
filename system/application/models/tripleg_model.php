@@ -31,7 +31,7 @@ class Tripleg_model extends Model
 	function getTripsForTournament($tid)
 	{
 		$trips = $this->db->query(
-			'SELECT * FROM trip_leg WHERE tid=? GROUP BY leg_id', 
+			'SELECT *, UNIX_TIMESTAMP(departure_time) AS u_departure_time FROM trip_leg WHERE tid=? GROUP BY leg_id', 
 			array($tid)
 		);
 		
