@@ -261,8 +261,7 @@ class Tournament extends GS_Controller {
 			$this->email->from($this->config->config['tank_auth']['webmaster_email'], 'Gestorneo Gremlin');
 			
 			$this->email->to($this->config->config['tank_auth']['webmaster_email']);
-			foreach($this->player_model->getAdmins() as $admin)
-				$this->email->cc($admin->email);
+			$this->email->cc(implode(',', array_map(function($p){ return $p->email; }, $this->player_model->getAdmins())));
 			
 			$this->email->subject($player->username.' signed up to '.$tournament->name);
 			$this->email->message(
