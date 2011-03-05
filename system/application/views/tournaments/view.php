@@ -118,7 +118,35 @@
 	</div>
 	
 	<div id="tournament_notes">
+		<h3><?=_('Tournament notes');?></h3>
 		<?=$tournament->notes ? markdown($tournament->notes) : '<p>'._('No notes').'</p>'; ?>
+	</div>
+	
+	<div id="travel_details">
+		<h3><?=_('Travel details');?></h3>
+		<p><a href="/tournament/add_trip_leg/<?=$tournament->id;?>"><?=_('Add trip leg');?></a></p>
+		
+		<?php if($trips): ?>
+			<ul>
+				<?php foreach($trips as $trip): ?>
+					<li>
+						(<?=sprintf(_('By %s'), $trip->trip_type);?>)
+						<?=sprintf(
+							_('From %s to %s, leaving on %s'), 
+							$trip->origin, 
+							$trip->destination, 
+							strftime('%A %e, %B %Y @%R', mysql_to_unix($trip->departure_time))
+						);?>
+						<?php if($trip->trip_type != "car"): ?>
+							<br />
+							<span id="trip_leg_details">
+								<?=$trip->company_name;?>, <?=$trip->trip_number;?>
+							</span>
+						<?php endif;?>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+		<?php endif; ?>
 	</div>
 	
 <?php else: ?>

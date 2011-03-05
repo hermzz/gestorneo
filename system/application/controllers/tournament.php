@@ -2,6 +2,9 @@
 
 class Tournament extends GS_Controller {
 
+	var $_date_regex = '/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/';
+	var $_datetime_regex = '/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4}) ([0-9]{1,2}):([0-9]{2,2})/';
+
 	function __construct()
 	{
 		parent::__construct();
@@ -44,6 +47,8 @@ class Tournament extends GS_Controller {
 		
 		$this->data['players_unassigned'] = $this->tournament_model->getUnassignedPlayers($id);
 		$this->data['players_waiting'] = $this->tournament_model->getPlayers($id, false);
+		
+		$this->data['trips'] = $this->tripleg_model->getTripsForTournament($id);
 
 		$this->data['title'] = $this->data['tournament'] ?  $this->data['tournament']->name : _("Tournament not found");
 		
@@ -101,9 +106,9 @@ class Tournament extends GS_Controller {
 			$this->tournament_model->create(
 				$this->input->post('name'),
 				$this->input->post('notes'),
-				preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $this->input->post('start_date')),
-				preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $this->input->post('end_date')),
-				preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $this->input->post('deadline_date')),
+				preg_replace($this->_date_regex, '\3-\2-\1', $this->input->post('start_date')),
+				preg_replace($this->_date_regex, '\3-\2-\1', $this->input->post('end_date')),
+				preg_replace($this->_date_regex, '\3-\2-\1', $this->input->post('deadline_date')),
 				$this->input->post('teams'),
 				$this->input->post('admin_users')
 			);
@@ -158,9 +163,9 @@ class Tournament extends GS_Controller {
 				$id,
 				$this->input->post('name'),
 				$this->input->post('notes'),
-				preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $this->input->post('start_date')),
-				preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $this->input->post('end_date')),
-				preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $this->input->post('deadline_date')),
+				preg_replace($this->_date_regex, '\3-\2-\1', $this->input->post('start_date')),
+				preg_replace($this->_date_regex, '\3-\2-\1', $this->input->post('end_date')),
+				preg_replace($this->_date_regex, '\3-\2-\1', $this->input->post('deadline_date')),
 				$this->input->post('teams'),
 				$this->input->post('admin_users')
 			);
@@ -175,14 +180,25 @@ class Tournament extends GS_Controller {
 		{
 			return true;
 		} else {
-			$this->form_validation->set_message('date_check', _('The %s is not a valid date'));
+			$this->form_validation->set_message('date_check', _('%s is not a valid date'));
+			return false;
+		}
+	}
+	
+	function datetime_check($datetime)
+	{
+		if(preg_match('/[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{4,4} [0-9]{1,2}:[0-9]{2,2}/', $datetime))
+		{
+			return true;
+		} else {
+			$this->form_validation->set_message('date_check', _('%s is not a valid date+time'));
 			return false;
 		}
 	}
 	
 	function is_after($a, $b)
 	{		
-		if(strtotime(preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $a)) < strtotime(preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $this->input->post($b))))
+		if(strtotime(preg_replace($this->_date_regex, '\3-\2-\1', $a)) < strtotime(preg_replace($this->_date_regex, '\3-\2-\1', $this->input->post($b))))
 		{
 			$this->form_validation->set_message('is_after', _('Start date must be before end date'));
 			return false;
@@ -193,7 +209,7 @@ class Tournament extends GS_Controller {
 	
 	function is_before($a, $b)
 	{		
-		if(strtotime(preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $a)) > strtotime(preg_replace('/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/', '\3-\2-\1', $this->input->post($b))))
+		if(strtotime(preg_replace($this->_date_regex, '\3-\2-\1', $a)) > strtotime(preg_replace($this->_date_regex, '\3-\2-\1', $this->input->post($b))))
 		{
 			$this->form_validation->set_message('is_before', _('Deadline date must be before end date'));
 			return false;
@@ -326,6 +342,70 @@ class Tournament extends GS_Controller {
 		$this->data['message'] = $this->input->post('message');
 		
 		$this->load->view('skeleton', $this->data);
+	}
+	
+	function add_trip_leg($id)
+	{
+		$tournament = $this->tournament_model->get($id);
+		
+		$this->load->helper(array('form', 'url'));
+		$this->load->library('form_validation');
+		
+		$this->form_validation->set_rules('trip_type', _('Trip type'), 'required');
+		
+		if($this->input->post('submitTripByOther'))
+		{
+			$this->form_validation->set_rules('company_name', _('Company name'), 'required');
+			$this->form_validation->set_rules('trip_number', _('Trip number'), 'required');
+			$this->form_validation->set_rules('other_origin', _('Origin'), 'required');
+			$this->form_validation->set_rules('departure_time', _('Departure time'), 'callback_datetime_check');
+			$this->form_validation->set_rules('other_destination', _('Destination'), 'required');
+			$this->form_validation->set_rules('arrival_time', _('Arrival time'), 'callback_datetime_check|callback_is_after[departure_time]');
+		} elseif ($this->input->post('submitTripByCar')) {
+			$this->form_validation->set_rules('car_origin', _('Origin'), 'required');
+			$this->form_validation->set_rules('car_destination', _('Destination'), 'required');
+			$this->form_validation->set_rules('car_departure_time', _('Departure time'), 'callback_datetime_check');
+		}
+		
+		if($this->form_validation->run() == FALSE)
+		{
+			$this->data['tournament'] = $tournament;
+			$this->data['title'] = _('Add trip leg for '.$tournament->name);
+			$this->data['content_view'] = 'tournaments/add_trip_leg';
+		
+			$this->load->view('skeleton', $this->data);
+		} else {
+			if($this->input->post('submitTripByOther'))
+			{
+				$this->tripleg_model->create(
+					$this->tank_auth->get_user_id(),
+					$id,
+					$this->input->post('trip_type'),
+					$this->input->post('company_name'),
+					$this->input->post('trip_number'),
+					$this->input->post('other_origin'),
+					preg_replace($this->_datetime_regex, '\3-\2-\1 \4:\5', $this->input->post('departure_time')),
+					$this->input->post('other_destination'),
+					preg_replace($this->_datetime_regex, '\3-\2-\1 \4:\5', $this->input->post('arrival_time'))
+				);
+			} elseif ($this->input->post('submitTripByCar')) {
+				$this->tripleg_model->create(
+					$this->tank_auth->get_user_id(),
+					$id,
+					$this->input->post('trip_type'),
+					false,
+					false,
+					$this->input->post('car_origin'),
+					preg_replace($this->_datetime_regex, '\3-\2-\1 \4:\5', $this->input->post('car_departure_time')),
+					$this->input->post('car_destination'),
+					false
+				);
+			} else {
+				throw new Exception(_('Oops, if you see this message, something went horribly wrong. Press the back button and try again.'));
+			}
+			
+			header('Location: /tournament/view/'.$id);
+		}
 	}
 }
 
