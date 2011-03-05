@@ -130,19 +130,22 @@
 			<ul>
 				<?php foreach($trips as $trip): ?>
 					<li>
-						(<?=sprintf(_('By %s'), $trip->trip_type);?>)
-						<?=sprintf(
-							_('From %s to %s, leaving on %s'), 
-							$trip->origin, 
-							$trip->destination, 
-							strftime('%A %e, %B %Y @%R', mysql_to_unix($trip->departure_time))
-						);?>
-						<?php if($trip->trip_type != "car"): ?>
-							<br />
-							<span id="trip_leg_details">
-								<?=$trip->company_name;?>, <?=$trip->trip_number;?>
-							</span>
-						<?php endif;?>
+						<?php switch($trip->trip_type):
+							case 'car': ?> 
+								(<?=_('Car');?>)
+								<?=sprintf(
+									_('From %s to %s, leaving on %s'), 
+									$trip->origin, 
+									$trip->destination, 
+									strftime('%A %e, %B %Y @%R', mysql_to_unix($trip->departure_time)));
+								?>
+								<?php break; ?>
+							<?php default: ?>
+								<?=$trip->company_name;?>, <?=$trip->trip_number;?>,
+								<?=$trip->origin;?> &rarr; <?=$trip->destination;?>, 
+								<?=strftime('%a %e, %R-', mysql_to_unix($trip->departure_time));?><?=strftime('%R', mysql_to_unix($trip->arrival_time));?>
+								<?php break; ?>
+						<?php endswitch; ?>
 					</li>
 				<?php endforeach; ?>
 			</ul>
