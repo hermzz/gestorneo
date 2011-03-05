@@ -48,12 +48,13 @@ a:link, a:visited, a:hover, a:active {
 	width: 500px;
 }
 
-#tournament_notes {
+#tournament_notes, #travel_details {
 	float: left;
 	width: 500px;
 	background-color: #eee;
 	border: 1px solid #ccc;
 	padding: 5px 10px;
+	margin: 0 0 10px 0;
 }
 
 .header-small {
