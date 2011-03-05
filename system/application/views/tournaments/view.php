@@ -145,7 +145,9 @@
 								<?=$trip->origin;?> &rarr; <?=$trip->destination;?>, 
 								<?=strftime('%a %e, %R-', mysql_to_unix($trip->departure_time));?><?=strftime('%R', mysql_to_unix($trip->arrival_time));?>
 								<?php break; ?>
-						<?php endswitch; ?>
+						<?php endswitch; ?><br />
+						<?=_('On this trip');?>:
+						<?=implode(', ', array_map(function($p){ return $p->username; }, $trip->passengers));?>
 					</li>
 				<?php endforeach; ?>
 			</ul>

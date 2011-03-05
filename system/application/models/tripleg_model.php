@@ -31,6 +31,16 @@ class Tripleg_model extends Model
 		
 		return $trips->num_rows > 0 ? $trips->result() : FALSE;
 	}
+	
+	function getTripPassengers($tlid)
+	{
+		$passengers = $this->db->query(
+			'SELECT u.* FROM player_trip_leg AS ptl, users AS u WHERE ptl.tlid = ? AND ptl.pid = u.id',
+			array($tlid)
+		);
+		
+		return $passengers->num_rows > 0 ? $passengers->result() : FALSE;
+	}
 }
 
 ?>

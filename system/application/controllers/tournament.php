@@ -49,6 +49,8 @@ class Tournament extends GS_Controller {
 		$this->data['players_waiting'] = $this->tournament_model->getPlayers($id, false);
 		
 		$this->data['trips'] = $this->tripleg_model->getTripsForTournament($id);
+		foreach($this->data['trips'] as $trip)
+			$trip->passengers = $this->tripleg_model->getTripPassengers($trip->leg_id);
 
 		$this->data['title'] = $this->data['tournament'] ?  $this->data['tournament']->name : _("Tournament not found");
 		
