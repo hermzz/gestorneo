@@ -5,16 +5,7 @@ class Tournament_model extends Model
 	// get tournament by ID
 	function get($id)
 	{
-		$query = $this->db->query(
-			'SELECT 
-				*,
-				UNIX_TIMESTAMP(start_date) AS u_start_date,
-				UNIX_TIMESTAMP(end_date) AS u_end_date,
-				UNIX_TIMESTAMP(signup_deadline) AS u_signup_deadline
-			FROM 
-				tournaments 
-			WHERE 
-				id='.$id);
+		$query = $this->db->query('SELECT * FROM tournaments WHERE id='.$id);
 		
 		return $query->num_rows > 0 ? $query->row() : FALSE;
 	}
@@ -203,12 +194,12 @@ class Tournament_model extends Model
 	
 	function is_old($tournament)
 	{
-		return mktime() > $tournament->u_start_date;
+		return mktime() > mysql_to_unix($tournament->start_date);
 	}
 	
 	function undeadlined($tournament)
 	{
-		return mktime(0, 0, 0, date('n'), date('j'), date('Y')) <= $tournament->u_signup_deadline;
+		return mktime(0, 0, 0, date('n'), date('j'), date('Y')) <= mysql_to_unix($tournament->signup_deadline);
 	}
 	
 	function getTeams($tournament_id)

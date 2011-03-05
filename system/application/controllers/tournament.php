@@ -64,11 +64,13 @@ class Tournament extends GS_Controller {
 		$this->data['players_unassigned'] = $this->tournament_model->getUnassignedPlayers($id);
 		$this->data['players_waiting'] = $this->tournament_model->getPlayers($id, false);
 		
+		$u_end_date = mysql_to_unix($this->data['tournament']->end_date);
+		
 		$last_day = mktime(
 			0, 0, 0,
-			date('m', $this->data['tournament']->u_end_date),
-			date('d', $this->data['tournament']->u_end_date),
-			date('Y', $this->data['tournament']->u_end_date)
+			date('m', $u_end_date),
+			date('d', $u_end_date),
+			date('Y', $u_end_date)
 		);
 		
 		$trips= $this->tripleg_model->getTripsForTournament($id);
@@ -79,7 +81,7 @@ class Tournament extends GS_Controller {
 				$trip->passengers = $this->tripleg_model->getTripPassengers($trip->leg_id);
 				$trip->player_on_it  =$this->tripleg_model->isPlayerOnIt($trip->leg_id, $this->tank_auth->get_user_id());
 				
-				$this->data['trips'][$trip->u_departure_time < $last_day ? 'way' : 'return'][] = $trip;
+				$this->data['trips'][mysql_to_unix($trip->departure_time) < $last_day ? 'way' : 'return'][] = $trip;
 			}
 		}
 

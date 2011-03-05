@@ -11,7 +11,7 @@
 		<ul>
 			<?php foreach($tournaments as $tournament): ?>
 				<li><a href="/tournament/view/<?=$tournament->id?>"><?=$tournament->name?></a>
-					 - <?=strftime('%A %e, %B %Y', $tournament->u_date)?></li>
+					 - <?=strftime('%A %e, %B %Y', mysql_to_unix($tournament->start_date))?></li>
 			<?php endforeach; ?>
 		</ul>
 	<?php else: ?>
