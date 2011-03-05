@@ -147,7 +147,18 @@
 								<?php break; ?>
 						<?php endswitch; ?><br />
 						<?=_('On this trip');?>:
-						<?=implode(', ', array_map(function($p){ return $p->username; }, $trip->passengers));?>
+						<?=implode(', ', array_map(function($p){ return $p->username; }, $trip->passengers));?><br />
+						<span class="trip_signup">
+							<form action="#" method="post">
+								<input type="hidden" name="tlid" value="<?=$trip->leg_id;?>" />
+								
+								<?php if($trip->player_on_it): ?>
+									<input type="submit" name="signoffFromTrip" value="Not going" />
+								<?php else: ?>
+									<input type="submit" name="signupToTrip" value="Going" />
+								<?php endif; ?>
+							</form>
+						</span>
 					</li>
 				<?php endforeach; ?>
 			</ul>

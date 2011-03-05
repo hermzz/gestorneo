@@ -28,6 +28,24 @@ class Tournament extends GS_Controller {
 	{
 		$this->load->helper('markdown');
 		
+		if($this->input->post('signupToTrip'))
+		{
+			$this->tripleg_model->addPlayer(
+				$this->input->post('tlid'), 
+				$id,
+				$this->tank_auth->get_user_id()
+			);
+		}
+		
+		if($this->input->post('signoffFromTrip'))
+		{
+			$this->tripleg_model->removePlayer(
+				$this->input->post('tlid'), 
+				$id,
+				$this->tank_auth->get_user_id()
+			);
+		}
+		
 		$this->data['tournament'] = $this->tournament_model->get($id);
 		
 		$this->data['teams'] = $this->tournament_model->getTeams($id);
@@ -50,7 +68,10 @@ class Tournament extends GS_Controller {
 		
 		$this->data['trips'] = $this->tripleg_model->getTripsForTournament($id);
 		foreach($this->data['trips'] as $trip)
+		{
 			$trip->passengers = $this->tripleg_model->getTripPassengers($trip->leg_id);
+			$trip->player_on_it  =$this->tripleg_model->isPlayerOnIt($trip->leg_id, $this->tank_auth->get_user_id());
+		}
 
 		$this->data['title'] = $this->data['tournament'] ?  $this->data['tournament']->name : _("Tournament not found");
 		

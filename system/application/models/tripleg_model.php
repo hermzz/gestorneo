@@ -13,19 +13,25 @@ class Tripleg_model extends Model
 			
 		$tlid = $this->db->insert_id();
 		
-		$this->add_user($tlid, $tid, $pid);
+		$this->addPlayer($tlid, $tid, $pid);
 	}
 	
-	function add_user($tlid, $tid, $pid)
+	function addPlayer($tlid, $tid, $pid)
 	{
 		$this->db->query('INSERT IGNORE INTO player_trip_leg (pid, tlid, tid) VALUES (?, ?, ?)',
+			array($pid, $tlid, $tid));
+	}
+	
+	function removePlayer($tlid, $tid, $pid)
+	{
+		$this->db->query('DELETE FROM player_trip_leg WHERE pid=? AND tlid=? AND tid=?',
 			array($pid, $tlid, $tid));
 	}
 	
 	function getTripsForTournament($tid)
 	{
 		$trips = $this->db->query(
-			'SELECT tl.* FROM trip_leg AS tl, player_trip_leg AS ptl WHERE ptl.tid=? AND ptl.tlid = tl.leg_id', 
+			'SELECT tl.* FROM trip_leg AS tl, player_trip_leg AS ptl WHERE ptl.tid=? AND ptl.tlid = tl.leg_id GROUP BY tl.leg_id', 
 			array($tid)
 		);
 		
@@ -40,6 +46,16 @@ class Tripleg_model extends Model
 		);
 		
 		return $passengers->num_rows > 0 ? $passengers->result() : FALSE;
+	}
+	
+	function isPlayerOnIt($tlid, $pid)
+	{
+		$rows = $this->db->query(
+			'SELECT * FROM player_trip_leg WHERE tlid = ? AND pid = ?',
+			array($tlid, $pid)
+		);
+		
+		return $rows->num_rows > 0 ? TRUE : FALSE;
 	}
 }
 
