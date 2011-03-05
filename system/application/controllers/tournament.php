@@ -67,10 +67,13 @@ class Tournament extends GS_Controller {
 		$this->data['players_waiting'] = $this->tournament_model->getPlayers($id, false);
 		
 		$this->data['trips'] = $this->tripleg_model->getTripsForTournament($id);
-		foreach($this->data['trips'] as $trip)
+		if($this->data['trips'])
 		{
-			$trip->passengers = $this->tripleg_model->getTripPassengers($trip->leg_id);
-			$trip->player_on_it  =$this->tripleg_model->isPlayerOnIt($trip->leg_id, $this->tank_auth->get_user_id());
+			foreach($this->data['trips'] as $trip)
+			{
+				$trip->passengers = $this->tripleg_model->getTripPassengers($trip->leg_id);
+				$trip->player_on_it  =$this->tripleg_model->isPlayerOnIt($trip->leg_id, $this->tank_auth->get_user_id());
+			}
 		}
 
 		$this->data['title'] = $this->data['tournament'] ?  $this->data['tournament']->name : _("Tournament not found");
