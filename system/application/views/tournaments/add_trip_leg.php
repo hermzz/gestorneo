@@ -67,7 +67,7 @@
 		<label for="company_name"><?=_('Company name');?></label>
 		<input type="text" id="company_name" name="company_name" value="<?=set_value('company_name');?>" /><br />
 	
-		<label for="trip_number"><?=_('Trip number (ie: flight number: EZY 1234)');?></label>
+		<label for="trip_number"><?=_('Trip number');?></label>
 		<input type="text" id="trip_number" name="trip_number" value="<?=set_value('trip_number');?>" /><br />
 	
 		<label for="other_origin"><?=_('Origin');?></label>
