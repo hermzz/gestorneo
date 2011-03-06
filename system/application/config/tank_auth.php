@@ -8,7 +8,7 @@
 |--------------------------------------------------------------------------
 */
 $config['website_name'] = 'Gestorneo';
-$config['webmaster_email'] = 'hermann.kaser@gmail.com';
+$config['webmaster_email'] = 'quijotesultimate+gestorneo@gmail.com ';
 
 /*
 |--------------------------------------------------------------------------
