@@ -1,4 +1,4 @@
-<h2><?=_('Add trip leg for '.$tournament->name);?></h2>
+<h2><?=sprintf(_('Add trip leg for %s'), '<a href="/tournament/view/'.$tournament->id.'">'.$tournament->name.'</a>');?></h2>
 
 <link href="/static/css/base/ui.datepicker.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="/static/javascript/jquery.timepicker.js"></script>
