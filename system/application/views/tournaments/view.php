@@ -8,6 +8,26 @@
 			$('form.approve_player select').change(function(e) {
 				$(e.target).parent().submit();
 			});
+			
+			$('#tn_toggle').click(function() {
+				$('#travel_details').hide();
+				$('#tournament_notes').show();
+				
+				$('#tn_toggle').attr('class', 'active');
+				$('#td_toggle').attr('class', '');
+				
+				return false;
+			});
+			
+			$('#td_toggle').click(function() {
+				$('#tournament_notes').hide();
+				$('#travel_details').show();
+				
+				$('#td_toggle').attr('class', 'active');
+				$('#tn_toggle').attr('class', '');
+				
+				return false;
+			});
 		});
 	</script>
 	
@@ -19,7 +39,66 @@
 		<?=sprintf(_('%s <span class="header-small">on %s</span>'), $tournament->name, strftime('%A %e, %B %Y', mysql_to_unix($tournament->start_date)));?>
 	</h1>
 	
-	<div id="tournament_content">
+	<div id="content_wrapper">
+		<div id="right_column">
+			<ul>
+				<li id="tn_toggle" class="active"><a href="#"><?=_('Notes');?></a></li>
+				<li id="td_toggle" ><a href="#"><?=_('Travel');?></a></li>
+			</ul>
+		
+			<div id="tournament_notes">
+				<?=$tournament->notes ? markdown($tournament->notes) : '<p>'._('No notes').'</p>'; ?>
+			</div>
+	
+			<div id="travel_details" style="display: none;">
+				<p><a href="/tournament/add_trip_leg/<?=$tournament->id;?>"><?=_('Add trip leg');?></a></p>
+		
+				<?php if($trips): ?>
+					<?php foreach(array('way', 'return') as $direction): ?>
+						<?php if(isset($trips[$direction])): ?>
+							<h2><?=$direction == 'way' ? _('Going to') : _('Return');?></h2>
+							<ul>
+								<?php foreach($trips[$direction] as $trip): ?>
+									<li>
+										<?php switch($trip->trip_type):
+											case 'car': ?> 
+												<?=sprintf(
+													_('Car from %s to %s, leaving on %s'), 
+													$trip->origin, 
+													$trip->destination, 
+													strftime('%A %e, %B %Y @%R', mysql_to_unix($trip->departure_time)));
+												?>
+												<?php break; ?>
+											<?php default: ?>
+												<?=$trip->company_name;?>, <?=$trip->trip_number;?>,
+												<?=$trip->origin;?> &rarr; <?=$trip->destination;?>, 
+												<?=strftime('%a %e, %R-', mysql_to_unix($trip->departure_time));?><?=strftime('%R', mysql_to_unix($trip->arrival_time));?>
+												<?php break; ?>
+										<?php endswitch; ?><br />
+										<?=_('On this trip');?>:
+										<?php if($trip->passengers): ?>
+											<?=implode(', ', array_map(function($p){ return $p->username; }, $trip->passengers));?><br />
+										<?php endif; ?>
+										<form action="#" method="post"  class="trip_signup">
+											<input type="hidden" name="tlid" value="<?=$trip->leg_id;?>" />
+							
+											<?php if($trip->player_on_it): ?>
+												<input type="submit" name="signoffFromTrip" value="Not going" />
+											<?php else: ?>
+												<input type="submit" name="signupToTrip" value="Going" />
+											<?php endif; ?>
+										</form>
+									</li>
+								<?php endforeach; ?>
+							</ul>
+						<?php endif; ?>
+					<?php endforeach; ?>
+				<?php endif; ?>
+			</div>
+		</div>
+	</div>
+	
+	<div id="left_column">
 		<?php if($is_tournament_admin): ?>
 			<p>
 				<a href="/tournament/email/<?=$tournament->id;?>">Email team</a> | 
@@ -114,58 +193,6 @@
 			</ul>
 		<?php else: ?>
 			<p><?=_('No one\'s been left out, yay!');?></p>
-		<?php endif; ?>
-	</div>
-	
-	<div id="tournament_notes">
-		<h3><?=_('Tournament notes');?></h3>
-		<?=$tournament->notes ? markdown($tournament->notes) : '<p>'._('No notes').'</p>'; ?>
-	</div>
-	
-	<div id="travel_details">
-		<h3><?=_('Travel details');?></h3>
-		<p><a href="/tournament/add_trip_leg/<?=$tournament->id;?>"><?=_('Add trip leg');?></a></p>
-		
-		<?php if($trips): ?>
-			<?php foreach(array('way', 'return') as $direction): ?>
-				<?php if(isset($trips[$direction])): ?>
-					<h2><?=$direction == 'way' ? _('Going to') : _('Return');?></h2>
-					<ul>
-						<?php foreach($trips[$direction] as $trip): ?>
-							<li>
-								<?php switch($trip->trip_type):
-									case 'car': ?> 
-										<?=sprintf(
-											_('Car from %s to %s, leaving on %s'), 
-											$trip->origin, 
-											$trip->destination, 
-											strftime('%A %e, %B %Y @%R', mysql_to_unix($trip->departure_time)));
-										?>
-										<?php break; ?>
-									<?php default: ?>
-										<?=$trip->company_name;?>, <?=$trip->trip_number;?>,
-										<?=$trip->origin;?> &rarr; <?=$trip->destination;?>, 
-										<?=strftime('%a %e, %R-', mysql_to_unix($trip->departure_time));?><?=strftime('%R', mysql_to_unix($trip->arrival_time));?>
-										<?php break; ?>
-								<?php endswitch; ?><br />
-								<?=_('On this trip');?>:
-								<?php if($trip->passengers): ?>
-									<?=implode(', ', array_map(function($p){ return $p->username; }, $trip->passengers));?><br />
-								<?php endif; ?>
-								<form action="#" method="post"  class="trip_signup">
-									<input type="hidden" name="tlid" value="<?=$trip->leg_id;?>" />
-							
-									<?php if($trip->player_on_it): ?>
-										<input type="submit" name="signoffFromTrip" value="Not going" />
-									<?php else: ?>
-										<input type="submit" name="signupToTrip" value="Going" />
-									<?php endif; ?>
-								</form>
-							</li>
-						<?php endforeach; ?>
-					</ul>
-				<?php endif; ?>
-			<?php endforeach; ?>
 		<?php endif; ?>
 	</div>
 	
