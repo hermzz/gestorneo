@@ -70,7 +70,7 @@
 												?>
 												<?php break; ?>
 											<?php default: ?>
-												<?=$trip->company_name;?>, <?=$trip->trip_number;?>,
+												<?=$trip->trip_name;?>,
 												<?=$trip->origin;?> &rarr; <?=$trip->destination;?>, 
 												<?=strftime('%a %e, %R-', mysql_to_unix($trip->departure_time));?><?=strftime('%R', mysql_to_unix($trip->arrival_time));?>
 												<?php break; ?>

@@ -4,12 +4,12 @@ class Tripleg_model extends Model
 {
 	function get($id) {}
 	
-	function create($pid, $tid, $type, $company, $number, $origin, $departure, $destination, $arrival)
+	function create($pid, $tid, $type, $trip_name, $origin, $departure, $destination, $arrival)
 	{
 		$this->db->query('INSERT INTO trip_leg 
-			(tid, trip_type, company_name, trip_number, origin, departure_time, destination, arrival_time) 
-			VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-			array($tid, $type, $company, $number, $origin, $departure, $destination, $arrival));
+			(tid, trip_type, trip_name, origin, departure_time, destination, arrival_time) 
+			VALUES (?, ?, ?, ?, ?, ?, ?)',
+			array($tid, $type, $trip_name, $origin, $departure, $destination, $arrival));
 			
 		$tlid = $this->db->insert_id();
 		

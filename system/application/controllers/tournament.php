@@ -389,8 +389,7 @@ class Tournament extends GS_Controller {
 		
 		if($this->input->post('submitTripByOther'))
 		{
-			$this->form_validation->set_rules('company_name', _('Company name'), 'required');
-			$this->form_validation->set_rules('trip_number', _('Trip number'), 'required');
+			$this->form_validation->set_rules('trip_name', _('Trip name'), 'required');
 			$this->form_validation->set_rules('other_origin', _('Origin'), 'required');
 			$this->form_validation->set_rules('departure_time', _('Departure time'), 'callback_datetime_check');
 			$this->form_validation->set_rules('other_destination', _('Destination'), 'required');
@@ -415,8 +414,7 @@ class Tournament extends GS_Controller {
 					$this->tank_auth->get_user_id(),
 					$id,
 					$this->input->post('trip_type'),
-					$this->input->post('company_name'),
-					$this->input->post('trip_number'),
+					$this->input->post('trip_name'),
 					$this->input->post('other_origin'),
 					preg_replace($this->_datetime_regex, '\3-\2-\1 \4:\5', $this->input->post('departure_time')),
 					$this->input->post('other_destination'),
@@ -427,7 +425,6 @@ class Tournament extends GS_Controller {
 					$this->tank_auth->get_user_id(),
 					$id,
 					$this->input->post('trip_type'),
-					false,
 					false,
 					$this->input->post('car_origin'),
 					preg_replace($this->_datetime_regex, '\3-\2-\1 \4:\5', $this->input->post('car_departure_time')),
