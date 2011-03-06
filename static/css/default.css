@@ -46,6 +46,7 @@ a:link, a:visited, a:hover, a:active {
 #tournament_content {
 	float: left;
 	width: 500px;
+	margin-top: -1em;
 }
 
 #tournament_notes, #travel_details {
