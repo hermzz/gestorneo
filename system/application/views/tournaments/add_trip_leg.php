@@ -32,6 +32,7 @@
 			} else if(val != "") {
 				$('#car_transportation').hide();
 				$('#other_transportation').show();
+				$('#trip_type_span').html(val);
 			}
 		});
 	});
