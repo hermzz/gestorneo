@@ -69,6 +69,14 @@ form.approve_player {
 	display: inline;
 }
 
+label {
+	width: 12em;
+	float: left;
+	text-align: right;
+	margin-right: 0.5em;
+	display: block;
+}
+
 .datepicker {
 	position: absolute;
 	display: none;
