@@ -134,10 +134,11 @@
 			<?php foreach($teams as $team): ?>
 				<h4><?=$team->name;?> (<?=$team->males;?>M / <?=$team->females;?>F)</h4>
 				
-				<ul>
+				<ul class="player_list">
 					<?php if($team->players): ?>
-						<?php foreach($team->players as $player): ?>
-							<li><a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
+						<?php foreach($team->players as $k => $player): ?>
+							<li class="<?=$k % 2 ? 'even': 'odd';?>">
+							<a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
 								<?php if($is_tournament_admin && !$this->tournament_model->is_old($tournament)): ?>
 									 - <a href="/tournament/drop_player/<?=$tournament->id;?>/<?=$player->id;?>"><?=_('Drop');?></a>
 								<?php endif; ?>
@@ -152,11 +153,11 @@
 		
 		<?php if($players_unassigned): ?>
 			<h4><?=_('Unassigned players');?></h4>
-			<ul>
-				<?php foreach($players_unassigned as $player): ?>
-					<li><a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
+			<ul class="player_list">
+				<?php foreach($players_unassigned as $k => $player): ?>
+					<li class="<?=$k % 2 ? 'even': 'odd';?>">
+					<a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
 						<?php if($is_tournament_admin && !$this->tournament_model->is_old($tournament)): ?>
-							
 							 <form class="approve_player" action="/tournament/approve_player/<?=$tournament->id;?>/<?=$player->id;?>" method="post">
 							 	<select name="team_id">
 							 		<option value="0"><?=_('no team');?></value>
@@ -174,9 +175,10 @@
 	
 		<h3><?=_('Waiting list');?></h3>
 		<?php if($players_waiting): ?>
-			<ul>
-				<?php foreach($players_waiting as $player): ?>
-					<li><a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
+			<ul class="player_list">
+				<?php foreach($players_waiting as $k => $player): ?>
+					<li class="<?=$k % 2 ? 'even': 'odd';?>">
+						<a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
 						<?php if($is_tournament_admin && !$this->tournament_model->is_old($tournament)): ?>
 							 <form class="approve_player" action="/tournament/approve_player/<?=$tournament->id;?>/<?=$player->id;?>" method="post">
 							 	<select name="team_id">
