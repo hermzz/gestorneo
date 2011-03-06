@@ -65,14 +65,14 @@
     
     <div class="datepicker" id="deadline_datepicker">&nbsp;</div><br />
     
-    <label for="notes"><?=_('Notes');?></label><br />
+    <label for="notes"><?=_('Notes');?></label>
     <textarea id="notes" name="notes" rows="20" cols="60"><?=set_value('notes', $tournament->notes);?></textarea><br />
     
     <fieldset>
     	<legend><?=_('Teams');?></legend>
 		<?php foreach($teams as $team): ?>
 			<input type="checkbox" id="team-<?=$team->id;?>" name="teams[]" value="<?=$team->id;?>" <?=set_checkbox('teams[]', $team->id, in_array($team->id, $selected_teams));?> />
-			<label for="team-<?=$team->id;?>"><?=$team->name;?></label><br />
+			<label for="team-<?=$team->id;?>" class="checkbox"><?=$team->name;?></label><br />
 		<?php endforeach; ?>
     </fieldset>
     
@@ -81,7 +81,7 @@
 		<?php foreach($users as $user): ?>
 			<?php if($user->level == 'user'): ?>
 				<input type="checkbox" id="user-<?=$user->id;?>" name="admin_users[]" value="<?=$user->id;?>" <?=set_checkbox('admin_users[]', $user->id, in_array($user->id, $tournament_admins));?> />
-				<label for="user-<?=$user->id;?>"><?=$user->username;?></label><br />
+				<label for="user-<?=$user->id;?>" class="checkbox"><?=$user->username;?></label><br />
 			<?php endif; ?>
 		<?php endforeach; ?>
     </fieldset>

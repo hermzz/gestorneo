@@ -70,11 +70,19 @@ form.approve_player {
 }
 
 label {
-	width: 12em;
+	width: 10em;
 	float: left;
 	text-align: right;
 	margin-right: 0.5em;
 	display: block;
+}
+
+label.checkbox {
+	width: auto;
+	float: none;
+	text-align: left;
+	margin: auto;
+	display: inline;
 }
 
 .datepicker {
