@@ -129,7 +129,7 @@
 		<?php if($trips): ?>
 			<?php foreach(array('way', 'return') as $direction): ?>
 				<?php if(isset($trips[$direction])): ?>
-					<h2><?=$direction;?></h2>
+					<h2><?=$direction == 'way' ? _('Going to') : _('Return');?></h2>
 					<ul>
 						<?php foreach($trips[$direction] as $trip): ?>
 							<li>
