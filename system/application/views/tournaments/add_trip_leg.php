@@ -66,9 +66,7 @@
 			set_value('trip_type', ''), 
 			'id="trip_type"'
 		); 
-	?><br />
-	
-	
+	?><br /><br />
 
 	<fieldset id="other_transportation">
 		
@@ -78,7 +76,9 @@
 		<input type="text" id="company_name" name="company_name" value="<?=set_value('company_name');?>" /><br />
 	
 		<label for="trip_number"><?=_('Trip number');?></label>
-		<input type="text" id="trip_number" name="trip_number" value="<?=set_value('trip_number');?>" /><br />
+		<input type="text" id="trip_number" name="trip_number" value="<?=set_value('trip_number');?>" />
+		<span class="form_help">(<?=_('ie: EZY 1234 o AVE 03112');?>)</span>
+		<br />
 	
 		<label for="other_origin"><?=_('Origin');?></label>
 		<input type="text" id="other_origin" name="other_origin" value="<?=set_value('other_origin');?>" /><br />

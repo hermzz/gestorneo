@@ -114,6 +114,7 @@ label {
 	text-align: right;
 	margin-right: 0.5em;
 	display: block;
+	line-height: 2em;
 }
 
 label.checkbox {
@@ -122,6 +123,10 @@ label.checkbox {
 	text-align: left;
 	margin: auto;
 	display: inline;
+}
+
+.form_help {
+	color: #666;
 }
 
 ul.player_list {
