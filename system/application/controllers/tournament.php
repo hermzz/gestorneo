@@ -83,6 +83,8 @@ class Tournament extends GS_Controller {
 				
 				$this->data['trips'][mysql_to_unix($trip->departure_time) < $last_day ? 'way' : 'return'][] = $trip;
 			}
+		} else {
+			$this->data['trips'] = false;
 		}
 
 		$this->data['title'] = $this->data['tournament'] ?  $this->data['tournament']->name : _("Tournament not found");
