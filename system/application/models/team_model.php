@@ -42,7 +42,9 @@ class Team_model extends Model
 			WHERE
 				tp.tid = '.$tournament_id.' AND
 				tp.pid = u.id AND
-				tp.team_id = '.$team_id
+				tp.team_id = '.$team_id.'
+			ORDER BY
+				u.username ASC'
 		);
 		
 		return $players->num_rows > 0 ? $players->result() : FALSE;

@@ -75,7 +75,10 @@ class Tournament_model extends Model
 			WHERE 
 				u.id = tp.pid AND
 				tp.confirmed = '.($confirmed ? 1 : 0).' AND
-				tp.tid = '.$id);
+				tp.tid = '.$id.'
+			ORDER BY
+				u.username ASC'
+		);
 			
 		return $query->num_rows ? $query->result() : array();
 	}
@@ -92,7 +95,10 @@ class Tournament_model extends Model
 				u.id = tp.pid AND
 				tp.confirmed = 1 AND
 				tp.team_id IS NULL AND
-				tp.tid = '.$id);
+				tp.tid = '.$id.'
+			ORDER BY
+				u.username ASC'
+		);
 			
 		return $query->num_rows ? $query->result() : array();
 	}
