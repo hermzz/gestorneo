@@ -139,7 +139,7 @@ ul.player_list li.odd {
 	background-color: #eee;
 }
 
-ul.player_list li form {
+ul.player_list li .admin_controls {
 	float: right;
 }
 

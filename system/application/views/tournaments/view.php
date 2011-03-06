@@ -140,7 +140,7 @@
 							<li class="<?=$k % 2 ? 'even': 'odd';?>">
 							<a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
 								<?php if($is_tournament_admin && !$this->tournament_model->is_old($tournament)): ?>
-									 - <a href="/tournament/drop_player/<?=$tournament->id;?>/<?=$player->id;?>"><?=_('Drop');?></a>
+									<a class="admin_controls" href="/tournament/drop_player/<?=$tournament->id;?>/<?=$player->id;?>"><?=_('Drop');?></a>
 								<?php endif; ?>
 							</li>
 						<?php endforeach; ?>
@@ -158,7 +158,7 @@
 					<li class="<?=$k % 2 ? 'even': 'odd';?>">
 					<a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
 						<?php if($is_tournament_admin && !$this->tournament_model->is_old($tournament)): ?>
-							 <form class="approve_player" action="/tournament/approve_player/<?=$tournament->id;?>/<?=$player->id;?>" method="post">
+							 <form class="approve_player admin_controls" action="/tournament/approve_player/<?=$tournament->id;?>/<?=$player->id;?>" method="post">
 							 	<select name="team_id">
 							 		<option value="0"><?=_('no team');?></value>
 									 <?php foreach($teams as $team): ?>
@@ -180,7 +180,7 @@
 					<li class="<?=$k % 2 ? 'even': 'odd';?>">
 						<a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
 						<?php if($is_tournament_admin && !$this->tournament_model->is_old($tournament)): ?>
-							 <form class="approve_player" action="/tournament/approve_player/<?=$tournament->id;?>/<?=$player->id;?>" method="post">
+							 <form class="approve_player admin_controls" action="/tournament/approve_player/<?=$tournament->id;?>/<?=$player->id;?>" method="post">
 							 	<select name="team_id">
 							 		<option value="invalid"><?=_('Assign to');?></value>
 									 <?php foreach($teams as $team): ?>
