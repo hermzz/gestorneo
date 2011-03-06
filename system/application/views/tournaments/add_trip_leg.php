@@ -35,6 +35,8 @@
 				$('#trip_type_span').html(val);
 			}
 		});
+		
+		$('#trip_type').trigger('change');
 	});
 </script>
 
@@ -51,15 +53,22 @@
 	<!-- Airplane, bus, train, boat, etc... details -->
 
 	<label for="trip_type"><?=_('Trip type');?></label>
-	<select id="trip_type" name="trip_type">
-		<option value=""><?=_('Choose one');?></option>
-		<option value="">----------</option>
-		<option value="airplane"><?=_('Airplane');?></value>
-		<option value="bus"><?=_('Bus');?></value>
-		<option value="train"><?=_('Train');?></value>
-		<option value="boat"><?=_('Boat');?></value>
-		<option value="car"><?=_('Car');?></value>
-	</select><br />
+	<?=
+		form_dropdown('trip_type', 
+			array(
+				'' => _('Choose one'),
+				'airplane' => _('Airplane'),
+				'bus' => _('Bus'),
+				'train' => _('Train'),
+				'boat' => _('Boat'),
+				'car' => _('Car')
+			), 
+			set_value('trip_type', ''), 
+			'id="trip_type"'
+		); 
+	?><br />
+	
+	
 
 	<fieldset id="other_transportation">
 		
