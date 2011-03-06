@@ -135,9 +135,8 @@
 							<li>
 								<?php switch($trip->trip_type):
 									case 'car': ?> 
-										(<?=_('Car');?>)
 										<?=sprintf(
-											_('From %s to %s, leaving on %s'), 
+											_('Car from %s to %s, leaving on %s'), 
 											$trip->origin, 
 											$trip->destination, 
 											strftime('%A %e, %B %Y @%R', mysql_to_unix($trip->departure_time)));
