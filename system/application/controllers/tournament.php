@@ -327,6 +327,13 @@ class Tournament extends GS_Controller {
 		$tournament = $this->tournament_model->get($tournament_id);
 		$this->data['tournament'] = $tournament;
 		
+		$this->data['teams'] = $this->tournament_model->getTeams($tournament_id);
+		foreach($this->data['teams'] as $team)
+			$team->players = $this->team_model->getTournamentPlayers($tournament_id, $team->id);
+		
+		$this->data['players_unassigned'] = $this->tournament_model->getUnassignedPlayers($tournament_id);
+		$this->data['players_waiting'] = $this->tournament_model->getPlayers($tournament_id, false);
+		
 		$this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
 		
