@@ -110,13 +110,15 @@ class Tournament_model extends Model
 			
 		$tournament_id = $this->db->insert_id();
 		
-		foreach($team_ids as $team_id)
-			$this->db->query('INSERT INTO tournament_teams (tid, teid) VALUES (?, ?)', 
-				array($tournament_id, $team_id));
+		if($team_ids)
+			foreach($team_ids as $team_id)
+				$this->db->query('INSERT INTO tournament_teams (tid, teid) VALUES (?, ?)', 
+					array($tournament_id, $team_id));
 		
-		foreach($admin_ids as $admin_id)
-			$this->db->query('INSERT INTO tournament_admins (uid, tid) VALUES (?, ?)', 
-				array($admin_id, $tournament_id));
+		if($admin_ids)
+			foreach($admin_ids as $admin_id)
+				$this->db->query('INSERT INTO tournament_admins (uid, tid) VALUES (?, ?)', 
+					array($admin_id, $tournament_id));
 	}
 	
 	function edit($id, $name, $notes, $start_date, $end_date, $signup_deadline, $team_ids, $admin_ids)
