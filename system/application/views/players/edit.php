@@ -64,7 +64,7 @@ $sex = array(
 	</tr>
 	<tr>
 		<td><?php echo form_label(_('Sex'), $sex['id']); ?></td>
-		<td><?php echo form_dropdown('sex', array('M' => _('Dude'), 'F' => _('Chick')), $player->sex, 'id="sex"'); ?></td>
+		<td><?php echo form_dropdown('sex', array('M' => _('Guy'), 'F' => _('Girl')), $player->sex, 'id="sex"'); ?></td>
 		<td style="color: red;"><?php echo form_error($sex['name']); ?></td>
 	</tr>
 </table>
