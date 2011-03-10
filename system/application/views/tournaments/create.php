@@ -68,6 +68,8 @@
     <label for="notes"><?=_('Notes');?></label>
     <textarea id="notes" name="notes" rows="20" cols="60"><?=set_value('notes');?></textarea><br />
     
+    <p><a href="/misc/page/markdown_help" target="_blank"><?=_('markdown help');?></a></p>
+    
     <fieldset>
     	<legend><?=_('Teams');?></legend>
 		<?php foreach($teams as $team): ?>
@@ -85,8 +87,6 @@
 			<?php endif; ?>
 		<?php endforeach; ?>
     </fieldset>
-    
-    <p><a href="/misc/page/markdown_help" target="_blank"><?=_('markdown help');?></a></p>
 
     <input type="submit" name="submitNewTournament" value="<?=_('Add');?>" />
 </form>
