@@ -4,7 +4,7 @@
 	<ul>
 		<?php foreach($players as $player): ?>
 			<li><a href="<?=site_url('/player/view/'.$player->id)?>">
-				<?=$player->username?></a> (<?=sprintf(_('joined %s'), strftime('%A %e, %B %Y', mysql_to_unix($player->created)));?>)
+				<?=$player->username?></a>
 			</li>
 		<?php endforeach; ?>
 	</ul>

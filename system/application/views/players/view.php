@@ -1,6 +1,8 @@
 <?php if($player): ?>
 	<h2><?=$player->username?> <span class="header-small">(<?=$player->email;?>)</span></h2>
 	
+	<p><?=sprintf(_('Member since %s'), strftime('%A %e, %B %Y', mysql_to_unix($player->created)));?></p>
+	
 	<h3><?=_('Tournaments');?></h3>
 	
 	<?php if($this->tank_auth->is_admin(array('player' => $player->id))): ?>
