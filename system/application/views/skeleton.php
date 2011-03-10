@@ -11,6 +11,8 @@
 			google.load("jquery","1.4.0");
 			google.load("jqueryui", "1.7.2");
 		</script>
+		<script src="/static/javascript/jquery.min.js" language="javascript"></script>
+		<script src="/static/javascript/jquery-ui.min.js" language="javascript"></script>
 		<script src="/static/javascript/jquery.cookie.js" language="javascript"></script>
 		
 		<script>
