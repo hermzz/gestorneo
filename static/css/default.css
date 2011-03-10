@@ -53,6 +53,8 @@ a:link, a:visited, a:hover, a:active {
 #content_wrapper {
 	float: left;
 	width: 100%;
+	position: relative;
+	z-index: -10;
 }
 
 #right_column {
