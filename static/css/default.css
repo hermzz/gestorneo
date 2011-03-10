@@ -48,6 +48,7 @@ a:link, a:visited, a:hover, a:active {
 	width: 480px;
 	margin-top: -1em;
 	margin-left: -100%;
+	position: relative;	
 }
 
 #content_wrapper {
