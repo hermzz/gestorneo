@@ -156,7 +156,7 @@ class Tournament_model extends Model
 	
 	function add_player($tournament_id, $player_id)
 	{
-		$this->db->query('INSERT INTO tournament_players VALUES (?, ?, 0, NULL)',
+		$this->db->query('INSERT IGNORE INTO tournament_players VALUES (?, ?, 0, NULL)',
 			array($player_id, $tournament_id));
 	}
 	
