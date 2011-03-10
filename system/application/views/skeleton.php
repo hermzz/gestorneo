@@ -6,11 +6,6 @@
 		<link href="/static/css/base/ui.base.css" type="text/css" rel="stylesheet" />
 		<link href="/static/css/base/ui.theme.css" type="text/css" rel="stylesheet" />
 		
-		<script src="http://www.google.com/jsapi" language="javascript"></script> 
-		<script language="javascript"> 
-			google.load("jquery","1.4.0");
-			google.load("jqueryui", "1.7.2");
-		</script>
 		<script src="/static/javascript/jquery.min.js" language="javascript"></script>
 		<script src="/static/javascript/jquery-ui.min.js" language="javascript"></script>
 		<script src="/static/javascript/jquery.cookie.js" language="javascript"></script>
