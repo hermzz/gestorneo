@@ -75,6 +75,7 @@ a:link, a:visited, a:hover, a:active {
 	margin-right: 5px;
 	z-index: 20;
 	position: relative;
+	list-style: none;
 }
 
 #right_column>ul>li>a {
