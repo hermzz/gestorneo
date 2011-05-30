@@ -151,10 +151,10 @@
 			<?php endforeach; ?>
 		<?php endif; ?>
 		
-		<?php if($players_unassigned): ?>
-			<h4><?=_('Unassigned players');?></h4>
+		<?php if($unassigned['players']): ?>
+			<h4><?=_('Unassigned players');?> (<?=$unassigned['males'];?>M / <?=$unassigned['females'];?>F)</h4>
 			<ul class="player_list">
-				<?php foreach($players_unassigned as $k => $player): ?>
+				<?php foreach($unassigned['players'] as $k => $player): ?>
 					<li class="<?=$k % 2 ? 'even': 'odd';?>">
 					<a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
 						<?php if($is_tournament_admin && !$this->tournament_model->is_old($tournament)): ?>
@@ -173,10 +173,10 @@
 			</ul>
 		<?php endif; ?>
 	
-		<h3><?=_('Waiting list');?></h3>
-		<?php if($players_waiting): ?>
+		<h3><?=_('Waiting list');?> (<?=$waiting['males'];?>M / <?=$waiting['females'];?>F)</h3>
+		<?php if($waiting['players']): ?>
 			<ul class="player_list">
-				<?php foreach($players_waiting as $k => $player): ?>
+				<?php foreach($waiting['players'] as $k => $player): ?>
 					<li class="<?=$k % 2 ? 'even': 'odd';?>">
 						<a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
 						<?php if($is_tournament_admin && !$this->tournament_model->is_old($tournament)): ?>

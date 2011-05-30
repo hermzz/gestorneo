@@ -61,8 +61,25 @@ class Tournament extends GS_Controller {
 			}
 		}
 		
-		$this->data['players_unassigned'] = $this->tournament_model->getUnassignedPlayers($id);
-		$this->data['players_waiting'] = $this->tournament_model->getPlayers($id, false);
+		$this->data['unassigned']['players'] = $this->tournament_model->getUnassignedPlayers($id);
+		if($this->data['unassigned']['players'])
+		{
+			$this->data['unassigned']['males'] = count(array_filter($this->data['unassigned']['players'], function($p) { return $p->sex == 'M'; }));
+			$this->data['unassigned']['females'] = count(array_filter($this->data['unassigned']['players'], function($p) { return $p->sex == 'F'; }));
+		} else {
+			$this->data['unassigned']['males'] = 0;
+			$this->data['unassigned']['females'] = 0;
+		}
+		
+		$this->data['waiting']['players'] = $this->tournament_model->getPlayers($id, false);
+		if($this->data['waiting']['players'])
+		{
+			$this->data['waiting']['males'] = count(array_filter($this->data['waiting']['players'], function($p) { return $p->sex == 'M'; }));
+			$this->data['waiting']['females'] = count(array_filter($this->data['waiting']['players'], function($p) { return $p->sex == 'F'; }));
+		} else {
+			$this->data['waiting']['males'] = 0;
+			$this->data['waiting']['females'] = 0;
+		}
 		
 		$u_end_date = mysql_to_unix($this->data['tournament']->end_date);
 		
