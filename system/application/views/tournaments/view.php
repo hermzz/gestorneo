@@ -1,8 +1,4 @@
 <?php if($tournament): ?>
-	<?php if($this->tournament_model->is_old($tournament)):?>
-		<p class="message neutral"><?=_('This tournament has already passed');?></p>
-	<?php endif;?>
-	
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('form.approve_player select').change(function(e) {
@@ -66,8 +62,10 @@
 							</form>
 						<?php endif; ?>
 					<?php else: ?>
-						<p><?=_('The signup deadline for this tournament has already passed, you\'re too late!');?></p>
+						<p class="message neutral"><?=_('The signup deadline for this tournament has already passed, you\'re too late!');?></p>
 					<?php endif; ?>
+				<?php else: ?>
+					<p class="message neutral"><?=_('This tournament has already passed');?></p>
 				<?php endif; ?>
 			</div>
 		
