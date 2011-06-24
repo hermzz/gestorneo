@@ -41,18 +41,43 @@
 	
 	<div id="content_wrapper">
 		<div id="right_column">
-			<ul>
-				<li id="tn_toggle" class="active"><a href="#"><?=_('Notes');?></a></li>
-				<li id="td_toggle" ><a href="#"><?=_('Travel');?></a></li>
-			</ul>
+			<div id="tournament_signup">
+				<?php if(!$this->tournament_model->is_old($tournament)):?>
+					<?php if($this->tournament_model->undeadlined($tournament)):?>
+						<p><?=sprintf(_('The signup deadline for this tournament is %s'), strftime('%A %e, %B %Y', mysql_to_unix($tournament->signup_deadline)));?></p>
+			
+						<?php if($this->tournament_model->is_signed_up($tournament->id, $this->tank_auth->get_user_id())): ?>
+							<form action="/tournament/cancel_sign_up" method="post">
+								<input type="hidden" name="tournament_id" value="<?=$tournament->id;?>" />
+								<input type="hidden" name="player_id" value="<?=$this->tank_auth->get_user_id();?>" />
+								
+								<?=_('You\'re already signed up.');?>
+								
+								<input type="submit" name="submitCancel" value="<?=_('Cancel');?>" />
+							</form>
+						<?php elseif($this->tournament_model->can_sign_up($tournament->id, $this->tank_auth->get_user_id())): ?>
+							<form action="/tournament/sign_up" method="post">
+								<input type="hidden" name="tournament_id" value="<?=$tournament->id;?>" />
+								<input type="hidden" name="player_id" value="<?=$this->tank_auth->get_user_id();?>" />
+								
+								<?=_('You aren\'t signed up yet.');?>
+								
+								<input type="submit" name="submitSignup" value="<?=_('Signup');?>" />
+							</form>
+						<?php endif; ?>
+					<?php else: ?>
+						<p><?=_('The signup deadline for this tournament has already passed, you\'re too late!');?></p>
+					<?php endif; ?>
+				<?php endif; ?>
+			</div>
 		
 			<div id="tournament_notes">
 				<?=$tournament->notes ? markdown($tournament->notes) : '<p>'._('No notes').'</p>'; ?>
 			</div>
-	
-			<div id="travel_details" style="display: none;">
+			
+			<div id="travel_details">
 				<p><a href="/tournament/add_trip_leg/<?=$tournament->id;?>"><?=_('Add trip leg');?></a></p>
-		
+
 				<?php if($trips): ?>
 					<?php foreach(array('way', 'return') as $direction): ?>
 						<?php if(isset($trips[$direction])): ?>
@@ -63,10 +88,10 @@
 										<?php switch($trip->trip_type):
 											case 'car': ?> 
 												<?=sprintf(
-													_('Car from %s to %s, leaving on %s'), 
-													$trip->origin, 
-													$trip->destination, 
-													strftime('%A %e, %B %Y @%R', mysql_to_unix($trip->departure_time)));
+												_('Car from %s to %s, leaving on %s'), 
+												$trip->origin, 
+												$trip->destination, 
+												strftime('%A %e, %B %Y @%R', mysql_to_unix($trip->departure_time)));
 												?>
 												<?php break; ?>
 											<?php default: ?>
@@ -75,15 +100,17 @@
 												<?=strftime('%a %e, %R-', mysql_to_unix($trip->departure_time));?><?=strftime('%R', mysql_to_unix($trip->arrival_time));?>
 												<?php break; ?>
 										<?php endswitch; ?><br />
+	
 										<?=_('On this trip');?>:
 										<?php if($trip->passengers): ?>
 											<?=implode(', ', array_map(function($p){ return $p->username; }, $trip->passengers));?><br />
 										<?php endif; ?>
+	
 										<form action="#" method="post"  class="trip_signup">
 											<input type="hidden" name="tlid" value="<?=$trip->leg_id;?>" />
-							
+
 											<?php if($trip->player_on_it): ?>
-												<input type="submit" name="signoffFromTrip" value="Not going" />
+												<input type="submit" name="signoffFromTrip" value="Not going"
 											<?php else: ?>
 												<input type="submit" name="signupToTrip" value="Going" />
 											<?php endif; ?>
@@ -104,28 +131,6 @@
 				<a href="/tournament/email/<?=$tournament->id;?>">Email team</a> | 
 				<a href="/tournament/edit/<?=$tournament->id;?>">Edit tournament</a>
 			</p>
-		<?php endif; ?>
-		
-		<?php if(!$this->tournament_model->is_old($tournament)):?>
-			<?php if($this->tournament_model->undeadlined($tournament)):?>
-				<p><?=sprintf(_('The signup deadline for this tournament is %s'), strftime('%A %e, %B %Y', mysql_to_unix($tournament->signup_deadline)));?></p>
-			
-				<?php if($this->tournament_model->is_signed_up($tournament->id, $this->tank_auth->get_user_id())): ?>
-					<form action="/tournament/cancel_sign_up" method="post">
-						<input type="hidden" name="tournament_id" value="<?=$tournament->id;?>" />
-						<input type="hidden" name="player_id" value="<?=$this->tank_auth->get_user_id();?>" />
-						<input type="submit" name="submitCancel" value="<?=_('Cancel');?>" />
-					</form>
-				<?php elseif($this->tournament_model->can_sign_up($tournament->id, $this->tank_auth->get_user_id())): ?>
-					<form action="/tournament/sign_up" method="post">
-						<input type="hidden" name="tournament_id" value="<?=$tournament->id;?>" />
-						<input type="hidden" name="player_id" value="<?=$this->tank_auth->get_user_id();?>" />
-						<input type="submit" name="submitSignup" value="<?=_('Signup');?>" />
-					</form>
-				<?php endif; ?>
-			<?php else: ?>
-				<p><?=_('The signup deadline for this tournament has already passed, you\'re too late!');?></p>
-			<?php endif; ?>
 		<?php endif; ?>
 	
 		<h3><?=_('Players confirmed');?></h3>

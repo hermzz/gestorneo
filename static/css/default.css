@@ -61,42 +61,16 @@ a:link, a:visited, a:hover, a:active {
 	position: relative;
 }
 
-#right_column>ul {
-	margin: 0;
-	padding: 0;
-}
-
-#right_column>ul>li {
-	float: left;
-	padding: 5px;
-	background-color: #eee;
-	border-width: 1px;
-	border-color: #ccc;
-	border-style: solid;
-	margin-right: 5px;
-	z-index: 20;
-	position: relative;
-	list-style: none;
-}
-
-#right_column>ul>li>a {
-	color: #000;
-}
-
 #right_column li.active {
 	font-weight: bold;
 	border-bottom-color: #eee;
 }
 
-#tournament_notes, #travel_details {
+#tournament_notes, #tournament_signup, #travel_details {
 	background-color: #eee;
 	border: 1px solid #ccc;
 	padding: 5px 10px;
 	margin: 0 0 10px 0;
-	position: absolute;
-	left: 0;
-	right: 0;
-	top: 26px;
 }
 
 .header-small {
