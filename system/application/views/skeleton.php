@@ -3,8 +3,7 @@
 		<title><?=$title?></title>
 		
 		<link rel="stylesheet" type="text/css" href="<?=base_url();?>/static/css/default.css" />
-		<link href="/static/css/base/ui.base.css" type="text/css" rel="stylesheet" />
-		<link href="/static/css/base/ui.theme.css" type="text/css" rel="stylesheet" />
+		<link href="/static/css/ui-lightness/ui.base.css" type="text/css" rel="stylesheet" />
 		
 		<script src="/static/javascript/jquery.min.js" language="javascript"></script>
 		<script src="/static/javascript/jquery-ui.min.js" language="javascript"></script>
