@@ -2,6 +2,9 @@
 
 <link href="/static/css/base/ui.datepicker.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript">
+	team_ids = [];
+	admin_ids = [];
+	
 	$(document).ready(function(){
 		$("#start_date").datepicker({
 			dateFormat: 'dd/mm/yy',
@@ -18,12 +21,59 @@
 		$("#deadline_date").datepicker({
 			dateFormat: 'dd/mm/yy'
 		});
+		
+		$('input[name="teams_autocomplete"]').autocomplete({
+			source: function(request, response) {
+				$.ajax({
+					url: '/ajax/team_autocomplete',
+					dataType: "jsonp",
+					data: {
+						term: request.term
+					},
+					success: function(data) 
+					{
+						if(data.success)
+						{
+							response($.map(data.results, function(item) 
+							{
+								return {
+									label: item.name,
+									value: item.id
+								}
+							}));
+						} else {
+							console.log('fail');
+						}
+					}
+				});
+			},
+			select: function(event, ui) 
+			{
+				if(team_ids.length > 0)
+				{
+					$('#teams_container').append(', ' + ui.item.label);
+				} else {
+					$('#teams_container').html(ui.item.label);
+				}
+				
+				team_ids.push(ui.item.value);
+			},
+			close: function() {	
+				$('input[name="teams_autocomplete"]').val('');
+			}
+		});
+		
+		$('#tournament_form').submit(function() {
+			$.each(team_ids, function (i, v) {
+				$('#tournament_form').append('<input type="hidden" name="teams[]" value="'+v+'" /'+'>');
+			});
+		});
 	});
 </script>
 
 <?=validation_errors()?>
 
-<form action="#" method="post">
+<form action="#" id="tournament_form" method="post">
     <label for="name"><?=_('Name');?></label>
     <input type="text" id="name" name="name" value="<?=set_value('name');?>" /><br />
 
@@ -43,10 +93,8 @@
     
     <fieldset>
     	<legend><?=_('Teams');?></legend>
-		<?php foreach($teams as $team): ?>
-			<input type="checkbox" id="team-<?=$team->id;?>" name="teams[]" value="<?=$team->id;?>" <?=set_checkbox('teams[]', $team->id);?> />
-			<label for="team-<?=$team->id;?>" class="checkbox"><?=$team->name;?></label><br />
-		<?php endforeach; ?>
+    	<input type="text" name="teams_autocomplete" />
+    	<p id="teams_container">No teams selected</p>
     </fieldset>
     
     <fieldset>

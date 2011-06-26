@@ -49,6 +49,15 @@ class Team_model extends Model
 		
 		return $players->num_rows > 0 ? $players->result() : FALSE;
 	}
+	
+	function search($name)
+	{
+		$query = $this->db->query(
+			'SELECT * FROM teams WHERE name LIKE "%'.$this->db->escape_like_str($name).'%"'
+		);
+		
+		return $query->num_rows > 0 ? $query->result() : FALSE;
+	}
 } 
 
 ?>
