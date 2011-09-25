@@ -164,7 +164,7 @@ class Tournament extends GS_Controller {
 				preg_replace($this->_date_regex, '\3-\2-\1', $this->input->post('end_date')),
 				preg_replace($this->_date_regex, '\3-\2-\1', $this->input->post('deadline_date')),
 				$this->input->post('teams'),
-				$this->input->post('admin_users')
+				$this->input->post('admins')
 			);
 			
 			header('Location: /');
@@ -221,7 +221,7 @@ class Tournament extends GS_Controller {
 				preg_replace($this->_date_regex, '\3-\2-\1', $this->input->post('end_date')),
 				preg_replace($this->_date_regex, '\3-\2-\1', $this->input->post('deadline_date')),
 				$this->input->post('teams'),
-				$this->input->post('admin_users')
+				$this->input->post('admins')
 			);
 			
 			header('Location: /tournament/view/'.$id);

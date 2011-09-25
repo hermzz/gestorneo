@@ -128,6 +128,9 @@
 			$.each(team_ids, function (i, v) {
 				$('#tournament_form').append('<input type="hidden" name="teams[]" value="'+v+'" /'+'>');
 			});
+			$.each(admin_ids, function (i, v) {
+				$('#tournament_form').append('<input type="hidden" name="admins[]" value="'+v+'" /'+'>');
+			});
 		});
 	});
 </script>
