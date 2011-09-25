@@ -3,11 +3,11 @@
 	
 	<p><?=sprintf(_('Member since %s'), strftime('%A %e, %B %Y', mysql_to_unix($player->created)));?></p>
 	
-	<h3><?=_('Tournaments');?></h3>
-	
 	<?php if($this->tank_auth->is_admin(array('player' => $player->id))): ?>
 		<p><a href="/player/edit/<?=$player->id;?>">Edit player</a></p>
 	<?php endif; ?>
+	
+	<h3><?=_('Tournaments');?></h3>
 	
 	<?php if($tournaments): ?>
 		<?php $month_year = false; ?>
