@@ -55,6 +55,15 @@ class Player_model extends Model
 		$query = $this->db->query('SELECT * FROM users WHERE level=?', array('admin'));
 		return $query->num_rows > 0 ? $query->result() : FALSE;
 	}
+	
+	function search($name)
+	{
+		$query = $this->db->query(
+			'SELECT * FROM users WHERE username LIKE "%'.$this->db->escape_like_str($name).'%"'
+		);
+		
+		return $query->num_rows > 0 ? $query->result() : FALSE;
+	}
 }
 
 ?>

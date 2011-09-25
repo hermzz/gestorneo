@@ -62,12 +62,65 @@
 					team_id = $(e.target).parent().attr('class').match(/r-([0-9]+)/)[1];
 					team_ids.splice(team_ids.indexOf(team_id), 1);
 					$(e.target).parent().remove();
+					
+					return false;
 				});
 				
 				team_ids.push(ui.item.value);
 			},
 			close: function() {	
 				$('input[name="teams_autocomplete"]').val('');
+			}
+		});
+		
+		$('input[name="players_autocomplete"]').autocomplete({
+			source: function(request, response) {
+				$.ajax({
+					url: '/ajax/player_autocomplete',
+					dataType: "jsonp",
+					data: {
+						term: request.term
+					},
+					success: function(data) 
+					{
+						if(data.success)
+						{
+							response($.map(data.results, function(item) 
+							{
+								return {
+									label: item.name,
+									value: item.id
+								}
+							}));
+						} else {
+							console.log('fail');
+						}
+					}
+				});
+			},
+			select: function(event, ui) 
+			{
+				if(admin_ids.length > 0)
+				{
+					$('#players_container').append(', ');
+				} else {
+					$('#players_container').html('');
+				}
+				
+				$('#players_container').append('<span class="r-'+ui.item.value+'">'+ui.item.label+' [<a href="#">x</a>]</span>');
+				
+				$('#players_container .r-'+ ui.item.value+' a').click(function (e) {
+					player_id = $(e.target).parent().attr('class').match(/r-([0-9]+)/)[1];
+					admin_ids.splice(admin_ids.indexOf(player_id), 1);
+					$(e.target).parent().remove();
+					
+					return false;
+				});
+				
+				admin_ids.push(ui.item.value);
+			},
+			close: function() {	
+				$('input[name="players_autocomplete"]').val('');
 			}
 		});
 		
@@ -107,12 +160,8 @@
     
     <fieldset>
     	<legend><?=_('Admins');?></legend>
-		<?php foreach($users as $user): ?>
-			<?php if($user->level == 'user'): ?>
-				<input type="checkbox" id="user-<?=$user->id;?>" name="admin_users[]" value="<?=$user->id;?>" <?=set_checkbox('admin_users[]', $user->id);?> />
-				<label for="user-<?=$user->id;?>" class="checkbox"><?=$user->username;?></label><br />
-			<?php endif; ?>
-		<?php endforeach; ?>
+    	<input type="text" name="players_autocomplete" />
+    	<p id="players_container">No players selected</p>
     </fieldset>
 
     <input type="submit" name="submitNewTournament" value="<?=_('Add');?>" />

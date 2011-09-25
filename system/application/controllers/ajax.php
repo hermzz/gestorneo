@@ -19,6 +19,24 @@ class Ajax extends GS_Controller
 			echo $params['callback'].'('.json_encode(array('success' => false, 'message' => _('No results found'))).')';
 		}
 	}
+	
+	function player_autocomplete() 
+	{
+		$url = parse_url($_SERVER['REQUEST_URI']);
+		parse_str($url['query'], $params);
+		$results = $this->player_model->search($params['term']);
+		
+		if($results)
+		{
+			$players = array();
+			foreach($results as $result)
+				$players[] = array('id' => $result->id, 'name' => $result->username);
+			
+			echo $params['callback'].'('.json_encode(array('success' => true, 'results' => $players)).')';
+		} else {
+			echo $params['callback'].'('.json_encode(array('success' => false, 'message' => _('No results found'))).')';
+		}
+	}
 }
 
 ?>
