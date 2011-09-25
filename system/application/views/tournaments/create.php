@@ -49,22 +49,22 @@
 			},
 			select: function(event, ui) 
 			{
-				if(team_ids.length == 0)
+				if($('#teams_container .teams').length == 0)
 				{
 					$('#teams_container').html('');
 				}
 				
-				$('#teams_container').append('<li class="r-'+ui.item.value+'">'+ui.item.label+' [<a href="#">x</a>]</li>');
+				$('#teams_container').append(
+					'<li class="teams r-'+ui.item.value+'">' + ui.item.label + 
+					'<input type="hidden" name="teams[]" value="'+ui.item.value+'" /'+'>' +
+					' [<a href="#">x</a>]</li>'
+				);
 				
 				$('#teams_container .r-'+ ui.item.value+' a').click(function (e) {
-					team_id = $(e.target).parent().attr('class').match(/r-([0-9]+)/)[1];
-					team_ids.splice(team_ids.indexOf(team_id), 1);
 					$(e.target).parent().remove();
 					
 					return false;
 				});
-				
-				team_ids.push(ui.item.value);
 			},
 			close: function() {	
 				$('input[name="teams_autocomplete"]').val('');
@@ -98,35 +98,26 @@
 			},
 			select: function(event, ui) 
 			{
-				if(admin_ids.length == 0)
+				if($('#players_container .teams').length == 0)
 				{
 					$('#players_container').html('');
 				}
 				
-				$('#players_container').append('<li class="r-'+ui.item.value+'">'+ui.item.label+' [<a href="#">x</a>]</li>');
+				$('#players_container').append(
+					'<li class="teams r-'+ui.item.value+'">' + ui.item.label + 
+					'<input type="hidden" name="admins[]" value="'+ui.item.value+'" /'+'>' +
+					' [<a href="#">x</a>]</li>'
+				);
 				
 				$('#players_container .r-'+ ui.item.value+' a').click(function (e) {
-					player_id = $(e.target).parent().attr('class').match(/r-([0-9]+)/)[1];
-					admin_ids.splice(admin_ids.indexOf(player_id), 1);
 					$(e.target).parent().remove();
 					
 					return false;
 				});
-				
-				admin_ids.push(ui.item.value);
 			},
 			close: function() {	
 				$('input[name="players_autocomplete"]').val('');
 			}
-		});
-		
-		$('#tournament_form').submit(function() {
-			$.each(team_ids, function (i, v) {
-				$('#tournament_form').append('<input type="hidden" name="teams[]" value="'+v+'" /'+'>');
-			});
-			$.each(admin_ids, function (i, v) {
-				$('#tournament_form').append('<input type="hidden" name="admins[]" value="'+v+'" /'+'>');
-			});
 		});
 	});
 </script>
