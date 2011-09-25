@@ -2,9 +2,6 @@
 
 <link href="/static/css/base/ui.datepicker.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript">
-	team_ids = [];
-	admin_ids = [];
-	
 	$(document).ready(function(){
 		$("#start_date").datepicker({
 			dateFormat: 'dd/mm/yy',
@@ -98,13 +95,13 @@
 			},
 			select: function(event, ui) 
 			{
-				if($('#players_container .teams').length == 0)
+				if($('#players_container .players').length == 0)
 				{
 					$('#players_container').html('');
 				}
 				
 				$('#players_container').append(
-					'<li class="teams r-'+ui.item.value+'">' + ui.item.label + 
+					'<li class="players r-'+ui.item.value+'">' + ui.item.label + 
 					'<input type="hidden" name="admins[]" value="'+ui.item.value+'" /'+'>' +
 					' [<a href="#">x</a>]</li>'
 				);
