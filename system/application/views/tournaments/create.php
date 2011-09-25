@@ -49,14 +49,12 @@
 			},
 			select: function(event, ui) 
 			{
-				if(team_ids.length > 0)
+				if(team_ids.length == 0)
 				{
-					$('#teams_container').append(', ');
-				} else {
 					$('#teams_container').html('');
 				}
 				
-				$('#teams_container').append('<span class="r-'+ui.item.value+'">'+ui.item.label+' [<a href="#">x</a>]</span>');
+				$('#teams_container').append('<li class="r-'+ui.item.value+'">'+ui.item.label+' [<a href="#">x</a>]</li>');
 				
 				$('#teams_container .r-'+ ui.item.value+' a').click(function (e) {
 					team_id = $(e.target).parent().attr('class').match(/r-([0-9]+)/)[1];
@@ -100,14 +98,12 @@
 			},
 			select: function(event, ui) 
 			{
-				if(admin_ids.length > 0)
+				if(admin_ids.length == 0)
 				{
-					$('#players_container').append(', ');
-				} else {
 					$('#players_container').html('');
 				}
 				
-				$('#players_container').append('<span class="r-'+ui.item.value+'">'+ui.item.label+' [<a href="#">x</a>]</span>');
+				$('#players_container').append('<li class="r-'+ui.item.value+'">'+ui.item.label+' [<a href="#">x</a>]</li>');
 				
 				$('#players_container .r-'+ ui.item.value+' a').click(function (e) {
 					player_id = $(e.target).parent().attr('class').match(/r-([0-9]+)/)[1];
@@ -158,13 +154,17 @@
     <fieldset>
     	<legend><?=_('Teams');?></legend>
     	<input type="text" name="teams_autocomplete" />
-    	<p id="teams_container">No teams selected</p>
+    	<ul id="teams_container">
+    		<li>No teams selected</li>
+    	</ul>
     </fieldset>
     
     <fieldset>
     	<legend><?=_('Admins');?></legend>
     	<input type="text" name="players_autocomplete" />
-    	<p id="players_container">No players selected</p>
+    	<ul id="players_container">
+    		<li>No players selected</li>
+    	</ul>
     </fieldset>
 
     <input type="submit" name="submitNewTournament" value="<?=_('Add');?>" />
