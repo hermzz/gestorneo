@@ -51,10 +51,18 @@
 			{
 				if(team_ids.length > 0)
 				{
-					$('#teams_container').append(', ' + ui.item.label);
+					$('#teams_container').append(', ');
 				} else {
-					$('#teams_container').html(ui.item.label);
+					$('#teams_container').html('');
 				}
+				
+				$('#teams_container').append('<span class="r-'+ui.item.value+'">'+ui.item.label+' [<a href="#">x</a>]</span>');
+				
+				$('#teams_container .r-'+ ui.item.value+' a').click(function (e) {
+					team_id = $(e.target).parent().attr('class').match(/r-([0-9]+)/)[1];
+					team_ids.splice(team_ids.indexOf(team_id), 1);
+					$(e.target).parent().remove();
+				});
 				
 				team_ids.push(ui.item.value);
 			},
