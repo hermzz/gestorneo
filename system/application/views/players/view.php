@@ -4,7 +4,15 @@
 	<p><?=sprintf(_('Member since %s'), strftime('%A %e, %B %Y', mysql_to_unix($player->created)));?></p>
 	
 	<?php if($this->tank_auth->is_admin(array('player' => $player->id))): ?>
-		<p><a href="/player/edit/<?=$player->id;?>">Edit player</a></p>
+		<p><a href="/player/edit/<?=$player->id;?>">Edit player</a>
+		<?php if($this->tank_auth->is_admin()): ?> |
+			<?php if($player->activated): ?>
+				<a href="/player/disable/<?=$player->id;?>">Disable player</a>
+			<?php else: ?>
+				<a href="/player/enable/<?=$player->id;?>">Enable player</a>
+			<?php endif; ?>
+		<?php endif; ?>
+		</p>
 	<?php endif; ?>
 	
 	<h3><?=_('Tournaments');?></h3>

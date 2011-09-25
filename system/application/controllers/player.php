@@ -13,7 +13,8 @@ class Player extends GS_Controller {
 	function index()
 	{
 		$this->data['title'] = _("Players");
-		$this->data['players'] = $this->player_model->getAll();
+		$this->data['active_players'] = $this->player_model->getAll();
+		$this->data['old_players'] = $this->player_model->getAll(false);
 		
 		$this->data['content_view'] = 'players/index';
 		$this->load->view('skeleton', $this->data);
@@ -67,6 +68,26 @@ class Player extends GS_Controller {
 			
 			header('Location: /player/view/'.$id);
 		}
+	}
+	
+	function disable($player_id)
+	{
+		if(!$this->tank_auth->is_admin())
+			header('Location: /');
+		
+		$this->player_model->disable($player_id);
+			
+		header('Location: /player/view/'.$player_id);
+	}
+	
+	function enable($player_id)
+	{
+		if(!$this->tank_auth->is_admin())
+			header('Location: /');
+		
+		$this->player_model->enable($player_id);
+			
+		header('Location: /player/view/'.$player_id);
 	}
 }
 	

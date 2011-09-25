@@ -9,9 +9,18 @@ class Player_model extends Model
 		return $query->num_rows > 0 ? $query->row() : FALSE;
 	}
 	
-	function getAll()
+	function getAll($active=true)
 	{
-		$players = $this->db->query('SELECT * FROM users ORDER BY username ASC');
+		$players = $this->db->query(
+			'SELECT 
+				* 
+			FROM 
+				users 
+			WHERE
+				activated='.($active ? '1' : '0').'
+			ORDER BY 
+				username ASC'
+		);
 		
 		return $players->num_rows > 0 ? $players->result() : FALSE;
 	}
@@ -63,6 +72,16 @@ class Player_model extends Model
 		);
 		
 		return $query->num_rows > 0 ? $query->result() : FALSE;
+	}
+	
+	function disable($id)
+	{
+		$this->db->query('UPDATE users SET activated=0 WHERE id=?', array($id));
+	}
+	
+	function enable($id)
+	{
+		$this->db->query('UPDATE users SET activated=1 WHERE id=?', array($id));
 	}
 }
 
