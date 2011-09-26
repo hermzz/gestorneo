@@ -122,6 +122,23 @@ class Users extends Model
 	}
 
 	/**
+	 * Check if email has been preregistered
+	 *
+	 * @param	string
+	 * @return	bool
+	 */
+	function is_email_preregistered($email)
+	{
+		$this->db->select('1', FALSE);
+		$this->db->where('password', '');
+		$this->db->where('LOWER(email)=', strtolower($email));
+		$this->db->or_where('LOWER(new_email)=', strtolower($email));
+
+		$query = $this->db->get(self::TABLE);
+		return $query->num_rows() > 0;
+	}
+
+	/**
 	 * Create new user record
 	 *
 	 * @param	array

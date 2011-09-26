@@ -5,6 +5,8 @@ $lang['auth_incorrect_password'] = 'Incorrect password';
 $lang['auth_incorrect_login'] = 'Incorrect login';
 $lang['auth_incorrect_email_or_username'] = 'Login or email doesn\'t exist';
 $lang['auth_email_in_use'] = 'Email is already used by another user. Please choose another email.';
+$lang['auth_account_preregistered'] = 'Your account has been created beforehand, <a href="/auth/finish_preregistering">click here to set your password and continue</a>';
+$lang['auth_account_not_preregistered'] = 'The email you\'ve entered does not correspond to an existing account, make sure you typed the same one as in the previous step.';
 $lang['auth_username_in_use'] = 'Username already exists. Please choose another username.';
 $lang['auth_current_email'] = 'This is your current email';
 $lang['auth_incorrect_captcha'] = 'Your confirmation code does not match the one in the image.';

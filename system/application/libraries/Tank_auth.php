@@ -197,7 +197,12 @@ class Tank_auth
 			$this->error = array('username' => 'auth_username_in_use');
 
 		} elseif (!$this->ci->users->is_email_available($email)) {
-			$this->error = array('email' => 'auth_email_in_use');
+			if($this->ci->users->is_email_preregistered($email))
+			{
+				$this->error = array('email' => 'auth_account_preregistered');
+			} else {
+				$this->error = array('email' => 'auth_email_in_use');
+			}
 
 		} else {
 			// Hash password using phpass
@@ -226,6 +231,33 @@ class Tank_auth
 	}
 
 	/**
+	 * Set password for an unregistered user, thus making them registered
+	 *
+
+	 * @param	string
+	 * @param	string
+
+	 * @return	array
+	 */
+	function finish_registering_user($email, $password)
+	{
+		if(!$this->ci->users->is_email_preregistered($email))
+		{
+			$this->error = array('email' => 'auth_account_not_preregistered');
+		} else {
+			// Hash password using phpass
+			$hasher = new PasswordHash(PHPASS_HASH_STRENGTH, PHPASS_HASH_PORTABLE);
+			$hashed_password = $hasher->HashPassword($password);
+			
+			$user = $this->ci->users->get_user_by_email($email);
+			$this->ci->users->change_password($user->id, $hashed_password);
+			
+			return $user;
+		}
+		return NULL;
+	}
+
+	/**
 	 * Check if username available for registering.
 	 * Can be called for instant form validation.
 	 *
@@ -247,6 +279,18 @@ class Tank_auth
 	function is_email_available($email)
 	{
 		return ((strlen($email) > 0) AND $this->ci->users->is_email_available($email));
+	}
+
+	/**
+	 * Check if email has been used in a preregistered account
+	 * Can be called for instant form validation.
+	 *
+	 * @param	string
+	 * @return	bool
+	 */
+	function is_email_preregistered($email)
+	{
+		return ((strlen($email) > 0) AND $this->ci->users->is_email_preregistered($email));
 	}
 
 	/**
