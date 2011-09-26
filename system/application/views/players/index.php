@@ -5,7 +5,7 @@
 <?php endif; ?>
 
 <?php if(count($active_players) > 0): ?>
-	<h3>Active</h3>
+	<h3><?=_('Active');?></h3>
 	<ul>
 		<?php foreach($active_players as $player): ?>
 			<li><a href="<?=site_url('/player/view/'.$player->id)?>">
@@ -18,7 +18,7 @@
 <?php endif; ?>
 
 <?php if(count($old_players) > 0): ?>
-	<h3>The exes</h3>
+	<h3><?=_('The exes');?></h3>
 	<ul>
 		<?php foreach($old_players as $player): ?>
 			<li><a href="<?=site_url('/player/view/'.$player->id)?>">

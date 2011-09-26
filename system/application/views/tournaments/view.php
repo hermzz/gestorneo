@@ -126,8 +126,8 @@
 	<div id="left_column">
 		<?php if($is_tournament_admin): ?>
 			<p>
-				<a href="/tournament/email/<?=$tournament->id;?>">Email team</a> | 
-				<a href="/tournament/edit/<?=$tournament->id;?>">Edit tournament</a>
+				<a href="/tournament/email/<?=$tournament->id;?>"><?=_('Email team');?></a> | 
+				<a href="/tournament/edit/<?=$tournament->id;?>"><?=_('Edit tournament');?></a>
 			</p>
 		<?php endif; ?>
 	

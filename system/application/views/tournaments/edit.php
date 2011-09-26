@@ -160,7 +160,7 @@
 					<?php endif; ?>
 				<?php endforeach; ?>
     		<?php else: ?>
-	    		<li>No teams selected</li>
+	    		<li><?=_('No teams selected');?></li>
 	    	<?php endif; ?>
     	</ul>
     </fieldset>
@@ -180,7 +180,7 @@
 					<?php endif; ?>
 				<?php endforeach; ?>
     		<?php else: ?>
-	    		<li>No players selected</li>
+	    		<li><?=_('No players selected');?></li>
 	    	<?php endif; ?>
     	</ul>
     </fieldset>

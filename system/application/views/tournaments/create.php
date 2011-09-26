@@ -143,7 +143,7 @@
     	<legend><?=_('Teams');?></legend>
     	<input type="text" name="teams_autocomplete" />
     	<ul id="teams_container">
-    		<li>No teams selected</li>
+    		<li><?=_('No teams selected');?></li>
     	</ul>
     </fieldset>
     
@@ -151,7 +151,7 @@
     	<legend><?=_('Admins');?></legend>
     	<input type="text" name="players_autocomplete" />
     	<ul id="players_container">
-    		<li>No players selected</li>
+    		<li><?=_('No players selected');?></li>
     	</ul>
     </fieldset>
 
