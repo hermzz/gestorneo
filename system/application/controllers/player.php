@@ -35,6 +35,35 @@ class Player extends GS_Controller {
 		$this->load->view('skeleton', $this->data);
 	}
 	
+	function create()
+	{
+		if(!$this->tank_auth->is_admin())
+			header('Location: /');
+		
+		$this->load->helper(array('form', 'url'));
+		$this->load->library('form_validation');
+		
+		$this->data['title'] = _('New player');
+		
+		$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean|min_length['.$this->config->item('username_min_length', 'tank_auth').']|max_length['.$this->config->item('username_max_length', 'tank_auth').']');
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email');
+		$this->form_validation->set_rules('sex', 'Sex', 'required|xss_clean');
+		
+		if($this->form_validation->run() == FALSE)
+		{
+			$this->data['content_view'] = 'players/create';
+			$this->load->view('skeleton', $this->data);
+		} else {
+			$id = $this->player_model->create(
+				$this->input->post('username'),
+				$this->input->post('email'),
+				$this->input->post('sex')
+			);
+			
+			header('Location: /player/view/'.$id);
+		}
+	}
+	
 	function edit($id)
 	{
 		if(!$this->tank_auth->is_admin(array('player' => $id)))

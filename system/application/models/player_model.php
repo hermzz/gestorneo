@@ -25,6 +25,14 @@ class Player_model extends Model
 		return $players->num_rows > 0 ? $players->result() : FALSE;
 	}
 	
+	function create($username, $email, $sex)
+	{
+		$this->db->query('INSERT INTO users (username, email, sex, created) VALUES (?, ?, ?, NOW())', 
+			array($username, $email, $sex));
+			
+		 return $this->db->insert_id();
+	}
+	
 	function edit($id, $username, $email, $password, $sex)
 	{
 		$this->db->query('UPDATE users SET username=?, email=?, sex=? WHERE id=?',
