@@ -1,5 +1,9 @@
 <h2><?=_('Players');?></h2>
 
+<?php if($this->tank_auth->is_admin()): ?>
+	<p><a href="/player/create">New player</a></p>
+<?php endif; ?>
+
 <?php if(count($active_players) > 0): ?>
 	<h3>Active</h3>
 	<ul>
