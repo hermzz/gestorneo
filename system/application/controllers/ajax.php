@@ -37,6 +37,16 @@ class Ajax extends GS_Controller
 			echo $params['callback'].'('.json_encode(array('success' => false, 'message' => _('No results found'))).')';
 		}
 	}
+	
+	function invite_player_to_tournament()
+	{
+		$url = parse_url($_SERVER['REQUEST_URI']);
+		parse_str($url['query'], $params);
+		
+		$this->tournament_model->add_player($params['tid'], $params['pid']);
+		
+		echo $params['callback'].'('.json_encode(array('success' => true)).')';
+	}
 }
 
 ?>

@@ -1,5 +1,8 @@
 <?php if($tournament): ?>
 	<script type="text/javascript">
+		var last_values = false;
+		var tournament_id = <?=$tournament->id;?>;
+		
 		$(document).ready(function() {
 			$('form.approve_player select').change(function(e) {
 				$(e.target).parent().submit();
@@ -22,6 +25,82 @@
 				$('#td_toggle').attr('class', 'active');
 				$('#tn_toggle').attr('class', '');
 				
+				return false;
+			});
+			
+			$('#include_player_dialog').dialog({
+				autoOpen: false,
+				modal: true,
+				close: function() { location.reload(); }
+			});
+			
+			$('#include_player').click(function() {
+				$('#include_player_dialog').dialog('open');
+			});
+			
+			$('input[name="player_autocomplete"]').autocomplete({
+				source: function(request, response) {
+					$.ajax({
+						url: '/ajax/player_autocomplete',
+						dataType: "jsonp",
+						data: {
+							term: request.term
+						},
+						success: function(data) 
+						{
+							if(data.success)
+							{
+								response($.map(data.results, function(item) 
+								{
+									return {
+										label: item.name,
+										value: item.id
+									}
+								}));
+							} else {
+								console.log('fail');
+							}
+						}
+					});
+				},
+				open: function(event, ui) 
+				{
+					last_values = false; 
+					$('input[name="add_player"]').attr('disabled', 'disabled');
+				
+				},
+				select: function(event, ui) { 
+					last_values = ui.item; 
+					$('input[name="add_player"]').attr('disabled', false);
+				},
+				close: function(event, ui) {
+					$('input[name="player_autocomplete"]').val(last_values.label);
+				}
+			});
+			
+			
+			$('#include_player_dialog form').submit(function() {
+				$.ajax({
+					url: '/ajax/invite_player_to_tournament',
+					dataType: "jsonp",
+					data: {
+						tid: tournament_id,
+						pid: last_values.value
+					},
+					success: function(data) 
+					{
+						if(data.success)
+						{
+							$('#include_player_dialog p').html('Success!');
+							$('input[name="player_autocomplete"]').val('');
+							last_values = false;
+							$('input[name="add_player"]').attr('disabled', false);
+						} else {
+							$('#include_player_dialog p').html('Dang it, something failed.');
+						}
+					}
+				});
+			
 				return false;
 			});
 		});
@@ -127,7 +206,8 @@
 		<?php if($is_tournament_admin): ?>
 			<p>
 				<a href="/tournament/email/<?=$tournament->id;?>"><?=_('Email team');?></a> | 
-				<a href="/tournament/edit/<?=$tournament->id;?>"><?=_('Edit tournament');?></a>
+				<a href="/tournament/edit/<?=$tournament->id;?>"><?=_('Edit tournament');?></a> |
+				<a href="#" id="include_player"><?=_('Include player');?></a>
 			</p>
 		<?php endif; ?>
 	
@@ -199,6 +279,16 @@
 		<?php else: ?>
 			<p><?=_('No one\'s been left out, yay!');?></p>
 		<?php endif; ?>
+	</div>
+	
+	<div id="include_player_dialog">
+		<form action="#" method="post">
+			<input type="text" name="player_autocomplete" />
+			
+			<input type="submit" name="add_player" value="<?=_('Add');?>" disabled="disabled" />
+			
+			<p></p>
+		</form>
 	</div>
 	
 <?php else: ?>
