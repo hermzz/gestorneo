@@ -93,7 +93,7 @@ label {
 	line-height: 2em;
 }
 
-label.checkbox {
+label.checkbox, label.radio {
 	width: auto;
 	float: none;
 	text-align: left;
