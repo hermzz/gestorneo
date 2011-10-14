@@ -462,6 +462,45 @@ class Tournament extends GS_Controller {
 			header('Location: /tournament/view/'.$id);
 		}
 	}
+	
+	function payments($id)
+	{
+		if(!$this->tank_auth->is_admin())
+			header('Location: /');
+			
+		$tournament = $this->tournament_model->get($id);
+		
+		$this->data['tournament'] = $tournament;
+		$raw_payments = $this->tournament_model->getPayments($tournament->id);
+		
+		// group by player
+		$payments = array();
+		foreach($raw_payments as $raw_payment)
+		{
+			if(!isset($payments[$raw_payment->id]['player']))
+				$payments[$raw_payment->id] = array(
+					'player' => $this->player_model->get($raw_payment->id),
+					'payments' => array(),
+					'totals' => array('owes' => 0, 'paid' => 0)
+				);
+				
+			$payments[$raw_payment->id]['payments'][] = array(
+				'tpid' => $raw_payment->tpid,
+				'concept' => $raw_payment->concept,
+				'amount' => $raw_payment->amount,
+				'paid' => $raw_payment->paid
+			);
+			
+			$payments[$raw_payment->id]['totals']['owes'] += $raw_payment->amount;
+			$payments[$raw_payment->id]['totals']['paid'] += $raw_payment->paid;
+		}
+		
+		$this->data['payment_details'] = $payments;
+		$this->data['title'] = _('Tournament payments');
+		$this->data['content_view'] = 'tournaments/payments';
+		
+		$this->load->view('skeleton', $this->data);
+	}
 }
 
 ?>

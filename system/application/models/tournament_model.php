@@ -240,6 +240,38 @@ class Tournament_model extends Model
 			
 		return $query->num_rows ? $query->result() : array();
 	}
+	
+	function addPayment($tournament_id, $concept, $amount, $applies, $pids)
+	{
+		$players = $this->getPlayers($tournament_id);
+		foreach($players as $player)
+		{
+			$this->db->query('INSERT INTO tournament_payments (tid, pid, concept, amount) VALUES (?, ?, ?, ?)',
+				array($tournament_id, $player->id, $concept, $amount));
+		}
+	}
+	
+	function getPayments($tournament_id)
+	{
+		$query = $this->db->query(
+			'SELECT
+				*
+			FROM
+				tournament_payments AS tp,
+				users AS u
+			WHERE 
+				tp.pid = u.id
+			ORDER BY
+				u.username ASC'
+		);
+		
+		return $query->num_rows ? $query->result() : array();
+	}
+	
+	function editPayment($tpid, $amount)
+	{
+		$this->db->query('UPDATE tournament_payments SET paid=? WHERE tpid=?', array($amount, $tpid));
+	}
 }
 
 ?>

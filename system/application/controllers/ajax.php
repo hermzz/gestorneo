@@ -47,6 +47,31 @@ class Ajax extends GS_Controller
 		
 		echo $params['callback'].'('.json_encode(array('success' => true)).')';
 	}
+	
+	function add_payments()
+	{
+		$this->tournament_model->addPayment(
+			$this->input->post('tid'),
+			$this->input->post('concept'),
+			$this->input->post('amount'),
+			$this->input->post('applies'),
+			$this->input->post('pids[]')
+		);
+		
+		$url = parse_url($_SERVER['REQUEST_URI']);
+		parse_str($url['query'], $params);
+		echo $params['callback'].'('.json_encode(array('success' => true)).')';
+	}
+	
+	function edit_payment()
+	{
+		$this->tournament_model->editPayment(
+			str_replace('player-', '', $this->input->post('element_id')),
+			$this->input->post('update_value')
+		);
+		
+		echo $this->input->post('update_value');
+	}
 }
 
 ?>

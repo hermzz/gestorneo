@@ -206,7 +206,8 @@
 		<?php if($is_tournament_admin): ?>
 			<p>
 				<a href="/tournament/email/<?=$tournament->id;?>"><?=_('Email team');?></a> | 
-				<a href="/tournament/edit/<?=$tournament->id;?>"><?=_('Edit tournament');?></a> |
+				<a href="/tournament/edit/<?=$tournament->id;?>"><?=_('Edit');?></a> |
+				<a href="/tournament/payments/<?=$tournament->id;?>"><?=_('Payments');?></a> |
 				<a href="#" id="include_player"><?=_('Include player');?></a>
 			</p>
 		<?php endif; ?>
