@@ -3,11 +3,12 @@
 		<title><?=$title?></title>
 		
 		<link rel="stylesheet" type="text/css" href="<?=base_url();?>/static/css/default.css" />
-		<link href="/static/css/ui-lightness/ui.base.css" type="text/css" rel="stylesheet" />
+		<link href="<?=base_url();?>/static/css/ui-lightness/ui.base.css" type="text/css" rel="stylesheet" />
 		
-		<script src="/static/javascript/jquery.min.js" language="javascript"></script>
-		<script src="/static/javascript/jquery-ui.min.js" language="javascript"></script>
-		<script src="/static/javascript/jquery.cookie.js" language="javascript"></script>
+		<script src="<?=base_url();?>/static/javascript/jquery.min.js" language="javascript"></script>
+		<script src="<?=base_url();?>/static/javascript/jquery-ui.min.js" language="javascript"></script>
+		<script src="<?=base_url();?>/static/javascript/jquery.cookie.js" language="javascript"></script>
+		<script src="<?=base_url();?>/static/javascript/jquery.editinplace.js" language="javascript"></script>
 		
 		<script>
 		$(document).ready(function() {

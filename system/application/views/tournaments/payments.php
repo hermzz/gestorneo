@@ -1,6 +1,5 @@
 <h2><?=_('Tournament payments')?></h2>
 
-<script src="/static/javascript/jquery.editinplace.js" language="javascript"></script>
 <script type="text/javascript">
 	$(document).ready(function (){
 		$('#new_payment_dialog').dialog({
