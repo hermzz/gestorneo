@@ -1,5 +1,12 @@
 <?php if($this->tank_auth->is_admin()): ?>
-	<p><?=_('Add a <a href="/tournament/create/">new tournament</a>');?></p>
+	<ul class="tabs">
+		<li class="dropdown pull-right" data-dropdown="dropdown">
+			<a href="#" class="dropdown-toggle">Admin</a>
+			<ul class="dropdown-menu">
+				<li><a href="/tournament/create/"><?=_('New tournament');?></a></li>
+			</ul>
+		</li>
+	</ul>
 <?php endif; ?>
 
 <h2><?=_('Upcoming tournaments');?></h2>
