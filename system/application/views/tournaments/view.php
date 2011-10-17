@@ -125,7 +125,27 @@
 	<?php endif; ?>
 	
 	<h1>
-		<?=sprintf(_('%s <span class="header-small">on %s</span>'), $tournament->name, strftime('%A %e, %B %Y', mysql_to_unix($tournament->start_date)));?>
+		<?=sprintf(_('%s <span class="header_small">on %s</span>'), $tournament->name, strftime('%A %e, %B %Y', mysql_to_unix($tournament->start_date)));?>
+		
+		<?php if(!$this->tournament_model->is_old($tournament)):?>
+			<?php if($this->tournament_model->undeadlined($tournament)):?>
+				<?php if($this->tournament_model->is_signed_up($tournament->id, $this->tank_auth->get_user_id())): ?>
+					<form action="/tournament/cancel_sign_up" method="post" class="pull-right">
+						<input type="hidden" name="tournament_id" value="<?=$tournament->id;?>" />
+						<input type="hidden" name="player_id" value="<?=$this->tank_auth->get_user_id();?>" />
+				
+						<input type="submit" name="submitCancel" class="btn danger" value="<?=_('Not going');?>" />
+					</form>
+				<?php elseif($this->tournament_model->can_sign_up($tournament->id, $this->tank_auth->get_user_id())): ?>
+					<form action="/tournament/sign_up" method="post" class="pull-right">
+						<input type="hidden" name="tournament_id" value="<?=$tournament->id;?>" />
+						<input type="hidden" name="player_id" value="<?=$this->tank_auth->get_user_id();?>" />
+				
+						<input type="submit" name="submitSignup" class="btn success" value="<?=_('I want to go!');?>" />
+					</form>
+				<?php endif; ?>
+			<?php endif; ?>
+		<?php endif; ?>
 	</h1>
 	
 	<div class="row">
@@ -142,7 +162,7 @@
 								<li class="<?=$k % 2 ? 'even': 'odd';?>">
 								<a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
 									<?php if($is_tournament_admin && !$this->tournament_model->is_old($tournament)): ?>
-										<a class="admin_controls" href="/tournament/drop_player/<?=$tournament->id;?>/<?=$player->id;?>"><?=_('Drop');?></a>
+										<a class="admin_controls pull-right" href="/tournament/drop_player/<?=$tournament->id;?>/<?=$player->id;?>"><?=_('Drop');?></a>
 									<?php endif; ?>
 								</li>
 							<?php endforeach; ?>
@@ -160,8 +180,8 @@
 						<li class="<?=$k % 2 ? 'even': 'odd';?>">
 						<a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
 							<?php if($is_tournament_admin && !$this->tournament_model->is_old($tournament)): ?>
-								 <form class="approve_player admin_controls" action="/tournament/approve_player/<?=$tournament->id;?>/<?=$player->id;?>" method="post">
-								 	<select name="team_id">
+								 <form class="approve_player admin_controls pull-right" action="/tournament/approve_player/<?=$tournament->id;?>/<?=$player->id;?>" method="post">
+								 	<select name="team_id" class="input-small">
 								 		<option value="0"><?=_('no team');?></value>
 										 <?php foreach($teams as $team): ?>
 										 	<option value="<?=$team->id;?>"><?=$team->name;?></option>
@@ -182,8 +202,8 @@
 						<li class="<?=$k % 2 ? 'even': 'odd';?>">
 							<a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
 							<?php if($is_tournament_admin && !$this->tournament_model->is_old($tournament)): ?>
-								 <form class="approve_player admin_controls" action="/tournament/approve_player/<?=$tournament->id;?>/<?=$player->id;?>" method="post">
-								 	<select name="team_id">
+								 <form class="approve_player admin_controls pull-right" action="/tournament/approve_player/<?=$tournament->id;?>/<?=$player->id;?>" method="post">
+								 	<select name="team_id" class="input-small">
 								 		<option value="invalid"><?=_('Assign to');?></value>
 										 <?php foreach($teams as $team): ?>
 										 	<option value="<?=$team->id;?>"><?=$team->name;?></option>
@@ -203,38 +223,8 @@
 		<div class="span8">
 			<div id="tournament_notes">
 				<?=$tournament->notes ? markdown($tournament->notes) : '<p>'._('No notes').'</p>'; ?>
-			</div>
-	
-			<div id="tournament_signup">
-				<?php if(!$this->tournament_model->is_old($tournament)):?>
-					<?php if($this->tournament_model->undeadlined($tournament)):?>
-						<p><?=sprintf(_('The signup deadline for this tournament is %s'), strftime('%A %e, %B %Y', mysql_to_unix($tournament->signup_deadline)));?></p>
-		
-						<?php if($this->tournament_model->is_signed_up($tournament->id, $this->tank_auth->get_user_id())): ?>
-							<form action="/tournament/cancel_sign_up" method="post">
-								<input type="hidden" name="tournament_id" value="<?=$tournament->id;?>" />
-								<input type="hidden" name="player_id" value="<?=$this->tank_auth->get_user_id();?>" />
-							
-								<p><?=_('You\'re already signed up.');?></p>
-							
-								<input type="submit" name="submitCancel" class="btn danger" value="<?=_('Cancel');?>" />
-							</form>
-						<?php elseif($this->tournament_model->can_sign_up($tournament->id, $this->tank_auth->get_user_id())): ?>
-							<form action="/tournament/sign_up" method="post">
-								<input type="hidden" name="tournament_id" value="<?=$tournament->id;?>" />
-								<input type="hidden" name="player_id" value="<?=$this->tank_auth->get_user_id();?>" />
-							
-								<p><?=_('You aren\'t signed up yet.');?></p>
-							
-								<input type="submit" name="submitSignup" class="btn success" value="<?=_('Signup');?>" />
-							</form>
-						<?php endif; ?>
-					<?php else: ?>
-						<p class="alert-message warning"><?=_('The signup deadline for this tournament has already passed, you\'re too late!');?></p>
-					<?php endif; ?>
-				<?php else: ?>
-					<p class="alert-message warning"><?=_('This tournament has already passed');?></p>
-				<?php endif; ?>
+				
+				<p><?=sprintf(_('The signup deadline for this tournament is %s'), strftime('%A %e, %B %Y', mysql_to_unix($tournament->signup_deadline)));?></p>
 			</div>
 		
 			<div id="travel_details">
@@ -286,10 +276,6 @@
 			</div>
 		</div>
 	</div>
-			
-			
-	
-		
 	
 	<div id="include_player_dialog">
 		<form action="#" method="post">

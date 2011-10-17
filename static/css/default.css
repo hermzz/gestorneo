@@ -9,3 +9,36 @@ body {
 	padding: 5px;
 	margin-bottom: 5px;
 }
+
+.header_small {
+	font-size: 0.7em;
+	color: #666;
+}
+
+.signup_form {
+	float: left;
+	display: inline;
+}
+
+.player_list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.player_list li {
+	padding: 3px;
+	line-height: 2em;
+}
+
+.player_list li form {
+	margin-bottom: 0px;
+}
+
+.odd { 
+	background-color: #ddd;
+}
+
+.odd select {
+	background-color: #fff;
+}
