@@ -1,5 +1,6 @@
 body {
 	padding-top: 60px !important;
+	margin-bottom: 0 !important;
 }
 
 #tournament_notes, #tournament_signup, #travel_details {
@@ -41,4 +42,8 @@ body {
 
 .odd select {
 	background-color: #fff;
+}
+
+#footer {
+	color: #999;
 }

@@ -44,15 +44,10 @@
 					</div>
 				</div>
 			</div>
-
+			
 			<footer>
 				<?php $this->load->view('footer'); ?>
 			</footer>
-
-		</div> 
-		
-		<div id="footer">
-			
 		</div>
 	</body>
 </html>
