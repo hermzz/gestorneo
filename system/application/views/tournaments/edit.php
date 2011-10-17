@@ -130,60 +130,95 @@
 <?=validation_errors()?>
 
 <form action="#" method="post">
-    <label for="name"><?=_('Name');?></label>
-    <input type="text" id="name" name="name" value="<?=set_value('name', $tournament->name);?>" /><br />
+	<fieldset>
+		<div class="clearfix">
+			<label for="name"><?=_('Name');?></label>
+			<div class="input">
+				<input type="text" id="name" name="name" class="span6" value="<?=set_value('name', $tournament->name);?>" />
+			</div>
+		</div>
 
-    <label for="start_date"><?=_('Start date');?></label>
-    <input type="text" id="start_date" name="start_date" value="<?=set_value('start_date', strftime('%d/%m/%Y', mysql_to_unix($tournament->start_date)));?>" /><br />
+		<div class="clearfix">
+			<label for="start_date"><?=_('Start date');?></label>
+			<div class="input">
+				<input type="text" id="start_date" name="start_date" class="span2" value="<?=set_value('start_date', strftime('%d/%m/%Y', mysql_to_unix($tournament->start_date)));?>" />
+			</div>
+		</div>	
 
-    <label for="end_date"><?=_('End date');?></label>
-    <input type="text" id="end_date" name="end_date" value="<?=set_value('end_date', strftime('%d/%m/%Y', mysql_to_unix($tournament->end_date)));?>" /><br />
+		<div class="clearfix">
+			<label for="end_date"><?=_('End date');?></label>
+			<div class="input">
+				<input type="text" id="end_date" name="end_date" class="span2" value="<?=set_value('end_date', strftime('%d/%m/%Y', mysql_to_unix($tournament->end_date)));?>" />
+			</div>
+		</div>	
 
-    <label for="deadline_date"><?=_('Signup deadline');?></label>
-    <input type="text" id="deadline_date" name="deadline_date" value="<?=set_value('deadline_date', strftime('%d/%m/%Y', mysql_to_unix($tournament->signup_deadline)));?>" /><br />
-    
-    <label for="notes"><?=_('Notes');?></label>
-    <textarea id="notes" name="notes" rows="20" cols="60"><?=set_value('notes', $tournament->notes);?></textarea><br />
+		<div class="clearfix">
+			<label for="deadline_date"><?=_('Signup deadline');?></label>
+			<div class="input">
+				<input type="text" id="deadline_date" name="deadline_date" class="span2" value="<?=set_value('signup_date', strftime('%d/%m/%Y', mysql_to_unix($tournament->signup_deadline)));?>" />
+			</div>
+		</div>	
+
+		<div class="clearfix">
+			<label for="notes"><?=_('Notes');?></label>
+			<div class="input">
+				<textarea id="notes" name="notes" rows="8" cols="60" class="span12"><?=set_value('notes', $tournament->notes);?></textarea>
+				<p><a href="/misc/page/markdown_help" target="_blank"><?=_('markdown help');?></a></p>
+			</div>
+		</div>
+	</fieldset>
     
     <fieldset>
     	<legend><?=_('Teams');?></legend>
-    	<input type="text" name="teams_autocomplete" />
-    	<ul id="teams_container">
-    		<?php if($teams): ?>
-    			<?php foreach($teams as $team): ?>
-    				<?php if(in_array($team->id, $selected_teams)): ?>
-    					<li class="teams r-<?=$team->id;?>">
-    						<?=$team->name;?>
-							<input type="hidden" name="teams[]" value="<?=$team->id;?>" />
-							[<a href="#">x</a>]
-						</li>
+    	
+    	<div class="clearfix">
+			<div class="input">
+				<input type="text" name="teams_autocomplete" />
+				
+				<ul id="teams_container">
+    				<?php if($teams): ?>
+						<?php foreach($teams as $team): ?>
+							<?php if(in_array($team->id, $selected_teams)): ?>
+								<li class="teams r-<?=$team->id;?>">
+									<?=$team->name;?>
+									<input type="hidden" name="teams[]" value="<?=$team->id;?>" />
+									[<a href="#">x</a>]
+								</li>
+							<?php endif; ?>
+						<?php endforeach; ?>
+					<?php else: ?>
+						<li><?=_('No teams selected');?></li>
 					<?php endif; ?>
-				<?php endforeach; ?>
-    		<?php else: ?>
-	    		<li><?=_('No teams selected');?></li>
-	    	<?php endif; ?>
-    	</ul>
+		    	</ul>
+			</div>
+		</div>
     </fieldset>
     
     <fieldset>
     	<legend><?=_('Admins');?></legend>
-    	<input type="text" name="players_autocomplete" />
-    	<ul id="players_container">
-    		<?php if($users): ?>
-    			<?php foreach($users as $user): ?>
-    				<?php if(in_array($user->id, $tournament_admins)): ?>
-    					<li class="players r-<?=$user->id;?>">
-    						<?=$user->username;?>
-							<input type="hidden" name="admins[]" value="<?=$user->id;?>" />
-							[<a href="#">x</a>]
-						</li>
+    	
+    	<div class="clearfix">
+			<div class="input">
+				<input type="text" name="players_autocomplete" />
+				
+				<ul id="players_container">
+					<?php if($users): ?>
+						<?php foreach($users as $user): ?>
+							<?php if(in_array($user->id, $tournament_admins)): ?>
+								<li class="players r-<?=$user->id;?>">
+									<?=$user->username;?>
+									<input type="hidden" name="admins[]" value="<?=$user->id;?>" />
+									[<a href="#">x</a>]
+								</li>
+							<?php endif; ?>
+						<?php endforeach; ?>
+					<?php else: ?>
+						<li><?=_('No players selected');?></li>
 					<?php endif; ?>
-				<?php endforeach; ?>
-    		<?php else: ?>
-	    		<li><?=_('No players selected');?></li>
-	    	<?php endif; ?>
-    	</ul>
+				</ul>
+			</div>
+		</div>
     </fieldset>
 
-    <input type="submit" name="submitNewTournament" value="<?=_('Edit');?>" />
+    <input type="submit" name="submitNewTournament" value="<?=_('Edit');?>" class="btn large primary offset2" />
 </form>

@@ -74,20 +74,29 @@ emails = {
 <?=validation_errors()?>
 
 <form action="#" method="post">
-	<label for="subject"><?=_('Subject');?></label>
-    <input type="text" id="subject" name="subject" /><br />
-    
-    <label for="message"><?=_('Message');?></label><br />
-    <textarea id="message" name="message" cols="60" rows="20"></textarea><br />
-    
-    <p><a href="/misc/page/markdown_help" target="_blank"><?=_('markdown help');?></a></p>
-
-    <input type="submit" name="submitSendEmail" value="<?=_('Send');?>" />
-    <input type="submit" name="submitPreviewEmail" value="<?=_('Preview');?>" />
+	<fieldset>
+		<div class="clearfix">
+			<label for="subject"><?=_('Subject');?></label>
+			<div class="input">
+				<input type="text" id="subject" name="subject" class="span12" value="<?=set_value('name');?>" />
+			</div>
+		</div>
+		
+		<div class="clearfix">
+			<label for="message"><?=_('Message');?></label>
+			<div class="input">
+				<textarea id="message" name="message" cols="60" rows="20" class="span12" ></textarea>
+				<p><a href="/misc/page/markdown_help" target="_blank"><?=_('markdown help');?></a></p>
+			</div>
+		</div>
+		
+		<input type="submit" name="submitSendEmail" class="offset2 btn primary" value="<?=_('Send');?>" />
+		<input type="submit" name="submitPreviewEmail"class="btn default"  value="<?=_('Preview');?>" />
+    </fieldset>
 </form>
 
 <h3><?=_('Generate email list');?></h3>
 
 <p id="team_list"></p>
 
-<p id="email_list" class="neutral message">&nbsp;</p>
+<p id="email_list" class="alert-message warning">&nbsp;</p>
