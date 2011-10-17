@@ -1,8 +1,15 @@
-<h2><?=_('Players');?></h2>
-
 <?php if($this->tank_auth->is_admin()): ?>
-	<p><a href="/player/create">New player</a></p>
+	<ul class="tabs">
+		<li class="dropdown pull-right" data-dropdown="dropdown">
+			<a href="#" class="dropdown-toggle">Admin</a>
+			<ul class="dropdown-menu">
+				<li><a href="/player/create">New player</a></li>
+			</ul>
+		</li>
+	</ul>
 <?php endif; ?>
+
+<h2><?=_('Players');?></h2>
 
 <?php if(count($active_players) > 0): ?>
 	<h3><?=_('Active');?></h3>

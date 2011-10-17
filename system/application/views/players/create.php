@@ -22,22 +22,51 @@ $sex = array(
 );
 ?>
 <?php echo form_open($this->uri->uri_string()); ?>
-<table>
-	<tr>
-		<td><?php echo form_label(_('Full name'), $username['id']); ?></td>
-		<td><?php echo form_input($username); ?></td>
-		<td style="color: red;"><?php echo form_error($username['name']); ?><?php echo isset($errors[$username['name']])?$errors[$username['name']]:''; ?></td>
-	</tr>
-	<tr>
-		<td><?php echo form_label(_('Email Address'), $email['id']); ?></td>
-		<td><?php echo form_input($email); ?></td>
-		<td style="color: red;"><?php echo form_error($email['name']); ?><?php echo isset($errors[$email['name']])?$errors[$email['name']]:''; ?></td>
-	</tr>
-	<tr>
-		<td><?php echo form_label(_('Sex'), $sex['id']); ?></td>
-		<td><?php echo form_dropdown('sex', array('M' => _('Guy'), 'F' => _('Girl')), null, 'id="sex"'); ?></td>
-		<td style="color: red;"><?php echo form_error($sex['name']); ?></td>
-	</tr>
-</table>
-<?php echo form_submit('create', _('Create')); ?>
+	<fieldset>
+		<?php
+			$name_error = strlen(form_error($username['name'])) > 0;
+		?>
+		<div class="clearfix <?=$name_error ? 'error' : '';?>">
+			<?php echo form_label(_('Full name'), $username['id']); ?>
+			<div class="input">
+				<?php echo form_input($username); ?>
+				<?php if($name_error): ?>
+					<span class="help-inline">
+						<?=form_error($username['name']); ?><?=isset($errors[$username['name']])?$errors[$username['name']]:'';?>
+					</span>
+				<?php endif; ?>
+			</div>
+		</div>
+
+		<?php
+			$email_error = strlen(form_error($email['id'])) > 0;
+		?>
+		<div class="clearfix <?=$email_error ? 'error' : '';?>">
+			<?php echo form_label(_('Email Address'), $email['id']); ?>
+			<div class="input">
+				<?php echo form_input($email); ?>
+				<?php if($email_error): ?>
+					<span class="help-inline">
+						<?=form_error($email['name']);?><?=isset($errors[$email['name']])?$errors[$email['name']]:'';?>
+					</span>
+				<?php endif; ?>
+			</div>
+		</div>
+
+		<?php
+			$sex_error = strlen(form_error($sex['name'])) > 0;
+		?>
+		<div class="clearfix <?=$sex_error ? 'error' : '';?>">
+			<?php echo form_label(_('Sex'), $sex['id']); ?>
+			<div class="input">
+				<?php echo form_dropdown('sex', array('M' => _('Guy'), 'F' => _('Girl')), null, 'id="sex"'); ?>
+				<?php if($sex_error): ?>
+					<span class="help-inline">
+						<?=form_error($sex['name']);?>
+					</span>
+				<?php endif; ?>
+			</div>
+		</div>
+	</fieldset>
+<?php echo form_submit(array('name' => 'create', 'value' => _('Create'), 'class' => 'btn primary offset2')); ?>
 <?php echo form_close(); ?>

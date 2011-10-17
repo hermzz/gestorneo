@@ -1,19 +1,26 @@
 <?php if($player): ?>
+	<?php if($this->tank_auth->is_admin(array('player' => $player->id))): ?>
+		<ul class="tabs">
+			<li class="dropdown pull-right" data-dropdown="dropdown">
+				<a href="#" class="dropdown-toggle">Admin</a>
+				<ul class="dropdown-menu">
+					<li><a href="/player/edit/<?=$player->id;?>">Edit player</a></li>
+					<?php if($this->tank_auth->is_admin()): ?><li>
+						<?php if($player->activated): ?>
+							<a href="/player/disable/<?=$player->id;?>">Disable player</a>
+						<?php else: ?>
+							<a href="/player/enable/<?=$player->id;?>">Enable player</a>
+						<?php endif; ?>
+						</li>
+					<?php endif; ?>
+				</ul>
+			</li>
+		</ul>
+	<?php endif; ?>
+	
 	<h2><?=$player->username?> <span class="header-small">(<?=$player->email;?>)</span></h2>
 	
 	<p><?=sprintf(_('Member since %s'), strftime('%A %e, %B %Y', mysql_to_unix($player->created)));?></p>
-	
-	<?php if($this->tank_auth->is_admin(array('player' => $player->id))): ?>
-		<p><a href="/player/edit/<?=$player->id;?>">Edit player</a>
-		<?php if($this->tank_auth->is_admin()): ?> |
-			<?php if($player->activated): ?>
-				<a href="/player/disable/<?=$player->id;?>">Disable player</a>
-			<?php else: ?>
-				<a href="/player/enable/<?=$player->id;?>">Enable player</a>
-			<?php endif; ?>
-		<?php endif; ?>
-		</p>
-	<?php endif; ?>
 	
 	<h3><?=_('Tournaments');?></h3>
 	
