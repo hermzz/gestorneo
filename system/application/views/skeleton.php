@@ -39,7 +39,9 @@
 
 			<div class="content">
 				<div class="row">
-					<?php $this->load->view($content_view); ?>
+					<div class="span16">
+						<?php $this->load->view($content_view); ?>
+					</div>
 				</div>
 			</div>
 
