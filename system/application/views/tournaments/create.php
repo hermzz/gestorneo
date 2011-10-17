@@ -122,38 +122,71 @@
 <?=validation_errors()?>
 
 <form action="#" id="tournament_form" method="post">
-    <label for="name"><?=_('Name');?></label>
-    <input type="text" id="name" name="name" value="<?=set_value('name');?>" /><br />
+	<fieldset>
+		<div class="clearfix">
+			<label for="name"><?=_('Name');?></label>
+			<div class="input">
+				<input type="text" id="name" name="name" class="span6" value="<?=set_value('name');?>" />
+			</div>
+		</div>
 
-    <label for="start_date"><?=_('Start date');?></label>
-    <input type="text" id="start_date" name="start_date" value="<?=set_value('start_date');?>" /><br />
+		<div class="clearfix">
+			<label for="start_date"><?=_('Start date');?></label>
+			<div class="input">
+				<input type="text" id="start_date" name="start_date" class="span2" value="<?=set_value('start_date');?>" />
+			</div>
+		</div>	
 
-    <label for="end_date"><?=_('End date');?></label>
-    <input type="text" id="end_date" name="end_date" value="<?=set_value('end_date');?>" /><br />
+		<div class="clearfix">
+			<label for="end_date"><?=_('End date');?></label>
+			<div class="input">
+				<input type="text" id="end_date" name="end_date" class="span2" value="<?=set_value('end_date');?>" />
+			</div>
+		</div>	
 
-    <label for="deadline_date"><?=_('Signup deadline');?></label>
-    <input type="text" id="deadline_date" name="deadline_date" value="<?=set_value('deadline_date');?>" /><br />
-    
-    <label for="notes"><?=_('Notes');?></label>
-    <textarea id="notes" name="notes" rows="20" cols="60"><?=set_value('notes');?></textarea><br />
-    
-    <p><a href="/misc/page/markdown_help" target="_blank"><?=_('markdown help');?></a></p>
+		<div class="clearfix">
+			<label for="deadline_date"><?=_('Signup deadline');?></label>
+			<div class="input">
+				<input type="text" id="deadline_date" name="deadline_date" class="span2" value="<?=set_value('deadline_date');?>" />
+			</div>
+		</div>	
+
+		<div class="clearfix">
+			<label for="notes"><?=_('Notes');?></label>
+			<div class="input">
+				<textarea id="notes" name="notes" rows="8" cols="60" class="span12"><?=set_value('notes');?></textarea>
+				<p><a href="/misc/page/markdown_help" target="_blank"><?=_('markdown help');?></a></p>
+			</div>
+		</div>
+	</fieldset>
     
     <fieldset>
     	<legend><?=_('Teams');?></legend>
-    	<input type="text" name="teams_autocomplete" />
-    	<ul id="teams_container">
-    		<li><?=_('No teams selected');?></li>
-    	</ul>
+    	
+    	<div class="clearfix">
+			<div class="input">
+				<input type="text" name="teams_autocomplete" />
+				
+				<ul id="teams_container">
+    				<li><?=_('No teams selected');?></li>
+		    	</ul>
+			</div>
+		</div>	
     </fieldset>
     
     <fieldset>
     	<legend><?=_('Admins');?></legend>
-    	<input type="text" name="players_autocomplete" />
-    	<ul id="players_container">
-    		<li><?=_('No players selected');?></li>
-    	</ul>
+    	
+    	<div class="clearfix">
+			<div class="input">
+				<input type="text" name="players_autocomplete" />
+				
+				<ul id="players_container">
+					<li><?=_('No players selected');?></li>
+				</ul>
+			</div>
+		</div>
     </fieldset>
 
-    <input type="submit" name="submitNewTournament" value="<?=_('Add');?>" />
+    <input type="submit" name="submitNewTournament" value="<?=_('Add');?>" class="btn large primary offset2" />
 </form>
