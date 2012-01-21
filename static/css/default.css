@@ -11,6 +11,10 @@ body {
 	margin-bottom: 5px;
 }
 
+#tournament_notes li {
+	color: #404040;
+}
+
 .header_small {
 	font-size: 0.7em;
 	color: #666;
