@@ -17,13 +17,13 @@
 			<?php
 				if(!$month_year)
 				{
-					echo '<h3>'.strftime('%B %Y', mysql_to_unix($tournament->start_date)).'</h3><ul>';
+					echo '<h4>'.strftime('%B %Y', mysql_to_unix($tournament->start_date)).'</h4><ul>';
 					$month_year = strftime('%m-%Y', mysql_to_unix($tournament->start_date));
 				} else {
 					$t_month_year = strftime('%m-%Y', mysql_to_unix($tournament->start_date));
 					if($t_month_year != $month_year)
 					{
-						echo '</ul><h3>'.strftime('%B %Y', mysql_to_unix($tournament->start_date)).'</h3><ul>';
+						echo '</ul><h4>'.strftime('%B %Y', mysql_to_unix($tournament->start_date)).'</h4><ul>';
 						$month_year = $t_month_year;
 					}
 				}
@@ -48,13 +48,13 @@
 			<?php
 				if(!$month_year)
 				{
-					echo '<h3>'.strftime('%B %Y', mysql_to_unix($tournament->start_date)).'</h3><ul>';
+					echo '<h4>'.strftime('%B %Y', mysql_to_unix($tournament->start_date)).'</h4><ul>';
 					$month_year = strftime('%m-%Y', mysql_to_unix($tournament->start_date));
 				} else {
 					$t_month_year = strftime('%m-%Y', mysql_to_unix($tournament->start_date));
 					if($t_month_year != $month_year)
 					{
-						echo '</ul><h3>'.strftime('%B %Y', mysql_to_unix($tournament->start_date)).'</h3><ul>';
+						echo '</ul><h4>'.strftime('%B %Y', mysql_to_unix($tournament->start_date)).'</h4><ul>';
 						$month_year = $t_month_year;
 					}
 				}
