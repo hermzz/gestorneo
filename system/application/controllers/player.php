@@ -7,7 +7,10 @@ class Player extends GS_Controller {
 		parent::__construct();
 		
 		if(!$this->tank_auth->is_logged_in())
-		    redirect('/auth/login/');
+		{
+			$this->session->set_userdata(array('login_return' => $this->uri->uri_string()));
+			redirect('/auth/login/');
+		}
 	}
 	
 	function index()
