@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gestorneo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-22 00:12+0100\n"
-"PO-Revision-Date: 2012-01-22 00:18+0100\n"
+"POT-Creation-Date: 2012-01-22 23:25+0100\n"
+"PO-Revision-Date: 2012-01-22 23:26+0100\n"
 "Last-Translator: Hermann Käser <hermann.kaser@gmail.com>\n"
 "Language-Team: es <hermann.kaser@gmail.com>\n"
 "Language: \n"
@@ -166,9 +166,9 @@ msgid "New team"
 msgstr "Nuevo equipo"
 
 #: /var/www/gestorneo/system/application/views/teams/create.php:22
-#: /var/www/gestorneo/system/application/views/tournaments/payments.php:138
+#: /var/www/gestorneo/system/application/views/tournaments/payments.php:201
 #: /var/www/gestorneo/system/application/views/tournaments/create.php:191
-#: /var/www/gestorneo/system/application/views/tournaments/view.php:284
+#: /var/www/gestorneo/system/application/views/tournaments/view.php:287
 msgid "Add"
 msgstr "Añadir"
 
@@ -226,45 +226,48 @@ msgstr "texto indentado"
 msgid "nested indented text"
 msgstr "texto indentado anidado"
 
-#: /var/www/gestorneo/system/application/views/tournaments/payments.php:1
-msgid "Tournament payments"
-msgstr "Pagos de torneos"
-
-#: /var/www/gestorneo/system/application/views/tournaments/payments.php:91
+#: /var/www/gestorneo/system/application/views/tournaments/payments.php:6
+#: /var/www/gestorneo/system/application/views/tournaments/payments.php:158
 msgid "Add new payment"
 msgstr "Añadir un nuevo pago"
 
-#: /var/www/gestorneo/system/application/views/tournaments/payments.php:97
-#, php-format
-msgid "owes %0.2d, paid %0.2d"
-msgstr "debe %0.2d, ha pagado %0.2d"
+#: /var/www/gestorneo/system/application/views/tournaments/payments.php:12
+msgid "Tournament payments"
+msgstr "Pagos de torneos"
 
-#: /var/www/gestorneo/system/application/views/tournaments/payments.php:103
-#, php-format
-msgid "owes %0.2d, paid <span id=\"player-%d\">%0.2d</span>"
-msgstr "debe %0.2d, pagó <span id=\"player-%d\">%0.2d</span>"
+#: /var/www/gestorneo/system/application/views/tournaments/payments.php:15
+#: /var/www/gestorneo/system/application/views/tournaments/payments.php:140
+#: /var/www/gestorneo/system/application/views/tournaments/payments.php:142
+msgid "Payed"
+msgstr "Pagado"
 
-#: /var/www/gestorneo/system/application/views/tournaments/payments.php:112
+#: /var/www/gestorneo/system/application/views/tournaments/payments.php:16
+#: /var/www/gestorneo/system/application/views/tournaments/payments.php:140
+#: /var/www/gestorneo/system/application/views/tournaments/payments.php:142
+msgid "Not payed"
+msgstr "No pagado"
+
+#: /var/www/gestorneo/system/application/views/tournaments/payments.php:152
 msgid "No payments added yet"
 msgstr "No hay pagos todavía"
 
-#: /var/www/gestorneo/system/application/views/tournaments/payments.php:119
+#: /var/www/gestorneo/system/application/views/tournaments/payments.php:165
 msgid "Concept"
 msgstr "Concepto"
 
-#: /var/www/gestorneo/system/application/views/tournaments/payments.php:122
+#: /var/www/gestorneo/system/application/views/tournaments/payments.php:172
 msgid "Amount"
 msgstr "Cantidad"
 
-#: /var/www/gestorneo/system/application/views/tournaments/payments.php:125
+#: /var/www/gestorneo/system/application/views/tournaments/payments.php:179
 msgid "Applies to"
 msgstr "Aplica a"
 
-#: /var/www/gestorneo/system/application/views/tournaments/payments.php:128
+#: /var/www/gestorneo/system/application/views/tournaments/payments.php:185
 msgid "All the team"
 msgstr "Todo el equipo"
 
-#: /var/www/gestorneo/system/application/views/tournaments/payments.php:132
+#: /var/www/gestorneo/system/application/views/tournaments/payments.php:192
 msgid "Only some players"
 msgstr "Sólo algunos jugadores"
 
@@ -408,12 +411,12 @@ msgid "Email team for %s"
 msgstr "Enviar correo al equipo para %s"
 
 #: /var/www/gestorneo/system/application/views/tournaments/email.php:56
-#: /var/www/gestorneo/system/application/views/tournaments/view.php:177
+#: /var/www/gestorneo/system/application/views/tournaments/view.php:176
 msgid "Unassigned players"
 msgstr "Jugadores sin asignar"
 
 #: /var/www/gestorneo/system/application/views/tournaments/email.php:64
-#: /var/www/gestorneo/system/application/views/tournaments/view.php:198
+#: /var/www/gestorneo/system/application/views/tournaments/view.php:197
 msgid "Waiting list"
 msgstr "Lista de espera"
 
@@ -442,83 +445,83 @@ msgid "Email team"
 msgstr "Enviar correo al equipo"
 
 #: /var/www/gestorneo/system/application/views/tournaments/view.php:120
-msgid "Payments"
-msgstr "Pagos"
-
-#: /var/www/gestorneo/system/application/views/tournaments/view.php:121
 msgid "Include player"
 msgstr "Añade un jugador"
 
-#: /var/www/gestorneo/system/application/views/tournaments/view.php:128
+#: /var/www/gestorneo/system/application/views/tournaments/view.php:127
 #, php-format
 msgid "%s <span class=\"header_small\">on %s</span>"
 msgstr "%s <span class=\"header-small\">el %s</span>"
 
-#: /var/www/gestorneo/system/application/views/tournaments/view.php:137
+#: /var/www/gestorneo/system/application/views/tournaments/view.php:136
 msgid "Not going"
 msgstr "No voy"
 
-#: /var/www/gestorneo/system/application/views/tournaments/view.php:144
+#: /var/www/gestorneo/system/application/views/tournaments/view.php:143
 msgid "I want to go!"
 msgstr "¡Quiero ir!"
 
-#: /var/www/gestorneo/system/application/views/tournaments/view.php:153
+#: /var/www/gestorneo/system/application/views/tournaments/view.php:152
 msgid "Players confirmed"
 msgstr "Jugadores confirmados"
 
-#: /var/www/gestorneo/system/application/views/tournaments/view.php:165
-#: /var/www/gestorneo/system/application/views/tournaments/view.php:190
+#: /var/www/gestorneo/system/application/views/tournaments/view.php:164
+#: /var/www/gestorneo/system/application/views/tournaments/view.php:189
 msgid "Drop"
 msgstr "Eliminar"
 
-#: /var/www/gestorneo/system/application/views/tournaments/view.php:170
+#: /var/www/gestorneo/system/application/views/tournaments/view.php:169
 msgid "No players assigned to this team yet"
 msgstr "No hay jugadores asignados a este equipo todavía"
 
-#: /var/www/gestorneo/system/application/views/tournaments/view.php:185
-#: /var/www/gestorneo/system/application/views/tournaments/view.php:211
+#: /var/www/gestorneo/system/application/views/tournaments/view.php:184
+#: /var/www/gestorneo/system/application/views/tournaments/view.php:210
 msgid "no team"
 msgstr "ningún equipo"
 
-#: /var/www/gestorneo/system/application/views/tournaments/view.php:207
+#: /var/www/gestorneo/system/application/views/tournaments/view.php:206
 msgid "Assign to"
 msgstr "Asignar a"
 
-#: /var/www/gestorneo/system/application/views/tournaments/view.php:219
+#: /var/www/gestorneo/system/application/views/tournaments/view.php:218
 msgid "No one's been left out, yay!"
 msgstr "Nadie se queda fuera!"
 
-#: /var/www/gestorneo/system/application/views/tournaments/view.php:225
+#: /var/www/gestorneo/system/application/views/tournaments/view.php:224
 msgid "No notes"
 msgstr "No hay notas"
 
-#: /var/www/gestorneo/system/application/views/tournaments/view.php:227
+#: /var/www/gestorneo/system/application/views/tournaments/view.php:226
 #, php-format
 msgid "The signup deadline for this tournament is %s"
 msgstr "La fecha limite de inscripción para este torneo es %s"
 
-#: /var/www/gestorneo/system/application/views/tournaments/view.php:231
+#: /var/www/gestorneo/system/application/views/tournaments/view.php:230
+msgid "See payment details"
+msgstr "Ver información de pagos"
+
+#: /var/www/gestorneo/system/application/views/tournaments/view.php:234
 msgid "Add trip leg"
 msgstr "Añadir viaje"
 
-#: /var/www/gestorneo/system/application/views/tournaments/view.php:236
+#: /var/www/gestorneo/system/application/views/tournaments/view.php:239
 msgid "Going to"
 msgstr "Ida"
 
-#: /var/www/gestorneo/system/application/views/tournaments/view.php:236
+#: /var/www/gestorneo/system/application/views/tournaments/view.php:239
 msgid "Return"
 msgstr "Vuelta"
 
-#: /var/www/gestorneo/system/application/views/tournaments/view.php:243
+#: /var/www/gestorneo/system/application/views/tournaments/view.php:246
 #, php-format
 msgid "Car from %s to %s, leaving on %s"
 msgstr "Coche llendo de %s a %s, saliendo a las %s"
 
-#: /var/www/gestorneo/system/application/views/tournaments/view.php:256
+#: /var/www/gestorneo/system/application/views/tournaments/view.php:259
 msgid "On this trip"
 msgstr "En este viaje"
 
-#: /var/www/gestorneo/system/application/views/tournaments/view.php:291
+#: /var/www/gestorneo/system/application/views/tournaments/view.php:294
 msgid "Tournament not found"
 msgstr "No existe este torneo"
 
@@ -678,3 +681,11 @@ msgstr "Oops, si ves este mensaje es que algo ha salido horriblemente mal. Dale 
 msgid "No results found"
 msgstr "Sin resultados"
 
+#~ msgid "owes %0.2d, paid %0.2d"
+#~ msgstr "debe %0.2d, ha pagado %0.2d"
+
+#~ msgid "owes %0.2d, paid <span id=\"player-%d\">%0.2d</span>"
+#~ msgstr "debe %0.2d, pagó <span id=\"player-%d\">%0.2d</span>"
+
+#~ msgid "Payments"
+#~ msgstr "Pagos"
