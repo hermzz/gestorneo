@@ -49,6 +49,21 @@ CREATE TABLE `login_attempts` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `player_payments`
+--
+
+DROP TABLE IF EXISTS `player_payments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `player_payments` (
+  `tpid` int(10) unsigned NOT NULL,
+  `plid` int(10) unsigned NOT NULL,
+  `payed` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`tpid`,`plid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `player_trip_leg`
 --
 
@@ -101,12 +116,9 @@ DROP TABLE IF EXISTS `tournament_payments`;
 CREATE TABLE `tournament_payments` (
   `tpid` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `tid` int(10) unsigned NOT NULL,
-  `pid` int(10) unsigned NOT NULL,
   `concept` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `amount` decimal(5,2) NOT NULL,
-  `paid` decimal(5,2) NOT NULL DEFAULT '0.00',
-  PRIMARY KEY (`tpid`),
-  UNIQUE KEY `tid` (`tid`,`pid`,`concept`)
+  PRIMARY KEY (`tpid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -249,4 +261,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-10-14 22:52:49
+-- Dump completed on 2012-01-22 23:16:16
