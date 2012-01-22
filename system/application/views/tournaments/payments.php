@@ -116,7 +116,7 @@
 </script>
 
 <?php if($payments): ?>
-	<table class="span<?=(count($payments) + 1) * 3;?>">
+	<table class="span<?=(count($payments) + 1) * 3;?> zebra-striped">
 		<thead>
 			<tr>
 				<th class="span3"><?=_('Players');?></th>
