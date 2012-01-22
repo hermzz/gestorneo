@@ -1,3 +1,14 @@
+<?php if($this->tank_auth->is_admin()): ?>
+	<ul class="tabs">
+		<li class="dropdown pull-right" data-dropdown="dropdown">
+			<a href="#" class="dropdown-toggle">Admin</a>
+			<ul class="dropdown-menu">
+				<li><a href="#" id="new_payment" data-controls-modal="new_payment_dialog" data-backdrop="static"><?=_('Add new payment');?></a></li>
+			</ul>
+		</li>
+	</ul>
+<?php endif; ?>
+
 <h2><?=_('Tournament payments')?></h2>
 
 <script type="text/javascript">
@@ -103,10 +114,6 @@
 		});
 	});
 </script>
-
-<?php if($this->tank_auth->is_admin()): ?>
-	<p><a href="#" id="new_payment" data-controls-modal="new_payment_dialog" data-backdrop="static"><?=_('Add new payment');?></a></p>
-<?php endif; ?>
 
 <?php if($payments): ?>
 	<table class="span<?=(count($payments) + 1) * 3;?>">
