@@ -117,7 +117,6 @@
 			<ul class="dropdown-menu">
 				<li><a href="/tournament/email/<?=$tournament->id;?>"><?=_('Email team');?></a></li>
 				<li><a href="/tournament/edit/<?=$tournament->id;?>"><?=_('Edit');?></a></li>
-				<li><a href="/tournament/payments/<?=$tournament->id;?>"><?=_('Payments');?></a></li>
 				<li><a href="#" id="include_player"><?=_('Include player');?></a></li>
 			</ul>
 		</li>
@@ -225,6 +224,10 @@
 				<?=$tournament->notes ? markdown($tournament->notes) : '<p>'._('No notes').'</p>'; ?>
 				
 				<p><?=sprintf(_('The signup deadline for this tournament is %s'), strftime('%A %e, %B %Y', mysql_to_unix($tournament->signup_deadline)));?></p>
+			</div>
+			
+			<div id="payment_details">
+				<p><a href="/tournament/payments/<?=$tournament->id;?>"><?=_('See payment details');?></a></p>
 			</div>
 		
 			<div id="travel_details">

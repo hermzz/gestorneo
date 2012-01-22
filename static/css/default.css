@@ -3,7 +3,7 @@ body {
 	margin-bottom: 0 !important;
 }
 
-#tournament_notes, #tournament_signup, #travel_details {
+#tournament_notes, #payment_details, #travel_details {
 	background-color: #eee;
 	border: 1px solid #ddd;
 	border-width: 1px 0;
