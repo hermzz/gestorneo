@@ -243,11 +243,20 @@ class Tournament_model extends Model
 	
 	function addPayment($tournament_id, $concept, $amount, $applies, $pids)
 	{
-		$players = $this->getPlayers($tournament_id);
-		foreach($players as $player)
+		$this->db->query('INSERT INTO tournament_payments (tid, concept, amount) VALUES (?, ?, ?)',
+			array($tournament_id, $concept, $amount)
+		);
+		
+		$payment_id = $this->db->insert_id();
+		
+		if($applies == 'all_team')
+			$pids = array_map(function($p) { return $p->id; }, $this->getPlayers($tournament_id));
+		
+		foreach($pids as $pid)
 		{
-			$this->db->query('INSERT INTO tournament_payments (tid, pid, concept, amount) VALUES (?, ?, ?, ?)',
-				array($tournament_id, $player->id, $concept, $amount));
+			$this->db->query('INSERT INTO player_payments (tpid, plid) VALUES (?, ?)',
+				array($payment_id, $pid)
+			);
 		}
 	}
 	
@@ -257,12 +266,12 @@ class Tournament_model extends Model
 			'SELECT
 				*
 			FROM
-				tournament_payments AS tp,
-				users AS u
+				tournament_payments
 			WHERE 
-				tp.pid = u.id
+				tid = ?
 			ORDER BY
-				u.username ASC'
+				concept ASC',
+			$tournament_id
 		);
 		
 		return $query->num_rows ? $query->result() : array();
@@ -271,6 +280,13 @@ class Tournament_model extends Model
 	function editPayment($tpid, $amount)
 	{
 		$this->db->query('UPDATE tournament_payments SET paid=? WHERE tpid=?', array($amount, $tpid));
+	}
+	
+	function setPayed($tpid, $plid, $payed)
+	{
+		$this->db->query('UPDATE player_payments SET payed=? WHERE tpid=? AND plid=?',
+			array($payed, $tpid, $plid)
+		);
 	}
 }
 

@@ -474,31 +474,14 @@ class Tournament extends GS_Controller {
 		$tournament = $this->tournament_model->get($id);
 		
 		$this->data['tournament'] = $tournament;
-		$raw_payments = $this->tournament_model->getPayments($tournament->id);
+		$payments = $this->tournament_model->getPayments($tournament->id);
 		
 		// group by player
-		$payments = array();
-		foreach($raw_payments as $raw_payment)
-		{
-			if(!isset($payments[$raw_payment->id]['player']))
-				$payments[$raw_payment->id] = array(
-					'player' => $this->player_model->get($raw_payment->id),
-					'payments' => array(),
-					'totals' => array('owes' => 0, 'paid' => 0)
-				);
-				
-			$payments[$raw_payment->id]['payments'][] = array(
-				'tpid' => $raw_payment->tpid,
-				'concept' => $raw_payment->concept,
-				'amount' => $raw_payment->amount,
-				'paid' => $raw_payment->paid
-			);
-			
-			$payments[$raw_payment->id]['totals']['owes'] += $raw_payment->amount;
-			$payments[$raw_payment->id]['totals']['paid'] += $raw_payment->paid;
-		}
+		foreach($payments as $payment)
+			$payment->players = $this->player_model->getPlayerPayments($payment->tpid);
 		
-		$this->data['payment_details'] = $payments;
+		$this->data['payments'] = $payments;
+		$this->data['players'] = $this->tournament_model->getPlayers($tournament->id);
 		$this->data['title'] = _('Tournament payments');
 		$this->data['content_view'] = 'tournaments/payments';
 		

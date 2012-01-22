@@ -91,6 +91,13 @@ class Player_model extends Model
 	{
 		$this->db->query('UPDATE users SET activated=1 WHERE id=?', array($id));
 	}
+	
+	function getPlayerPayments($tpid)
+	{
+		$query = $this->db->query('SELECT * FROM player_payments WHERE tpid=?', array($tpid));
+		
+		return $query->num_rows > 0 ? $query->result() : FALSE;
+	}
 }
 
 ?>
