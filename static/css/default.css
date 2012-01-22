@@ -11,7 +11,7 @@ body {
 	margin-bottom: 5px;
 }
 
-#tournament_notes li {
+#tournament_notes li, #payment_details li, #travel_details li {
 	color: #404040;
 }
 
