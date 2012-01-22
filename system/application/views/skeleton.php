@@ -10,7 +10,6 @@
 		<script src="<?=base_url();?>static/javascript/jquery-ui.min.js" language="javascript"></script>
 		<script src="<?=base_url();?>static/javascript/jquery.cookie.js" language="javascript"></script>
 		<script src="<?=base_url();?>static/javascript/jquery.editinplace.js" language="javascript"></script>
-		<script src="<?=base_url();?>static/javascript/jquery.editinplace.js" language="javascript"></script>
 		
 		<script src="<?=base_url();?>static/javascript/bootstrap-dropdown.js" language="javascript"></script>
 		
