@@ -468,9 +468,6 @@ class Tournament extends GS_Controller {
 	
 	function payments($id)
 	{
-		if(!$this->tank_auth->is_admin())
-			header('Location: /');
-			
 		$tournament = $this->tournament_model->get($id);
 		
 		$this->data['tournament'] = $tournament;
