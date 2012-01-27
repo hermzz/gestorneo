@@ -28,7 +28,8 @@
 				return false;
 			});
 			
-			$('#include_player_dialog').modal();
+			$('#include_player_dialog').modal().bind('hide', function() { location.reload(); });
+			$('#include_player_dialog .modal-footer a').click(function() { $('#include_player_dialog').modal('hide'); });
 			
 			$('input[name="player_autocomplete"]').autocomplete({
 				source: function(request, response) {
@@ -285,6 +286,9 @@
 				
 				<p></p>
 			</form>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn secondary">Close</a>
 		</div>
 	</div>
 	
