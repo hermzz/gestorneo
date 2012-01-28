@@ -477,8 +477,19 @@ class Tournament extends GS_Controller {
 		foreach($payments as $payment)
 			$payment->players = $this->player_model->getPlayerPayments($payment->tpid);
 		
+		// get total for each player
+		$players = $this->tournament_model->getPlayers($tournament->id);
+		foreach($players as $player)
+		{
+			$player->amount_owed = 0;
+			foreach($payments as $payment)
+				foreach($payment->players as $pplayer)
+					if($pplayer->plid == $player->id && !$pplayer->payed)
+						$player->amount_owed += $payment->amount;
+		}
+		
 		$this->data['payments'] = $payments;
-		$this->data['players'] = $this->tournament_model->getPlayers($tournament->id);
+		$this->data['players'] = $players;
 		$this->data['title'] = _('Tournament payments');
 		$this->data['content_view'] = 'tournaments/payments';
 		

@@ -116,13 +116,14 @@
 </script>
 
 <?php if($payments): ?>
-	<table class="span<?=(count($payments) + 1) * 3;?> zebra-striped">
+	<table class="span<?=(count($payments) + 2) * 3;?> zebra-striped">
 		<thead>
 			<tr>
 				<th class="span3"><?=_('Players');?></th>
 				<?php foreach($payments as $payment): ?>
 					<th class="span3"><?=$payment->concept;?> - €<?=$payment->amount;?></th>
 				<?php endforeach; ?>
+				<th class="span3"><?=_('Owes');?></th>
 			</th>
 		</thead>
 		<tbody>
@@ -144,6 +145,7 @@
 							?>
 						</td>
 					<?php endforeach; ?>
+					<td><?=$player->amount_owed;?></td>
 				</tr>
 			<?php endforeach; ?>
 		</tbody>
