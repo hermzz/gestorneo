@@ -96,7 +96,7 @@ class Player_model extends Model
 	{
 		$query = $this->db->query('SELECT * FROM player_payments WHERE tpid=?', array($tpid));
 		
-		return $query->num_rows > 0 ? $query->result() : FALSE;
+		return $query->num_rows > 0 ? $query->result() : array();
 	}
 }
 
