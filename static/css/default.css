@@ -56,3 +56,20 @@ body {
 #footer {
 	color: #999;
 }
+
+
+/** LOGIN **/
+#login-form #remember {
+ margin: 10px 0 0 5px;
+}
+
+#login-form .col1 {
+  width: 160px;
+}
+#login-form .col2 {
+  width: 220px;
+}
+
+input.error {
+ border-color: #EE5F5B;
+}
