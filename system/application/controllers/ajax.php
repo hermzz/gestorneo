@@ -55,7 +55,7 @@ class Ajax extends GS_Controller
 			$this->input->post('concept'),
 			$this->input->post('amount'),
 			$this->input->post('applies'),
-			$this->input->post('pids[]')
+			$this->input->post('pids')
 		);
 		
 		$url = parse_url($_SERVER['REQUEST_URI']);

@@ -60,22 +60,12 @@
 			}
 		});
 		
-		$('#new_payment_dialog form').submit(function() {
+		$('#new_payment_dialog form').submit(function(f) {
 			$.ajax({
 				url: '/ajax/add_payments',
 				dataType: "jsonp",
 				type: 'POST',
-				data: {
-					tid: <?=$tournament->id;?>,
-					concept: $('#concept').val(),
-					amount: $('#amount').val(),
-					applies: $('[name="applies"][checked="checked"]').val(),
-					pids: function() {
-						a = [];
-						$('[name="pids[]"]').each(function(i,e) {a.push($(e).val()); });
-						return a;
-					}
-				},
+				data: $(f.target).serialize(),
 				success: function(data) 
 				{
 					if(data.success)
@@ -84,7 +74,7 @@
 					}
 				}
 			});
-		
+			
 			return false;
 		});
 		
