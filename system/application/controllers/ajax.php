@@ -24,7 +24,7 @@ class Ajax extends GS_Controller
 	{
 		$url = parse_url($_SERVER['REQUEST_URI']);
 		parse_str($url['query'], $params);
-		$results = $this->player_model->search($params['term']);
+		$results = $this->player_model->search($params['term'], array('tournament_id' => $params['tournament_id']));
 		
 		if($results)
 		{

@@ -73,11 +73,29 @@ class Player_model extends Model
 		return $query->num_rows > 0 ? $query->result() : FALSE;
 	}
 	
-	function search($name)
+	function search($name, $filter)
 	{
-		$query = $this->db->query(
-			'SELECT * FROM users WHERE username LIKE "%'.$this->db->escape_like_str($name).'%"'
-		);
+		if($filter['tournament_id'])
+		{
+			$query = $this->db->query(
+				'SELECT 
+					u.*
+				FROM 
+					users AS u, 
+					tournament_players AS tp
+				WHERE 
+					u.id = tp.pid AND
+					tp.tid = ? AND
+					username LIKE "%'.$this->db->escape_like_str($name).'%"
+				ORDER BY
+					u.username ASC',
+				array($filter['tournament_id'])
+			);
+		} else {
+			$query = $this->db->query(
+				'SELECT * FROM users WHERE username LIKE "%'.$this->db->escape_like_str($name).'%"'
+			);
+		}
 		
 		return $query->num_rows > 0 ? $query->result() : FALSE;
 	}

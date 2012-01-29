@@ -24,7 +24,8 @@
 					url: '/ajax/player_autocomplete',
 					dataType: "jsonp",
 					data: {
-						term: request.term
+						term: request.term,
+						tournament_id: <?=$tournament->id;?>,
 					},
 					success: function(data) 
 					{
