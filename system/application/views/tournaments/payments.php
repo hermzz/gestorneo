@@ -46,12 +46,11 @@
 			select: function(event, ui) { 
 				$('#payment_player_list').append(
 					'<li>' + ui.item.label + ' [<a href="#">x</a>]' + 
-					'<input type="hidden" name="pids[]" value="' + ui.item.id + '" /'+'>' + 
+					'<input type="hidden" name="pids[]" value="' + ui.item.value + '" /'+'>' + 
 					'</li>'
 				);
 				
 				as = $('#payment_player_list a');
-				console.log(as[as.length-1]);
 				$(as[as.length-1]).click(function(e) {
 					$(e.target).parent().remove();
 				});
@@ -70,7 +69,12 @@
 					tid: <?=$tournament->id;?>,
 					concept: $('#concept').val(),
 					amount: $('#amount').val(),
-					applies: $('[name="applies"][checked="checked"]').val()
+					applies: $('[name="applies"][checked="checked"]').val(),
+					pids: function() {
+						a = [];
+						$('[name="pids[]"]').each(function(i,e) {a.push($(e).val()); });
+						return a;
+					}
 				},
 				success: function(data) 
 				{
