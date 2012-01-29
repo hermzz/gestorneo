@@ -73,3 +73,8 @@ body {
 input.error {
  border-color: #EE5F5B;
 }
+
+/** NAV **/
+.nav li {
+  text-transform: lowercase;
+}
