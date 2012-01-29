@@ -54,7 +54,6 @@ class Auth extends GS_Controller
 				else
 					$this->form_validation->set_rules('captcha', 'Confirmation Code', 'trim|xss_clean|required|callback__check_captcha');
 			}
-			$data['errors'] = array();
 
 			if ($this->form_validation->run()) {								// validation ok
 				if ($this->tank_auth->login(

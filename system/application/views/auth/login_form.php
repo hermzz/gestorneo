@@ -5,7 +5,9 @@ $login = array(
 	'value' => set_value('login'),
 	'maxlength'	=> 80,
 	'size'	=> 30,
+  'class' => (form_error('login') != '' ? 'error' : '')
 );
+
 if ($login_by_username AND $login_by_email) {
 	$login_label = _('Email or login');
 } else if ($login_by_username) {
@@ -17,31 +19,36 @@ $password = array(
 	'name'	=> 'password',
 	'id'	=> 'password',
 	'size'	=> 30,
+  'class' => (form_error('password') != '' ? 'error' : '')
 );
 $remember = array(
 	'name'	=> 'remember',
 	'id'	=> 'remember',
 	'value'	=> 1,
 	'checked'	=> set_value('remember'),
-	'style' => 'margin:0;padding:0',
 );
 $captcha = array(
 	'name'	=> 'captcha',
 	'id'	=> 'captcha',
-	'maxlength'	=> 8,
+	'maxlength'	=> 8
+);
+$submit = array(
+    'name' => 'submit',
+    'id' => 'submit',
+    'class' => 'btn primary'
 );
 ?>
 <?php echo form_open($this->uri->uri_string()); ?>
-<table>
+<table id="login-form">
 	<tr>
-		<td><?php echo form_label($login_label, $login['id']); ?></td>
-		<td><?php echo form_input($login); ?></td>
-		<td style="color: red;"><?php echo form_error($login['name']); ?><?php echo isset($errors[$login['name']])?$errors[$login['name']]:''; ?></td>
+		<td class="col1"><?php echo form_label($login_label, $login['id']); ?></td>
+		<td class="col2"><?php echo form_input($login); ?></td>
+		<td style="color: red;"><?php echo form_error($login['name']); ?></td>
 	</tr>
 	<tr>
 		<td><?php echo form_label('Password', $password['id']); ?></td>
 		<td><?php echo form_password($password); ?></td>
-		<td style="color: red;"><?php echo form_error($password['name']); ?><?php echo isset($errors[$password['name']])?$errors[$password['name']]:''; ?></td>
+		<td style="color: red;"><?php echo form_error($password['name']); ?></td>
 	</tr>
 
 	<?php if ($show_captcha) {
@@ -87,7 +94,7 @@ $captcha = array(
 		</td>
 	</tr>
 </table>
-<?php echo form_submit('submit', _('Let me in')); ?>
+<?php echo form_submit($submit, _('Let me in')); ?>
 <?php echo form_close(); ?>
 
 <p><?=_('If you forgot your password, <a href="/auth/forgot_password/">click here to reset it</a>');?>.</p>
