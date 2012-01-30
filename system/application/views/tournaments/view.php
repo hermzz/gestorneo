@@ -28,15 +28,8 @@
 				return false;
 			});
 			
-			$('#include_player_dialog').dialog({
-				autoOpen: false,
-				modal: true,
-				close: function() { location.reload(); }
-			});
-			
-			$('#include_player').click(function() {
-				$('#include_player_dialog').dialog('open');
-			});
+			$('#include_player_dialog').modal().bind('hide', function() { location.reload(); });
+			$('#include_player_dialog .modal-footer a').click(function() { $('#include_player_dialog').modal('hide'); });
 			
 			$('input[name="player_autocomplete"]').autocomplete({
 				source: function(request, response) {
@@ -117,7 +110,7 @@
 			<ul class="dropdown-menu">
 				<li><a href="/tournament/email/<?=$tournament->id;?>"><?=_('Email team');?></a></li>
 				<li><a href="/tournament/edit/<?=$tournament->id;?>"><?=_('Edit');?></a></li>
-				<li><a href="#" id="include_player"><?=_('Include player');?></a></li>
+				<li><a href="#" id="include_player" data-controls-modal="include_player_dialog" data-backdrop="static"><?=_('Include player');?></a></li>
 			</ul>
 		</li>
 	</ul>
@@ -265,7 +258,7 @@
 											<input type="hidden" name="tlid" value="<?=$trip->leg_id;?>" />
 
 											<?php if($trip->player_on_it): ?>
-												<input type="submit" name="signoffFromTrip" value="Not going"
+												<input type="submit" name="signoffFromTrip" value="Not going" />
 											<?php else: ?>
 												<input type="submit" name="signupToTrip" value="Going" />
 											<?php endif; ?>
@@ -280,14 +273,23 @@
 		</div>
 	</div>
 	
-	<div id="include_player_dialog">
-		<form action="#" method="post">
-			<input type="text" name="player_autocomplete" />
-			
-			<input type="submit" name="add_player" value="<?=_('Add');?>" disabled="disabled" />
-			
-			<p></p>
-		</form>
+	<div id="include_player_dialog" class="modal hide fade" style="display: block; ">
+		<div class="modal-header">
+			<a href="#" class="close">×</a>
+			<h3><?=_('Include player');?></h3>
+		</div>
+		<div class="modal-body">
+			<form action="#" method="post">
+				<input type="text" name="player_autocomplete" />
+				
+				<input type="submit" name="add_player" value="<?=_('Add');?>" disabled="disabled" />
+				
+				<p></p>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn secondary">Close</a>
+		</div>
 	</div>
 	
 <?php else: ?>

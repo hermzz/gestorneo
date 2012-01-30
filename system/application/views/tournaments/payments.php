@@ -24,7 +24,8 @@
 					url: '/ajax/player_autocomplete',
 					dataType: "jsonp",
 					data: {
-						term: request.term
+						term: request.term,
+						tournament_id: <?=$tournament->id;?>,
 					},
 					success: function(data) 
 					{
@@ -46,12 +47,11 @@
 			select: function(event, ui) { 
 				$('#payment_player_list').append(
 					'<li>' + ui.item.label + ' [<a href="#">x</a>]' + 
-					'<input type="hidden" name="pids[]" value="' + ui.item.id + '" /'+'>' + 
+					'<input type="hidden" name="pids[]" value="' + ui.item.value + '" /'+'>' + 
 					'</li>'
 				);
 				
 				as = $('#payment_player_list a');
-				console.log(as[as.length-1]);
 				$(as[as.length-1]).click(function(e) {
 					$(e.target).parent().remove();
 				});
@@ -61,17 +61,12 @@
 			}
 		});
 		
-		$('#new_payment_dialog form').submit(function() {
+		$('#new_payment_dialog form').submit(function(f) {
 			$.ajax({
 				url: '/ajax/add_payments',
 				dataType: "jsonp",
 				type: 'POST',
-				data: {
-					tid: <?=$tournament->id;?>,
-					concept: $('#concept').val(),
-					amount: $('#amount').val(),
-					applies: $('[name="applies"][checked="checked"]').val()
-				},
+				data: $(f.target).serialize(),
 				success: function(data) 
 				{
 					if(data.success)
@@ -80,7 +75,7 @@
 					}
 				}
 			});
-		
+			
 			return false;
 		});
 		
@@ -116,13 +111,14 @@
 </script>
 
 <?php if($payments): ?>
-	<table class="span<?=(count($payments) + 1) * 3;?> zebra-striped">
+	<table class="span<?=(count($payments) + 2) * 3;?> zebra-striped">
 		<thead>
 			<tr>
 				<th class="span3"><?=_('Players');?></th>
 				<?php foreach($payments as $payment): ?>
 					<th class="span3"><?=$payment->concept;?> - €<?=$payment->amount;?></th>
 				<?php endforeach; ?>
+				<th class="span3"><?=_('Owes');?></th>
 			</th>
 		</thead>
 		<tbody>
@@ -144,6 +140,7 @@
 							?>
 						</td>
 					<?php endforeach; ?>
+					<td><?=$player->amount_owed;?></td>
 				</tr>
 			<?php endforeach; ?>
 		</tbody>
