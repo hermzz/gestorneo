@@ -12,8 +12,8 @@
 <h2><?=_('Tournament payments')?></h2>
 
 <script type="text/javascript">
-	var PAYED_TXT = "<?=_('Payed');?>";
-	var NOT_PAYED_TXT = "<?=_('Not payed');?>";
+	var PAID_TXT = "<?=_('Paid');?>";
+	var NOT_PAID_TXT = "<?=_('Not paid');?>";
 	
 	$(document).ready(function (){
 		$('#new_payment_dialog').modal();
@@ -83,25 +83,25 @@
 		
 		$('.payment_links').click(function(e) {
 			$.ajax({
-				url: '/ajax/set_payed',
+				url: '/ajax/set_paid',
 				dataType: "jsonp",
 				type: 'POST',
 				data: {
 					tpid: $(e.target).attr('tpid'),
 					plid: $(e.target).attr('plid'),
-					payed: parseInt($(e.target).attr('payed')) ? 0 : 1
+					paid: parseInt($(e.target).attr('paid')) ? 0 : 1
 				},
 				success: function(data) 
 				{
 					if(data.success)
 					{
-						if($(e.target).attr('payed') == 1)
+						if($(e.target).attr('paid') == 1)
 						{
-							$(e.target).html(NOT_PAYED_TXT);
-							$(e.target).attr('payed', '0');
+							$(e.target).html(NOT_PAID_TXT);
+							$(e.target).attr('paid', '0');
 						} else {
-							$(e.target).html(PAYED_TXT);
-							$(e.target).attr('payed', '1');
+							$(e.target).html(PAID_TXT);
+							$(e.target).attr('paid', '1');
 						}
 					}
 				}
@@ -181,10 +181,10 @@
 									if($p->plid == $player->id)
 										if($this->tank_auth->is_admin())
 										{
-											echo '<a href="#" payed="'.$p->payed.'" class="payment_links" tpid="'.$payment->tpid.'" plid="'.$p->plid.'">' 
-												. ($p->payed ? _('Payed') : _('Not payed')) . '</a>';
+											echo '<a href="#" paid="'.$p->paid.'" class="payment_links" tpid="'.$payment->tpid.'" plid="'.$p->plid.'">' 
+												. ($p->paid ? _('Paid') : _('Not paid')) . '</a>';
 										} else {
-											echo $p->payed ? _('Payed') : _('Not payed');
+											echo $p->paid ? _('Paid') : _('Not paid');
 										}
 							?>
 						</td>

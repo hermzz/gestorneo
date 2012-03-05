@@ -484,7 +484,7 @@ class Tournament extends GS_Controller {
 			$player->amount_owed = 0;
 			foreach($payments as $payment)
 				foreach($payment->players as $pplayer)
-					if($pplayer->plid == $player->id && !$pplayer->payed)
+					if($pplayer->plid == $player->id && !$pplayer->paid)
 						$player->amount_owed += $payment->amount;
 		}
 		

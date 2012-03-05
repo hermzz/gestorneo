@@ -84,12 +84,12 @@ class Ajax extends GS_Controller
 		echo $this->input->post('update_value');
 	}
 	
-	function set_payed()
+	function set_paid()
 	{
-		$this->tournament_model->setPayed(
+		$this->tournament_model->setPaid(
 			$this->input->post('tpid'),
 			$this->input->post('plid'),
-			$this->input->post('payed')
+			$this->input->post('paid')
 		);
 		
 		$url = parse_url($_SERVER['REQUEST_URI']);

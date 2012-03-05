@@ -271,7 +271,7 @@ class Tournament_model extends Model
 		if($applies == 'all_team')
 			$pids = array_map(function($p) { return $p->id; }, $this->getPlayers($payment->tid));
 		
-		$this->db->query('DELETE FROM player_payments WHERE tpid=? AND payed=0', array($tpid));
+		$this->db->query('DELETE FROM player_payments WHERE tpid=? AND paid=0', array($tpid));
 		
 		foreach($pids as $pid)
 		{
@@ -307,13 +307,13 @@ class Tournament_model extends Model
 	
 	function editPayment($tpid, $amount)
 	{
-		$this->db->query('UPDATE tournament_payments SET payed=? WHERE tpid=?', array($amount, $tpid));
+		$this->db->query('UPDATE tournament_payments SET paid=? WHERE tpid=?', array($amount, $tpid));
 	}
 	
-	function setPayed($tpid, $plid, $payed)
+	function setPaid($tpid, $plid, $paid)
 	{
-		$this->db->query('UPDATE player_payments SET payed=? WHERE tpid=? AND plid=?',
-			array($payed, $tpid, $plid)
+		$this->db->query('UPDATE player_payments SET paid=? WHERE tpid=? AND plid=?',
+			array($paid, $tpid, $plid)
 		);
 	}
 }
