@@ -18,6 +18,17 @@
 	$(document).ready(function (){
 		$('#new_payment_dialog').modal();
 		
+		$('#new_payment_dialog').bind('show', function(e) {
+			$('#concept').attr('value', '');
+			$('#amount').attr('value', '');
+		
+			$('input[value="all_team"]').attr('checked', 'checked');
+		
+			$('#payment_player_list').html('');
+		
+			$('input[name="tpid"]').attr('value', '');
+		});
+		
 		$('input[name="player_autocomplete"]').autocomplete({
 			source: function(request, response) {
 				$.ajax({
@@ -45,16 +56,7 @@
 				});
 			},
 			select: function(event, ui) { 
-				$('#payment_player_list').append(
-					'<li>' + ui.item.label + ' [<a href="#">x</a>]' + 
-					'<input type="hidden" name="pids[]" value="' + ui.item.value + '" /'+'>' + 
-					'</li>'
-				);
-				
-				as = $('#payment_player_list a');
-				$(as[as.length-1]).click(function(e) {
-					$(e.target).parent().remove();
-				});
+				add_player_to_modal(ui.item.value, ui.item.label);
 			},
 			close: function() {	
 				$('input[name="player_autocomplete"]').val('');
@@ -107,16 +109,63 @@
 			
 			return false;
 		});
+		
+		$('#payment_table th a').click(function(e) {
+			// fill in data for the payment
+			$.ajax({
+				url: '/ajax/get_payment_data',
+				dataType: "jsonp",
+				type: 'POST',
+				data: {
+					tpid: $(e.target).attr('tpid'),
+				},
+				success: function(response) 
+				{
+					if(response.success)
+					{
+						$('#new_payment_dialog').modal().show();
+						
+						$('#concept').attr('value', response.data.concept);
+						$('#amount').attr('value', response.data.amount);
+						
+						$('input[value="individuals"]').attr('checked', 'checked');
+						
+						$.each(response.data.players, function(k, v) {
+							add_player_to_modal(v.plid, v.username);
+						});
+						
+						$('input[name="tpid"]').attr('value', response.data.tpid);
+					}
+				}
+			});
+			
+			return false;
+		});
 	});
+	
+	function add_player_to_modal(player_id, player_name)
+	{
+		$('#payment_player_list').append(
+			'<li>' + player_name + ' [<a href="#">x</a>]' + 
+			'<input type="hidden" name="pids[]" value="' + player_id + '" /'+'>' + 
+			'</li>'
+		);
+		
+		as = $('#payment_player_list a');
+		$(as[as.length-1]).click(function(e) {
+			$(e.target).parent().remove();
+			return false;
+		});
+	}
 </script>
 
 <?php if($payments): ?>
-	<table class="span<?=(count($payments) + 2) * 3;?> zebra-striped">
+	<table id="payment_table" class="span<?=(count($payments) + 2) * 3;?> zebra-striped">
 		<thead>
 			<tr>
 				<th class="span3"><?=_('Players');?></th>
 				<?php foreach($payments as $payment): ?>
-					<th class="span3"><?=$payment->concept;?> - €<?=$payment->amount;?></th>
+					<th class="span3"><?=$payment->concept;?> - €<?=$payment->amount;?> (<a href="#" tpid="<?=$payment->tpid;?>">edit</a>)</th>
 				<?php endforeach; ?>
 				<th class="span3"><?=_('Owes');?></th>
 			</th>
@@ -157,6 +206,7 @@
 	<div class="modal-body">
 		<form action="#" method="post">
 			<input type="hidden" name="tid" value="<?=$tournament->id;?>" />
+			<input type="hidden" name="tpid" value="" />
 		
 			<div class="clearfix">
 				<label for="concept"><?=_('Concept');?></label>

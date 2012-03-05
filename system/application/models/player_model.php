@@ -112,7 +112,17 @@ class Player_model extends Model
 	
 	function getPlayerPayments($tpid)
 	{
-		$query = $this->db->query('SELECT * FROM player_payments WHERE tpid=?', array($tpid));
+		$query = $this->db->query(
+			'SELECT 
+				pp.*, 
+				u.username
+			FROM 
+				player_payments AS pp, 
+				users AS u 
+			WHERE 
+				pp.plid=u.id AND 
+				pp.tpid=?', 
+			array($tpid));
 		
 		return $query->num_rows > 0 ? $query->result() : array();
 	}

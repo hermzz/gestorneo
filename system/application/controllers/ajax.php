@@ -50,13 +50,24 @@ class Ajax extends GS_Controller
 	
 	function add_payments()
 	{
-		$this->tournament_model->addPayment(
-			$this->input->post('tid'),
-			$this->input->post('concept'),
-			$this->input->post('amount'),
-			$this->input->post('applies'),
-			$this->input->post('pids')
-		);
+		if($this->input->post('tpid'))
+		{
+			$this->tournament_model->editPayments(
+				$this->input->post('tpid'),
+				$this->input->post('concept'),
+				$this->input->post('amount'),
+				$this->input->post('applies'),
+				$this->input->post('pids')
+			);
+		} else {
+			$this->tournament_model->addPayment(
+				$this->input->post('tid'),
+				$this->input->post('concept'),
+				$this->input->post('amount'),
+				$this->input->post('applies'),
+				$this->input->post('pids')
+			);
+		}
 		
 		$url = parse_url($_SERVER['REQUEST_URI']);
 		parse_str($url['query'], $params);
@@ -84,6 +95,20 @@ class Ajax extends GS_Controller
 		$url = parse_url($_SERVER['REQUEST_URI']);
 		parse_str($url['query'], $params);
 		echo $params['callback'].'('.json_encode(array('success' => true)).')'; 
+	}
+	
+	function get_payment_data()
+	{
+		$url = parse_url($_SERVER['REQUEST_URI']);
+		parse_str($url['query'], $params);
+		
+		$payment = $this->tournament_model->getPayment(
+			$this->input->post('tpid')
+		);
+		
+		$payment->players = $this->player_model->getPlayerPayments($payment->tpid);
+		
+		echo $params['callback'].'('.json_encode(array('success' => true, 'data' => $payment)).')';  
 	}
 }
 

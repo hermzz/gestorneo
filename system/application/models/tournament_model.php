@@ -260,6 +260,27 @@ class Tournament_model extends Model
 		}
 	}
 	
+	function editPayments($tpid, $concept, $amount, $applies, $pids)
+	{
+		$this->db->query('UPDATE tournament_payments SET concept=?, amount=? WHERE tpid=?',
+			array($concept, $amount, $tpid)
+		);
+		
+		$payment = $this->getPayment($tpid);
+		
+		if($applies == 'all_team')
+			$pids = array_map(function($p) { return $p->id; }, $this->getPlayers($payment->tid));
+		
+		$this->db->query('DELETE FROM player_payments WHERE tpid=? AND payed=0', array($tpid));
+		
+		foreach($pids as $pid)
+		{
+			$this->db->query('INSERT IGNORE INTO player_payments (tpid, plid) VALUES (?, ?)',
+				array($tpid, $pid)
+			);
+		}
+	}
+	
 	function getPayments($tournament_id)
 	{
 		$query = $this->db->query(
@@ -277,9 +298,16 @@ class Tournament_model extends Model
 		return $query->num_rows ? $query->result() : array();
 	}
 	
+	function getPayment($payment_id)
+	{
+		$query = $this->db->query('SELECT * FROM tournament_payments WHERE tpid=?', array($payment_id));
+		
+		return $query->num_rows ? $query->row() : array();
+	}
+	
 	function editPayment($tpid, $amount)
 	{
-		$this->db->query('UPDATE tournament_payments SET paid=? WHERE tpid=?', array($amount, $tpid));
+		$this->db->query('UPDATE tournament_payments SET payed=? WHERE tpid=?', array($amount, $tpid));
 	}
 	
 	function setPayed($tpid, $plid, $payed)
