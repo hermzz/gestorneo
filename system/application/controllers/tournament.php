@@ -27,7 +27,7 @@ class Tournament extends GS_Controller {
 		$this->load->view('skeleton', $this->data);
 	}
 	
-	function view($id)
+	function view($tournament_id)
 	{
 		$this->load->helper('markdown');
 		
@@ -47,13 +47,13 @@ class Tournament extends GS_Controller {
 			);
 		}
 		
-		$this->data['tournament'] = $this->tournament_model->get($id);
+		$this->data['tournament'] = $this->tournament_model->get($tournament_id);
 		
 		// player lists
-		$this->data['teams'] = $this->tournament_model->getTeams($id);
+		$this->data['teams'] = $this->tournament_model->getTeams($tournament_id);
 		foreach($this->data['teams'] as $team)
 		{
-			$team->players = $this->team_model->getTournamentPlayers($id, $team->id);
+			$team->players = $this->team_model->getTournamentPlayers($tournament_id, $team->id);
 			
 			if($team->players)
 			{
@@ -65,7 +65,7 @@ class Tournament extends GS_Controller {
 			}
 		}
 		
-		$this->data['unassigned']['players'] = $this->tournament_model->getUnassignedPlayers($id);
+		$this->data['unassigned']['players'] = $this->tournament_model->getUnassignedPlayers($tournament_id);
 		if($this->data['unassigned']['players'])
 		{
 			$this->data['unassigned']['males'] = count(array_filter($this->data['unassigned']['players'], function($p) { return $p->sex == 'M'; }));
@@ -75,7 +75,7 @@ class Tournament extends GS_Controller {
 			$this->data['unassigned']['females'] = 0;
 		}
 		
-		$this->data['waiting']['players'] = $this->tournament_model->getPlayers($id, false);
+		$this->data['waiting']['players'] = $this->tournament_model->getPlayers($tournament_id, false);
 		if($this->data['waiting']['players'])
 		{
 			$this->data['waiting']['males'] = count(array_filter($this->data['waiting']['players'], function($p) { return $p->sex == 'M'; }));
@@ -95,7 +95,7 @@ class Tournament extends GS_Controller {
 			date('Y', $u_end_date)
 		);
 		
-		$trips= $this->tripleg_model->getTripsForTournament($id);
+		$trips= $this->tripleg_model->getTripsForTournament($tournament_id);
 		if($trips)
 		{
 			foreach($trips as $trip)
@@ -110,7 +110,7 @@ class Tournament extends GS_Controller {
 		}
 		
 		// payment details
-		$this->data['player_owes'] = $this->player_model->getPlayerDebtByTournament($id, $this->tank_auth->get_user_id());
+		$this->data['player_owes'] = $this->player_model->getPlayerDebtByTournament($tournament_id, $this->tank_auth->get_user_id());
 
 		$this->data['title'] = $this->data['tournament'] ?  $this->data['tournament']->name : _("Tournament not found");
 		
@@ -179,24 +179,24 @@ class Tournament extends GS_Controller {
 		}
 	}
 
-	function edit($id)
+	function edit($tournament_id)
 	{
-		if(!$this->tank_auth->is_admin(array('tournament' => $id)))
+		if(!$this->tank_auth->is_admin(array('tournament' => $tournament_id)))
 			header('Location: /');
 			
 		$this->data['title'] = _('Edit tournament');
 		
-		$this->data['tournament'] = $this->tournament_model->get($id);
+		$this->data['tournament'] = $this->tournament_model->get($tournament_id);
 		
 		$this->data['teams'] = $this->team_model->getAll();
-		$selected_teams = $this->tournament_model->getTeams($id);
+		$selected_teams = $this->tournament_model->getTeams($tournament_id);
 		
 		$team_ids = array();
 		foreach($selected_teams as $team)
 			$team_ids[] = $team->id;
 		
 		$this->data['users'] = $this->player_model->getAll();
-		$tournament_admins = $this->tournament_model->getAdmins($id);
+		$tournament_admins = $this->tournament_model->getAdmins($tournament_id);
 		
 		$admin_ids = array();
 		foreach($tournament_admins as $tournament_admin)
@@ -222,7 +222,7 @@ class Tournament extends GS_Controller {
 			$this->load->view('skeleton', $this->data);
 		} else {
 			$this->tournament_model->edit(
-				$id,
+				$tournament_id,
 				$this->input->post('name'),
 				$this->input->post('notes'),
 				preg_replace($this->_date_regex, '\3-\2-\1', $this->input->post('start_date')),
@@ -232,7 +232,7 @@ class Tournament extends GS_Controller {
 				$this->input->post('admins')
 			);
 			
-			header('Location: /tournament/view/'.$id);
+			header('Location: /tournament/view/'.$tournament_id);
 		}
 	}
 	
@@ -410,9 +410,9 @@ class Tournament extends GS_Controller {
 		$this->load->view('skeleton', $this->data);
 	}
 	
-	function add_trip_leg($id)
+	function add_trip_leg($tournament_id)
 	{
-		$tournament = $this->tournament_model->get($id);
+		$tournament = $this->tournament_model->get($tournament_id);
 		
 		$this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
@@ -444,7 +444,7 @@ class Tournament extends GS_Controller {
 			{
 				$this->tripleg_model->create(
 					$this->tank_auth->get_user_id(),
-					$id,
+					$tournament_id,
 					$this->input->post('trip_type'),
 					$this->input->post('trip_name'),
 					$this->input->post('other_origin'),
@@ -455,7 +455,7 @@ class Tournament extends GS_Controller {
 			} elseif ($this->input->post('submitTripByCar')) {
 				$this->tripleg_model->create(
 					$this->tank_auth->get_user_id(),
-					$id,
+					$tournament_id,
 					$this->input->post('trip_type'),
 					false,
 					$this->input->post('car_origin'),
@@ -467,13 +467,13 @@ class Tournament extends GS_Controller {
 				throw new Exception(_('Oops, if you see this message, something went horribly wrong. Press the back button and try again.'));
 			}
 			
-			header('Location: /tournament/view/'.$id);
+			header('Location: /tournament/view/'.$tournament_id);
 		}
 	}
 	
-	function payments($id)
+	function payments($tournament_id)
 	{
-		$tournament = $this->tournament_model->get($id);
+		$tournament = $this->tournament_model->get($tournament_id);
 		
 		$this->data['tournament'] = $tournament;
 		$payments = $this->tournament_model->getPayments($tournament->id);
