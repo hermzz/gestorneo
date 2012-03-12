@@ -49,6 +49,7 @@ class Tournament extends GS_Controller {
 		
 		$this->data['tournament'] = $this->tournament_model->get($id);
 		
+		// player lists
 		$this->data['teams'] = $this->tournament_model->getTeams($id);
 		foreach($this->data['teams'] as $team)
 		{
@@ -83,7 +84,8 @@ class Tournament extends GS_Controller {
 			$this->data['waiting']['males'] = 0;
 			$this->data['waiting']['females'] = 0;
 		}
-		
+
+		// travel details		
 		$u_end_date = mysql_to_unix($this->data['tournament']->end_date);
 		
 		$last_day = mktime(
@@ -106,6 +108,9 @@ class Tournament extends GS_Controller {
 		} else {
 			$this->data['trips'] = false;
 		}
+		
+		// payment details
+		$this->data['player_owes'] = $this->player_model->getPlayerDebtByTournament($id, $this->tank_auth->get_user_id());
 
 		$this->data['title'] = $this->data['tournament'] ?  $this->data['tournament']->name : _("Tournament not found");
 		

@@ -126,6 +126,31 @@ class Player_model extends Model
 		
 		return $query->num_rows > 0 ? $query->result() : array();
 	}
-}
+	
+	function getPlayerDebtByTournament($tournament_id, $player_id)
+	{
+		$query = $this->db->query(
+			'SELECT
+				SUM(tp.amount) AS total
+			FROM
+				tournament_payments AS tp,
+				player_payments AS pp
+			WHERE
+				tp.tid = ? AND
+				tp.tpid = pp.tpid AND
+				pp.paid = 0 AND
+				pp.plid = ?',
+			array($tournament_id, $player_id)
+		);
+		
+		if($query->num_rows > 0)
+		{
+			$row = $query->row();
+			return $row->total;
+		} else {
+			return false;
+		}
+	}
+}	
 
 ?>

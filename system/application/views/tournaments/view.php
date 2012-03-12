@@ -220,6 +220,11 @@
 			</div>
 			
 			<div id="payment_details">
+				<?php if($player_owes): ?>
+					<p><?=sprintf(_('You still have to pay €%0.2f'), $player_owes);?></p>
+				<?php else: ?>
+					<p><?=_('You don\'t owe any money!');?>
+				<?php endif; ?>
 				<p><a href="/tournament/payments/<?=$tournament->id;?>"><?=_('See payment details');?></a></p>
 			</div>
 		
