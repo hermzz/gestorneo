@@ -104,16 +104,16 @@
 	?>
 	
 	<?php if($is_tournament_admin): ?>
-		<ul class="tabs">
-		<li class="dropdown pull-right" data-dropdown="dropdown">
-			<a href="#" class="dropdown-toggle">Admin</a>
-			<ul class="dropdown-menu">
-				<li><a href="/tournament/email/<?=$tournament->id;?>"><?=_('Email team');?></a></li>
-				<li><a href="/tournament/edit/<?=$tournament->id;?>"><?=_('Edit');?></a></li>
-				<li><a href="#" id="include_player" data-controls-modal="include_player_dialog" data-backdrop="static"><?=_('Include player');?></a></li>
-			</ul>
-		</li>
-	</ul>
+		<ul class="nav nav-tabs">
+			<li class="dropdown pull-left" data-dropdown="dropdown">
+				<a href="#" class="dropdown-toggle">Admin <b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li><a href="/tournament/email/<?=$tournament->id;?>"><?=_('Email team');?></a></li>
+					<li><a href="/tournament/edit/<?=$tournament->id;?>"><?=_('Edit');?></a></li>
+					<li><a href="#" id="include_player" data-controls-modal="include_player_dialog" data-backdrop="static"><?=_('Include player');?></a></li>
+				</ul>
+			</li>
+		</ul>
 	<?php endif; ?>
 	
 	<h1>

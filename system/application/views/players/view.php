@@ -1,8 +1,8 @@
 <?php if($player): ?>
 	<?php if($this->tank_auth->is_admin(array('player' => $player->id))): ?>
-		<ul class="tabs">
-			<li class="dropdown pull-right" data-dropdown="dropdown">
-				<a href="#" class="dropdown-toggle">Admin</a>
+		<ul class="nav nav-tabs">
+			<li class="dropdown pull-left" data-dropdown="dropdown">
+				<a href="#" class="dropdown-toggle">Admin <b class="caret"></b></a>
 				<ul class="dropdown-menu">
 					<li><a href="/player/edit/<?=$player->id;?>">Edit player</a></li>
 					<?php if($this->tank_auth->is_admin()): ?><li>

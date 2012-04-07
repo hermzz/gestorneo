@@ -1,7 +1,7 @@
 <?php if($this->tank_auth->is_admin()): ?>
-	<ul class="tabs">
-		<li class="dropdown pull-right" data-dropdown="dropdown">
-			<a href="#" class="dropdown-toggle">Admin</a>
+	<ul class="nav nav-tabs">
+		<li class="dropdown pull-left" data-dropdown="dropdown">
+			<a href="#" class="dropdown-toggle">Admin <b class="caret"></b></a>
 			<ul class="dropdown-menu">
 				<li><a href="#" id="new_payment" data-controls-modal="new_payment_dialog" data-backdrop="static"><?=_('Add new payment');?></a></li>
 			</ul>

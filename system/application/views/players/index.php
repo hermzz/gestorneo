@@ -1,9 +1,9 @@
 <?php if($this->tank_auth->is_admin()): ?>
-	<ul class="tabs">
-		<li class="dropdown pull-right" data-dropdown="dropdown">
-			<a href="#" class="dropdown-toggle">Admin</a>
+	<ul class="nav nav-tabs">
+		<li class="dropdown pull-left" data-dropdown="dropdown">
+			<a href="#" class="dropdown-toggle">Admin <b class="caret"></b></a>
 			<ul class="dropdown-menu">
-				<li><a href="/player/create">New player</a></li>
+				<li><a href="/tournament/create/"><?=_('New tournament');?></a></li>
 			</ul>
 		</li>
 	</ul>
