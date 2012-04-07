@@ -272,7 +272,7 @@
 				</div>
 			</div>
 		
-			<input type="submit" name="add_payment" class="btn primary" value="<?=_('Add');?>" />
+			<input type="submit" name="add_payment" class="btn btn-primary" value="<?=_('Add');?>" />
 		</form>
 	</div>
 </div>

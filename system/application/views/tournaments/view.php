@@ -126,14 +126,14 @@
 						<input type="hidden" name="tournament_id" value="<?=$tournament->id;?>" />
 						<input type="hidden" name="player_id" value="<?=$this->tank_auth->get_user_id();?>" />
 				
-						<input type="submit" name="submitCancel" class="btn danger" value="<?=_('Not going');?>" />
+						<input type="submit" name="submitCancel" class="btn btn-danger" value="<?=_('Not going');?>" />
 					</form>
 				<?php elseif($this->tournament_model->can_sign_up($tournament->id, $this->tank_auth->get_user_id())): ?>
 					<form action="/tournament/sign_up" method="post" class="pull-right">
 						<input type="hidden" name="tournament_id" value="<?=$tournament->id;?>" />
 						<input type="hidden" name="player_id" value="<?=$this->tank_auth->get_user_id();?>" />
 				
-						<input type="submit" name="submitSignup" class="btn success" value="<?=_('I want to go!');?>" />
+						<input type="submit" name="submitSignup" class="btn btn-success" value="<?=_('I want to go!');?>" />
 					</form>
 				<?php endif; ?>
 			<?php endif; ?>
@@ -141,7 +141,7 @@
 	</h1>
 	
 	<div class="row">
-		<div class="span8">
+		<div class="span6">
 			<h3><?=_('Players confirmed');?></h3>
 		
 			<?php if($teams): ?>
@@ -212,7 +212,7 @@
 			<?php endif; ?>
 		</div>
 		
-		<div class="span8">
+		<div class="span6">
 			<div id="tournament_notes">
 				<?=$tournament->notes ? markdown($tournament->notes) : '<p>'._('No notes').'</p>'; ?>
 				
@@ -293,7 +293,7 @@
 			</form>
 		</div>
 		<div class="modal-footer">
-			<a href="#" class="btn secondary">Close</a>
+			<a href="#" class="btn btn-primary">Close</a>
 		</div>
 	</div>
 	

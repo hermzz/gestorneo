@@ -90,8 +90,8 @@ emails = {
 			</div>
 		</div>
 		
-		<input type="submit" name="submitSendEmail" class="offset2 btn primary" value="<?=_('Send');?>" />
-		<input type="submit" name="submitPreviewEmail"class="btn default"  value="<?=_('Preview');?>" />
+		<input type="submit" name="submitSendEmail" class="btn btn-primary" value="<?=_('Send');?>" />
+		<input type="submit" name="submitPreviewEmail"class="btn"  value="<?=_('Preview');?>" />
     </fieldset>
 </form>
 

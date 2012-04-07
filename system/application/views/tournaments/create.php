@@ -188,5 +188,5 @@
 		</div>
     </fieldset>
 
-    <input type="submit" name="submitNewTournament" value="<?=_('Add');?>" class="btn large primary offset2" />
+    <input type="submit" name="submitNewTournament" value="<?=_('Add');?>" class="btn btn-primary" />
 </form>

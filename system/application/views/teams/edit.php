@@ -19,6 +19,6 @@
 			</div>
 		</div>
 		
-	    <input type="submit" name="submitEditTeam" value="<?=_('Edit');?>" class="btn primary offset2" />
+	    <input type="submit" name="submitEditTeam" value="<?=_('Edit');?>" class="btn btn-primary" />
     </fieldset>
 </form>
