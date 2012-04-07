@@ -40,7 +40,7 @@
 
 			<div class="content">
 				<div class="row">
-					<div class="span16">
+					<div class="span12">
 						<?php if($breadcrumbs): ?>
 							<ul class="breadcrumb">
 								<?php foreach($breadcrumbs as $bc): ?>
