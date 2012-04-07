@@ -37,11 +37,16 @@ h2, h3, h4 {
 
 .player_list li {
 	padding: 3px;
-	line-height: 2em;
+	line-height: 2.2em;
 }
 
 .player_list li form {
 	margin-bottom: 0px;
+	clear: both;
+}
+
+.player_list li form select {
+	margin: 0;
 }
 
 .odd { 
