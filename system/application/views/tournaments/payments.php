@@ -110,14 +110,13 @@
 			return false;
 		});
 		
-		$('#payment_table th a').click(function(e) {
-			// fill in data for the payment
+		$('#payment_table th a.edit_payment').click(function(e) {
 			$.ajax({
 				url: '/ajax/get_payment_data',
 				dataType: "jsonp",
 				type: 'POST',
 				data: {
-					tpid: $(e.target).attr('tpid'),
+					tpid: $(e.target).parent().attr('tpid'),
 				},
 				success: function(response) 
 				{
@@ -165,7 +164,12 @@
 			<tr>
 				<th class="span3"><?=_('Players');?></th>
 				<?php foreach($payments as $payment): ?>
-					<th class="span3"><?=$payment->concept;?> - €<?=$payment->amount;?> (<a href="#" tpid="<?=$payment->tpid;?>">edit</a>)</th>
+					<th class="span3"><?=$payment->concept;?> - €<?=$payment->amount;?>
+						<?php if($this->tank_auth->is_admin()): ?>
+							<a href="#" class="edit_payment" tpid="<?=$payment->tpid;?>"><img src="/static/images/Boolean/Papermart/Text Edit.png" /></a>
+							<a href="#" class="delete_payment" tpid="<?=$payment->tpid;?>"><img src="/static/images/Boolean/Signage/Close Square.png" /></a>
+						<?php endif; ?>
+					</th>
 				<?php endforeach; ?>
 				<th class="span3"><?=_('Owes');?></th>
 			</th>
