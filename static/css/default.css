@@ -78,3 +78,7 @@ input.error {
 .nav li {
   text-transform: lowercase;
 }
+
+.navbar form {
+	margin: 5px 0 0 0;
+}
