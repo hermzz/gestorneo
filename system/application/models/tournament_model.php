@@ -316,6 +316,12 @@ class Tournament_model extends Model
 			array($paid, $tpid, $plid)
 		);
 	}
+	
+	function deletePayment($tpid)
+	{
+		$this->db->query('DELETE FROM player_payments WHERE tpid=?', array($tpid));
+		$this->db->query('DELETE FROM tournament_payments WHERE tpid=?', array($tpid));
+	}
 }
 
 ?>

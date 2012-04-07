@@ -94,7 +94,7 @@ class Ajax extends GS_Controller
 		
 		$url = parse_url($_SERVER['REQUEST_URI']);
 		parse_str($url['query'], $params);
-		echo $params['callback'].'('.json_encode(array('success' => true)).')'; 
+		echo $params['callback'].'('.json_encode(array('success' => true)).')';
 	}
 	
 	function get_payment_data()
@@ -108,7 +108,19 @@ class Ajax extends GS_Controller
 		
 		$payment->players = $this->player_model->getPlayerPayments($payment->tpid);
 		
-		echo $params['callback'].'('.json_encode(array('success' => true, 'data' => $payment)).')';  
+		echo $params['callback'].'('.json_encode(array('success' => true, 'data' => $payment)).')';
+	}
+	
+	function delete_payment()
+	{
+		$url = parse_url($_SERVER['REQUEST_URI']);
+		parse_str($url['query'], $params);
+		
+		$payment = $this->tournament_model->deletePayment(
+			$this->input->post('tpid')
+		);
+		
+		echo $params['callback'].'('.json_encode(array('success' => true)).')';
 	}
 }
 

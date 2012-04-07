@@ -140,6 +140,29 @@
 			
 			return false;
 		});
+		
+		$('#payment_table th a.delete_payment').click(function(e) {
+			if(confirm("<?=_("Are you sure you want to delete this payment?");?>"))
+			{
+				$.ajax({
+					url: '/ajax/delete_payment',
+					dataType: "jsonp",
+					type: 'POST',
+					data: {
+						tpid: $(e.target).parent().attr('tpid'),
+					},
+					success: function(response) 
+					{
+						if(response.success)
+						{
+							location.reload();
+						}
+					}
+				});
+			}
+			
+			return false;
+		});
 	});
 	
 	function add_player_to_modal(player_id, player_name)
