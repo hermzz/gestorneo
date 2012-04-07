@@ -12,24 +12,27 @@
 <h2><?=_('Upcoming tournaments');?></h2>
 
 <?php if($future_tournaments): ?>
-	<?php $month_year = false; ?>
+	<?php $year = false; ?>
 		<?php foreach($future_tournaments as $tournament): ?>
 			<?php
-				if(!$month_year)
+				if(!$year)
 				{
-					echo '<h4>'.strftime('%B %Y', mysql_to_unix($tournament->start_date)).'</h4><ul>';
-					$month_year = strftime('%m-%Y', mysql_to_unix($tournament->start_date));
+					echo '<h4>'.strftime('%Y', mysql_to_unix($tournament->start_date)).'</h4><ul>';
+					$year = strftime('%Y', mysql_to_unix($tournament->start_date));
 				} else {
-					$t_month_year = strftime('%m-%Y', mysql_to_unix($tournament->start_date));
-					if($t_month_year != $month_year)
+					$t_year = strftime('%Y', mysql_to_unix($tournament->start_date));
+					if($t_year != $year)
 					{
-						echo '</ul><h4>'.strftime('%B %Y', mysql_to_unix($tournament->start_date)).'</h4><ul>';
-						$month_year = $t_month_year;
+						echo '</ul><h4>'.strftime('%Y', mysql_to_unix($tournament->start_date)).'</h4><ul>';
+						$year = $t_year;
 					}
 				}
 			?>
 			<li>
-				<?=sprintf(_('<a href="%s">%s</a> on %s'), site_url('/tournament/view/'.$tournament->id), $tournament->name, strftime('%A %e', mysql_to_unix($tournament->start_date)));?>
+				<?=sprintf(_('<a href="%s">%s</a> on %s'), 
+					site_url('/tournament/view/'.$tournament->id), 
+					$tournament->name, 
+					strftime('%A %B %e, %Y', mysql_to_unix($tournament->start_date)));?>
 				(<?=_('Players');?>: <?=$this->tournament_model->countSignedUp($tournament->id)?>
 					[<?=$this->tournament_model->countSignedUp($tournament->id, 'M')?>M/
 					<?=$this->tournament_model->countSignedUp($tournament->id, 'F')?>F])
@@ -43,24 +46,27 @@
 <h2><?=_('Past tournaments');?></h2>
 
 <?php if($past_tournaments): ?>
-	<?php $month_year = false; ?>
+	<?php $year = false; ?>
 		<?php foreach($past_tournaments as $tournament): ?>
 			<?php
-				if(!$month_year)
+				if(!$year)
 				{
-					echo '<h4>'.strftime('%B %Y', mysql_to_unix($tournament->start_date)).'</h4><ul>';
-					$month_year = strftime('%m-%Y', mysql_to_unix($tournament->start_date));
+					echo '<h4>'.strftime('%Y', mysql_to_unix($tournament->start_date)).'</h4><ul>';
+					$year = strftime('%Y', mysql_to_unix($tournament->start_date));
 				} else {
-					$t_month_year = strftime('%m-%Y', mysql_to_unix($tournament->start_date));
-					if($t_month_year != $month_year)
+					$t_year = strftime('%Y', mysql_to_unix($tournament->start_date));
+					if($t_year != $year)
 					{
-						echo '</ul><h4>'.strftime('%B %Y', mysql_to_unix($tournament->start_date)).'</h4><ul>';
-						$month_year = $t_month_year;
+						echo '</ul><h4>'.strftime('%Y', mysql_to_unix($tournament->start_date)).'</h4><ul>';
+						$year = $t_year;
 					}
 				}
 			?>
 			<li>
-				<?=sprintf(_('<a href="%s">%s</a> on %s'), site_url('/tournament/view/'.$tournament->id), $tournament->name, strftime('%A %e, %B %Y', mysql_to_unix($tournament->start_date)));?>
+				<?=sprintf(_('<a href="%s">%s</a> on %s'), 
+					site_url('/tournament/view/'.$tournament->id), 
+					$tournament->name, 
+					strftime('%A %e %B', mysql_to_unix($tournament->start_date)));?>
 				(<?=_('Players');?>: <?=$this->tournament_model->countSignedUp($tournament->id)?>
 					[<?=$this->tournament_model->countSignedUp($tournament->id, 'M')?>M/
 					<?=$this->tournament_model->countSignedUp($tournament->id, 'F')?>F])
