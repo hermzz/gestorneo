@@ -9,6 +9,11 @@ class GS_Controller extends Controller
 		// Data array passed on to template
 		$this->data = array();
 		
+		$this->data['breadcrumbs'][] = array(
+			'url' => '/',
+			'text' => _('Home')
+		);
+		
 		$this->_set_language();
 	}
 	

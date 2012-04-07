@@ -14,6 +14,11 @@ class Tournament extends GS_Controller {
 			$this->session->set_userdata(array('login_return' => $this->uri->uri_string()));
 			redirect('/auth/login/');
 		}
+		
+		$this->data['breadcrumbs'][] = array(
+			'url' => '/tournament/',
+			'text' => _('Tournaments')
+		);
 	}
 	
 	function index()
@@ -497,6 +502,11 @@ class Tournament extends GS_Controller {
 		$this->data['players'] = $players;
 		$this->data['title'] = _('Tournament payments');
 		$this->data['content_view'] = 'tournaments/payments';
+		
+		$this->data['breadcrumbs'][] = array(
+			'url' => '/tournament/view/'.$tournament_id,
+			'text' => $tournament->name
+		);
 		
 		$this->load->view('skeleton', $this->data);
 	}

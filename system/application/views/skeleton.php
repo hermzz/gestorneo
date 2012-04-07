@@ -41,6 +41,17 @@
 			<div class="content">
 				<div class="row">
 					<div class="span16">
+						<?php if($breadcrumbs): ?>
+							<ul class="breadcrumb">
+								<?php foreach($breadcrumbs as $bc): ?>
+									<li>
+										<a href="<?=$bc['url'];?>"><?=$bc['text'];?></a>
+										<span class="divider">/</span>
+									</li>
+								<?php endforeach; ?>
+							</ul>
+						<?php endif; ?>
+					
 						<?php $this->load->view($content_view); ?>
 					</div>
 				</div>
