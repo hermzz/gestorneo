@@ -32,7 +32,7 @@
 				<?=sprintf(_('<a href="%s">%s</a> on %s'), 
 					site_url('/tournament/view/'.$tournament->id), 
 					$tournament->name, 
-					strftime('%A %B %e, %Y', mysql_to_unix($tournament->start_date)));?>
+					strftime('%A %B %e', mysql_to_unix($tournament->start_date)));?>
 				(<?=_('Players');?>: <?=$this->tournament_model->countSignedUp($tournament->id)?>
 					[<?=$this->tournament_model->countSignedUp($tournament->id, 'M')?>M/
 					<?=$this->tournament_model->countSignedUp($tournament->id, 'F')?>F])
