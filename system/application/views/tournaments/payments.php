@@ -188,7 +188,7 @@
 				<th class="span3"><?=_('Players');?></th>
 				<?php foreach($payments as $payment): ?>
 					<th class="span3"><?=$payment->concept;?> - €<?=$payment->amount;?>
-						<?php if($this->tank_auth->is_admin()): ?>
+						<?php if($this->tank_auth->is_admin(array('tournament' => $tournament->id))): ?>
 							<a href="#" class="edit_payment" tpid="<?=$payment->tpid;?>"><img src="/static/images/Boolean/Papermart/Text Edit.png" /></a>
 							<a href="#" class="delete_payment" tpid="<?=$payment->tpid;?>"><img src="/static/images/Boolean/Signage/Close Square.png" /></a>
 						<?php endif; ?>
