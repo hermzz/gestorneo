@@ -4,8 +4,8 @@
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 		<title><?=$title?></title>
 		
-		<link rel="stylesheet" type="text/css" href="<?=base_url();?>static/css/default.css" />
 		<link rel="stylesheet" type="text/css" href="<?=base_url();?>static/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="<?=base_url();?>static/css/default.css" />
 		<link href="<?=base_url();?>static/css/ui-lightness/ui.base.css" type="text/css" rel="stylesheet" />
 		
 		<script src="<?=base_url();?>static/javascript/jquery.min.js" language="javascript"></script>

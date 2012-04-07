@@ -3,6 +3,10 @@ body {
 	margin-bottom: 0 !important;
 }
 
+h2, h3, h4 {
+	line-height: 2em;
+}
+
 #tournament_notes, #payment_details, #travel_details {
 	background-color: #eee;
 	border: 1px solid #ddd;
