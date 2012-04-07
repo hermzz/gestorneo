@@ -1,7 +1,6 @@
 <div class="navbar navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container">
-			<a class="brand" href="#">Torneos de Q+D</a>
 			<div class="nav-collapse">
 				<ul class="nav">
 					<li><a href="/"><?=_('home');?></a></li>
