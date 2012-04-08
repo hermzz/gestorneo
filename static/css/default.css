@@ -91,3 +91,20 @@ input.error {
 .navbar form {
 	margin: 5px 0 0 0;
 }
+
+/** PAYMENT TABLE STRIPING */
+.table-striped tbody tr:nth-child(odd).good td {
+	background-color: #a9d8a9;
+}
+
+.table-striped .good td {
+	background-color: #a9d8a9;
+}
+
+.table-striped tbody tr:nth-child(odd).bad td {
+	background-color: #d9aeac;
+}
+
+.table-striped .bad td {
+	background-color: #d9aeac;
+}

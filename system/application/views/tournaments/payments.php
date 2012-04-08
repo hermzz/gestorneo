@@ -182,7 +182,7 @@
 </script>
 
 <?php if($payments): ?>
-	<table id="payment_table" class="span<?=(count($payments) + 2) * 3;?> zebra-striped">
+	<table id="payment_table" class="table table-striped">
 		<thead>
 			<tr>
 				<th class="span3"><?=_('Players');?></th>
@@ -199,7 +199,7 @@
 		</thead>
 		<tbody>
 			<?php foreach($players as $player): ?>
-				<tr>
+				<tr class="<?=$player->amount_owed > 0 ? 'bad' : 'good' ;?>">
 					<td class="span3"><?=$player->username;?></td>
 					<?php foreach($payments as $payment): ?>
 						<td class="span3">
