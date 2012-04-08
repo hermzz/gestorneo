@@ -21,7 +21,7 @@ $sex = array(
 	'value'	=> set_value('sex'),
 );
 ?>
-<?php echo form_open($this->uri->uri_string()); ?>
+<?php echo form_open($this->uri->uri_string(), array('class' => 'well')); ?>
 	<fieldset>
 		<?php
 			$name_error = strlen(form_error($username['name'])) > 0;
@@ -68,5 +68,5 @@ $sex = array(
 			</div>
 		</div>
 	</fieldset>
-<?php echo form_submit(array('name' => 'create', 'value' => _('Create'), 'class' => 'btn primary offset2')); ?>
+<?php echo form_submit(array('name' => 'create', 'value' => _('Create'), 'class' => 'btn btn-primary')); ?>
 <?php echo form_close(); ?>

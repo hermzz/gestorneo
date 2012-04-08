@@ -129,7 +129,7 @@
 
 <?=validation_errors()?>
 
-<form action="#" method="post">
+<form action="#" method="post" class="well">
 	<fieldset>
 		<div class="clearfix">
 			<label for="name"><?=_('Name');?></label>

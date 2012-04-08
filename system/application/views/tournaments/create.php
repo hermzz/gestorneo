@@ -121,7 +121,7 @@
 
 <?=validation_errors()?>
 
-<form action="#" id="tournament_form" method="post">
+<form action="#" id="tournament_form" method="post" class="well">
 	<fieldset>
 		<div class="clearfix">
 			<label for="name"><?=_('Name');?></label>

@@ -35,7 +35,7 @@ $sex = array(
 	'value'	=> set_value('sex', $player->sex),
 );
 ?>
-<?php echo form_open($this->uri->uri_string()); ?>
+<?php echo form_open($this->uri->uri_string(), array('class' => 'well')); ?>
 <fieldset>
 		<?php
 			$name_error = strlen(form_error($username['name'])) > 0;
@@ -107,7 +107,7 @@ $sex = array(
 		<div class="clearfix <?=$sex_error ? 'error' : '';?>">
 			<?php echo form_label(_('Sex'), $sex['id']); ?>
 			<div class="input">
-				<?php echo form_dropdown('sex', array('M' => _('Guy'), 'F' => _('Girl')), null, 'id="sex"'); ?>
+				<?php echo form_dropdown('sex', array('M' => _('Guy'), 'F' => _('Girl')), $player->sex, 'id="sex"'); ?>
 				<?php if($sex_error): ?>
 					<span class="help-inline">
 						<?=form_error($sex['name']);?>
@@ -116,5 +116,5 @@ $sex = array(
 			</div>
 		</div>
 	</fieldset>
-<?php echo form_submit(array('name' => 'editInfo', 'value' => _('Edit information'), 'class' => 'btn primary offset2')); ?>
+<?php echo form_submit(array('name' => 'editInfo', 'value' => _('Edit information'), 'class' => 'btn btn-primary')); ?>
 <?php echo form_close(); ?>
