@@ -43,10 +43,12 @@
 					<div class="span12">
 						<?php if($breadcrumbs): ?>
 							<ul class="breadcrumb">
-								<?php foreach($breadcrumbs as $bc): ?>
+								<?php foreach($breadcrumbs as $k => $bc): ?>
 									<li>
 										<a href="<?=$bc['url'];?>"><?=$bc['text'];?></a>
-										<span class="divider">/</span>
+										<?php if($k < (count($breadcrumbs) - 1)): ?>
+											<span class="divider">/</span>
+										<?php endif; ?>
 									</li>
 								<?php endforeach; ?>
 							</ul>
