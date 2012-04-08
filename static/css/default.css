@@ -93,11 +93,11 @@ input.error {
 }
 
 /** PAYMENT TABLE STRIPING */
-.table-striped tbody tr:nth-child(odd).good td {
+.table-striped tbody tr:nth-child(odd).good td  {
 	background-color: #a9d8a9;
 }
 
-.table-striped .good td {
+.table-striped tbody tr.good td {
 	background-color: #a9d8a9;
 }
 
@@ -105,6 +105,6 @@ input.error {
 	background-color: #d9aeac;
 }
 
-.table-striped .bad td {
+.table-striped tbody tr.bad td {
 	background-color: #d9aeac;
 }
