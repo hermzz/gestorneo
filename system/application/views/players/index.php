@@ -3,7 +3,7 @@
 		<li class="dropdown pull-left" data-dropdown="dropdown">
 			<a href="#" class="dropdown-toggle">Admin <b class="caret"></b></a>
 			<ul class="dropdown-menu">
-				<li><a href="/tournament/create/"><?=_('New tournament');?></a></li>
+				<li><a href="/player/create/"><?=_('New player');?></a></li>
 			</ul>
 		</li>
 	</ul>
