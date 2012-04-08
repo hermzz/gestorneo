@@ -11,6 +11,11 @@ class Player extends GS_Controller {
 			$this->session->set_userdata(array('login_return' => $this->uri->uri_string()));
 			redirect('/auth/login/');
 		}
+		
+		$this->data['breadcrumbs'][] = array(
+			'url' => '/player/',
+			'text' => _('Players')
+		);
 	}
 	
 	function index()
@@ -33,6 +38,11 @@ class Player extends GS_Controller {
 		} else {
 			$this->data['title'] = _("Player not found");
 		}
+		
+		$this->data['breadcrumbs'][] = array(
+			'url' => '/player/view/'.$id,
+			'text' => $this->data['player']->username
+		);
 		
 		$this->data['content_view'] = 'players/view';
 		$this->load->view('skeleton', $this->data);
@@ -84,6 +94,11 @@ class Player extends GS_Controller {
 		$this->form_validation->set_rules('password', 'Password', 'trim|xss_clean|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
 		$this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|xss_clean|matches[password]');
 		$this->form_validation->set_rules('sex', 'Sex', 'required|xss_clean');
+		
+		$this->data['breadcrumbs'][] = array(
+			'url' => '/player/view/'.$id,
+			'text' => $this->data['player']->username
+		);
 		
 		if($this->form_validation->run() == FALSE)
 		{

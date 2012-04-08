@@ -11,6 +11,11 @@ class Team extends GS_Controller {
 			$this->session->set_userdata(array('login_return' => $this->uri->uri_string()));
 			redirect('/auth/login/');
 		}
+		
+		$this->data['breadcrumbs'][] = array(
+			'url' => '/team/',
+			'text' => _('Teams')
+		);
 	}
 	
 	function index()
@@ -61,6 +66,11 @@ class Team extends GS_Controller {
 		$this->data['title'] = sprintf(_('Edit team "%s"'), $this->data['team']->name);
 		
 		$this->form_validation->set_rules('name', _('Name'), 'required');
+		
+		$this->data['breadcrumbs'][] = array(
+			'url' => '/team/view/'.$id,
+			'text' => $this->data['team']->name
+		);
 		
 		if($this->form_validation->run() == FALSE)
 		{

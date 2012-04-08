@@ -118,6 +118,11 @@ class Tournament extends GS_Controller {
 		$this->data['player_owes'] = $this->player_model->getPlayerDebtByTournament($tournament_id, $this->tank_auth->get_user_id());
 
 		$this->data['title'] = $this->data['tournament'] ?  $this->data['tournament']->name : _("Tournament not found");
+	
+		$this->data['breadcrumbs'][] = array(
+			'url' => '/tournament/view/'.$tournament_id,
+			'text' => $this->data['tournament']->name
+		);
 		
 		$this->data['tank_auth'] = $this->tank_auth;
 		$this->data['content_view'] = 'tournaments/view';
@@ -220,6 +225,11 @@ class Tournament extends GS_Controller {
 		$this->form_validation->set_rules('deadline_date', _('Deadline date'), 'callback_date_check|callback_is_before[end_date]');
 		$this->form_validation->set_rules('notes', _('Notes'), 'trim');
 		$this->form_validation->set_rules('teams[]', _('Teams'), 'required');
+		
+		$this->data['breadcrumbs'][] = array(
+			'url' => '/tournament/view/'.$tournament_id,
+			'text' => $this->data['tournament']->name
+		);
 		
 		if($this->form_validation->run() == FALSE)
 		{
@@ -369,6 +379,11 @@ class Tournament extends GS_Controller {
 		
 		$this->form_validation->set_rules('subject', _('Subject'), 'required');
 		$this->form_validation->set_rules('message', _('Message'), 'required');
+		
+		$this->data['breadcrumbs'][] = array(
+			'url' => '/tournament/view/'.$tournament_id,
+			'text' => $this->data['tournament']->name
+		);
 		
 		if($this->form_validation->run() == FALSE)
 		{
