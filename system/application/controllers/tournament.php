@@ -308,8 +308,9 @@ class Tournament extends GS_Controller {
 			$tournament = $this->tournament_model->get($this->input->post('tournament_id'));
 			
 			$this->load->library('email');
-			
-			$this->email->from($this->config->config['tank_auth']['webmaster_email'], 'Gestorneo Gremlin');
+
+			$this->email->from($this->config->config['email']['via_email']);
+			$this->email->reply_to($this->config->config['tank_auth']['webmaster_email'], 'Gestorneo Gremlin');
 			
 			$this->email->to($this->config->config['tank_auth']['webmaster_email']);
 			$this->email->cc(implode(',', array_map(function($p){ return $p->email; }, $this->player_model->getAdmins())));
@@ -319,7 +320,7 @@ class Tournament extends GS_Controller {
 				$player->username.' has signed up to play at '.$tournament->name.'
 				'.$this->config->config['base_url'].'tournament/view/'.$tournament->id
 			);
-			
+
 			$this->email->send();
 		}
 		
@@ -340,7 +341,8 @@ class Tournament extends GS_Controller {
 			
 			$this->load->library('email');
 			
-			$this->email->from($this->config->config['tank_auth']['webmaster_email'], 'Gestorneo Gremlin');
+			$this->email->from($this->config->config['email']['via_email']);
+			$this->email->reply_to($this->config->config['tank_auth']['webmaster_email'], 'Gestorneo Gremlin');
 			
 			$this->email->to($this->config->config['tank_auth']['webmaster_email']);
 			$this->email->cc(implode(',', array_map(function($p){ return $p->email; }, $this->player_model->getAdmins())));
@@ -399,8 +401,9 @@ class Tournament extends GS_Controller {
 			);
 			
 			$this->load->library('email');
-			
-			$this->email->from($this->config->config['tank_auth']['webmaster_email'], 'Gestorneo Gremlin');
+
+			$this->email->from($this->config->config['email']['via_email']);
+			$this->email->reply_to($this->config->config['tank_auth']['webmaster_email'], 'Gestorneo Gremlin');
 			
 			$this->email->to($this->config->config['tank_auth']['webmaster_email']);
 			$this->email->cc(implode(',', array_map(function($p){ return $p->email; }, $players)));

@@ -51,6 +51,7 @@ class CI_Email {
 	var $send_multipart	= TRUE;		// TRUE/FALSE - Yahoo does not like multipart alternative, so this is an override.  Set to FALSE for Yahoo.
 	var	$bcc_batch_mode	= FALSE;	// TRUE/FALSE  Turns on/off Bcc batch feature
 	var	$bcc_batch_size	= 200;		// If bcc_batch_mode = TRUE, sets max number of Bccs in each batch
+	var $via_email		= FALSE;	// Email addres to send email from
 	var $_safe_mode		= FALSE;
 	var	$_subject		= "";
 	var	$_body			= "";
@@ -543,6 +544,11 @@ class CI_Email {
 		}
 
 		$this->crlf	= $crlf;
+	}
+
+	function set_via_email($via_email)
+	{
+		$this->via_email = $via_email;
 	}
   
 	// --------------------------------------------------------------------
