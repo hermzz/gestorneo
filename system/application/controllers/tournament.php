@@ -309,7 +309,7 @@ class Tournament extends GS_Controller {
 			
 			$this->load->library('email');
 
-			$this->email->from($this->config->config['email']['via_email']);
+			$this->email->from($this->config->item('via_email'));
 			$this->email->reply_to($this->config->config['tank_auth']['webmaster_email'], 'Gestorneo Gremlin');
 			
 			$this->email->to($this->config->config['tank_auth']['webmaster_email']);
