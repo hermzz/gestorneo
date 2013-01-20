@@ -17,13 +17,13 @@
 			</li>
 		</ul>
 	<?php endif; ?>
-	
+
 	<h2><?=$player->username?> <span class="header-small">(<?=$player->email;?>)</span></h2>
-	
-	<p><?=sprintf(_('Member since %s'), strftime('%A %e, %B %Y', mysql_to_unix($player->created)));?></p>
-	
+
+	<p><?=sprintf(_('Member since %s'), strftime('%A '.(strtoupper(substr(PHP_OS, 0, 3)) == 'WIN' ? '%#d' : '%e').', %B %Y', mysql_to_unix($player->created)));?></p>
+
 	<h3><?=_('Tournaments');?></h3>
-	
+
 	<?php if($tournaments): ?>
 		<?php $year = false; ?>
 			<?php foreach($tournaments as $tournament): ?>
@@ -42,7 +42,7 @@
 					}
 				?>
 				<li><a href="/tournament/view/<?=$tournament->id?>"><?=$tournament->name?></a>
-					 - <?=strftime('%A %e %B', mysql_to_unix($tournament->start_date))?></li>
+					 - <?=strftime('%A '.(strtoupper(substr(PHP_OS, 0, 3)) == 'WIN' ? '%#d' : '%e').' %B', mysql_to_unix($tournament->start_date))?></li>
 			<?php endforeach; ?>
 		</ul>
 	<?php else: ?>

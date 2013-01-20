@@ -49,7 +49,7 @@ h2, h3, h4 {
 	margin: 0;
 }
 
-.odd { 
+.odd {
 	background-color: #ddd;
 }
 
@@ -107,4 +107,14 @@ input.error {
 
 .table-striped tbody tr.bad td {
 	background-color: #d9aeac;
+}
+
+/** Tournament Form **/
+#tournament_form .clearfix {
+	clear: both;
+}
+#tournament_form .inline-date {
+	clear: none;
+	float: left;
+	margin: 5px 15px 10px 0
 }

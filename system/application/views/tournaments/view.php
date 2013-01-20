@@ -2,35 +2,35 @@
 	<script type="text/javascript">
 		var last_values = false;
 		var tournament_id = <?=$tournament->id;?>;
-		
+
 		$(document).ready(function() {
 			$('form.approve_player select').change(function(e) {
 				$(e.target).parent().submit();
 			});
-			
+
 			$('#tn_toggle').click(function() {
 				$('#travel_details').hide();
 				$('#tournament_notes').show();
-				
+
 				$('#tn_toggle').attr('class', 'active');
 				$('#td_toggle').attr('class', '');
-				
+
 				return false;
 			});
-			
+
 			$('#td_toggle').click(function() {
 				$('#tournament_notes').hide();
 				$('#travel_details').show();
-				
+
 				$('#td_toggle').attr('class', 'active');
 				$('#tn_toggle').attr('class', '');
-				
+
 				return false;
 			});
-			
+
 			$('#include_player_dialog').modal().bind('hide', function() { location.reload(); });
 			$('#include_player_dialog .modal-footer a').click(function() { $('#include_player_dialog').modal('hide'); });
-			
+
 			$('input[name="player_autocomplete"]').autocomplete({
 				source: function(request, response) {
 					$.ajax({
@@ -39,11 +39,11 @@
 						data: {
 							term: request.term
 						},
-						success: function(data) 
+						success: function(data)
 						{
 							if(data.success)
 							{
-								response($.map(data.results, function(item) 
+								response($.map(data.results, function(item)
 								{
 									return {
 										label: item.name,
@@ -56,22 +56,22 @@
 						}
 					});
 				},
-				open: function(event, ui) 
+				open: function(event, ui)
 				{
-					last_values = false; 
+					last_values = false;
 					$('input[name="add_player"]').attr('disabled', 'disabled');
-				
+
 				},
-				select: function(event, ui) { 
-					last_values = ui.item; 
+				select: function(event, ui) {
+					last_values = ui.item;
 					$('input[name="add_player"]').attr('disabled', false);
 				},
 				close: function(event, ui) {
 					$('input[name="player_autocomplete"]').val(last_values.label);
 				}
 			});
-			
-			
+
+
 			$('#include_player_dialog form').submit(function() {
 				$.ajax({
 					url: '/ajax/invite_player_to_tournament',
@@ -80,7 +80,7 @@
 						tid: tournament_id,
 						pid: last_values.value
 					},
-					success: function(data) 
+					success: function(data)
 					{
 						if(data.success)
 						{
@@ -93,16 +93,16 @@
 						}
 					}
 				});
-			
+
 				return false;
 			});
 		});
 	</script>
-	
+
 	<?php
 		$is_tournament_admin = $this->tank_auth->is_admin(array('tournament' => $tournament->id));
 	?>
-	
+
 	<?php if($is_tournament_admin): ?>
 		<ul class="nav nav-tabs">
 			<li class="dropdown pull-left" data-dropdown="dropdown">
@@ -115,39 +115,39 @@
 			</li>
 		</ul>
 	<?php endif; ?>
-	
+
 	<h1>
-		<?=sprintf(_('%s <span class="header_small">on %s</span>'), $tournament->name, strftime('%A %e, %B %Y', mysql_to_unix($tournament->start_date)));?>
-		
+		<?=sprintf(_('%s <span class="header_small">on %s</span>'), $tournament->name, strftime('%A '.(strtoupper(substr(PHP_OS, 0, 3)) == 'WIN' ? '%d' : '%e').', %B %Y', mysql_to_unix($tournament->start_date)));?>
+
 		<?php if(!$this->tournament_model->is_old($tournament)):?>
 			<?php if($this->tournament_model->undeadlined($tournament)):?>
 				<?php if($this->tournament_model->is_signed_up($tournament->id, $this->tank_auth->get_user_id())): ?>
 					<form action="/tournament/cancel_sign_up" method="post" class="pull-right">
 						<input type="hidden" name="tournament_id" value="<?=$tournament->id;?>" />
 						<input type="hidden" name="player_id" value="<?=$this->tank_auth->get_user_id();?>" />
-				
+
 						<input type="submit" name="submitCancel" class="btn btn-danger" value="<?=_('Not going');?>" />
 					</form>
 				<?php elseif($this->tournament_model->can_sign_up($tournament->id, $this->tank_auth->get_user_id())): ?>
 					<form action="/tournament/sign_up" method="post" class="pull-right">
 						<input type="hidden" name="tournament_id" value="<?=$tournament->id;?>" />
 						<input type="hidden" name="player_id" value="<?=$this->tank_auth->get_user_id();?>" />
-				
+
 						<input type="submit" name="submitSignup" class="btn btn-success" value="<?=_('I want to go!');?>" />
 					</form>
 				<?php endif; ?>
 			<?php endif; ?>
 		<?php endif; ?>
 	</h1>
-	
+
 	<div class="row">
 		<div class="span6">
 			<h3><?=_('Players confirmed');?></h3>
-		
+
 			<?php if($teams): ?>
 				<?php foreach($teams as $team): ?>
 					<h4><?=$team->name;?> (<?=$team->males;?>M / <?=$team->females;?>F)</h4>
-				
+
 					<ul class="player_list">
 						<?php if($team->players): ?>
 							<?php foreach($team->players as $k => $player): ?>
@@ -164,7 +164,7 @@
 					</ul>
 				<?php endforeach; ?>
 			<?php endif; ?>
-		
+
 			<?php if($unassigned['players']): ?>
 				<h4><?=_('Unassigned players');?> (<?=$unassigned['males'];?>M / <?=$unassigned['females'];?>F)</h4>
 				<ul class="player_list">
@@ -186,7 +186,7 @@
 					<?php endforeach; ?>
 				</ul>
 			<?php endif; ?>
-	
+
 			<h3><?=_('Waiting list');?> (<?=$waiting['males'];?>M / <?=$waiting['females'];?>F)</h3>
 			<?php if($waiting['players']): ?>
 				<ul class="player_list">
@@ -211,14 +211,14 @@
 				<p><?=_('No one\'s been left out, yay!');?></p>
 			<?php endif; ?>
 		</div>
-		
+
 		<div class="span6">
 			<div id="tournament_notes">
 				<?=$tournament->notes ? markdown($tournament->notes) : '<p>'._('No notes').'</p>'; ?>
-				
-				<p><?=sprintf(_('The signup deadline for this tournament is %s'), strftime('%A %e, %B %Y', mysql_to_unix($tournament->signup_deadline)));?></p>
+
+				<p><?=sprintf(_('The signup deadline for this tournament is %s'), strftime('%A '.(strtoupper(substr(PHP_OS, 0, 3)) == 'WIN' ? '%d' : '%e').', %B %Y', mysql_to_unix($tournament->signup_deadline)));?></p>
 			</div>
-			
+
 			<div id="payment_details">
 				<?php if($player_owes): ?>
 					<p><?=sprintf(_('You still have to pay €%0.2f'), $player_owes);?></p>
@@ -227,7 +227,7 @@
 				<?php endif; ?>
 				<p><a href="/tournament/payments/<?=$tournament->id;?>"><?=_('See payment details');?></a></p>
 			</div>
-		
+
 			<div id="travel_details">
 				<p><a href="/tournament/add_trip_leg/<?=$tournament->id;?>"><?=_('Add trip leg');?></a></p>
 
@@ -239,18 +239,18 @@
 								<?php foreach($trips[$direction] as $trip): ?>
 									<li>
 										<?php switch($trip->trip_type):
-											case 'car': ?> 
+											case 'car': ?>
 												<?=sprintf(
-												_('Car from %s to %s, leaving on %s'), 
-												$trip->origin, 
-												$trip->destination, 
-												strftime('%A %e, %B %Y @%R', mysql_to_unix($trip->departure_time)));
+												_('Car from %s to %s, leaving on %s'),
+												$trip->origin,
+												$trip->destination,
+												strftime('%A '.(strtoupper(substr(PHP_OS, 0, 3)) == 'WIN' ? '%d' : '%e').', %B %Y @%H:%M', mysql_to_unix($trip->departure_time)));
 												?>
 												<?php break; ?>
 											<?php default: ?>
 												<?=$trip->trip_name;?>,
-												<?=$trip->origin;?> &rarr; <?=$trip->destination;?>, 
-												<?=strftime('%a %e, %R-', mysql_to_unix($trip->departure_time));?><?=strftime('%R', mysql_to_unix($trip->arrival_time));?>
+												<?=$trip->origin;?> &rarr; <?=$trip->destination;?>,
+												<?=strftime('%a '.(strtoupper(substr(PHP_OS, 0, 3)) == 'WIN' ? '%d' : '%e').', %H:%M-', mysql_to_unix($trip->departure_time));?><?=strftime('%H:%M', mysql_to_unix($trip->arrival_time));?>
 												<?php break; ?>
 										<?php endswitch; ?><br />
 
@@ -277,7 +277,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<div id="include_player_dialog" class="modal hide fade" style="display: block; ">
 		<div class="modal-header">
 			<a href="#" class="close">×</a>
@@ -286,9 +286,9 @@
 		<div class="modal-body">
 			<form action="#" method="post">
 				<input type="text" name="player_autocomplete" />
-				
+
 				<input type="submit" name="add_player" value="<?=_('Add');?>" disabled="disabled" />
-				
+
 				<p></p>
 			</form>
 		</div>
@@ -296,7 +296,7 @@
 			<a href="#" class="btn btn-primary">Close</a>
 		</div>
 	</div>
-	
+
 <?php else: ?>
 	<p><?=_('Tournament not found');?></p>
 <?php endif; ?>

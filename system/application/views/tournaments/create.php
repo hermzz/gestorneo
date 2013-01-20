@@ -3,22 +3,44 @@
 <link href="/static/css/base/ui.datepicker.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#start_date").datepicker({
+		$("#start_date_picker").datepicker({
 			dateFormat: 'dd/mm/yy',
+			firstDay: 1,
 			onSelect: function(dateText, inst) {
-				$('#end_date').attr('value', dateText);
-				$('#deadline_date').attr('value', dateText);
+				$('#start_date').val(dateText);
+
+				var dparts = dateText.split("/");
+				var dd = new Date(dparts[2], dparts[1]-1, dparts[0]);
+				var edate = dd;
+				edate.setDate(edate.getDate() + 7 - edate.getDay());
+				edate = edate.getDate() + '/' + (edate.getMonth() + 1) + '/' + edate.getFullYear();
+				$('#end_date_picker').datepicker("option", "minDate", dateText).datepicker("setDate", edate);
+				$('#end_date').val(edate);
+
+				var ddate = dd;
+				ddate.setDate(ddate.getDate() - 70);
+				ddate = ddate.getDate() + '/' + (ddate.getMonth() +1) + '/' + ddate.getFullYear();
+				$('#deadline_date').val(ddate);
+				$('#deadline_date_picker').datepicker("setDate", ddate).datepicker("option", "maxDate", dateText);
 			}
 		});
-		
-		$("#end_date").datepicker({
-			dateFormat: 'dd/mm/yy'
+
+		$("#end_date_picker").datepicker({
+			dateFormat: 'dd/mm/yy',
+			firstDay: 1,
+			onSelect: function(dateText, inst) {
+				$('#end_date').val(dateText);
+			}
 		});
-		
-		$("#deadline_date").datepicker({
-			dateFormat: 'dd/mm/yy'
+
+		$("#deadline_date_picker").datepicker({
+			dateFormat: 'dd/mm/yy',
+			firstDay: 1,
+			onSelect: function(dateText, inst) {
+				$('#deadline_date').val(dateText);
+			}
 		});
-		
+
 		$('input[name="teams_autocomplete"]').autocomplete({
 			source: function(request, response) {
 				$.ajax({
@@ -27,11 +49,11 @@
 					data: {
 						term: request.term
 					},
-					success: function(data) 
+					success: function(data)
 					{
 						if(data.success)
 						{
-							response($.map(data.results, function(item) 
+							response($.map(data.results, function(item)
 							{
 								return {
 									label: item.name,
@@ -44,30 +66,30 @@
 					}
 				});
 			},
-			select: function(event, ui) 
+			select: function(event, ui)
 			{
 				if($('#teams_container .teams').length == 0)
 				{
 					$('#teams_container').html('');
 				}
-				
+
 				$('#teams_container').append(
-					'<li class="teams r-'+ui.item.value+'">' + ui.item.label + 
+					'<li class="teams r-'+ui.item.value+'">' + ui.item.label +
 					'<input type="hidden" name="teams[]" value="'+ui.item.value+'" /'+'>' +
 					' [<a href="#">x</a>]</li>'
 				);
-				
+
 				$('#teams_container .r-'+ ui.item.value+' a').click(function (e) {
 					$(e.target).parent().remove();
-					
+
 					return false;
 				});
 			},
-			close: function() {	
+			close: function() {
 				$('input[name="teams_autocomplete"]').val('');
 			}
 		});
-		
+
 		$('input[name="players_autocomplete"]').autocomplete({
 			source: function(request, response) {
 				$.ajax({
@@ -76,11 +98,11 @@
 					data: {
 						term: request.term
 					},
-					success: function(data) 
+					success: function(data)
 					{
 						if(data.success)
 						{
-							response($.map(data.results, function(item) 
+							response($.map(data.results, function(item)
 							{
 								return {
 									label: item.name,
@@ -93,26 +115,26 @@
 					}
 				});
 			},
-			select: function(event, ui) 
+			select: function(event, ui)
 			{
 				if($('#players_container .players').length == 0)
 				{
 					$('#players_container').html('');
 				}
-				
+
 				$('#players_container').append(
-					'<li class="players r-'+ui.item.value+'">' + ui.item.label + 
+					'<li class="players r-'+ui.item.value+'">' + ui.item.label +
 					'<input type="hidden" name="admins[]" value="'+ui.item.value+'" /'+'>' +
 					' [<a href="#">x</a>]</li>'
 				);
-				
+
 				$('#players_container .r-'+ ui.item.value+' a').click(function (e) {
 					$(e.target).parent().remove();
-					
+
 					return false;
 				});
 			},
-			close: function() {	
+			close: function() {
 				$('input[name="players_autocomplete"]').val('');
 			}
 		});
@@ -130,26 +152,29 @@
 			</div>
 		</div>
 
-		<div class="clearfix">
+		<div class="clearfix inline-date">
 			<label for="start_date"><?=_('Start date');?></label>
 			<div class="input">
 				<input type="text" id="start_date" name="start_date" class="span2" value="<?=set_value('start_date');?>" />
 			</div>
-		</div>	
+			<div id="start_date_picker"></div>
+		</div>
 
-		<div class="clearfix">
+		<div class="clearfix inline-date">
 			<label for="end_date"><?=_('End date');?></label>
 			<div class="input">
 				<input type="text" id="end_date" name="end_date" class="span2" value="<?=set_value('end_date');?>" />
 			</div>
-		</div>	
+			<div id="end_date_picker"></div>
+		</div>
 
-		<div class="clearfix">
+		<div class="clearfix inline-date">
 			<label for="deadline_date"><?=_('Signup deadline');?></label>
 			<div class="input">
 				<input type="text" id="deadline_date" name="deadline_date" class="span2" value="<?=set_value('deadline_date');?>" />
 			</div>
-		</div>	
+			<div id="deadline_date_picker"></div>
+		</div>
 
 		<div class="clearfix">
 			<label for="notes"><?=_('Notes');?></label>
@@ -159,28 +184,28 @@
 			</div>
 		</div>
 	</fieldset>
-    
+
     <fieldset>
     	<legend><?=_('Teams');?></legend>
-    	
+
     	<div class="clearfix">
 			<div class="input">
 				<input type="text" name="teams_autocomplete" />
-				
+
 				<ul id="teams_container">
     				<li><?=_('No teams selected');?></li>
 		    	</ul>
 			</div>
-		</div>	
+		</div>
     </fieldset>
-    
+
     <fieldset>
     	<legend><?=_('Admins');?></legend>
-    	
+
     	<div class="clearfix">
 			<div class="input">
 				<input type="text" name="players_autocomplete" />
-				
+
 				<ul id="players_container">
 					<li><?=_('No players selected');?></li>
 				</ul>

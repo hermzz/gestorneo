@@ -29,10 +29,10 @@
 				}
 			?>
 			<li>
-				<?=sprintf(_('<a href="%s">%s</a> on %s'), 
-					site_url('/tournament/view/'.$tournament->id), 
-					$tournament->name, 
-					strftime('%A %B %e', mysql_to_unix($tournament->start_date)));?>
+				<?=sprintf(_('<a href="%s">%s</a> on %s'),
+					site_url('/tournament/view/'.$tournament->id),
+					$tournament->name,
+					strftime('%A %B '.(strtoupper(substr(PHP_OS, 0, 3)) == 'WIN' ? '%#d' : '%e'), mysql_to_unix($tournament->start_date)));?>
 				(<?=_('Players');?>: <?=$this->tournament_model->countSignedUp($tournament->id)?>
 					[<?=$this->tournament_model->countSignedUp($tournament->id, 'M')?>M/
 					<?=$this->tournament_model->countSignedUp($tournament->id, 'F')?>F])
@@ -63,10 +63,10 @@
 				}
 			?>
 			<li>
-				<?=sprintf(_('<a href="%s">%s</a> on %s'), 
-					site_url('/tournament/view/'.$tournament->id), 
-					$tournament->name, 
-					strftime('%A %e %B', mysql_to_unix($tournament->start_date)));?>
+				<?=sprintf(_('<a href="%s">%s</a> on %s'),
+					site_url('/tournament/view/'.$tournament->id),
+					$tournament->name,
+					strftime('%A '.(strtoupper(substr(PHP_OS, 0, 3)) == 'WIN' ? '%#d' : '%e').' %B', mysql_to_unix($tournament->start_date)));?>
 				(<?=_('Players');?>: <?=$this->tournament_model->countSignedUp($tournament->id)?>
 					[<?=$this->tournament_model->countSignedUp($tournament->id, 'M')?>M/
 					<?=$this->tournament_model->countSignedUp($tournament->id, 'F')?>F])

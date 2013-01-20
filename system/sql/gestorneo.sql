@@ -58,7 +58,7 @@ DROP TABLE IF EXISTS `player_payments`;
 CREATE TABLE `player_payments` (
   `tpid` int(10) unsigned NOT NULL,
   `plid` int(10) unsigned NOT NULL,
-  `payed` tinyint(4) NOT NULL DEFAULT '0',
+  `paid` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`tpid`,`plid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
