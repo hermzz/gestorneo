@@ -19,6 +19,14 @@ h2, h3, h4 {
 	color: #404040;
 }
 
+/** Admin tabs always show on hover **/
+.dropdown:hover .dropdown-menu {
+	display: block;
+}
+.nav-tabs .dropdown-menu, .nav-pills .dropdown-menu {
+	margin-top: -1px;
+}
+
 .header_small {
 	font-size: 0.7em;
 	color: #666;
