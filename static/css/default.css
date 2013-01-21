@@ -6,7 +6,12 @@ body {
 h2, h3, h4 {
 	line-height: 2em;
 }
-
+form label {
+	font-weight: bold;
+}
+form legend {
+	margin-bottom: 12px;
+}
 #tournament_notes, #payment_details, #travel_details {
 	background-color: #eee;
 	border: 1px solid #ddd;
@@ -117,7 +122,7 @@ input.error {
 	background-color: #d9aeac;
 }
 
-/** Tournament Form **/
+/** TOURNAMENT FORM **/
 #tournament_form .clearfix {
 	clear: both;
 }
@@ -125,4 +130,48 @@ input.error {
 	clear: none;
 	float: left;
 	margin: 5px 15px 10px 0
+}
+
+#tournament_form .notes-section  {
+	margin-top: 20px;
+	float: left;
+}
+#tournament_form .notes-section #markdown_help h2 {
+	display: none;
+}
+#tournament_form #notes_preview {
+	display: block;
+	padding: 4.5px;
+	margin: 0 0 9px;
+	font-size: 12.025px;
+	line-height: 18px;
+	background-color: #f5f5f5;
+	border: 1px solid #ccc;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	overflow: auto;
+}
+#tournament_form #markdown_help,
+#tournament_form #notes_preview {
+	display: none;
+	margin-left: 0;
+	min-height: 80px;
+}
+#tournament_form .notes-section a.btn i{
+	margin-right: 4px;
+	position: relative;
+	top: 2px;
+}
+
+
+#tournament_form .teams,
+#tournament_form .admins {
+	float: left;
+	width: 48%;
+}
+#tournament_form input.btn {
+	clear: both;
+	margin-top: 10px;
 }
