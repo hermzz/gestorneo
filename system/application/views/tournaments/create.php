@@ -138,6 +138,29 @@
 				$('input[name="players_autocomplete"]').val('');
 			}
 		});
+
+		$("#notes_preview-link").click(function(e){
+			e.preventDefault();
+			setNotesView(this);
+			$("#notes_preview")
+				.load('<?= site_url("/misc/markdown_preview") ?>', {markdown: $("#notes").val()})
+				.css('min-height', $("#notes").height());
+		});
+
+		$("#notes-link").addClass('disabled').click(function(e){
+			e.preventDefault();
+			setNotesView(this);
+		});
+
+		$("#markdown_help-link").click(function(e){
+			e.preventDefault();
+			setNotesView(this);
+		});
+
+		function setNotesView(t) {
+			$(".notes-section .span10").hide().filter("#"+t.id.replace("-link", "")).show();
+			$(".notes-section a.btn").removeClass('disabled').filter("#"+t.id).addClass('disabled');
+		}
 	});
 </script>
 
@@ -176,16 +199,24 @@
 			<div id="deadline_date_picker"></div>
 		</div>
 
-		<div class="clearfix">
+		<div class="clearfix notes-section">
 			<label for="notes"><?=_('Notes');?></label>
+			<div class="btn-toolbar">
+			  <div class="btn-group">
+			    <a class="btn" href="#" id="notes-link"><i class="icon-pencil"></i><?=_('edit notes');?></a>
+			    <a class="btn" href="#" id="notes_preview-link"><i class="icon-eye-open"></i><?=_('preview notes');?></a>
+			    <a class="btn" href="/misc/page/markdown_help" id="markdown_help-link" target="_blank"><i class="icon-question-sign"></i><?=_('markdown help');?></a>
+			  </div>
+			</div>
 			<div class="input">
-				<textarea id="notes" name="notes" rows="8" cols="60" class="span12"><?=set_value('notes');?></textarea>
-				<p><a href="/misc/page/markdown_help" target="_blank"><?=_('markdown help');?></a></p>
+				<textarea id="notes" name="notes" rows="8" cols="60" class="span10"><?=set_value('notes');?></textarea>
+				<div id="notes_preview" class="span10"></div>
+				<div id="markdown_help" class="span10"><?= $this->load->view('misc/markdown_help', '', true)?></div>
 			</div>
 		</div>
 	</fieldset>
 
-    <fieldset>
+    <fieldset class="teams">
     	<legend><?=_('Teams');?></legend>
 
     	<div class="clearfix">
@@ -199,7 +230,7 @@
 		</div>
     </fieldset>
 
-    <fieldset>
+    <fieldset class="admins">
     	<legend><?=_('Admins');?></legend>
 
     	<div class="clearfix">
@@ -213,5 +244,5 @@
 		</div>
     </fieldset>
 
-    <input type="submit" name="submitNewTournament" value="<?=_('Add');?>" class="btn btn-primary" />
+    <input type="submit" name="submitNewTournament" value="<?=_('Add');?>" class="btn btn-primary btn-large" />
 </form>

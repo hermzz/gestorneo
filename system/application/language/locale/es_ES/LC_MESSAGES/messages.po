@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gestorneo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-21 13:13+0100\n"
-"PO-Revision-Date: 2013-01-21 13:13+0100\n"
+"POT-Creation-Date: 2013-01-21 15:54+0100\n"
+"PO-Revision-Date: 2013-01-21 15:54+0100\n"
 "Last-Translator: J <j@j.jp>\n"
 "Language-Team: es <hermann.kaser@gmail.com>\n"
 "Language: es\n"
@@ -61,7 +61,7 @@ msgstr "Editar jugador %s"
 #: c:\inetpub\phproot\gestorneo\system/application/controllers/tournament.php:171
 #: c:\inetpub\phproot\gestorneo\system/application/controllers/tournament.php:227
 #: c:\inetpub\phproot\gestorneo\system/application/views/teams/index.php:1
-#: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/create.php:189
+#: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/create.php:220
 #: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/edit.php:172
 msgid "Teams"
 msgstr "Equipos"
@@ -77,7 +77,7 @@ msgstr "Nuevo equipo"
 #: c:\inetpub\phproot\gestorneo\system/application/controllers/tournament.php:222
 #: c:\inetpub\phproot\gestorneo\system/application/views/teams/create.php:8
 #: c:\inetpub\phproot\gestorneo\system/application/views/teams/edit.php:8
-#: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/create.php:149
+#: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/create.php:172
 #: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/edit.php:135
 msgid "Name"
 msgstr "Nombre"
@@ -107,14 +107,14 @@ msgstr "Nuevo torneo"
 
 #: c:\inetpub\phproot\gestorneo\system/application/controllers/tournament.php:167
 #: c:\inetpub\phproot\gestorneo\system/application/controllers/tournament.php:223
-#: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/create.php:156
+#: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/create.php:179
 #: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/edit.php:142
 msgid "Start date"
 msgstr "Fecha de inicio"
 
 #: c:\inetpub\phproot\gestorneo\system/application/controllers/tournament.php:168
 #: c:\inetpub\phproot\gestorneo\system/application/controllers/tournament.php:224
-#: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/create.php:164
+#: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/create.php:187
 #: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/edit.php:149
 msgid "End date"
 msgstr "Fecha de fin"
@@ -126,7 +126,7 @@ msgstr "Fecha limite de inscripción"
 
 #: c:\inetpub\phproot\gestorneo\system/application/controllers/tournament.php:170
 #: c:\inetpub\phproot\gestorneo\system/application/controllers/tournament.php:226
-#: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/create.php:180
+#: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/create.php:203
 #: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/edit.php:163
 msgid "Notes"
 msgstr "Notas"
@@ -431,39 +431,39 @@ msgstr "Enviar"
 msgid "Delete account"
 msgstr "Eliminar cuenta"
 
-#: c:\inetpub\phproot\gestorneo\system/application/views/misc/markdown_help.php:5
+#: c:\inetpub\phproot\gestorneo\system/application/views/misc/markdown_help.php:4
 msgid "h1 header"
 msgstr "cabecera h1"
 
-#: c:\inetpub\phproot\gestorneo\system/application/views/misc/markdown_help.php:6
+#: c:\inetpub\phproot\gestorneo\system/application/views/misc/markdown_help.php:5
 msgid "h2 header"
 msgstr "cabecera h2"
 
-#: c:\inetpub\phproot\gestorneo\system/application/views/misc/markdown_help.php:9
+#: c:\inetpub\phproot\gestorneo\system/application/views/misc/markdown_help.php:8
 msgid "bold text"
 msgstr "texto en negrita"
 
-#: c:\inetpub\phproot\gestorneo\system/application/views/misc/markdown_help.php:10
+#: c:\inetpub\phproot\gestorneo\system/application/views/misc/markdown_help.php:9
 msgid "italic text"
 msgstr "texto en italico"
 
-#: c:\inetpub\phproot\gestorneo\system/application/views/misc/markdown_help.php:12
+#: c:\inetpub\phproot\gestorneo\system/application/views/misc/markdown_help.php:11
 msgid "link title"
 msgstr "título del enlace"
 
-#: c:\inetpub\phproot\gestorneo\system/application/views/misc/markdown_help.php:14
+#: c:\inetpub\phproot\gestorneo\system/application/views/misc/markdown_help.php:13
 msgid "unordered list"
 msgstr "lista sin ordenar"
 
-#: c:\inetpub\phproot\gestorneo\system/application/views/misc/markdown_help.php:15
+#: c:\inetpub\phproot\gestorneo\system/application/views/misc/markdown_help.php:14
 msgid "ordered list"
 msgstr "lista ordenada"
 
-#: c:\inetpub\phproot\gestorneo\system/application/views/misc/markdown_help.php:17
+#: c:\inetpub\phproot\gestorneo\system/application/views/misc/markdown_help.php:16
 msgid "indented text"
 msgstr "texto indentado"
 
-#: c:\inetpub\phproot\gestorneo\system/application/views/misc/markdown_help.php:18
+#: c:\inetpub\phproot\gestorneo\system/application/views/misc/markdown_help.php:17
 msgid "nested indented text"
 msgstr "texto indentado anidado"
 
@@ -515,14 +515,14 @@ msgstr "Descripcción"
 
 #: c:\inetpub\phproot\gestorneo\system/application/views/teams/create.php:18
 #: c:\inetpub\phproot\gestorneo\system/application/views/teams/edit.php:18
-#: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/create.php:183
+#: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/create.php:208
 #: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/edit.php:166
 #: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/email.php:89
 msgid "markdown help"
 msgstr "ayuda markdown"
 
 #: c:\inetpub\phproot\gestorneo\system/application/views/teams/create.php:22
-#: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/create.php:216
+#: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/create.php:247
 #: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/payments.php:275
 #: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/view.php:290
 msgid "Add"
@@ -583,22 +583,30 @@ msgstr "ej: EZY 1234 ó AVE 03112"
 msgid "Trip by car"
 msgstr "Viaje en coche"
 
-#: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/create.php:172
+#: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/create.php:195
 #: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/edit.php:156
 msgid "Signup deadline"
 msgstr "Fecha limite de inscripción"
 
-#: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/create.php:196
+#: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/create.php:206
+msgid "edit notes"
+msgstr "editar notas"
+
+#: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/create.php:207
+msgid "preview notes"
+msgstr "previsualizar notas"
+
+#: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/create.php:227
 #: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/edit.php:190
 msgid "No teams selected"
 msgstr "No hay equipo seleccionado"
 
-#: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/create.php:203
+#: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/create.php:234
 #: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/edit.php:198
 msgid "Admins"
 msgstr "Admins"
 
-#: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/create.php:210
+#: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/create.php:241
 #: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/edit.php:216
 msgid "No players selected"
 msgstr "No hay jugadores seleccionados."
@@ -782,6 +790,12 @@ msgstr "Coche llendo de %s a %s, saliendo a las %s"
 #: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/view.php:257
 msgid "On this trip"
 msgstr "En este viaje"
+
+#~ msgid "edit markdown"
+#~ msgstr "editar markdown"
+
+#~ msgid "markdown preview"
+#~ msgstr "previsualizar markdown"
 
 #~ msgid "Payed"
 #~ msgstr "Pagado"
