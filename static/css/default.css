@@ -81,19 +81,28 @@ form legend {
 
 
 /** LOGIN **/
-#login-form #remember {
- margin: 10px 0 0 5px;
-}
 
 #login-form .col1 {
-  width: 160px;
+  width: 120px;
 }
 #login-form .col2 {
   width: 220px;
 }
+#login-form label {
+	display: inline;
+}
 
 input.error {
  border-color: #EE5F5B;
+}
+
+#login-form #remember {
+	margin: 8px 6px 0 0;
+	float: left;
+}
+
+#login-form .btn {
+	float: right;
 }
 
 /** NAV **/

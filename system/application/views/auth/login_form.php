@@ -35,7 +35,7 @@ $captcha = array(
 $submit = array(
     'name' => 'submit',
     'id' => 'submit',
-    'class' => 'btn primary'
+    'class' => 'btn btn-primary'
 );
 ?>
 <?php echo form_open($this->uri->uri_string()); ?>
@@ -88,13 +88,15 @@ $submit = array(
 	} ?>
 
 	<tr>
-		<td colspan="3">
-			<?php echo form_checkbox($remember); ?>
+		<td>
 			<?php echo form_label(_('Remember me'), $remember['id']); ?>
+		</td>
+		<td colspan="2">
+			<?php echo form_checkbox($remember); ?>
+			<?php echo form_submit($submit, _('Let me in')); ?>
 		</td>
 	</tr>
 </table>
-<?php echo form_submit($submit, _('Let me in')); ?>
 <?php echo form_close(); ?>
 
 <p><?=_('If you forgot your password, <a href="/auth/forgot_password/">click here to reset it</a>');?>.</p>
