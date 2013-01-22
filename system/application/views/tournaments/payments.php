@@ -3,7 +3,7 @@
 		<li class="dropdown pull-left" data-dropdown="dropdown">
 			<a href="#" class="dropdown-toggle">Admin <b class="caret"></b></a>
 			<ul class="dropdown-menu">
-				<li><a href="#" id="new_payment" data-controls-modal="new_payment_dialog" data-backdrop="static"><?=_('Add new payment');?></a></li>
+				<li><a href="#new_payment_dialog" id="new_payment" role="button" data-toggle="modal"><?=_('Add new payment');?></a></li>
 			</ul>
 		</li>
 	</ul>
@@ -16,7 +16,7 @@
 	var NOT_PAID_TXT = "<?=_('Not paid');?>";
 
 	$(document).ready(function (){
-		$('#new_payment_dialog').modal();
+		//$('#new_payment_dialog').modal();
 
 		$('#new_payment_dialog').bind('show', function(e) {
 			$('#concept').attr('value', '');
@@ -227,7 +227,7 @@
 
 <div id="new_payment_dialog" class="modal hide fade" style="display: block; ">
 	<div class="modal-header">
-		<a href="#" class="close">×</a>
+		<a href="#" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
 		<h3><?=_('Add new payment');?></h3>
 	</div>
 	<div class="modal-body">
