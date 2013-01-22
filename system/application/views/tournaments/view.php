@@ -28,7 +28,7 @@
 				return false;
 			});
 
-			$('#include_player_dialog').modal().bind('hide', function() { location.reload(); });
+			$('#include_player_dialog').bind('hide', function() { location.reload(); });
 			$('#include_player_dialog .modal-footer a').click(function() { $('#include_player_dialog').modal('hide'); });
 
 			$('input[name="player_autocomplete"]').autocomplete({
@@ -51,13 +51,12 @@
 									}
 								}));
 							} else {
-								console.log('fail');
+								//console.log('fail');
 							}
 						}
 					});
 				},
-				open: function(event, ui)
-				{
+				open: function(event, ui) {
 					last_values = false;
 					$('input[name="add_player"]').attr('disabled', 'disabled');
 
@@ -84,12 +83,12 @@
 					{
 						if(data.success)
 						{
-							$('#include_player_dialog p').html('Success!');
+							$('#include_player_dialog p').html('<?= _('Success!') ?>').removeClass('label-error').addClass('label label-success');
 							$('input[name="player_autocomplete"]').val('');
 							last_values = false;
 							$('input[name="add_player"]').attr('disabled', false);
 						} else {
-							$('#include_player_dialog p').html('Dang it, something failed.');
+							$('#include_player_dialog p').html('<?= _('Dang it, something failed.') ?>').removeClass('label-success').addClass('label label-error');
 						}
 					}
 				});
@@ -110,7 +109,7 @@
 				<ul class="dropdown-menu">
 					<li><a href="/tournament/email/<?=$tournament->id;?>"><?=_('Email team');?></a></li>
 					<li><a href="/tournament/edit/<?=$tournament->id;?>"><?=_('Edit');?></a></li>
-					<li><a href="#" id="include_player" data-controls-modal="include_player_dialog" data-backdrop="static"><?=_('Include player');?></a></li>
+					<li><a href="#include_player_dialog" id="include_player" data-toggle="modal"><?=_('Include player');?></a></li>
 				</ul>
 			</li>
 		</ul>
@@ -280,20 +279,18 @@
 
 	<div id="include_player_dialog" class="modal hide fade" style="display: block; ">
 		<div class="modal-header">
-			<a href="#" class="close">×</a>
+			<a href="#" class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
 			<h3><?=_('Include player');?></h3>
 		</div>
 		<div class="modal-body">
 			<form action="#" method="post">
 				<input type="text" name="player_autocomplete" />
-
-				<input type="submit" name="add_player" value="<?=_('Add');?>" disabled="disabled" />
-
+				<input type="submit" name="add_player" value="<?=_('Add');?>" disabled="disabled" class="btn btn-primary" />
 				<p></p>
 			</form>
 		</div>
 		<div class="modal-footer">
-			<a href="#" class="btn btn-primary">Close</a>
+			<a href="#" class="btn">Close</a>
 		</div>
 	</div>
 
