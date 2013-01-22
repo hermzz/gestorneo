@@ -1,6 +1,15 @@
-<h2><?=_('Teams');?></h2>
+<?php if($this->tank_auth->is_admin()): ?>
+  <ul class="nav nav-tabs">
+    <li class="dropdown pull-left" data-dropdown="dropdown">
+      <a href="#" class="dropdown-toggle">Admin <b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><a href="/team/create/"><?=_('Create a new team');?></a></li>
+      </ul>
+    </li>
+  </ul>
+<?php endif; ?>
 
-<p><a href="/team/create"><?=_('Create a new team');?></a></p>
+<h2><?=_('Teams');?></h2>
 
 <?php if($teams): ?>
 	<ul>
