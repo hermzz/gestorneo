@@ -5,85 +5,85 @@ class Player_model extends Model
 	function get($id)
 	{
 		$query = $this->db->query('SELECT * FROM users WHERE id='.$id);
-		
+
 		return $query->num_rows > 0 ? $query->row() : FALSE;
 	}
-	
+
 	function getAll($active=true)
 	{
 		$players = $this->db->query(
-			'SELECT 
-				* 
-			FROM 
-				users 
+			'SELECT
+				*
+			FROM
+				users
 			WHERE
 				activated='.($active ? '1' : '0').'
-			ORDER BY 
+			ORDER BY
 				username ASC'
 		);
-		
+
 		return $players->num_rows > 0 ? $players->result() : FALSE;
 	}
-	
+
 	function create($username, $email, $sex)
 	{
-		$this->db->query('INSERT INTO users (username, email, sex, created) VALUES (?, ?, ?, NOW())', 
+		$this->db->query('INSERT INTO users (username, email, sex, created) VALUES (?, ?, ?, NOW())',
 			array($username, $email, $sex));
-			
+
 		 return $this->db->insert_id();
 	}
-	
+
 	function edit($id, $username, $email, $password, $sex)
 	{
 		$this->db->query('UPDATE users SET username=?, email=?, sex=? WHERE id=?',
 			array($username, $email, $sex, $id));
-			
+
 		if($password)
 		{
 			$hasher = new PasswordHash(PHPASS_HASH_STRENGTH, PHPASS_HASH_PORTABLE);
 			$hashed_password = $hasher->HashPassword($password);
-			
-			$this->db->query('UPDATE users SET password=? WHERE id=?', array($hashed_password));
+
+			$this->db->query('UPDATE users SET password=? WHERE id=?', array($hashed_password, $id));
 		}
 	}
-	
+
 	function getTournaments($id, $only_confirmed=false)
 	{
 		$sql = 'SELECT
 					t.*
-				FROM 
+				FROM
 					tournaments AS t,
 					tournament_players AS tp
 				WHERE
 					t.id = tp.tid AND
 					tp.pid = ? '
-				. ($only_confirmed ? ' AND tp.confirmed = 1' : '') . 
+				. ($only_confirmed ? ' AND tp.confirmed = 1' : '') .
 				' ORDER BY
 					t.start_date DESC';
-			
+
 		$query = $this->db->query($sql,
 			array($id));
-		
+
 		return $query->num_rows > 0 ? $query->result() : FALSE;
 	}
-	
+
 	function getAdmins()
 	{
 		$query = $this->db->query('SELECT * FROM users WHERE level=?', array('admin'));
 		return $query->num_rows > 0 ? $query->result() : FALSE;
 	}
-	
+
 	function search($name, $filter)
 	{
 		if($filter['tournament_id'])
 		{
 			$query = $this->db->query(
-				'SELECT 
+				'SELECT
 					u.*
-				FROM 
-					users AS u, 
+				FROM
+					users AS u,
 					tournament_players AS tp
-				WHERE 
+				WHERE
 					u.id = tp.pid AND
 					tp.tid = ? AND
 					username LIKE "%'.$this->db->escape_like_str($name).'%"
@@ -96,37 +96,37 @@ class Player_model extends Model
 				'SELECT * FROM users WHERE username LIKE "%'.$this->db->escape_like_str($name).'%"'
 			);
 		}
-		
+
 		return $query->num_rows > 0 ? $query->result() : FALSE;
 	}
-	
+
 	function disable($id)
 	{
 		$this->db->query('UPDATE users SET activated=0 WHERE id=?', array($id));
 	}
-	
+
 	function enable($id)
 	{
 		$this->db->query('UPDATE users SET activated=1 WHERE id=?', array($id));
 	}
-	
+
 	function getPlayerPayments($tpid)
 	{
 		$query = $this->db->query(
-			'SELECT 
-				pp.*, 
+			'SELECT
+				pp.*,
 				u.username
-			FROM 
-				player_payments AS pp, 
-				users AS u 
-			WHERE 
-				pp.plid=u.id AND 
-				pp.tpid=?', 
+			FROM
+				player_payments AS pp,
+				users AS u
+			WHERE
+				pp.plid=u.id AND
+				pp.tpid=?',
 			array($tpid));
-		
+
 		return $query->num_rows > 0 ? $query->result() : array();
 	}
-	
+
 	function getPlayerDebtByTournament($tournament_id, $player_id)
 	{
 		$query = $this->db->query(
@@ -142,7 +142,7 @@ class Player_model extends Model
 				pp.plid = ?',
 			array($tournament_id, $player_id)
 		);
-		
+
 		if($query->num_rows > 0)
 		{
 			$row = $query->row();
@@ -151,6 +151,6 @@ class Player_model extends Model
 			return false;
 		}
 	}
-}	
+}
 
 ?>
