@@ -14,21 +14,21 @@
 <script type="text/javascript">
 	var PAID_TXT = "<?=_('Paid');?>";
 	var NOT_PAID_TXT = "<?=_('Not paid');?>";
-	
+
 	$(document).ready(function (){
 		$('#new_payment_dialog').modal();
-		
+
 		$('#new_payment_dialog').bind('show', function(e) {
 			$('#concept').attr('value', '');
 			$('#amount').attr('value', '');
-		
+
 			$('input[value="all_team"]').attr('checked', 'checked');
-		
+
 			$('#payment_player_list').html('');
-		
+
 			$('input[name="tpid"]').attr('value', '');
 		});
-		
+
 		$('input[name="player_autocomplete"]').autocomplete({
 			source: function(request, response) {
 				$.ajax({
@@ -38,11 +38,11 @@
 						term: request.term,
 						tournament_id: <?=$tournament->id;?>,
 					},
-					success: function(data) 
+					success: function(data)
 					{
 						if(data.success)
 						{
-							response($.map(data.results, function(item) 
+							response($.map(data.results, function(item)
 							{
 								return {
 									label: item.name,
@@ -55,21 +55,21 @@
 					}
 				});
 			},
-			select: function(event, ui) { 
+			select: function(event, ui) {
 				add_player_to_modal(ui.item.value, ui.item.label);
 			},
-			close: function() {	
+			close: function() {
 				$('input[name="player_autocomplete"]').val('');
 			}
 		});
-		
+
 		$('#new_payment_dialog form').submit(function(f) {
 			$.ajax({
 				url: '/ajax/add_payments',
 				dataType: "jsonp",
 				type: 'POST',
 				data: $(f.target).serialize(),
-				success: function(data) 
+				success: function(data)
 				{
 					if(data.success)
 					{
@@ -77,10 +77,10 @@
 					}
 				}
 			});
-			
+
 			return false;
 		});
-		
+
 		$('.payment_links').click(function(e) {
 			$.ajax({
 				url: '/ajax/set_paid',
@@ -91,7 +91,7 @@
 					plid: $(e.target).attr('plid'),
 					paid: parseInt($(e.target).attr('paid')) ? 0 : 1
 				},
-				success: function(data) 
+				success: function(data)
 				{
 					if(data.success)
 					{
@@ -106,10 +106,10 @@
 					}
 				}
 			});
-			
+
 			return false;
 		});
-		
+
 		$('#payment_table th a.edit_payment').click(function(e) {
 			$.ajax({
 				url: '/ajax/get_payment_data',
@@ -118,29 +118,29 @@
 				data: {
 					tpid: $(e.target).parent().attr('tpid'),
 				},
-				success: function(response) 
+				success: function(response)
 				{
 					if(response.success)
 					{
 						$('#new_payment_dialog').modal().show();
-						
+
 						$('#concept').attr('value', response.data.concept);
 						$('#amount').attr('value', response.data.amount);
-						
+
 						$('input[value="individuals"]').attr('checked', 'checked');
-						
+
 						$.each(response.data.players, function(k, v) {
 							add_player_to_modal(v.plid, v.username);
 						});
-						
+
 						$('input[name="tpid"]').attr('value', response.data.tpid);
 					}
 				}
 			});
-			
+
 			return false;
 		});
-		
+
 		$('#payment_table th a.delete_payment').click(function(e) {
 			if(confirm("<?=_("Are you sure you want to delete this payment?");?>"))
 			{
@@ -151,7 +151,7 @@
 					data: {
 						tpid: $(e.target).parent().attr('tpid'),
 					},
-					success: function(response) 
+					success: function(response)
 					{
 						if(response.success)
 						{
@@ -160,19 +160,19 @@
 					}
 				});
 			}
-			
+
 			return false;
 		});
 	});
-	
+
 	function add_player_to_modal(player_id, player_name)
 	{
 		$('#payment_player_list').append(
-			'<li>' + player_name + ' [<a href="#">x</a>]' + 
-			'<input type="hidden" name="pids[]" value="' + player_id + '" /'+'>' + 
+			'<li>' + player_name + ' [<a href="#">x</a>]' +
+			'<input type="hidden" name="pids[]" value="' + player_id + '" /'+'>' +
 			'</li>'
 		);
-		
+
 		as = $('#payment_player_list a');
 		$(as[as.length-1]).click(function(e) {
 			$(e.target).parent().remove();
@@ -208,7 +208,7 @@
 									if($p->plid == $player->id)
 										if($this->tank_auth->is_admin())
 										{
-											echo '<a href="#" paid="'.$p->paid.'" class="payment_links" tpid="'.$payment->tpid.'" plid="'.$p->plid.'">' 
+											echo '<a href="#" paid="'.$p->paid.'" class="payment_links" tpid="'.$payment->tpid.'" plid="'.$p->plid.'">'
 												. ($p->paid ? _('Paid') : _('Not paid')) . '</a>';
 										} else {
 											echo $p->paid ? _('Paid') : _('Not paid');
@@ -234,21 +234,21 @@
 		<form action="#" method="post">
 			<input type="hidden" name="tid" value="<?=$tournament->id;?>" />
 			<input type="hidden" name="tpid" value="" />
-		
+
 			<div class="clearfix">
 				<label for="concept"><?=_('Concept');?></label>
 				<div class="input">
 					<input type="text" id="concept" name="concept" />
 				</div>
 			</div>
-			
+
 			<div class="clearfix">
 				<label for="amount"><?=_('Amount');?></label>
 				<div class="input">
 					<input type="text" id="amount" name="amount" />
 				</div>
 			</div>
-		
+
 			<div class="clearfix">
 				<label><?=_('Applies to');?>:</label>
 				<div class="input">
@@ -271,7 +271,7 @@
 					</ul>
 				</div>
 			</div>
-		
+
 			<input type="submit" name="add_payment" class="btn btn-primary" value="<?=_('Add');?>" />
 		</form>
 	</div>
