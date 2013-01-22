@@ -16,6 +16,13 @@ form label {
 form legend {
 	margin-bottom: 12px;
 }
+
+/** JQUERYUI MODS **/
+.ui-helper-hidden-accessible {
+	display: none;
+}
+
+
 #tournament_notes, #payment_details, #travel_details {
 	background-color: #eee;
 	border: 1px solid #ddd;
@@ -105,9 +112,6 @@ input.error {
 	float: left;
 }
 
-#login-form .btn {
-	float: right;
-}
 
 /** NAV **/
 .navbar li {
@@ -133,6 +137,19 @@ input.error {
 
 .table-striped tbody tr.bad td {
 	background-color: #d9aeac;
+}
+
+/** ADD PLAYER TO TOURNAMENT FORM **/
+#include_player_dialog input {
+ margin-bottom: 0;
+ margin-right: 1px;
+}
+#include_player_dialog .label {
+	float:left;
+	margin: 4px 1px;
+	font-size:12px;
+	line-height: 18px;
+	padding: 3px 8px 3px 7px;
 }
 
 /** TOURNAMENT FORM **/

@@ -35,7 +35,7 @@ $captcha = array(
 $submit = array(
     'name' => 'submit',
     'id' => 'submit',
-    'class' => 'btn btn-primary'
+    'class' => 'btn btn-primary pull-right'
 );
 ?>
 <?php echo form_open($this->uri->uri_string()); ?>
