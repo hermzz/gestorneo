@@ -3,6 +3,7 @@
 	<head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 		<title><?=$title?></title>
+		<link rel="icon" type="image/png" href="<?=base_url();?>static/images/favicon.ico">
 
 		<link rel="stylesheet" type="text/css" href="<?=base_url();?>static/css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="<?=base_url();?>static/css/default.css" />
