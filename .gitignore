@@ -2,3 +2,4 @@
 system/application/config/database.php
 logs
 *.sublime*
+ci_ide_helper.php
