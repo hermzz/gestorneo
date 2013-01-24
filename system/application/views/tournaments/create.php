@@ -3,9 +3,19 @@
 <link href="/static/css/base/ui.datepicker.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#start_date_picker").datepicker({
-			dateFormat: 'dd/mm/yy',
+		$.datepicker.setDefaults( $.datepicker.regional[ "" ] );
+		$.datepicker.setDefaults({
 			firstDay: 1,
+			dateFormat: 'dd/mm/yy',
+      changeMonth: true,
+      changeYear: true,
+      showOtherMonths: true,
+      selectOtherMonths: true
+		});
+
+
+		$("#start_date_picker")
+		.datepicker({
 			onSelect: function(dateText, inst) {
 				$('#start_date').val(dateText);
 
@@ -26,20 +36,21 @@
 		});
 
 		$("#end_date_picker").datepicker({
-			dateFormat: 'dd/mm/yy',
-			firstDay: 1,
 			onSelect: function(dateText, inst) {
 				$('#end_date').val(dateText);
 			}
 		});
 
+
 		$("#deadline_date_picker").datepicker({
-			dateFormat: 'dd/mm/yy',
-			firstDay: 1,
 			onSelect: function(dateText, inst) {
 				$('#deadline_date').val(dateText);
 			}
 		});
+
+		if($.cookie("language") !== 'en') {
+			$(".hasDatepicker").datepicker( "option", $.datepicker.regional[ $.cookie("language") ] );
+		}
 
 		$('input[name="teams_autocomplete"]').autocomplete({
 			source: function(request, response) {
