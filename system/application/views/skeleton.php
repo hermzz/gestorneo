@@ -9,11 +9,17 @@
 		<link rel="stylesheet" type="text/css" href="<?=base_url();?>static/css/default.css" />
 		<link href="<?=base_url();?>static/css/flick/jquery-ui-1.10.0.custom.min.css" type="text/css" rel="stylesheet" />
 
-		<script src="<?=base_url();?>static/javascript/jquery.min.js" language="javascript"></script>
-		<script src="<?=base_url();?>static/javascript/jquery-ui-1.10.0.custom.min.js" language="javascript"></script>
-		<script src="<?=base_url();?>static/javascript/jquery.cookie.js" language="javascript"></script>
+		<script src="<?=base_url();?>static/javascript/jquery.min.js"></script>
+		<script src="<?=base_url();?>static/javascript/jquery-migrate-1.0.0.js"></script>
+		<script src="<?=base_url();?>static/javascript/jquery-ui-1.10.0.custom.min.js"></script>
+		<script src="<?=base_url();?>static/javascript/jquery.cookie.js"></script>
+		<script src="<?=base_url();?>static/javascript/jquery.ba-hashchange.min.js"></script>
+		<script src="<?=base_url();?>static/javascript/jquery.tablesorter.min.js"></script>
+		<script src="<?=base_url();?>static/javascript/jquery.ui.datepicker-es.js"></script>
 
-		<script src="<?=base_url();?>static/javascript/bootstrap.min.js" language="javascript"></script>
+		<script src="<?=base_url();?>static/javascript/custom.js"></script>
+
+		<script src="<?=base_url();?>static/javascript/bootstrap.min.js"></script>
 
 		<script>
 			$(document).ready(function() {
