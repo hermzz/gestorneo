@@ -10,28 +10,37 @@ class Tournament_model extends Model
 		return $query->num_rows > 0 ? $query->row() : FALSE;
 	}
 
-	function getAll($type='all')
+	function getAll($type='all', $check_user_status_id=false)
 	{
+		$this->db->select('t.*');
+		$this->db->select('DATEDIFF(t.signup_deadline, NOW()) as days_to_signup');
+		$this->db->from('tournaments AS t');
+		$this->db->order_by('t.start_date', 'DESC');
+
 		switch($type)
 		{
 			case 'past':
-				$where = ' start_date < NOW()';
+				$this->db->where('t.start_date <', 'NOW()', false);
 				break;
 
 			case 'future':
-				$where = ' start_date > NOW()';
+				$this->db->where('t.start_date >', 'NOW()', false);
 				break;
 
 			case 'all':
 			default;
-				$where = FALSE;
-				break;
 		}
 
-		$sql = 'SELECT * FROM tournaments ' .
-			( $where ? ' WHERE '.$where : '' ) .
-		' ORDER BY start_date DESC';
-		$tournaments = $this->db->query($sql);
+		if($check_user_status_id !== false && is_numeric($check_user_status_id)) {
+			$this->db->select('tp.*');
+			$this->db->select('tp.pid IS NOT NULL as player_signed_up');
+			$this->db->select('tp.confirmed IS NOT NULL AS player_confirmed');
+			$this->db->select('t.start_date < NOW() AS passed');
+			//stupid joins ... is this right?
+			$this->db->join('tournament_players AS tp', 'tp.tid = t.id AND tp.pid=' . mysql_escape_string($check_user_status_id), 'LEFT');
+		}
+
+		$tournaments = $this->db->get();
 
 		return $tournaments->num_rows > 0 ? $tournaments->result() : FALSE;
 	}

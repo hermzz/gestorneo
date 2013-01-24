@@ -23,11 +23,14 @@ class Tournament extends GS_Controller {
 
 	function index()
 	{
-		$this->data['future_tournaments'] = $this->tournament_model->getAll('future');
-		$this->data['past_tournaments'] = $this->tournament_model->getAll('past');
+		$this->data['future_tournaments'] = $this->tournament_model->getAll('future', $this->tank_auth->get_user_id());
+		$this->data['past_tournaments'] = $this->tournament_model->getAll('past', $this->tank_auth->get_user_id());
 
 		$this->data['title'] = _('Tournaments');
 		$this->data['content_view'] = 'tournaments/index';
+
+		// for the table headers
+		$this->load->helper('array');
 
 		$this->load->view('skeleton', $this->data);
 	}

@@ -16,6 +16,10 @@ form label {
 form legend {
 	margin-bottom: 12px;
 }
+.label {
+	font-size: 100%;
+	padding: 2px 6px;
+}
 
 /** JQUERYUI MODS **/
 .ui-helper-hidden-accessible {
@@ -202,4 +206,15 @@ input.error {
 #tournament_form input.btn {
 	clear: both;
 	margin-top: 10px;
+}
+
+/** Tournament List **/
+#tournament-tables caption { font-weight: bold; font-size: 1.3em; margin: 0 0 3px 4px;text-align: left;}
+#tournament-tables .col1 { width: 320px; }
+#tournament-tables .col2 { width: 140px; }
+#tournament-tables .col3 { width: 140px; }
+#tournament-tables .col4 { }
+#tournament-tables .col5 { width: 150px; }
+.tablesorter-header-inner i {
+	float: right;
 }
