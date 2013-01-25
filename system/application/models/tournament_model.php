@@ -37,7 +37,7 @@ class Tournament_model extends Model
 			$this->db->select('tp.confirmed IS NOT NULL AS player_confirmed');
 			$this->db->select('t.start_date < NOW() AS passed');
 			//stupid joins ... is this right?
-			$this->db->join('tournament_players AS tp', 'tp.tid = t.id AND tp.pid=' . mysql_escape_string($check_user_status_id), 'LEFT');
+			$this->db->join('tournament_players AS tp', 'tp.tid = t.id AND tp.pid=' . $check_user_status_id, 'LEFT');
 		}
 
 		$tournaments = $this->db->get();
