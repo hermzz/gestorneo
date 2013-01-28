@@ -2,9 +2,12 @@ html {
 	overflow-y: scroll;
 }
 
-body {
-	padding-top: 60px !important;
-	margin-bottom: 0 !important;
+
+@media (min-width: 980px) {
+	body {
+		padding-top: 60px !important;
+		margin-bottom: 0 !important;
+	}
 }
 
 h2, h3, h4 {
@@ -124,6 +127,12 @@ input.error {
 
 .navbar form {
 	margin: 5px 0 0 0;
+}
+@media (max-width: 979px) {
+	.navbar form {
+		float: left;
+		margin-left: 14px;
+	}
 }
 
 /** PAYMENT TABLE STRIPING */
