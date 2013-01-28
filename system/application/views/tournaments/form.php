@@ -1,8 +1,9 @@
-<h2><?=_('New tournament');?></h2>
+<h2><?= $title ?></h2>
 
 <link href="/static/css/base/ui.datepicker.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript">
 	$(document).ready(function(){
+		// datepicker defaults
 		$.datepicker.setDefaults( $.datepicker.regional[ "" ] );
 		$.datepicker.setDefaults({
 			firstDay: 1,
@@ -13,25 +14,12 @@
       selectOtherMonths: true
 		});
 
-
+		// datepicker selections
+		// start_date launches other updates
 		$("#start_date_picker")
 		.datepicker({
 			onSelect: function(dateText, inst) {
-				$('#start_date').val(dateText);
-
-				var dparts = dateText.split("/");
-				var dd = new Date(dparts[2], dparts[1]-1, dparts[0]);
-				var edate = dd;
-				edate.setDate(edate.getDate() + 7 - edate.getDay());
-				edate = edate.getDate() + '/' + (edate.getMonth() + 1) + '/' + edate.getFullYear();
-				$('#end_date_picker').datepicker("option", "minDate", dateText).datepicker("setDate", edate);
-				$('#end_date').val(edate);
-
-				var ddate = dd;
-				ddate.setDate(ddate.getDate() - 70);
-				ddate = ddate.getDate() + '/' + (ddate.getMonth() +1) + '/' + ddate.getFullYear();
-				$('#deadline_date').val(ddate);
-				$('#deadline_date_picker').datepicker("setDate", ddate).datepicker("option", "maxDate", dateText);
+				$('#start_date').val(dateText).keyup();
 			}
 		});
 
@@ -42,16 +30,49 @@
 		});
 
 
-		$("#deadline_date_picker").datepicker({
+		$("#signup_deadline_picker").datepicker({
 			onSelect: function(dateText, inst) {
-				$('#deadline_date').val(dateText);
+				$('#signup_deadline').val(dateText);
 			}
 		});
 
+		// handle date input field changes
+		$(".inline-date input").keyup(function(){
+			var id = $(this).attr('id');
+
+			$("#"+id+"_picker").datepicker("setDate", $(this).val());
+
+			// start_date launches other updates
+			if(id == 'start_date') {
+				dateText = $(this).val();
+				var dparts = dateText.split("/");
+				var dd = new Date(dparts[2], dparts[1]-1, dparts[0]);
+				var edate = dd;
+				edate.setDate(edate.getDate() + 7 - edate.getDay());
+				edate = padJsDate(edate.getDate()) + '/' + padJsDate(edate.getMonth() + 1) + '/' + edate.getFullYear();
+				$('#end_date').val(edate);
+				$('#end_date_picker').datepicker("option", "minDate", dateText).datepicker("setDate", edate);
+
+				var ddate = dd;
+				ddate.setDate(ddate.getDate() - 70);
+				ddate = padJsDate(ddate.getDate()) + '/' + padJsDate(ddate.getMonth() +1) + '/' + ddate.getFullYear();
+				$('#signup_deadline').val(ddate);
+				$('#signup_deadline_picker').datepicker("setDate", ddate).datepicker("option", "maxDate", dateText);
+			}
+		});
+
+<?php if(('' != set_value('start_date')) or isset($tournament->start_date)) : ?>
+		$('#start_date').val('<?= isset($tournament->start_date) ? strftime('%d/%m/%Y', mysql_to_unix($tournament->start_date)) : set_value('start_date');?>').keyup();
+		$('#end_date').val('<?= isset($tournament->end_date) ? strftime('%d/%m/%Y', mysql_to_unix($tournament->end_date)) : set_value('end_date');?>').keyup();
+		$('#signup_deadline').val('<?= isset($tournament->signup_deadline) ? strftime('%d/%m/%Y', mysql_to_unix($tournament->signup_deadline)) : set_value('signup_deadline');?>').keyup();
+<?php endif; ?>
+
+		// datepicker language from cookie
 		if($.cookie("language") !== 'en') {
 			$(".hasDatepicker").datepicker( "option", $.datepicker.regional[ $.cookie("language") ] );
 		}
 
+		// teams autocomplete
 		$('input[name="teams_autocomplete"]').autocomplete({
 			source: function(request, response) {
 				$.ajax({
@@ -66,7 +87,7 @@
 						{
 							response($.map(data.results, function(item)
 							{
-								return {
+								return $("li.teams.r-"+item.id).length ? null : {
 									label: item.name,
 									value: item.id
 								}
@@ -90,17 +111,25 @@
 					' [<a href="#">x</a>]</li>'
 				);
 
-				$('#teams_container .r-'+ ui.item.value+' a').click(function (e) {
-					$(e.target).parent().remove();
-
-					return false;
-				});
 			},
 			close: function() {
 				$('input[name="teams_autocomplete"]').val('');
 			}
 		});
 
+		// remove an item from the teams list
+		$('#teams_container [class*=r-] a').live("click", function (e) {
+			$(e.target).parent().remove();
+
+			if($('#teams_container .teams').length == 0)
+			{
+				$('#teams_container').html('<li><?= str_replace("'", "\'", _('No teams selected')) ?></li>');
+			}
+
+			return false;
+		});
+
+		// admins autcomplete
 		$('input[name="players_autocomplete"]').autocomplete({
 			source: function(request, response) {
 				$.ajax({
@@ -115,7 +144,7 @@
 						{
 							response($.map(data.results, function(item)
 							{
-								return {
+								return $("li.players.r-"+item.id).length ? null : {
 									label: item.name,
 									value: item.id
 								}
@@ -138,18 +167,25 @@
 					'<input type="hidden" name="admins[]" value="'+ui.item.value+'" /'+'>' +
 					' [<a href="#">x</a>]</li>'
 				);
-
-				$('#players_container .r-'+ ui.item.value+' a').click(function (e) {
-					$(e.target).parent().remove();
-
-					return false;
-				});
 			},
 			close: function() {
 				$('input[name="players_autocomplete"]').val('');
 			}
 		});
 
+		// remove an admin from the list
+		$('#players_container [class*=r-] a').live('click', function (e) {
+			$(e.target).parent().remove();
+
+			if($('#players_container .players').length == 0)
+			{
+				$('#players_container').html('<li><?= str_replace("'", "\'", _('No players selected')) ;?></li>');
+			}
+
+			return false;
+		});
+
+		// notes preview (set to same size as textarea)
 		$("#notes_preview-link").click(function(e){
 			e.preventDefault();
 			setNotesView(this);
@@ -157,17 +193,17 @@
 				.load('<?= site_url("/misc/markdown_preview") ?>', {markdown: $("#notes").val()})
 				.css('min-height', $("#notes").height());
 		});
-
+		// notes textarea
 		$("#notes-link").addClass('disabled').click(function(e){
 			e.preventDefault();
 			setNotesView(this);
 		});
-
+		// notes markdown
 		$("#markdown_help-link").click(function(e){
 			e.preventDefault();
 			setNotesView(this);
 		});
-
+		// generic set notes view
 		function setNotesView(t) {
 			$(".notes-section .span10").hide().filter("#"+t.id.replace("-link", "")).show();
 			$(".notes-section a.btn").removeClass('disabled').filter("#"+t.id).addClass('disabled');
@@ -175,21 +211,26 @@
 	});
 </script>
 
-<?=validation_errors()?>
+<?php if( '' != validation_errors()) : ?>
+<div class="alert alert-error">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+	<?= validation_errors() ?>
+</div>
+<?php endif; ?>
 
 <form action="#" id="tournament_form" method="post" class="well">
 	<fieldset>
 		<div class="clearfix">
 			<label for="name"><?=_('Name');?></label>
 			<div class="input">
-				<input type="text" id="name" name="name" class="span6" value="<?=set_value('name');?>" />
+				<input type="text" id="name" name="name" class="span6" value="<?= isset($tournament->name) ? $tournament->name : set_value('name');?>" />
 			</div>
 		</div>
 
 		<div class="clearfix inline-date">
 			<label for="start_date"><?=_('Start date');?></label>
 			<div class="input">
-				<input type="text" id="start_date" name="start_date" class="span2" value="<?=set_value('start_date');?>" />
+				<input type="text" id="start_date" name="start_date" class="span2" value="<?= isset($tournament->start_date) ? strftime('%d/%m/%Y', mysql_to_unix($tournament->start_date)) : set_value('start_date');?>" />
 			</div>
 			<div id="start_date_picker"></div>
 		</div>
@@ -197,17 +238,17 @@
 		<div class="clearfix inline-date">
 			<label for="end_date"><?=_('End date');?></label>
 			<div class="input">
-				<input type="text" id="end_date" name="end_date" class="span2" value="<?=set_value('end_date');?>" />
+				<input type="text" id="end_date" name="end_date" class="span2" value="<?= isset($tournament->end_date) ? strftime('%d/%m/%Y', mysql_to_unix($tournament->end_date)) : set_value('end_date');?>" />
 			</div>
 			<div id="end_date_picker"></div>
 		</div>
 
 		<div class="clearfix inline-date">
-			<label for="deadline_date"><?=_('Signup deadline');?></label>
+			<label for="signup_deadline"><?=_('Signup deadline');?></label>
 			<div class="input">
-				<input type="text" id="deadline_date" name="deadline_date" class="span2" value="<?=set_value('deadline_date');?>" />
+				<input type="text" id="signup_deadline" name="signup_deadline" class="span2" value="<?= isset($tournament->signup_deadline) ? strftime('%d/%m/%Y', mysql_to_unix($tournament->signup_deadline)) : set_value('signup_deadline');?>" />
 			</div>
-			<div id="deadline_date_picker"></div>
+			<div id="signup_deadline_picker"></div>
 		</div>
 
 		<div class="clearfix notes-section">
@@ -220,7 +261,7 @@
 			  </div>
 			</div>
 			<div class="input">
-				<textarea id="notes" name="notes" rows="8" cols="60" class="span10"><?=set_value('notes');?></textarea>
+				<textarea id="notes" name="notes" rows="8" cols="60" class="span10"><?= isset($tournament->notes) ? htmlentities($tournament->notes) : set_value('notes');?></textarea>
 				<div id="notes_preview" class="span10"></div>
 				<div id="markdown_help" class="span10"><?= $this->load->view('misc/markdown_help', '', true)?></div>
 			</div>
@@ -235,8 +276,20 @@
 				<input type="text" name="teams_autocomplete" />
 
 				<ul id="teams_container">
-    				<li><?=_('No teams selected');?></li>
-		    	</ul>
+  				<?php if($teams && isset($selected_teams) && count($selected_teams)): ?>
+					<?php foreach($teams as $team): ?>
+						<?php if(in_array($team->id, $selected_teams)): ?>
+							<li class="teams r-<?=$team->id;?>">
+								<?=$team->name;?>
+								<input type="hidden" name="teams[]" value="<?=$team->id;?>" />
+								[<a href="#">x</a>]
+							</li>
+						<?php endif; ?>
+					<?php endforeach; ?>
+				<?php else: ?>
+					<li><?=_('No teams selected');?></li>
+				<?php endif; ?>
+	    	</ul>
 			</div>
 		</div>
     </fieldset>
@@ -249,11 +302,23 @@
 				<input type="text" name="players_autocomplete" />
 
 				<ul id="players_container">
+				<?php if($users && isset($tournament_admins) && count($tournament_admins)): ?>
+					<?php foreach($users as $user): ?>
+						<?php if(in_array($user->id, $tournament_admins)): ?>
+							<li class="players r-<?=$user->id;?>">
+								<?=$user->username;?>
+								<input type="hidden" name="admins[]" value="<?=$user->id;?>" />
+								[<a href="#">x</a>]
+							</li>
+						<?php endif; ?>
+					<?php endforeach; ?>
+				<?php else: ?>
 					<li><?=_('No players selected');?></li>
+				<?php endif; ?>
 				</ul>
 			</div>
 		</div>
     </fieldset>
 
-    <input type="submit" name="submitNewTournament" value="<?=_('Add');?>" class="btn btn-primary btn-large" />
+    <input type="submit" name="submitNewTournament" value="<?= htmlspecialchars($form_action) ?>" class="btn btn-primary btn-large" />
 </form>

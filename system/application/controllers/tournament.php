@@ -159,6 +159,7 @@ class Tournament extends GS_Controller {
 			header('Location: /');
 
 		$this->data['title'] = _('New tournament');
+		$this->data['form_action'] = _('Add');
 
 		$this->data['teams'] = $this->team_model->getAll();
 		$this->data['users'] = $this->player_model->getAll();
@@ -169,13 +170,13 @@ class Tournament extends GS_Controller {
 		$this->form_validation->set_rules('name', _('Name'), 'required');
 		$this->form_validation->set_rules('start_date', _('Start date'), 'callback_date_check');
 		$this->form_validation->set_rules('end_date', _('End date'), 'callback_date_check|callback_is_after[start_date]');
-		$this->form_validation->set_rules('deadline_date', _('Deadline date'), 'callback_date_check|callback_is_before[end_date]');
+		$this->form_validation->set_rules('signup_deadline', _('Deadline date'), 'callback_date_check|callback_is_before[end_date]');
 		$this->form_validation->set_rules('notes', _('Notes'), 'trim');
 		$this->form_validation->set_rules('teams[]', _('Teams'), 'required');
 
 		if($this->form_validation->run() == FALSE)
 		{
-			$this->data['content_view'] = 'tournaments/create';
+			$this->data['content_view'] = 'tournaments/form';
 			$this->load->view('skeleton', $this->data);
 		} else {
 			$this->tournament_model->create(
@@ -183,7 +184,7 @@ class Tournament extends GS_Controller {
 				$this->input->post('notes'),
 				preg_replace($this->_date_regex, '\3-\2-\1', $this->input->post('start_date')),
 				preg_replace($this->_date_regex, '\3-\2-\1', $this->input->post('end_date')),
-				preg_replace($this->_date_regex, '\3-\2-\1', $this->input->post('deadline_date')),
+				preg_replace($this->_date_regex, '\3-\2-\1', $this->input->post('signup_deadline')),
 				$this->input->post('teams'),
 				$this->input->post('admins')
 			);
@@ -198,6 +199,7 @@ class Tournament extends GS_Controller {
 			header('Location: /');
 
 		$this->data['title'] = _('Edit tournament');
+		$this->data['form_action'] = _('Edit');
 
 		$this->data['tournament'] = $this->tournament_model->get($tournament_id);
 
@@ -225,7 +227,7 @@ class Tournament extends GS_Controller {
 		$this->form_validation->set_rules('name', _('Name'), 'required');
 		$this->form_validation->set_rules('start_date', _('Start date'), 'callback_date_check');
 		$this->form_validation->set_rules('end_date', _('End date'), 'callback_date_check|callback_is_after[start_date]');
-		$this->form_validation->set_rules('deadline_date', _('Deadline date'), 'callback_date_check|callback_is_before[end_date]');
+		$this->form_validation->set_rules('signup_deadline', _('Deadline date'), 'callback_date_check|callback_is_before[end_date]');
 		$this->form_validation->set_rules('notes', _('Notes'), 'trim');
 		$this->form_validation->set_rules('teams[]', _('Teams'), 'required');
 
@@ -236,7 +238,7 @@ class Tournament extends GS_Controller {
 
 		if($this->form_validation->run() == FALSE)
 		{
-			$this->data['content_view'] = 'tournaments/edit';
+			$this->data['content_view'] = 'tournaments/form';
 			$this->load->view('skeleton', $this->data);
 		} else {
 			$this->tournament_model->edit(
@@ -245,7 +247,7 @@ class Tournament extends GS_Controller {
 				$this->input->post('notes'),
 				preg_replace($this->_date_regex, '\3-\2-\1', $this->input->post('start_date')),
 				preg_replace($this->_date_regex, '\3-\2-\1', $this->input->post('end_date')),
-				preg_replace($this->_date_regex, '\3-\2-\1', $this->input->post('deadline_date')),
+				preg_replace($this->_date_regex, '\3-\2-\1', $this->input->post('signup_deadline')),
 				$this->input->post('teams'),
 				$this->input->post('admins')
 			);

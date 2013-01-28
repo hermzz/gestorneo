@@ -69,3 +69,12 @@ $(function(){
 
   });
 });
+
+/**
+ * 0-pad a Js getDate or getMonth value
+ * @param  {[type]} num [description]
+ * @return {[type]}     [description]
+ */
+function padJsDate(num) {
+  return ('0' + num).slice(-2);
+}

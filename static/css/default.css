@@ -29,6 +29,11 @@ form legend {
 	display: none;
 }
 
+/** BOOTSTRAP MODS **/
+.alert {
+	padding-bottom: 0;
+}
+
 
 #tournament_notes, #payment_details, #travel_details {
 	background-color: #eee;
@@ -207,13 +212,15 @@ input.error {
 }
 
 
-#tournament_form .teams,
-#tournament_form .admins {
+#tournament_form fieldset.teams,
+#tournament_form fieldset.admins {
 	float: left;
 	width: 48%;
+	margin-bottom: 1em;
 }
 #tournament_form input.btn {
 	clear: both;
+	display: block;
 	margin-top: 10px;
 }
 
