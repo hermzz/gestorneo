@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Gestorneo\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-01-24 15:13+0100\n"
-"PO-Revision-Date: 2013-01-24 15:24+0100\n"
+"PO-Revision-Date: 2013-01-25 10:36+0100\n"
 "Last-Translator: J <j@j.jp>\n"
 "Language-Team: es <hermann.kaser@gmail.com>\n"
 "Language: es\n"
@@ -631,7 +631,7 @@ msgstr "Previsualizar"
 
 #: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/email.php:98
 msgid "Generate email list"
-msgstr "Generar lista de correso"
+msgstr "Generar lista de correos"
 
 #: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/index.php:3
 #: c:\inetpub\phproot\gestorneo\system/application/views/tournaments/index.php:18
