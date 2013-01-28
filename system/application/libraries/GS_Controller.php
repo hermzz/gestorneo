@@ -66,6 +66,7 @@ class GS_Controller extends Controller
     textdomain($gettext_domain);
 
 		$this->data['selected_language'] = $language;
+		$this->config->set_item('language', $language == 'es' ? 'spanish' : 'english');
 	}
 }
 
