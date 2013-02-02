@@ -27,6 +27,26 @@ class Team extends GS_Controller {
 		
 		$this->load->view('skeleton', $this->data);
 	}
+
+	function view($id)
+	{
+		$this->data['team'] = $this->team_model->get($id);
+		if($this->data['team'])
+		{
+			$this->data['title'] = $this->data['team']->name;
+			$this->data['tournaments'] = $this->team_model->getTournaments($id, true);
+		} else {
+			$this->data['title'] = _("Team not found");
+		}
+
+		$this->data['breadcrumbs'][] = array(
+			'url' => '/team/view/'.$id,
+			'text' => $this->data['team']->name
+		);
+
+		$this->data['content_view'] = 'teams/view';
+		$this->load->view('skeleton', $this->data);
+	}
 	
 	function create()
 	{

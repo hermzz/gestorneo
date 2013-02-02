@@ -30,6 +30,25 @@ class Team_model extends Model
 		$this->db->query('UPDATE teams SET name=?, description=? WHERE id=?', 
 			array($name, $description, $id));
 	}
+
+	function getTournaments($id)
+	{
+		$sql = 'SELECT
+					t.*
+				FROM
+					tournaments AS t,
+					tournament_teams AS tt
+				WHERE
+					t.id = tt.tid AND
+					tt.teid = ? 
+				ORDER BY
+					t.start_date DESC';
+
+		$query = $this->db->query($sql,
+			array($id));
+
+		return $query->num_rows > 0 ? $query->result() : FALSE;
+	}
 	
 	function getTournamentPlayers($tournament_id, $team_id)
 	{
