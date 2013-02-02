@@ -34,6 +34,18 @@ form legend {
 	padding-bottom: 0;
 }
 
+@font-face {
+	font-family: "Entypo";
+	src: url("static/css/entypo.eot");
+	/*src: local("☺"),
+		url("static/css/entypo.woff") format("woff"),
+		url("static/css/entypo.otf") format("opentype"),
+		url("static/css/entypo.svg") format("svg");*/
+}
+.entypo { 
+	font-family: "Entypo"; 
+	font-size: 1.5em;
+}
 
 #tournament_notes, #payment_details, #travel_details {
 	background-color: #eee;
@@ -65,33 +77,19 @@ form legend {
 	display: inline;
 }
 
-.player_list {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-}
-
-.player_list li {
-	padding: 3px;
-	line-height: 2.2em;
+.player_list li:hover .admin_controls {
+	display: inline;
 }
 
 .player_list li form {
-	margin-bottom: 0px;
-	clear: both;
+	/*margin-bottom: 0px;
+	clear: both;*/
 }
 
 .player_list li form select {
-	margin: 0;
+	/*margin: 0;*/
 }
 
-.odd {
-	background-color: #ddd;
-}
-
-.odd select {
-	background-color: #fff;
-}
 
 #players_container, #teams_container {
 	margin-top: 5px;
@@ -233,4 +231,8 @@ input.error {
 #tournament-tables .col5 { width: 150px; }
 .tablesorter-header-inner i {
 	float: right;
+}
+
+.admin_controls form, .admin_controls div {
+	display: none;
 }

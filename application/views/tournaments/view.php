@@ -28,6 +28,10 @@
 				return false;
 			});
 
+			$('.admin_controls .entypo').click(function(e) {
+				$(e.target).next().toggle();
+			});
+
 			$('#include_player_dialog').bind('hide', function() { location.reload(); });
 			$('#include_player_dialog .modal-footer a').click(function() { $('#include_player_dialog').modal('hide'); });
 
@@ -153,7 +157,12 @@
 								<li class="<?=$k % 2 ? 'even': 'odd';?>">
 								<a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
 									<?php if($is_tournament_admin && !$this->tournament_model->is_old($tournament)): ?>
-										<a class="admin_controls pull-right" href="/tournament/drop_player/<?=$tournament->id;?>/<?=$player->id;?>"><?=_('Drop');?></a>
+										<span class="admin_controls">
+											&mdash; <span class="entypo">&#9874;</span>
+											<div>
+												<a href="/tournament/drop_player/<?=$tournament->id;?>/<?=$player->id;?>"><?=_('Drop');?></a>
+											</div>
+										</span>
 									<?php endif; ?>
 								</li>
 							<?php endforeach; ?>
@@ -171,15 +180,18 @@
 						<li class="<?=$k % 2 ? 'even': 'odd';?>">
 						<a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
 							<?php if($is_tournament_admin && !$this->tournament_model->is_old($tournament)): ?>
-								 <form class="approve_player admin_controls pull-right" action="/tournament/approve_player/<?=$tournament->id;?>/<?=$player->id;?>" method="post">
-								 	<select name="team_id" class="input-small">
-								 		<option value="0"><?=_('no team');?></value>
-										 <?php foreach($teams as $team): ?>
-										 	<option value="<?=$team->id;?>"><?=$team->name;?></option>
-										 <?php endforeach; ?>
-									</select>
-									or <a href="/tournament/drop_player/<?=$tournament->id;?>/<?=$player->id;?>"><?=_('Drop');?></a>
-								 </form>
+								<span class="admin_controls">
+									&mdash; <span class="entypo">&#9874;</span>
+									<form class="approve_player" action="/tournament/approve_player/<?=$tournament->id;?>/<?=$player->id;?>" method="post">
+										<select name="team_id" class="input-small">
+											<option value="0"><?=_('no team');?></value>
+											<?php foreach($teams as $team): ?>
+												<option value="<?=$team->id;?>"><?=$team->name;?></option>
+											<?php endforeach; ?>
+										</select>
+										or <a href="/tournament/drop_player/<?=$tournament->id;?>/<?=$player->id;?>"><?=_('Drop');?></a>
+									 </form>
+								</span>
 							<?php endif; ?>
 						</li>
 					<?php endforeach; ?>
@@ -193,15 +205,18 @@
 						<li class="<?=$k % 2 ? 'even': 'odd';?>">
 							<a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
 							<?php if($is_tournament_admin && !$this->tournament_model->is_old($tournament)): ?>
-								 <form class="approve_player admin_controls pull-right" action="/tournament/approve_player/<?=$tournament->id;?>/<?=$player->id;?>" method="post">
-								 	<select name="team_id" class="input-small">
-								 		<option value="invalid"><?=_('Assign to');?></value>
-										 <?php foreach($teams as $team): ?>
-										 	<option value="<?=$team->id;?>"><?=$team->name;?></option>
-										 <?php endforeach; ?>
-										 <option value="0"><?=_('no team');?></option>
-									</select>
-								 </form>
+								<span class="admin_controls">
+									&mdash; <span class="entypo">&#9874;</span>
+									<form class="approve_player" action="/tournament/approve_player/<?=$tournament->id;?>/<?=$player->id;?>" method="post">
+										<select name="team_id" class="input-small">
+											<option value="invalid"><?=_('Assign to');?></value>
+											<?php foreach($teams as $team): ?>
+												<option value="<?=$team->id;?>"><?=$team->name;?></option>
+											<?php endforeach; ?>
+											<option value="0"><?=_('no team');?></option>
+										</select>
+									</form>
+								</span>
 							<?php endif; ?>
 						</li>
 					<?php endforeach; ?>
