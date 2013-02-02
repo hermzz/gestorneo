@@ -1,4 +1,3 @@
-# Ignored files
 application/config/database.php
 logs
 *.sublime*
