@@ -1,4 +1,14 @@
 <?php if($team): ?>
+	<?php if($this->tank_auth->is_admin()): ?>
+		<ul class="nav nav-tabs">
+			<li class="dropdown pull-left" data-dropdown="dropdown">
+				<a href="#" class="dropdown-toggle">Admin <b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li><a href="/team/edit/<?=$team->id;?>">Edit team</a></li>
+				</ul>
+			</li>
+		</ul>
+	<?php endif; ?>
 	
 	<h2><?=$team->name?></span></h2>
 

@@ -91,7 +91,7 @@ class Team extends GS_Controller {
 			'url' => '/team/view/'.$id,
 			'text' => $this->data['team']->name
 		);
-		
+
 		if($this->form_validation->run() == FALSE)
 		{
 			$this->data['content_view'] = 'teams/edit';
@@ -103,7 +103,7 @@ class Team extends GS_Controller {
 				$this->input->post('description')
 			);
 			
-			header('Location: /team/edit/'.$this->data['team']->id);
+			header('Location: /team/view/'.$this->data['team']->id);
 		}
 	}
 }
