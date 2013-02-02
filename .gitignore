@@ -1,5 +1,5 @@
 # Ignored files
-system/application/config/database.php
+application/config/database.php
 logs
 *.sublime*
 ci_ide_helper.php
