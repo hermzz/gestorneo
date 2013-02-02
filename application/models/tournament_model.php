@@ -42,7 +42,7 @@ class Tournament_model extends Model
 
 		$tournaments = $this->db->get();
 
-		return $tournaments->num_rows > 0 ? $tournaments->result() : FALSE;
+		return $tournaments->num_rows > 0 ? $tournaments->result() : array();
 	}
 
 	function countSignedUp($id, $sex=false)
