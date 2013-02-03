@@ -30,6 +30,8 @@
 
 			$('.admin_controls .entypo').click(function(e) {
 				$(e.target).next().toggle();
+
+				return false;
 			});
 
 			$('#include_player_dialog').bind('hide', function() { location.reload(); });
@@ -158,7 +160,7 @@
 								<a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
 									<?php if($is_tournament_admin && !$this->tournament_model->is_old($tournament)): ?>
 										<span class="admin_controls">
-											&mdash; <span class="entypo">&#9874;</span>
+											&mdash; <a class="entypo" href="#">&#9874;</a>
 											<div>
 												<a href="/tournament/drop_player/<?=$tournament->id;?>/<?=$player->id;?>"><?=_('Drop');?></a>
 											</div>
@@ -181,7 +183,7 @@
 						<a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
 							<?php if($is_tournament_admin && !$this->tournament_model->is_old($tournament)): ?>
 								<span class="admin_controls">
-									&mdash; <span class="entypo">&#9874;</span>
+									&mdash; <a class="entypo" href="#">&#9874;</a>
 									<form class="approve_player" action="/tournament/approve_player/<?=$tournament->id;?>/<?=$player->id;?>" method="post">
 										<select name="team_id" class="input-small">
 											<option value="0"><?=_('no team');?></value>
@@ -206,7 +208,7 @@
 							<a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
 							<?php if($is_tournament_admin && !$this->tournament_model->is_old($tournament)): ?>
 								<span class="admin_controls">
-									&mdash; <span class="entypo">&#9874;</span>
+									&mdash; <a class="entypo" href="#">&#9874;</a>
 									<form class="approve_player" action="/tournament/approve_player/<?=$tournament->id;?>/<?=$player->id;?>" method="post">
 										<select name="team_id" class="input-small">
 											<option value="invalid"><?=_('Assign to');?></value>
