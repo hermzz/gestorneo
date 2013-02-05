@@ -73,7 +73,7 @@
                   $w = "$s $w";
                 }
                 if($tournament->player_signed_up) {
-                  $c = '';
+                  $c = str_replace(array('label label-', 'important'), array('text-', 'error'), $c);
                 }
 
                 print '<span class="'.$c.'" data-days="'.$s.'">'.$w.'</span>';
