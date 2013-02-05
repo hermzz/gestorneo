@@ -20,6 +20,9 @@
 		<script src="<?=base_url();?>static/javascript/custom.js"></script>
 
 		<script src="<?=base_url();?>static/javascript/bootstrap.min.js"></script>
+<?php for($i=0; isset($extra_js_files) && $i<count($extra_js_files); $i++) : ?>
+		<script src="<?=$extra_js_files[$i]?>"></script>
+<?php endfor; ?>
 
 		<script>
 			$(document).ready(function() {
