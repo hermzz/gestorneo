@@ -1,4 +1,11 @@
 $(function(){
+  // Focus on the correct fields
+  $("#login-form #login").focus();
+  $("#tournament_form #name").focus();
+  $('#include_player_dialog').on('shown', function () {
+    $('input:text').focus();
+  });
+
   //https://github.com/twitter/bootstrap/pull/581#issuecomment-4966967
   // Function to activate the tab
   function activateTab() {
