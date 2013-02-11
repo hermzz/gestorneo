@@ -261,7 +261,7 @@
 			  </div>
 			</div>
 			<div class="input">
-				<textarea id="notes" name="notes" rows="8" cols="60" class="span10"><?= isset($tournament->notes) ? htmlentities($tournament->notes) : set_value('notes');?></textarea>
+				<textarea id="notes" name="notes" rows="8" cols="60" class="span10"><?= isset($tournament->notes) ? htmlentities(utf8_decode($tournament->notes)) : set_value('notes');?></textarea>
 				<div id="notes_preview" class="span10"></div>
 				<div id="markdown_help" class="span10"><?= $this->load->view('misc/markdown_help', '', true)?></div>
 			</div>

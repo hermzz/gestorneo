@@ -230,7 +230,7 @@
 
 		<div class="span6">
 			<div id="tournament_notes">
-				<?=$tournament->notes ? markdown($tournament->notes) : '<p>'._('No notes').'</p>'; ?>
+				<?=$tournament->notes ? markdown(htmlentities(utf8_decode($tournament->notes))) : '<p>'._('No notes').'</p>'; ?>
 
 				<p><?=sprintf(_('The signup deadline for this tournament is %s'), strftime('%A '.(strtoupper(substr(PHP_OS, 0, 3)) == 'WIN' ? '%d' : '%e').', %B %Y', mysql_to_unix($tournament->signup_deadline)));?></p>
 			</div>
