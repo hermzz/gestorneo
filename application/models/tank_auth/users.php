@@ -10,7 +10,7 @@
  * @package	Tank_auth
  * @author	Ilya Konyukhov (http://konyukhov.com/soft/)
  */
-class Users extends Model
+class Users extends CI_Model
 {
 	const TABLE			= 'users';			// user accounts
 	const TABLE_PROFILE	= 'user_profiles';	// user profiles

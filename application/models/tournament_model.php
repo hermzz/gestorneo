@@ -1,6 +1,6 @@
 <?php
 
-class Tournament_model extends Model
+class Tournament_model extends CI_Model
 {
 	// get tournament by ID
 	function get($id)

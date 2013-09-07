@@ -1,6 +1,6 @@
 <?php
 
-class Tripleg_model extends Model
+class Tripleg_model extends CI_Model
 {
 	function get($id) {}
 	

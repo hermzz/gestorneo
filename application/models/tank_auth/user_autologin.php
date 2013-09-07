@@ -9,7 +9,7 @@
  * @package	Tank_auth
  * @author	Ilya Konyukhov (http://konyukhov.com/soft/)
  */
-class User_Autologin extends Model
+class User_Autologin extends CI_Model
 {
 	const TABLE			= 'user_autologin';
 	const TABLE_USERS	= 'users';

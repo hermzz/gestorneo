@@ -1,6 +1,6 @@
 <?php
 
-class Team_model extends Model
+class Team_model extends CI_Model
 {
 	function get($id)
 	{

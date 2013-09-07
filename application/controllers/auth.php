@@ -42,7 +42,7 @@ class Auth extends GS_Controller
 			// Get login for counting attempts to login
 			if ($this->config->item('login_count_attempts', 'tank_auth') AND
 					($login = $this->input->post('login'))) {
-				$login = $this->input->xss_clean($login);
+				$login = $login;
 			} else {
 				$login = '';
 			}

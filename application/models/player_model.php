@@ -1,6 +1,6 @@
 <?php
 
-class Player_model extends Model
+class Player_model extends CI_Model
 {
 	function get($id)
 	{

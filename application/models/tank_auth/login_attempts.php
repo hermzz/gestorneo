@@ -9,7 +9,7 @@
  * @package	Tank_auth
  * @author	Ilya Konyukhov (http://konyukhov.com/soft/)
  */
-class Login_attempts extends Model
+class Login_attempts extends CI_Model
 {
 	const TABLE = 'login_attempts';
 
