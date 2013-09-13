@@ -7,6 +7,7 @@ $username = array(
 	'value' => set_value('username'),
 	'maxlength'	=> $this->config->item('username_max_length', 'tank_auth'),
 	'size'	=> 30,
+	'class' => 'form-control'
 );
 $email = array(
 	'name'	=> 'email',
@@ -14,11 +15,13 @@ $email = array(
 	'value'	=> set_value('email'),
 	'maxlength'	=> 80,
 	'size'	=> 30,
+	'class' => 'form-control'
 );
 $sex = array(
 	'name'	=> 'sex',
 	'id'	=> 'sex',
 	'value'	=> set_value('sex'),
+	'class' => 'form-control'
 );
 ?>
 <?php echo form_open($this->uri->uri_string(), array('class' => 'well')); ?>
@@ -59,7 +62,7 @@ $sex = array(
 		<div class="clearfix <?=$sex_error ? 'error' : '';?>">
 			<?php echo form_label(_('Sex'), $sex['id']); ?>
 			<div class="input">
-				<?php echo form_dropdown('sex', array('M' => _('Guy'), 'F' => _('Girl')), null, 'id="sex"'); ?>
+				<?php echo form_dropdown('sex', array('M' => _('Guy'), 'F' => _('Girl')), null, 'id="sex" class="form-control"'); ?>
 				<?php if($sex_error): ?>
 					<span class="help-inline">
 						<?=form_error($sex['name']);?>

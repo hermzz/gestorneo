@@ -4,10 +4,6 @@
 		var tournament_id = <?=$tournament->id;?>;
 
 		$(document).ready(function() {
-			$('form.approve_player select').change(function(e) {
-				$(e.target).parent().submit();
-			});
-
 			$('#tn_toggle').click(function() {
 				$('#travel_details').hide();
 				$('#tournament_notes').show();
@@ -101,6 +97,49 @@
 
 				return false;
 			});
+
+
+			/** Player Admin **/
+			$('input:checkbox').prettyCheckable({
+		    color: 'red'
+		  });
+			var $pl = $("input:checkbox[name=player_id]");
+			var $pl_pc = $(".prettycheckbox a");
+			var $pa = $(".player-actions");
+			$("button[class*=select-]").click(function(){
+				if($(this).hasClass('select-all')) {
+					if($pl_pc.length > 0)
+						$pl.not(":checked").siblings('a').click();
+					else
+						$pl.attr("checked", "checked").last().change();
+				}
+				else {
+					if($pl_pc.length > 0)
+						$pl.filter(":checked").siblings('a').click();
+					else
+						$pl.removeAttr("checked").last().change();
+				}
+			});
+
+			$pl.change(function(){
+				if($pl.filter(":checked").length > 0) {
+					$pa.removeClass("disabled");
+				}
+				else {
+					$pa.addClass('disabled');
+				}
+			});
+
+			$(".player-admin .team-action li a").click(function(e){
+				e.preventDefault();
+				$(".player-admin input#team-id").val($(this).data('id'));
+				selected_players = [];
+				$pl.filter(":checked").each(function(){
+					selected_players.push($(this).val());
+				});
+				$(".player-admin input#player-ids").val(selected_players.join(','));
+				$(".player-admin form").submit();
+			});
 		});
 	</script>
 
@@ -121,37 +160,72 @@
 		</ul>
 	<?php endif; ?>
 
-	<h1>
+	<h1 class="left">
 		<?=sprintf(_('%s <span class="header_small">on %s</span>'), $tournament->name, strftime('%A '.(strtoupper(substr(PHP_OS, 0, 3)) == 'WIN' ? '%d' : '%e').', %B %Y', mysql_to_unix($tournament->start_date)));?>
+	</h1>
 
 		<?php if(!$this->tournament_model->is_old($tournament)):?>
 			<?php if($this->tournament_model->undeadlined($tournament)):?>
 				<?php if($this->tournament_model->is_signed_up($tournament->id, $this->tank_auth->get_user_id())): ?>
-					<form action="/tournament/cancel_sign_up" method="post" class="pull-right">
+					<form action="/tournament/cancel_sign_up" method="post" class="self-action pull-right">
 						<input type="hidden" name="tournament_id" value="<?=$tournament->id;?>" />
 						<input type="hidden" name="player_id" value="<?=$this->tank_auth->get_user_id();?>" />
 
-						<input type="submit" name="submitCancel" class="btn btn-danger" value="<?=_('Not going');?>" />
+						<input type="submit" name="submitCancel" class="btn btn-danger btn-lg" value="<?=_('Not going');?>" />
 					</form>
 				<?php elseif($this->tournament_model->can_sign_up($tournament->id, $this->tank_auth->get_user_id())): ?>
-					<form action="/tournament/sign_up" method="post" class="pull-right">
+					<form action="/tournament/sign_up" method="post" class="pull-right self-action">
 						<input type="hidden" name="tournament_id" value="<?=$tournament->id;?>" />
 						<input type="hidden" name="player_id" value="<?=$this->tank_auth->get_user_id();?>" />
 
-						<input type="submit" name="submitSignup" class="btn btn-success" value="<?=_('I want to go!');?>" />
+						<input type="submit" name="submitSignup" class="btn btn-success btn-lg" value="<?=_('I want to go!');?>" />
 					</form>
 				<?php endif; ?>
 			<?php endif; ?>
 		<?php endif; ?>
-	</h1>
 
-	<div class="row">
-		<div class="span6">
+	<div class="row cb">
+		<div class="col-md-6">
+
+
+			<?php if($is_tournament_admin && !$this->tournament_model->is_old($tournament)): ?>
+			<div class="panel panel-default player-admin">
+        <div class="panel-body">
+        	<label><?=_('Team Admin')?>:</label>
+					<div class="btn-group">
+					  <button type="button" class="btn btn-default select-all"><?=_('Select All')?></button>
+					  <button type="button" class="btn btn-default select-none"><?= _('Select None') ?></button>
+
+					  <div class="btn-group team-action">
+					    <button type="button" class="btn btn-primary dropdown-toggle player-actions disabled" data-toggle="dropdown">
+					      <?= _('Player Action') ?>
+					      <span class="caret"></span>
+					    </button>
+					    <ul class="dropdown-menu">
+							<?php foreach($teams as $team): ?>
+					      <li><a href="#" data-id="<?=$team->id;?>"><?= _('Add to') ?> <?=$team->name;?></a></li>
+							<?php endforeach; ?>
+					      <li><a href="#" data-id="-1"><?= _('Add to Waiting List') ?></a></li>
+					      <li><a href="#" data-id="0"><?= _('Remove from Tournament') ?></a></li>
+					    </ul>
+					  </div>
+					</div>
+        </div>
+        <form class="assign-player" action="<?= site_url('tournament/assign_players/' . $tournament->id); ?>" method="post">
+        	<input type="hidden" name="team_id" id="team-id" />
+        	<input type="hidden" name="player_ids" id="player-ids" />
+        </form>
+        </form>
+      </div>
+			<?php endif; ?>
+
+
+
 			<h3><?=_('Players confirmed');?></h3>
 
 			<?php if($teams): ?>
 				<?php foreach($teams as $team): ?>
-					<h4><?=$team->name;?> (<?=$team->males;?>M / <?=$team->females;?>F)</h4>
+					<h4><?=$team->name;?> [<?=$team->males;?>M / <?=$team->females;?>F]</h4>
 
 					<ul class="player_list">
 						<?php if($team->players): ?>
@@ -159,12 +233,9 @@
 								<li class="<?=$k % 2 ? 'even': 'odd';?>">
 								<a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
 									<?php if($is_tournament_admin && !$this->tournament_model->is_old($tournament)): ?>
-										<span class="admin_controls">
-											&mdash; <a class="entypo" href="#">&#9874;</a>
-											<div>
-												<a href="/tournament/drop_player/<?=$tournament->id;?>/<?=$player->id;?>"><?=_('Drop');?></a>
-											</div>
-										</span>
+										<div class="admin_controls">
+											<input type="checkbox" name="player_id" value="<?=$player->id?>" />
+										</div>
 									<?php endif; ?>
 								</li>
 							<?php endforeach; ?>
@@ -176,49 +247,31 @@
 			<?php endif; ?>
 
 			<?php if($unassigned['players']): ?>
-				<h4><?=_('Unassigned players');?> (<?=$unassigned['males'];?>M / <?=$unassigned['females'];?>F)</h4>
+				<h4><?=_('No longer going');?> [<?=$unassigned['males'];?>M / <?=$unassigned['females'];?>F]</h4>
 				<ul class="player_list">
 					<?php foreach($unassigned['players'] as $k => $player): ?>
 						<li class="<?=$k % 2 ? 'even': 'odd';?>">
 						<a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
 							<?php if($is_tournament_admin && !$this->tournament_model->is_old($tournament)): ?>
-								<span class="admin_controls">
-									&mdash; <a class="entypo" href="#">&#9874;</a>
-									<form class="approve_player" action="/tournament/approve_player/<?=$tournament->id;?>/<?=$player->id;?>" method="post">
-										<select name="team_id" class="input-small">
-											<option value="0"><?=_('no team');?></value>
-											<?php foreach($teams as $team): ?>
-												<option value="<?=$team->id;?>"><?=$team->name;?></option>
-											<?php endforeach; ?>
-										</select>
-										or <a href="/tournament/drop_player/<?=$tournament->id;?>/<?=$player->id;?>"><?=_('Drop');?></a>
-									 </form>
-								</span>
+								<div class="admin_controls">
+									 <input type="checkbox" name="player_id" value="<?=$player->id?>" />
+								</div>
 							<?php endif; ?>
 						</li>
 					<?php endforeach; ?>
 				</ul>
 			<?php endif; ?>
 
-			<h3><?=_('Waiting list');?> (<?=$waiting['males'];?>M / <?=$waiting['females'];?>F)</h3>
+			<h3><?=_('Waiting list');?> [<?=$waiting['males'];?>M / <?=$waiting['females'];?>F]</h3>
 			<?php if($waiting['players']): ?>
 				<ul class="player_list">
 					<?php foreach($waiting['players'] as $k => $player): ?>
 						<li class="<?=$k % 2 ? 'even': 'odd';?>">
 							<a href="/player/view/<?=$player->id?>"><?=$player->username?></a>
 							<?php if($is_tournament_admin && !$this->tournament_model->is_old($tournament)): ?>
-								<span class="admin_controls">
-									&mdash; <a class="entypo" href="#">&#9874;</a>
-									<form class="approve_player" action="/tournament/approve_player/<?=$tournament->id;?>/<?=$player->id;?>" method="post">
-										<select name="team_id" class="input-small">
-											<option value="invalid"><?=_('Assign to');?></value>
-											<?php foreach($teams as $team): ?>
-												<option value="<?=$team->id;?>"><?=$team->name;?></option>
-											<?php endforeach; ?>
-											<option value="0"><?=_('no team');?></option>
-										</select>
-									</form>
-								</span>
+								<div class="admin_controls">
+									<input type="checkbox" name="player_id" value="<?=$player->id?>" />
+								</div>
 							<?php endif; ?>
 						</li>
 					<?php endforeach; ?>
@@ -228,7 +281,7 @@
 			<?php endif; ?>
 		</div>
 
-		<div class="span6">
+		<div class="col-md-6">
 			<div id="tournament_notes">
 				<?=$tournament->notes ? markdown(htmlentities(utf8_decode($tournament->notes))) : '<p>'._('No notes').'</p>'; ?>
 
@@ -293,21 +346,28 @@
 			</div>
 		</div>
 	</div>
-
-	<div id="include_player_dialog" class="modal hide fade" style="display: block; ">
-		<div class="modal-header">
-			<a href="#" class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
-			<h3><?=_('Include player');?></h3>
-		</div>
-		<div class="modal-body">
-			<form action="#" method="post">
-				<input type="text" name="player_autocomplete" />
-				<input type="submit" name="add_player" value="<?=_('Add');?>" disabled="disabled" class="btn btn-primary" />
-				<p></p>
-			</form>
-		</div>
-		<div class="modal-footer">
-			<a href="#" class="btn">Close</a>
+  <div class="modal fade" id="include_player_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    	<div class="modal-content">
+				<div class="modal-header">
+					<a href="#" class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
+					<h3><?=_('Include player');?></h3>
+				</div>
+				<div class="modal-body">
+					<form action="#" method="post">
+						<div class="input-group">
+							<input type="text" class="form-control" name="player_autocomplete" />
+	      			<span class="input-group-btn">
+								<input type="submit" name="add_player" value="<?=_('Add');?>" disabled="disabled" class="btn btn-primary" />
+							</span>
+						</div>
+						<p></p>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<a href="#" class="btn btn-default">Close</a>
+				</div>
+			</div>
 		</div>
 	</div>
 

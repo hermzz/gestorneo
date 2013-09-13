@@ -223,14 +223,14 @@
 		<div class="clearfix">
 			<label for="name"><?=_('Name');?></label>
 			<div class="input">
-				<input type="text" id="name" name="name" class="span6" value="<?= isset($tournament->name) ? $tournament->name : set_value('name');?>" />
+				<input type="text" class="form-control col-md-6" id="name" name="name" value="<?= isset($tournament->name) ? $tournament->name : set_value('name');?>" />
 			</div>
 		</div>
 
 		<div class="clearfix inline-date">
 			<label for="start_date"><?=_('Start date');?></label>
 			<div class="input">
-				<input type="text" id="start_date" name="start_date" class="span2" value="<?= isset($tournament->start_date) ? strftime('%d/%m/%Y', mysql_to_unix($tournament->start_date)) : set_value('start_date');?>" />
+				<input type="text" class="form-control col-md-2" id="start_date" name="start_date" value="<?= isset($tournament->start_date) ? strftime('%d/%m/%Y', mysql_to_unix($tournament->start_date)) : set_value('start_date');?>" />
 			</div>
 			<div id="start_date_picker"></div>
 		</div>
@@ -238,7 +238,7 @@
 		<div class="clearfix inline-date">
 			<label for="end_date"><?=_('End date');?></label>
 			<div class="input">
-				<input type="text" id="end_date" name="end_date" class="span2" value="<?= isset($tournament->end_date) ? strftime('%d/%m/%Y', mysql_to_unix($tournament->end_date)) : set_value('end_date');?>" />
+				<input type="text" class="form-control col-md-2" id="end_date" name="end_date" value="<?= isset($tournament->end_date) ? strftime('%d/%m/%Y', mysql_to_unix($tournament->end_date)) : set_value('end_date');?>" />
 			</div>
 			<div id="end_date_picker"></div>
 		</div>
@@ -246,7 +246,7 @@
 		<div class="clearfix inline-date">
 			<label for="signup_deadline"><?=_('Signup deadline');?></label>
 			<div class="input">
-				<input type="text" id="signup_deadline" name="signup_deadline" class="span2" value="<?= isset($tournament->signup_deadline) ? strftime('%d/%m/%Y', mysql_to_unix($tournament->signup_deadline)) : set_value('signup_deadline');?>" />
+				<input type="text" class="form-control col-md-2" id="signup_deadline" name="signup_deadline" value="<?= isset($tournament->signup_deadline) ? strftime('%d/%m/%Y', mysql_to_unix($tournament->signup_deadline)) : set_value('signup_deadline');?>" />
 			</div>
 			<div id="signup_deadline_picker"></div>
 		</div>
@@ -255,15 +255,15 @@
 			<label for="notes"><?=_('Notes');?></label>
 			<div class="btn-toolbar">
 			  <div class="btn-group">
-			    <a class="btn" href="#" id="notes-link"><i class="icon-pencil"></i><?=_('edit notes');?></a>
-			    <a class="btn" href="#" id="notes_preview-link"><i class="icon-eye-open"></i><?=_('preview notes');?></a>
-			    <a class="btn" href="/misc/page/markdown_help" id="markdown_help-link" target="_blank"><i class="icon-question-sign"></i><?=_('markdown help');?></a>
+			    <a class="btn btn-default" href="#" id="notes-link"><i class="glyphicon glyphicon-pencil"></i><?=_('edit notes');?></a>
+			    <a class="btn btn-default" href="#" id="notes_preview-link"><i class="glyphicon glyphicon-eye-open"></i><?=_('preview notes');?></a>
+			    <a class="btn btn-default" href="/misc/page/markdown_help" id="markdown_help-link" target="_blank"><i class="glyphicon glyphicon-question-sign"></i><?=_('markdown help');?></a>
 			  </div>
 			</div>
 			<div class="input">
-				<textarea id="notes" name="notes" rows="8" cols="60" class="span10"><?= isset($tournament->notes) ? htmlentities(utf8_decode($tournament->notes)) : set_value('notes');?></textarea>
-				<div id="notes_preview" class="span10"></div>
-				<div id="markdown_help" class="span10"><?= $this->load->view('misc/markdown_help', '', true)?></div>
+				<textarea id="notes" name="notes" rows="8" cols="60" class="col-md-10"><?= isset($tournament->notes) ? htmlentities(utf8_decode($tournament->notes)) : set_value('notes');?></textarea>
+				<div id="notes_preview" class="col-md-10"></div>
+				<div id="markdown_help" class="col-md-10"><?= $this->load->view('misc/markdown_help', '', true)?></div>
 			</div>
 		</div>
 	</fieldset>
@@ -273,7 +273,7 @@
 
     	<div class="clearfix">
 			<div class="input">
-				<input type="text" name="teams_autocomplete" />
+				<input type="text" class="form-control" name="teams_autocomplete" />
 
 				<ul id="teams_container">
   				<?php if($teams && isset($selected_teams) && count($selected_teams)): ?>
@@ -299,7 +299,7 @@
 
     	<div class="clearfix">
 			<div class="input">
-				<input type="text" name="players_autocomplete" />
+				<input type="text" class="form-control" name="players_autocomplete" />
 
 				<ul id="players_container">
 				<?php if($users && isset($tournament_admins) && count($tournament_admins)): ?>
@@ -320,5 +320,5 @@
 		</div>
     </fieldset>
 
-    <input type="submit" name="submitNewTournament" value="<?= htmlspecialchars($form_action) ?>" class="btn btn-primary btn-large" />
+    <input type="submit" name="submitNewTournament" value="<?= htmlspecialchars($form_action) ?>" class="btn btn-primary btn-lg" />
 </form>

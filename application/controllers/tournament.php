@@ -132,6 +132,36 @@ class Tournament extends GS_Controller {
 		$this->load->view('skeleton', $this->data);
 	}
 
+	function assign_players($tournament_id)
+	{
+		if(!$this->tank_auth->is_admin(array('tournament' => $tournament_id)))
+			header(site_url(''));
+
+		$team_id = $this->input->post("team_id");
+		$player_ids = $this->input->post("player_ids");
+		$player_ids = explode(",", $player_ids);
+
+		switch($team_id)
+		{
+			case -1:
+				foreach($player_ids as $player_id)
+				{
+					$this->tournament_model->drop_player($tournament_id, $player_id);
+				}
+				break;
+			default:
+				if(is_numeric($team_id) && $team_id >= 0)
+					foreach($player_ids as $player_id)
+					{
+						$this->tournament_model->approve_player($tournament_id, $team_id, $player_id);
+					}
+		}
+
+		redirect('tournament/view/'.$tournament_id);
+
+
+	}
+
 	function approve_player($tournament_id, $player_id)
 	{
 		if(!$this->tank_auth->is_admin(array('tournament' => $tournament_id)))

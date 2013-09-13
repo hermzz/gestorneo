@@ -2,12 +2,14 @@
 <html>
 	<head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-		<title><?=$title?></title>
+		<title><?=$title?> - Gestorneo</title>
 		<link rel="icon" type="image/png" href="<?=base_url();?>static/images/favicon.ico">
 
-		<link rel="stylesheet" type="text/css" href="<?=base_url();?>static/css/bootstrap.min.css" />
-		<link rel="stylesheet" type="text/css" href="<?=base_url();?>static/css/default.css" />
+		<!-- <link rel="stylesheet" type="text/css" href="<?=base_url();?>static/css/bootstrap.min.css" /> -->
+		<link rel="stylesheet" type="text/css" href="<?=base_url();?>static/css/bootstrap.united.min.css" />
 		<link href="<?=base_url();?>static/css/flick/jquery-ui-1.10.0.custom.min.css" type="text/css" rel="stylesheet" />
+		<link href="<?=base_url();?>static/css/prettyCheckable.css" type="text/css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="<?=base_url();?>static/css/default.css" />
 
 		<script src="<?=base_url();?>static/javascript/jquery.min.js"></script>
 		<script src="<?=base_url();?>static/javascript/jquery-migrate-1.0.0.js"></script>
@@ -16,6 +18,7 @@
 		<script src="<?=base_url();?>static/javascript/jquery.ba-hashchange.min.js"></script>
 		<script src="<?=base_url();?>static/javascript/jquery.tablesorter.min.js"></script>
 		<script src="<?=base_url();?>static/javascript/jquery.ui.datepicker-es.js"></script>
+		<script src="<?=base_url();?>static/javascript/prettyCheckable.js"></script>
 
 		<script src="<?=base_url();?>static/javascript/custom.js"></script>
 
@@ -49,7 +52,7 @@
 
 			<div class="content">
 				<div class="row">
-					<div class="span12">
+					<div class="col-md-12">
 						<?php if($breadcrumbs): ?>
 							<ul class="breadcrumb">
 								<?php foreach($breadcrumbs as $k => $bc): ?>

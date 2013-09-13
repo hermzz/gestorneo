@@ -87,7 +87,7 @@ $captcha = array(
 			<div class="recaptcha_only_if_image"><?=_('Enter the words above');?></div>
 			<div class="recaptcha_only_if_audio"><?=_('Enter the numbers you hear');?></div>
 		</td>
-		<td><input type="text" id="recaptcha_response_field" name="recaptcha_response_field" /></td>
+		<td><input type="text" class="form-control" id="recaptcha_response_field" name="recaptcha_response_field" /></td>
 		<td style="color: red;"><?php echo form_error('recaptcha_response_field'); ?></td>
 		<?php echo $recaptcha_html; ?>
 	</tr>

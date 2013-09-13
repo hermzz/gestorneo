@@ -9,7 +9,7 @@
 			</li>
 		</ul>
 	<?php endif; ?>
-	
+
 	<h2><?=$team->name?></span></h2>
 
 	<p><?=$team->description;?></p>

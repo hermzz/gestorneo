@@ -23,6 +23,17 @@ form legend {
 	font-size: 100%;
 	padding: 2px 6px;
 }
+.left {
+	float: left;
+}
+.cb {
+	clear: both;
+}
+.prettycheckbox {
+	position: relative;
+	top: 3px;
+}
+
 
 /** JQUERYUI MODS **/
 .ui-helper-hidden-accessible {
@@ -42,10 +53,23 @@ form legend {
 		url("static/css/entypo.otf") format("opentype"),
 		url("static/css/entypo.svg") format("svg");*/
 }
-.entypo { 
-	font-family: "Entypo"; 
+.entypo {
+	font-family: "Entypo";
 	font-size: 1.5em;
 }
+
+/** BOOSTRAP 3 MODS **/
+.divider {
+	display: none;
+}
+
+/** PRETTYCHECKABLE MODS **/
+.prettycheckbox a, .prettyradio a {
+	width: 25px;
+	height: 25px;
+}
+
+/** GENERAL **/
 
 #tournament_notes, #payment_details, #travel_details {
 	background-color: #eee;
@@ -76,20 +100,6 @@ form legend {
 	float: left;
 	display: inline;
 }
-
-.player_list li:hover .admin_controls {
-	display: inline;
-}
-
-.player_list li form {
-	/*margin-bottom: 0px;
-	clear: both;*/
-}
-
-.player_list li form select {
-	/*margin: 0;*/
-}
-
 
 #players_container, #teams_container {
 	margin-top: 5px;
@@ -155,6 +165,14 @@ input.error {
 	background-color: #d9aeac;
 }
 
+/** TOURNAMENT VIEW **/
+.player_list .admin_controls {
+  display: inline-block;;
+}
+.self-action {
+	margin-top: 10px;
+}
+
 /** ADD PLAYER TO TOURNAMENT FORM **/
 #include_player_dialog input {
  margin-bottom: 0;
@@ -167,6 +185,25 @@ input.error {
 	line-height: 18px;
 	padding: 3px 8px 3px 7px;
 }
+
+/** SIGNED UP PLAYER LIST/ADMIN **/
+.player-admin label {
+	padding-right: 25px;
+}
+.player_list .has-pretty-child {
+	float: right;
+	margin-right: 20em;
+	position: relative;
+	top: -9px;
+}
+.player_list li:hover .admin_controls {
+	display: inline;
+}
+.player_list li{
+	clear: both;
+}
+
+
 
 /** TOURNAMENT FORM **/
 #tournament_form .clearfix {
@@ -231,8 +268,4 @@ input.error {
 #tournament-tables .col5 { width: 150px; }
 .tablesorter-header-inner i {
 	float: right;
-}
-
-.admin_controls form, .admin_controls div {
-	display: none;
 }

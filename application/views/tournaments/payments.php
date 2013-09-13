@@ -185,24 +185,24 @@
 	<table id="payment_table" class="table table-striped">
 		<thead>
 			<tr>
-				<th class="span3"><?=_('Players');?></th>
+				<th class="col-md-3"><?=_('Players');?></th>
 				<?php foreach($payments as $payment): ?>
-					<th class="span3"><?=$payment->concept;?> - €<?=$payment->amount;?>
+					<th class="col-md-3"><?=$payment->concept;?> - €<?=$payment->amount;?>
 						<?php if($this->tank_auth->is_admin(array('tournament' => $tournament->id))): ?>
 							<a href="#" class="edit_payment" tpid="<?=$payment->tpid;?>"><img src="/static/images/Boolean/Papermart/Text Edit.png" /></a>
 							<a href="#" class="delete_payment" tpid="<?=$payment->tpid;?>"><img src="/static/images/Boolean/Signage/Close Square.png" /></a>
 						<?php endif; ?>
 					</th>
 				<?php endforeach; ?>
-				<th class="span3"><?=_('Owes');?></th>
+				<th class="col-md-3"><?=_('Owes');?></th>
 			</th>
 		</thead>
 		<tbody>
 			<?php foreach($players as $player): ?>
 				<tr class="<?=$player->amount_owed > 0 ? 'bad' : 'good' ;?>">
-					<td class="span3"><?=$player->username;?></td>
+					<td class="col-md-3"><?=$player->username;?></td>
 					<?php foreach($payments as $payment): ?>
-						<td class="span3">
+						<td class="col-md-3">
 							<?php
 								foreach($payment->players as $p)
 									if($p->plid == $player->id)
@@ -238,14 +238,14 @@
 			<div class="clearfix">
 				<label for="concept"><?=_('Concept');?></label>
 				<div class="input">
-					<input type="text" id="concept" name="concept" />
+					<input type="text" class="form-control" id="concept" name="concept" />
 				</div>
 			</div>
 
 			<div class="clearfix">
 				<label for="amount"><?=_('Amount');?></label>
 				<div class="input">
-					<input type="text" id="amount" name="amount" />
+					<input type="text" class="form-control" id="amount" name="amount" />
 				</div>
 			</div>
 
@@ -264,7 +264,7 @@
 								<input type="radio" name="applies" class="radio" value="individuals" />
 								<span>
 									<?=_('Only some players');?><br />
-									<input type="text" name="player_autocomplete" />
+									<input type="text" class="form-control" name="player_autocomplete" />
 									<ul id="payment_player_list"></ul></span>
 							</label>
 						</li>

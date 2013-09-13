@@ -5,7 +5,7 @@ $login = array(
 	'value' => set_value('login'),
 	'maxlength'	=> 80,
 	'size'	=> 30,
-  'class' => (form_error('login') != '' ? 'error' : '')
+  'class' => 'form-control ' . (form_error('login') != '' ? 'error' : '')
 );
 
 if ($login_by_username AND $login_by_email) {
@@ -19,7 +19,7 @@ $password = array(
 	'name'	=> 'password',
 	'id'	=> 'password',
 	'size'	=> 30,
-  'class' => (form_error('password') != '' ? 'error' : '')
+  'class' => 'form-control ' . (form_error('password') != '' ? 'error' : '')
 );
 $remember = array(
 	'name'	=> 'remember',
@@ -68,7 +68,7 @@ $submit = array(
 			<div class="recaptcha_only_if_image"><?=_('Enter the words above');?></div>
 			<div class="recaptcha_only_if_audio"><?=_('Enter the numbers you hear');?></div>
 		</td>
-		<td><input type="text" id="recaptcha_response_field" name="recaptcha_response_field" /></td>
+		<td><input type="text" class="form-control" id="recaptcha_response_field" name="recaptcha_response_field" /></td>
 		<td style="color: red;"><?php echo form_error('recaptcha_response_field'); ?></td>
 		<?php echo $recaptcha_html; ?>
 	</tr>
@@ -104,3 +104,10 @@ $submit = array(
 <?php if ($this->config->item('allow_registration', 'tank_auth')): ?>
 	<p><?=_('If you don\'t have an account yet, <a href="/auth/register/">click here to create one</a>');?>.</p>
 <?php endif; ?>
+<script type="text/javascript">
+$(function(){
+	$('input:checkbox').prettyCheckable({
+    color: 'red'
+  });
+});
+</script>
