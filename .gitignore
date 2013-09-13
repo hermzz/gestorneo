@@ -6,7 +6,8 @@ application/cache/*
 
 application/logs/*
 !application/logs/index.html
-!application/logs/.htaccessapplication/config/database.php
+!application/logs/.htaccess
+!application/config/database.php
 logs
 *.sublime*
 ci_ide_helper.php
