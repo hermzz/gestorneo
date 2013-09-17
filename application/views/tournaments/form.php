@@ -185,30 +185,19 @@
 			return false;
 		});
 
-		// notes preview (set to same size as textarea)
-		$("#notes_preview-link").click(function(e){
-			e.preventDefault();
-			setNotesView(this);
-			$("#notes_preview")
-				.load('<?= site_url("/misc/markdown_preview") ?>', {markdown: $("#notes").val()})
-				.css('min-height', $("#notes").height());
+		// notes tabs
+		$('#description-tabs a:first').tab('show');
+		$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+
+		  if(e.target.hash == '#preview-tab') {
+		     	$("#notes_preview")
+		        .load('<?= site_url("/misc/markdown_preview") ?>', {markdown: $("#notes").val()})
+		        ;
+		  }
 		});
-		// notes textarea
-		$("#notes-link").addClass('disabled').click(function(e){
-			e.preventDefault();
-			setNotesView(this);
-		});
-		// notes markdown
-		$("#markdown_help-link").click(function(e){
-			e.preventDefault();
-			setNotesView(this);
-		});
-		// generic set notes view
-		function setNotesView(t) {
-			$(".notes-section .span10").hide().filter("#"+t.id.replace("-link", "")).show();
-			$(".notes-section a.btn").removeClass('disabled').filter("#"+t.id).addClass('disabled');
-		}
+
 	});
+
 </script>
 
 <?php if( '' != validation_errors()) : ?>
@@ -251,19 +240,17 @@
 			<div id="signup_deadline_picker"></div>
 		</div>
 
-		<div class="clearfix notes-section">
+		<div class="clearfix notes-section col-md-6">
 			<label for="notes"><?=_('Notes');?></label>
-			<div class="btn-toolbar">
-			  <div class="btn-group">
-			    <a class="btn btn-default" href="#" id="notes-link"><i class="glyphicon glyphicon-pencil"></i><?=_('edit notes');?></a>
-			    <a class="btn btn-default" href="#" id="notes_preview-link"><i class="glyphicon glyphicon-eye-open"></i><?=_('preview notes');?></a>
-			    <a class="btn btn-default" href="/misc/page/markdown_help" id="markdown_help-link" target="_blank"><i class="glyphicon glyphicon-question-sign"></i><?=_('markdown help');?></a>
-			  </div>
-			</div>
-			<div class="input">
-				<textarea id="notes" name="notes" rows="8" cols="60" class="col-md-10"><?= isset($tournament->notes) ? htmlentities(utf8_decode($tournament->notes)) : set_value('notes');?></textarea>
-				<div id="notes_preview" class="col-md-10"></div>
-				<div id="markdown_help" class="col-md-10"><?= $this->load->view('misc/markdown_help', '', true)?></div>
+			<ul class="nav nav-tabs" id="description-tabs">
+			  <li><a href="#notes-tab" data-toggle="tab"><i class="glyphicon glyphicon-pencil"></i><?=_('edit notes');?></a></li>
+			  <li><a href="#preview-tab" data-toggle="tab"><i class="glyphicon glyphicon-eye-open"></i><?=_('preview notes');?></a></li>
+			  <li><a href="#markdown-tab" data-toggle="tab"><i class="glyphicon glyphicon-question-sign"></i><?=_('markdown help');?></a></li>
+			</ul>
+			<div class="tab-content">
+			  <div class="tab-pane active" id="notes-tab"><textarea id="notes" name="notes" rows="8" cols="60" class="col-md-10 form-control"><?= isset($tournament->notes) ? htmlentities(utf8_decode($tournament->notes)) : set_value('notes');?></textarea></div>
+			  <div class="tab-pane" id="preview-tab"><div id="notes_preview" class="col-md-10"></div></div>
+			  <div class="tab-pane" id="markdown-tab"><div id="markdown_help" class="col-md-10"><?= $this->load->view('misc/markdown_help', '', true)?></div></div>
 			</div>
 		</div>
 	</fieldset>

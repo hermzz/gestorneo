@@ -29,8 +29,8 @@ $sex = array(
 		<?php
 			$name_error = strlen(form_error($username['name'])) > 0;
 		?>
-		<div class="clearfix <?=$name_error ? 'error' : '';?>">
-			<?php echo form_label(_('Full name'), $username['id']); ?>
+		<div class="clearfix <?=$name_error ? 'has-error' : '';?>">
+			<?php echo form_label(_('Full name'), $username['id'], array('class' => "control-label")); ?>
 			<div class="input">
 				<?php echo form_input($username); ?>
 				<?php if($name_error): ?>
@@ -44,7 +44,7 @@ $sex = array(
 		<?php
 			$email_error = strlen(form_error($email['id'])) > 0;
 		?>
-		<div class="clearfix <?=$email_error ? 'error' : '';?>">
+		<div class="clearfix <?=$email_error ? 'has-error' : '';?>">
 			<?php echo form_label(_('Email Address'), $email['id']); ?>
 			<div class="input">
 				<?php echo form_input($email); ?>
@@ -59,7 +59,7 @@ $sex = array(
 		<?php
 			$sex_error = strlen(form_error($sex['name'])) > 0;
 		?>
-		<div class="clearfix <?=$sex_error ? 'error' : '';?>">
+		<div class="clearfix form-group <?=$sex_error ? 'has-error' : '';?>">
 			<?php echo form_label(_('Sex'), $sex['id']); ?>
 			<div class="input">
 				<?php echo form_dropdown('sex', array('M' => _('Guy'), 'F' => _('Girl')), null, 'id="sex" class="form-control"'); ?>

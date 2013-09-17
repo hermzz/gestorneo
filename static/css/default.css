@@ -238,10 +238,17 @@ input.error {
 }
 #tournament_form #markdown_help,
 #tournament_form #notes_preview {
-	display: none;
 	margin-left: 0;
 	min-height: 80px;
+	padding: 0;
+	width: 100%;
+	border-top: 0px;
+	border-top-right-radius: 0;
+	border-top-left-radius: 0;
 }
+
+
+
 #tournament_form .notes-section a.btn i{
 	margin-right: 4px;
 }
@@ -252,6 +259,10 @@ input.error {
 	float: left;
 	width: 48%;
 	margin-bottom: 1em;
+}
+#tournament_form fieldset.teams .input,
+#tournament_form fieldset.admins .input {
+	width: 80%;
 }
 #tournament_form input.btn {
 	clear: both;

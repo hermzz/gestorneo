@@ -1,8 +1,9 @@
 <h2><?=_('Markdown help');?></h2>
+<pre>
+# <?=_('h1 header');?>
 
-<p><pre>
-# <?=_('h1 header');?> 
-## <?=_('h2 header');?> 
+## <?=_('h2 header');?>
+
 ### etc...
 
 **<?=_('bold text');?>** or __<?=_('bold text');?>__
@@ -10,9 +11,11 @@
 
 [<?=_('link title');?>](http://www.google.com)
 
-* <?=_('unordered list');?> 
-1. <?=_('ordered list');?> 
+* <?=_('unordered list');?>
 
-> <?=_('indented text');?> 
->> <?=_('nested indented text');?> 
-</pre></p>
+1. <?=_('ordered list');?>
+
+> <?=_('indented text');?>
+
+>> <?=_('nested indented text');?>
+</pre>

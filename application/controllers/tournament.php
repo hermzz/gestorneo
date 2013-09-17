@@ -421,6 +421,10 @@ class Tournament extends GS_Controller {
 			'url' => '/tournament/view/'.$tournament_id,
 			'text' => $this->data['tournament']->name
 		);
+		$this->data['breadcrumbs'][] = array(
+			'url' => site_url('tournament/email/'.$tournament_id),
+			'text' => _('Email team')
+		);
 
 		if($this->form_validation->run() == FALSE)
 		{

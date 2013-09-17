@@ -21,7 +21,7 @@
 			$('#team_list').append('<input type="checkbox" name="'+team_name+'" /'+'>'+team_name+'<br /'+'>');
 		};
 
-		$('#team_list input').click(function(e) {
+		$('#team_list input').change(function(e) {
 			$('#email_list').html('&nbsp;');
 			$('#team_list input').each(function(k,v) {
 				if(v.checked)
@@ -39,6 +39,10 @@
 				}
 			});
 		});
+
+		$('input:checkbox').prettyCheckable({
+		    color: 'red'
+	  });
 	});
 
 emails = {
@@ -85,7 +89,7 @@ emails = {
 		<div class="clearfix">
 			<label for="message"><?=_('Message');?></label>
 			<div class="input">
-				<textarea id="message" name="message" cols="60" rows="20" class="col-md-12" ></textarea>
+				<textarea id="message" name="message" cols="60" rows="20" class="col-md-12 form-control" ></textarea>
 				<p><a href="/misc/page/markdown_help" target="_blank"><?=_('markdown help');?></a></p>
 			</div>
 		</div>
@@ -99,4 +103,4 @@ emails = {
 
 <p id="team_list"></p>
 
-<p id="email_list" class="alert-message warning">&nbsp;</p>
+<p id="email_list" class="alert-message warning well">&nbsp;</p>

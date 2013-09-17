@@ -7,6 +7,7 @@ $username = array(
 	'value' => set_value('username', $player->username),
 	'maxlength'	=> $this->config->item('username_max_length', 'tank_auth'),
 	'size'	=> 30,
+	'class' => 'form-control'
 );
 $email = array(
 	'name'	=> 'email',
@@ -14,6 +15,7 @@ $email = array(
 	'value'	=> set_value('email', $player->email),
 	'maxlength'	=> 80,
 	'size'	=> 30,
+	'class' => 'form-control'
 );
 $password = array(
 	'name'	=> 'password',
@@ -21,6 +23,7 @@ $password = array(
 	'value' => set_value('password'),
 	'maxlength'	=> $this->config->item('password_max_length', 'tank_auth'),
 	'size'	=> 30,
+	'class' => 'form-control'
 );
 $confirm_password = array(
 	'name'	=> 'confirm_password',
@@ -28,6 +31,7 @@ $confirm_password = array(
 	'value' => set_value('confirm_password'),
 	'maxlength'	=> $this->config->item('password_max_length', 'tank_auth'),
 	'size'	=> 30,
+	'class' => 'form-control'
 );
 $sex = array(
 	'name'	=> 'sex',
@@ -40,7 +44,7 @@ $sex = array(
 		<?php
 			$name_error = strlen(form_error($username['name'])) > 0;
 		?>
-		<div class="clearfix <?=$name_error ? 'error' : '';?>">
+		<div class="clearfix <?=$name_error ? 'has-error' : '';?>">
 			<?php echo form_label(_('Full name'), $username['id']); ?>
 			<div class="input">
 				<?php echo form_input($username); ?>
@@ -55,7 +59,7 @@ $sex = array(
 		<?php
 			$email_error = strlen(form_error($email['id'])) > 0;
 		?>
-		<div class="clearfix <?=$email_error ? 'error' : '';?>">
+		<div class="clearfix <?=$email_error ? 'has-error' : '';?>">
 			<?php echo form_label(_('Email Address'), $email['id']); ?>
 			<div class="input">
 				<?php echo form_input($email); ?>
@@ -74,7 +78,7 @@ $sex = array(
 		<?php
 			$pass1_error = strlen(form_error($password['name'])) > 0;
 		?>
-		<div class="clearfix <?=$pass1_error ? 'error' : '';?>">
+		<div class="clearfix <?=$pass1_error ? 'has-error' : '';?>">
 			<?php echo form_label(_('Password'), $password['id']); ?>
 			<div class="input">
 				<?php echo form_password($password); ?>
@@ -89,7 +93,7 @@ $sex = array(
 		<?php
 			$pass2_error = strlen(form_error($confirm_password['name'])) > 0;
 		?>
-		<div class="clearfix <?=$pass2_error ? 'error' : '';?>">
+		<div class="clearfix <?=$pass2_error ? 'has-error' : '';?>">
 			<?php echo form_label(_('Confirm Password'), $confirm_password['id']); ?>
 			<div class="input">
 				<?php echo form_password($confirm_password); ?>
@@ -104,10 +108,10 @@ $sex = array(
 		<?php
 			$sex_error = strlen(form_error($sex['name'])) > 0;
 		?>
-		<div class="clearfix <?=$sex_error ? 'error' : '';?>">
+		<div class="clearfix form-group<?=$sex_error ? 'has-error' : '';?>">
 			<?php echo form_label(_('Sex'), $sex['id']); ?>
 			<div class="input">
-				<?php echo form_dropdown('sex', array('M' => _('Guy'), 'F' => _('Girl')), $player->sex, 'id="sex"'); ?>
+				<?php echo form_dropdown('sex', array('M' => _('Guy'), 'F' => _('Girl')), $player->sex, 'id="sex" class="form-control"'); ?>
 				<?php if($sex_error): ?>
 					<span class="help-inline">
 						<?=form_error($sex['name']);?>
@@ -116,5 +120,8 @@ $sex = array(
 			</div>
 		</div>
 	</fieldset>
-<?php echo form_submit(array('name' => 'editInfo', 'value' => _('Edit information'), 'class' => 'btn btn-primary')); ?>
+
+	<div class="clearfix">
+		<?php echo form_submit(array('name' => 'editInfo', 'value' => _('Edit information'), 'class' => 'btn btn-primary')); ?>
+	</div>
 <?php echo form_close(); ?>
