@@ -1,19 +1,55 @@
-FROM ubuntu
-MAINTAINER Jon Surrell, jon@surrell.es
+# runnable base
+FROM stackbrew/ubuntu:saucy
 
-# Update
-RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
+# REPOS
 RUN apt-get update
+RUN apt-get upgrade -y
+RUN apt-get install -y software-properties-common
+RUN add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe"
 
-# Get our required stuff
-RUN apt-get install -y git vim apache2 php5 php5-mysqlnd mysql-server
-RUN git clone --branch dev https://github.com/SirReal/gestorneo.git /var/www
+# Node
+# RUN add-apt-repository -y ppa:chris-lea/node.js
+RUN apt-get -y update
 
-# Daemons
-ENTRYPOINT ["mysqld"]
-USER daemon
+#SHIMS
+#RUN dpkg-divert --local --rename --add /sbin/initctl
+#RUN ln -s /bin/true /sbin/initctl
+#ENV DEBIAN_FRONTEND noninteractive
 
-ENTRYPOINT ["apache2ctl", "start"]
-USER daemon
+# EDITORS
+RUN apt-get install -y vim
 
-EXPOSE 80
+# TOOLS
+RUN apt-get install -y curl git wget
+
+# BUILD
+# RUN apt-get install -y build-essential g++
+
+# LANGS
+
+## PHP
+RUN apt-get install -y php5 php5-cli php5-dev
+
+## NODE
+#RUN apt-get install -y nodejs
+
+# SERVICES
+
+## APACHE
+RUN apt-get install -y apache2 libapache2-mod-php5
+
+## MYSQL
+RUN apt-get install -y mysql-client mysql-server php5-mysqlnd
+RUN mysqld & sleep 2 && mysqladmin create mydb
+
+## APP
+RUN rm -rf /var/www/*
+ADD app /var/www
+
+# RESET
+
+#ENV DEBIAN_FRONTEND dialog
+
+## CONFIG
+ENV RUNNABLE_USER_DIR /var/www
+ENV RUNNABLE_SERVICE_CMDS /etc/init.d/apache2 restart; mysqld
