@@ -1,3 +1,2 @@
 branches:
-  except:
-    - master
+  only:
