@@ -9,5 +9,5 @@ application/logs/*
 !application/logs/.htaccess
 !application/config/database.php
 logs
-*.sublime*
+*.sublime-workspace
 ci_ide_helper.php
