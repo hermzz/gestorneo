@@ -21,9 +21,6 @@ class GS_Controller extends CI_Controller
 			'es' => _('Spanish'),
 			'en' => _('English')
 		);
-
-
-
 	}
 
 	function _set_language()
@@ -44,7 +41,7 @@ class GS_Controller extends CI_Controller
 				array(
 					'name' => 'language',
 					'value' => $language,
-					'expire' => 60*60*24*30,
+					'expire' => 60 * 60 * 24 * 30,
 					'domain' => $_SERVER['SERVER_NAME'],
 					'path' => '/'
 				)
@@ -57,13 +54,14 @@ class GS_Controller extends CI_Controller
 			$language_configs[$language][1],
 			$language_configs[$language][2]
 		);
-		putenv("LANG=".$language_configs[$language][1]);
 
+		putenv("LANG=".$language_configs[$language][0]);
+		putenv("LANGUAGE=".$language_configs[$language][0]);
 
-    $gettext_domain = 'messages';
-    bindtextdomain($gettext_domain, APPPATH . "language/locale");
-    bind_textdomain_codeset($gettext_domain, "UTF-8");
-    textdomain($gettext_domain);
+		$gettext_domain = 'messages';
+		bindtextdomain($gettext_domain, APPPATH . "language/locale/");
+		bind_textdomain_codeset($gettext_domain, "UTF-8");
+		textdomain($gettext_domain);
 
 		$this->data['selected_language'] = $language;
 		$this->config->set_item('language', $language == 'es' ? 'spanish' : 'english');
