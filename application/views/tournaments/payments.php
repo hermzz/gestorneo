@@ -225,54 +225,58 @@
 	<p><?=_('No payments added yet');?>
 <?php endif; ?>
 
-<div id="new_payment_dialog" class="modal hide fade" style="display: block; ">
-	<div class="modal-header">
-		<a href="#" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
-		<h3><?=_('Add new payment');?></h3>
-	</div>
-	<div class="modal-body">
-		<form action="#" method="post">
-			<input type="hidden" name="tid" value="<?=$tournament->id;?>" />
-			<input type="hidden" name="tpid" value="" />
-
-			<div class="clearfix">
-				<label for="concept"><?=_('Concept');?></label>
-				<div class="input">
-					<input type="text" class="form-control" id="concept" name="concept" />
-				</div>
+<div id="new_payment_dialog" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title"><?=_('Add new payment');?></h4>
 			</div>
+			<div class="modal-body">
+				<form action="#" method="post">
+					<input type="hidden" name="tid" value="<?=$tournament->id;?>" />
+					<input type="hidden" name="tpid" value="" />
 
-			<div class="clearfix">
-				<label for="amount"><?=_('Amount');?></label>
-				<div class="input">
-					<input type="text" class="form-control" id="amount" name="amount" />
-				</div>
+					<div class="clearfix">
+						<label for="concept"><?=_('Concept');?></label>
+						<div class="input">
+							<input type="text" class="form-control" id="concept" name="concept" />
+						</div>
+					</div>
+
+					<div class="clearfix">
+						<label for="amount"><?=_('Amount');?></label>
+						<div class="input">
+							<input type="text" class="form-control" id="amount" name="amount" />
+						</div>
+					</div>
+
+					<div class="clearfix">
+						<label><?=_('Applies to');?>:</label>
+						<div class="input">
+							<ul class="inputs-list">
+								<li>
+									<label>
+										<input type="radio" name="applies" value="all_team" checked="checked" />
+										<span><?=_('All the team');?></span>
+									</label>
+								</li>
+								<li>
+									<label>
+										<input type="radio" name="applies" class="radio" value="individuals" />
+										<span>
+											<?=_('Only some players');?><br />
+											<input type="text" class="form-control" name="player_autocomplete" />
+											<ul id="payment_player_list"></ul></span>
+									</label>
+								</li>
+							</ul>
+						</div>
+					</div>
+
+					<input type="submit" name="add_payment" class="btn btn-primary" value="<?=_('Add');?>" />
+				</form>
 			</div>
-
-			<div class="clearfix">
-				<label><?=_('Applies to');?>:</label>
-				<div class="input">
-					<ul class="inputs-list">
-						<li>
-							<label>
-								<input type="radio" name="applies" value="all_team" checked="checked" />
-								<span><?=_('All the team');?></span>
-							</label>
-						</li>
-						<li>
-							<label>
-								<input type="radio" name="applies" class="radio" value="individuals" />
-								<span>
-									<?=_('Only some players');?><br />
-									<input type="text" class="form-control" name="player_autocomplete" />
-									<ul id="payment_player_list"></ul></span>
-							</label>
-						</li>
-					</ul>
-				</div>
-			</div>
-
-			<input type="submit" name="add_payment" class="btn btn-primary" value="<?=_('Add');?>" />
-		</form>
+		</div>
 	</div>
 </div>
