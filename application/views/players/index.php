@@ -14,7 +14,7 @@
 	  <div class="tab-content">
 			<h2><?=_('Players');?></h2>
 		  <div class="tab-pane active" id="tab1">
-				<?php if(count($active_players) > 0): ?>
+				<?php if($active_players): ?>
 					<h3><?=_('Active');?></h3>
 					<ul>
 						<?php foreach($active_players as $player): ?>
@@ -29,7 +29,7 @@
 
 		  </div>
 		  <div class="tab-pane" id="tab2">
-				<?php if(count($old_players) > 0): ?>
+				<?php if($old_players): ?>
 					<h3><?=_('The exes');?></h3>
 					<ul>
 						<?php foreach($old_players as $player): ?>

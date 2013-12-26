@@ -1,4 +1,3 @@
 branches:
-  except:
-    - 2.1-stable
-    - master
+  only:
+    - some-nonexistant-brach
