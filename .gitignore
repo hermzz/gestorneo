@@ -1,13 +1,16 @@
 .DS_Store
 
+# Cache
 application/cache/*
 !application/cache/index.html
 !application/cache/.htaccess
 
+# Logs
 application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
+
 !application/config/database.php
-logs
+
 *.sublime-workspace
 ci_ide_helper.php
