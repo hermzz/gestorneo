@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="<?= $selected_language; ?>">
 	<head>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title><?=$title?> - Gestorneo</title>
 		<link rel="icon" type="image/png" href="<?=base_url();?>static/images/favicon.ico">
 
