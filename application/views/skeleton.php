@@ -6,44 +6,15 @@
 		<title><?=$title?> - Gestorneo</title>
 		<link rel="icon" type="image/png" href="<?=base_url();?>static/images/favicon.ico">
 
-		<!-- <link rel="stylesheet" type="text/css" href="<?=base_url();?>static/css/bootstrap.min.css" /> -->
 		<link rel="stylesheet" type="text/css" href="<?=base_url();?>static/css/bootstrap.united.min.css" />
 		<link href="<?=base_url();?>static/css/flick/jquery-ui-1.10.0.custom.min.css" type="text/css" rel="stylesheet" />
 		<link href="<?=base_url();?>static/css/prettyCheckable.css" type="text/css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="<?=base_url();?>static/css/default.css" />
 
-		<script src="<?=base_url();?>static/javascript/jquery.min.js"></script>
-		<script src="<?=base_url();?>static/javascript/jquery-migrate-1.0.0.js"></script>
-		<script src="<?=base_url();?>static/javascript/jquery-ui-1.10.0.custom.min.js"></script>
-		<script src="<?=base_url();?>static/javascript/jquery.cookie.js"></script>
-		<script src="<?=base_url();?>static/javascript/jquery.ba-hashchange.min.js"></script>
-		<script src="<?=base_url();?>static/javascript/jquery.tablesorter.min.js"></script>
-		<script src="<?=base_url();?>static/javascript/jquery.ui.datepicker-es.js"></script>
-		<script src="<?=base_url();?>static/javascript/prettyCheckable.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 
-		<script src="<?=base_url();?>static/javascript/custom.js"></script>
-
-		<script src="<?=base_url();?>static/javascript/bootstrap.min.js"></script>
-<?php for($i=0; isset($extra_js_files) && $i<count($extra_js_files); $i++) : ?>
-		<script src="<?=$extra_js_files[$i]?>"></script>
-<?php endfor; ?>
-
-		<script>
-			$(document).ready(function() {
-				$('[name="language_chooser"]').change(function(e) {
-					$.cookie(
-						'language',
-						$(e.target).val(),
-						{
-							path: '/',
-							domain: window.location.host
-						}
-					);
-
-					location.reload();
-				});
-			});
-		</script>
 	</head>
 
 	<body>
@@ -76,5 +47,6 @@
 				<?php $this->load->view('footer'); ?>
 			</footer>
 		</div>
+		<?php $this->load->view('footer-scripts'); ?>
 	</body>
 </html>

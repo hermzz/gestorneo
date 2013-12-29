@@ -5,5 +5,8 @@
 			"follow_symlinks": true,
 			"path": "."
 		}
-	]
+	],
+	"settings": {
+		"translate_tabs_to_spaces": false
+	}
 }
