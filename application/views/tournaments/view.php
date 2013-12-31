@@ -332,9 +332,9 @@
 											<input type="hidden" name="tlid" value="<?=$trip->leg_id;?>" />
 
 											<?php if($trip->player_on_it): ?>
-												<input type="submit" name="signoffFromTrip" value="Not going" />
+												<input type="submit" name="signoffFromTrip" value="<?= _('Not going'); ?>" />
 											<?php else: ?>
-												<input type="submit" name="signupToTrip" value="Going" />
+												<input type="submit" name="signupToTrip" value="<?= _('Going'); ?>" />
 											<?php endif; ?>
 										</form>
 									</li>
