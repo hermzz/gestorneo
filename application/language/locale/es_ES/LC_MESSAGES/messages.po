@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Gestorneo\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-09-13 14:45+0100\n"
-"PO-Revision-Date: 2013-09-13 14:50+0100\n"
+"PO-Revision-Date: 2013-12-31 17:28+0100\n"
 "Last-Translator: J <j@j.jp>\n"
 "Language-Team: es <hermann.kaser@gmail.com>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.6.3\n"
 "X-Poedit-SearchPath-0: /var/www/gestorneo/application\n"
 "X-Poedit-SearchPath-1: c:\\inetpub\\phproot\\gestorneo\\application\n"
 
@@ -857,7 +857,7 @@ msgstr "Vuelta"
 #: c:\inetpub\phproot\gestorneo\application/views/tournaments/view.php:313
 #, php-format
 msgid "Car from %s to %s, leaving on %s"
-msgstr "Coche llendo de %s a %s, saliendo a las %s"
+msgstr "Coche yendo de %s a %s, saliendo a las %s"
 
 #: c:\inetpub\phproot\gestorneo\application/views/tournaments/view.php:326
 msgid "On this trip"
