@@ -1,4 +1,4 @@
-<h2><?= $title ?></h2>
+<h2><?= $title; ?></h2>
 
 <link href="/static/css/base/ui.datepicker.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript">
@@ -8,10 +8,10 @@
 		$.datepicker.setDefaults({
 			firstDay: 1,
 			dateFormat: 'dd/mm/yy',
-      changeMonth: true,
-      changeYear: true,
-      showOtherMonths: true,
-      selectOtherMonths: true
+			changeMonth: true,
+			changeYear: true,
+			showOtherMonths: true,
+			selectOtherMonths: true
 		});
 
 		// datepicker selections
@@ -90,7 +90,7 @@
 								return $("li.teams.r-"+item.id).length ? null : {
 									label: item.name,
 									value: item.id
-								}
+								};
 							}));
 						} else {
 							console.log('fail');
@@ -100,7 +100,7 @@
 			},
 			select: function(event, ui)
 			{
-				if($('#teams_container .teams').length == 0)
+				if($('#teams_container .teams').length === 0)
 				{
 					$('#teams_container').html('');
 				}
@@ -121,7 +121,7 @@
 		$('#teams_container [class*=r-] a').live("click", function (e) {
 			$(e.target).parent().remove();
 
-			if($('#teams_container .teams').length == 0)
+			if($('#teams_container .teams').length === 0)
 			{
 				$('#teams_container').html('<li><?= str_replace("'", "\'", _('No teams selected')) ?></li>');
 			}
@@ -147,7 +147,7 @@
 								return $("li.players.r-"+item.id).length ? null : {
 									label: item.name,
 									value: item.id
-								}
+								};
 							}));
 						} else {
 							console.log('fail');
@@ -157,7 +157,7 @@
 			},
 			select: function(event, ui)
 			{
-				if($('#players_container .players').length == 0)
+				if($('#players_container .players').length === 0)
 				{
 					$('#players_container').html('');
 				}
@@ -177,7 +177,7 @@
 		$('#players_container [class*=r-] a').live('click', function (e) {
 			$(e.target).parent().remove();
 
-			if($('#players_container .players').length == 0)
+			if($('#players_container .players').length === 0)
 			{
 				$('#players_container').html('<li><?= str_replace("'", "\'", _('No players selected')) ;?></li>');
 			}
@@ -189,11 +189,10 @@
 		$('#description-tabs a:first').tab('show');
 		$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 
-		  if(e.target.hash == '#preview-tab') {
-		     	$("#notes_preview")
-		        .load('<?= site_url("/misc/markdown_preview") ?>', {markdown: $("#notes").val()})
-		        ;
-		  }
+			if(e.target.hash == '#preview-tab')
+			{
+				$("#notes_preview").load('<?= site_url("/misc/markdown_preview") ?>', {markdown: $("#notes").val()});
+			}
 		});
 
 	});
@@ -202,22 +201,22 @@
 
 <?php if( '' != validation_errors()) : ?>
 <div class="alert alert-error">
-  <button type="button" class="close" data-dismiss="alert">&times;</button>
-	<?= validation_errors() ?>
+	<button type="button" class="close" data-dismiss="alert">&times;</button>
+	<?= validation_errors(); ?>
 </div>
 <?php endif; ?>
 
 <form action="#" id="tournament_form" method="post" class="well">
 	<fieldset>
 		<div class="clearfix">
-			<label for="name"><?=_('Name');?></label>
+			<label for="name"><?= _('Name'); ?></label>
 			<div class="input">
 				<input type="text" class="form-control col-md-6" id="name" name="name" value="<?= isset($tournament->name) ? $tournament->name : set_value('name');?>" />
 			</div>
 		</div>
 
 		<div class="clearfix inline-date">
-			<label for="start_date"><?=_('Start date');?></label>
+			<label for="start_date"><?= _('Start date'); ?></label>
 			<div class="input">
 				<input type="text" class="form-control col-md-2" id="start_date" name="start_date" value="<?= isset($tournament->start_date) ? strftime('%d/%m/%Y', mysql_to_unix($tournament->start_date)) : set_value('start_date');?>" />
 			</div>
@@ -225,87 +224,87 @@
 		</div>
 
 		<div class="clearfix inline-date">
-			<label for="end_date"><?=_('End date');?></label>
+			<label for="end_date"><?= _('End date'); ?></label>
 			<div class="input">
-				<input type="text" class="form-control col-md-2" id="end_date" name="end_date" value="<?= isset($tournament->end_date) ? strftime('%d/%m/%Y', mysql_to_unix($tournament->end_date)) : set_value('end_date');?>" />
+				<input type="text" class="form-control col-md-2" id="end_date" name="end_date" value="<?= isset($tournament->end_date) ? strftime('%d/%m/%Y', mysql_to_unix($tournament->end_date)) : set_value('end_date'); ?>" />
 			</div>
 			<div id="end_date_picker"></div>
 		</div>
 
 		<div class="clearfix inline-date">
-			<label for="signup_deadline"><?=_('Signup deadline');?></label>
+			<label for="signup_deadline"><?= _('Signup deadline'); ?></label>
 			<div class="input">
-				<input type="text" class="form-control col-md-2" id="signup_deadline" name="signup_deadline" value="<?= isset($tournament->signup_deadline) ? strftime('%d/%m/%Y', mysql_to_unix($tournament->signup_deadline)) : set_value('signup_deadline');?>" />
+				<input type="text" class="form-control col-md-2" id="signup_deadline" name="signup_deadline" value="<?= isset($tournament->signup_deadline) ? strftime('%d/%m/%Y', mysql_to_unix($tournament->signup_deadline)) : set_value('signup_deadline'); ?>" />
 			</div>
 			<div id="signup_deadline_picker"></div>
 		</div>
 
 		<div class="clearfix notes-section col-md-6">
-			<label for="notes"><?=_('Notes');?></label>
+			<label for="notes"><?= _('Notes'); ?></label>
 			<ul class="nav nav-tabs" id="description-tabs">
-			  <li><a href="#notes-tab" data-toggle="tab"><i class="glyphicon glyphicon-pencil"></i><?=_('edit notes');?></a></li>
-			  <li><a href="#preview-tab" data-toggle="tab"><i class="glyphicon glyphicon-eye-open"></i><?=_('preview notes');?></a></li>
-			  <li><a href="#markdown-tab" data-toggle="tab"><i class="glyphicon glyphicon-question-sign"></i><?=_('markdown help');?></a></li>
+				<li><a href="#notes-tab" data-toggle="tab"><i class="glyphicon glyphicon-pencil"></i><?= _('edit notes'); ?></a></li>
+				<li><a href="#preview-tab" data-toggle="tab"><i class="glyphicon glyphicon-eye-open"></i><?= _('preview notes'); ?></a></li>
+				<li><a href="#markdown-tab" data-toggle="tab"><i class="glyphicon glyphicon-question-sign"></i><?= _('markdown help'); ?></a></li>
 			</ul>
 			<div class="tab-content">
-			  <div class="tab-pane active" id="notes-tab"><textarea id="notes" name="notes" rows="8" cols="60" class="col-md-10 form-control"><?= isset($tournament->notes) ? htmlentities(utf8_decode($tournament->notes)) : set_value('notes');?></textarea></div>
-			  <div class="tab-pane" id="preview-tab"><div id="notes_preview" class="col-md-10"></div></div>
-			  <div class="tab-pane" id="markdown-tab"><div id="markdown_help" class="col-md-10"><?= $this->load->view('misc/markdown_help', '', true)?></div></div>
+				<div class="tab-pane active" id="notes-tab"><textarea id="notes" name="notes" rows="8" cols="60" class="col-md-10 form-control"><?= isset($tournament->notes) ? htmlentities(utf8_decode($tournament->notes)) : set_value('notes'); ?></textarea></div>
+				<div class="tab-pane" id="preview-tab"><div id="notes_preview" class="col-md-10"></div></div>
+				<div class="tab-pane" id="markdown-tab"><div id="markdown_help" class="col-md-10"><?= $this->load->view('misc/markdown_help', '', true); ?></div></div>
 			</div>
 		</div>
 	</fieldset>
 
-    <fieldset class="teams">
-    	<legend><?=_('Teams');?></legend>
+	<fieldset class="teams">
+		<legend><?= _('Teams'); ?></legend>
 
-    	<div class="clearfix">
+		<div class="clearfix">
 			<div class="input">
 				<input type="text" class="form-control" name="teams_autocomplete" />
 
 				<ul id="teams_container">
-  				<?php if($teams && isset($selected_teams) && count($selected_teams)): ?>
+					<?php if($teams && isset($selected_teams) && count($selected_teams)): ?>
 					<?php foreach($teams as $team): ?>
 						<?php if(in_array($team->id, $selected_teams)): ?>
-							<li class="teams r-<?=$team->id;?>">
-								<?=$team->name;?>
-								<input type="hidden" name="teams[]" value="<?=$team->id;?>" />
+							<li class="teams r-<?= $team->id; ?>">
+								<?= $team->name; ?>
+								<input type="hidden" name="teams[]" value="<?= $team->id; ?>" />
 								[<a href="#">x</a>]
 							</li>
 						<?php endif; ?>
 					<?php endforeach; ?>
 				<?php else: ?>
-					<li><?=_('No teams selected');?></li>
-				<?php endif; ?>
-	    	</ul>
-			</div>
-		</div>
-    </fieldset>
-
-    <fieldset class="admins">
-    	<legend><?=_('Admins');?></legend>
-
-    	<div class="clearfix">
-			<div class="input">
-				<input type="text" class="form-control" name="players_autocomplete" />
-
-				<ul id="players_container">
-				<?php if($users && isset($tournament_admins) && count($tournament_admins)): ?>
-					<?php foreach($users as $user): ?>
-						<?php if(in_array($user->id, $tournament_admins)): ?>
-							<li class="players r-<?=$user->id;?>">
-								<?=$user->username;?>
-								<input type="hidden" name="admins[]" value="<?=$user->id;?>" />
-								[<a href="#">x</a>]
-							</li>
-						<?php endif; ?>
-					<?php endforeach; ?>
-				<?php else: ?>
-					<li><?=_('No players selected');?></li>
+					<li><?= _('No teams selected'); ?></li>
 				<?php endif; ?>
 				</ul>
 			</div>
 		</div>
-    </fieldset>
+	</fieldset>
 
-    <input type="submit" name="submitNewTournament" value="<?= htmlspecialchars($form_action) ?>" class="btn btn-primary btn-lg" />
+	<fieldset class="admins">
+		<legend><?= _('Admins'); ?></legend>
+
+		<div class="clearfix">
+			<div class="input">
+				<input type="text" class="form-control" name="players_autocomplete" />
+
+				<ul id="players_container">
+				<?php if ($users && isset($tournament_admins) && count($tournament_admins)): ?>
+					<?php foreach ($users as $user): ?>
+						<?php if (in_array($user->id, $tournament_admins)): ?>
+							<li class="players r-<?= $user->id; ?>">
+								<?= $user->username; ?>
+								<input type="hidden" name="admins[]" value="<?= $user->id; ?>" />
+								[<a href="#">x</a>]
+							</li>
+						<?php endif; ?>
+					<?php endforeach; ?>
+				<?php else: ?>
+					<li><?= _('No players selected'); ?></li>
+				<?php endif; ?>
+				</ul>
+			</div>
+		</div>
+	</fieldset>
+
+	<input type="submit" name="submitNewTournament" value="<?= htmlspecialchars($form_action); ?>" class="btn btn-primary btn-lg" />
 </form>
