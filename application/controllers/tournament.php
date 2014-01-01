@@ -266,7 +266,7 @@ class Tournament extends GS_Controller {
 			'text' => $this->data['tournament']->name
 		);
 
-		if($this->form_validation->run() == FALSE)
+		if($this->form_validation->run() === FALSE)
 		{
 			$this->data['content_view'] = 'tournaments/form';
 			$this->load->view('skeleton', $this->data);
