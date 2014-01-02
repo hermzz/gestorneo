@@ -247,7 +247,7 @@
 				<li><a href="#markdown-tab" data-toggle="tab"><i class="glyphicon glyphicon-question-sign"></i><?= _('markdown help'); ?></a></li>
 			</ul>
 			<div class="tab-content">
-				<div class="tab-pane active" id="notes-tab"><textarea id="notes" name="notes" rows="8" cols="60" class="col-md-10 form-control"><?= isset($tournament->notes) ? htmlentities($tournament->notes) : set_value('notes'); ?></textarea></div>
+				<div class="tab-pane active" id="notes-tab"><textarea id="notes" name="notes" rows="8" cols="60" class="col-md-10 form-control"><?= isset($tournament->notes) ? htmlspecialchars($tournament->notes) : set_value('notes'); ?></textarea></div>
 				<div class="tab-pane" id="preview-tab"><div id="notes_preview" class="col-md-10"></div></div>
 				<div class="tab-pane" id="markdown-tab"><div id="markdown_help" class="col-md-10"><?= $this->load->view('misc/markdown_help', '', true); ?></div></div>
 			</div>
