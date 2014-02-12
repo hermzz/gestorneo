@@ -225,10 +225,10 @@
 				<?php foreach($teams as $team): ?>
 					<h4>
 						<?= $team->name; ?>
-						<?= $team->males + $team->females; ?>:
-						<span class="badge badge-info"><?= $team->males; ?>M</span>
-						/
-						<span class="badge badge-danger"><?= $team->females; ?>F</span>
+						[<?= $team->males + $team->females; ?>:
+						<span class="label label-info"><?= $team->males; ?>M</span>
+						+
+						<span class="label label-danger"><?= $team->females; ?>F</span>]
 					</h4>
 
 					<ul class="player_list">
