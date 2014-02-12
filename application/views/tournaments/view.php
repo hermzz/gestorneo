@@ -37,7 +37,7 @@
 				source: function(request, response) {
 					$.ajax({
 						url: '/ajax/player_autocomplete',
-						dataType: "jsonp",
+						dataType: 'jsonp',
 						data: {
 							term: request.term
 						},
@@ -76,7 +76,7 @@
 			$('#include_player_dialog form').submit(function() {
 				$.ajax({
 					url: '/ajax/invite_player_to_tournament',
-					dataType: "jsonp",
+					dataType: 'jsonp',
 					data: {
 						tid: tournament_id,
 						pid: last_values.value
@@ -103,21 +103,21 @@
 			$('input:checkbox').prettyCheckable({
 				color: 'red'
 			});
-			var $pl = $("input:checkbox[name=player_id]");
-			var $pl_pc = $(".prettycheckbox a");
-			var $pa = $(".player-actions");
-			$("button[class*=select-]").click(function(){
+			var $pl = $('input:checkbox[name=player_id]');
+			var $pl_pc = $('.prettycheckbox a');
+			var $pa = $('.player-actions');
+			$('button[class*=select-]').click(function(){
 				if($(this).hasClass('select-all')) {
 					if($pl_pc.length > 0)
-						$pl.not(":checked").siblings('a').click();
+						$pl.not(':checked').siblings('a').click();
 					else
-						$pl.attr("checked", "checked").last().change();
+						$pl.attr('checked', 'checked').last().change();
 				}
 				else {
 					if($pl_pc.length > 0)
-						$pl.filter(":checked").siblings('a').click();
+						$pl.filter(':checked').siblings('a').click();
 					else
-						$pl.removeAttr("checked").last().change();
+						$pl.removeAttr('checked').last().change();
 				}
 			});
 
@@ -190,42 +190,46 @@
 
 			<?php if($is_tournament_admin && !$this->tournament_model->is_old($tournament)): ?>
 			<div class="panel panel-default player-admin">
-        <div class="panel-body">
-        	<label><?= _('Team Admin'); ?>:</label>
+				<div class="panel-body">
+					<label><?= _('Team Admin'); ?>:</label>
 					<div class="btn-group">
-					  <button type="button" class="btn btn-default select-all"><?= _('Select All'); ?></button>
-					  <button type="button" class="btn btn-default select-none"><?= _('Select None'); ?></button>
+						<button type="button" class="btn btn-default select-all"><?= _('Select All'); ?></button>
+						<button type="button" class="btn btn-default select-none"><?= _('Select None'); ?></button>
 
-					  <div class="btn-group team-action">
-					    <button type="button" class="btn btn-primary dropdown-toggle player-actions disabled" data-toggle="dropdown">
-					      <?= _('Player Action') ?>
-					      <span class="caret"></span>
-					    </button>
-					    <ul class="dropdown-menu">
-							<?php foreach($teams as $team): ?>
-					      <li><a href="#" data-id="<?= $team->id; ?>"><?= _('Add to'); ?> <?= $team->name; ?></a></li>
-							<?php endforeach; ?>
-					      <li><a href="#" data-id="-1"><?= _('Add to Waiting List'); ?></a></li>
-					      <li><a href="#" data-id="0"><?= _('Remove from Tournament'); ?></a></li>
-					    </ul>
-					  </div>
+						<div class="btn-group team-action">
+							<button type="button" class="btn btn-primary dropdown-toggle player-actions disabled" data-toggle="dropdown">
+								<?= _('Player Action') ?>
+								<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu">
+								<?php foreach($teams as $team): ?>
+								<li><a href="#" data-id="<?= $team->id; ?>"><?= _('Add to'); ?> <?= $team->name; ?></a></li>
+								<?php endforeach; ?>
+								<li><a href="#" data-id="-1"><?= _('Add to Waiting List'); ?></a></li>
+								<li><a href="#" data-id="0"><?= _('Remove from Tournament'); ?></a></li>
+							</ul>
+					 	</div>
 					</div>
-        </div>
-        <form class="assign-player" action="<?= site_url('tournament/assign_players/' . $tournament->id); ?>" method="post">
-        	<input type="hidden" name="team_id" id="team-id" />
-        	<input type="hidden" name="player_ids" id="player-ids" />
-        </form>
-        </form>
-      </div>
+				</div>
+				<form class="assign-player" action="<?= site_url('tournament/assign_players/' . $tournament->id); ?>" method="post">
+					<input type="hidden" name="team_id" id="team-id" />
+					<input type="hidden" name="player_ids" id="player-ids" />
+				</form>
+				</form>
+			</div>
 			<?php endif; ?>
-
-
 
 			<h3><?= _('Players confirmed'); ?></h3>
 
 			<?php if($teams): ?>
 				<?php foreach($teams as $team): ?>
-					<h4><?= $team->name; ?> [<?= $team->males; ?>M / <?= $team->females; ?>F]</h4>
+					<h4>
+						<?= $team->name; ?>
+						<?= $team->males + $team->females; ?>:
+						<span class="badge badge-info"><?= $team->males; ?>M</span>
+						/
+						<span class="badge badge-danger"><?= $team->females; ?>F</span>
+					</h4>
 
 					<ul class="player_list">
 						<?php if($team->players): ?>
@@ -347,8 +351,8 @@
 		</div>
 	</div>
   <div class="modal fade" id="include_player_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-    	<div class="modal-content">
+	<div class="modal-dialog">
+		<div class="modal-content">
 				<div class="modal-header">
 					<a href="#" class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
 					<h3><?= _('Include player'); ?></h3>
@@ -357,7 +361,7 @@
 					<form action="#" method="post">
 						<div class="input-group">
 							<input type="text" class="form-control" name="player_autocomplete" />
-	      			<span class="input-group-btn">
+					<span class="input-group-btn">
 								<input type="submit" name="add_player" value="<?= _('Add'); ?>" disabled="disabled" class="btn btn-primary" />
 							</span>
 						</div>
