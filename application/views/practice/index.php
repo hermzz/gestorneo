@@ -1,3 +1,5 @@
 <div>
-<h1>practices</h1>
+	<?php foreach ($practices as $p): ?>
+		<?php var_export($p); ?>
+	<?php endforeach; ?>
 </div>
