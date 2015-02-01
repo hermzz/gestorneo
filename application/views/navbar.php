@@ -17,6 +17,7 @@
 				<li><a href="/tournament/"><?=_('tournaments');?></a></li>
 				<li><a href="/player/"><?=_('players');?></a></li>
 				<li><a href="/team/"><?=_('teams');?></a></li>
+				<li><a href="/practice/"><?=_('practices');?></a></li>
 				<li><a href="/auth/logout"><?=_('Logout');?></a></li>
 			<?php endif; ?>
 		</ul>
