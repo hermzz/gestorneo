@@ -14,7 +14,7 @@ class Practice_model extends CI_Model
 	{
 		$this->db->select('t.*')
 		         ->from('practices AS t')
-		         ->where('t.next_date >=', 'NOW()')
+		         ->where('t.next_date >= NOW()')
 		         ->order_by('t.next_date', 'DESC');
 
 		$query = $this->db->get();
