@@ -109,7 +109,13 @@ $autoload['language'] = array();
 |
 */
 
-$autoload['model'] = array('tournament_model', 'player_model', 'team_model', 'tripleg_model');
+$autoload['model'] = array(
+	'tournament_model',
+	'player_model',
+	'team_model',
+	'tripleg_model',
+	'practice_model',
+);
 
 
 /* End of file autoload.php */
