@@ -6,7 +6,7 @@ class Practice extends GS_Controller {
 	{
 		parent::__construct();
 
-		if(!$this->tank_auth->is_logged_in())
+		if (!$this->tank_auth->is_logged_in())
 		{
 			$this->session->set_userdata(array('login_return' => $this->uri->uri_string()));
 			redirect('/auth/login/');
@@ -21,7 +21,7 @@ class Practice extends GS_Controller {
 	function index()
 	{
 		// $this->data['future_tournaments'] = $this->tournament_model->getAll('future', $this->tank_auth->get_user_id());
-		// $this->data['past_tournaments'] = $this->tournament_model->getAll('past', $this->tank_auth->get_user_id());
+		$this->data['practices'] = $this->practice_model->getUpcoming();
 
 		$this->data['title'] = _('Practices');
 		$this->data['content_view'] = 'practice/index';

@@ -10,6 +10,19 @@ class Practice_model extends CI_Model
 		return $query->num_rows > 0 ? $query->row() : FALSE;
 	}
 
+	function getUpcoming()
+	{
+		$this->db->select('t.*')
+		         ->from('practices AS t')
+		         ->where('t.next_date >=', 'NOW()')
+		         ->order_by('t.next_date', 'DESC');
+
+		$query = $this->db->get();
+
+		return $query->num_rows > 0 ? $query->result() : array();
+	}
+
+
 	function getAll($type='all', $check_user_status_id=false)
 	{
 		$this->db->select('t.*');
@@ -26,10 +39,6 @@ class Practice_model extends CI_Model
 			case 'future':
 				$this->db->where('t.start_date >', 'NOW()', false);
 				break;
-
-			// Redundant
-			// case 'all':
-			// default;
 		}
 
 		$query = $this->db->get();
