@@ -15,23 +15,12 @@ class Practice_model extends CI_Model
 	*/
 	function updateRecurring()
 	{
-		$this->db
-			->select('t.*')
-			->from('practices AS t')
-			->where('t.next_date < NOW()')
-			->where('t.recurring', true)
-			->order_by('t.next_date', 'DESC');
 
-		$query = $this->db->get();
-
-		foreach ($query as $row)
-		{
-			$this->db->query(
-				'UPDATE practices AS t
-				SET t.next_date = DATE_ADD(t.next_date, INTERVAL 1 WEEK)
-				WHERE t.next_date < NOW() AND t.recurring IS TRUE'
-			);
-		}
+		$this->db->query(
+			'UPDATE practices AS t
+			SET t.next_date = DATE_ADD(t.next_date, INTERVAL 1 WEEK)
+			WHERE t.next_date < NOW() AND t.recurring IS TRUE'
+		);
 
 		return $this;
 	}
