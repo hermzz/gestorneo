@@ -17,9 +17,9 @@ class Practice_model extends CI_Model
 	{
 
 		$this->db->query(
-			'UPDATE practices AS t
-			SET t.next_date = DATE_ADD(t.next_date, INTERVAL 1 WEEK)
-			WHERE t.next_date < NOW() AND t.recurring IS TRUE'
+			'UPDATE `practices` AS `t`
+			SET `t`.`next_date` = DATE_ADD(`t`.`next_date`, INTERVAL 1 WEEK)
+			WHERE `t`.`next_date` < NOW() AND `t`.`recurring` IS TRUE'
 		);
 
 		return $this;
