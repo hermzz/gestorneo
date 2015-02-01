@@ -30,6 +30,9 @@ class Practice_model extends CI_Model
 			// 2015-02-01 00:00:00
 			$mysql_date = date('Y-m-d H:i:s', strtotime($row['repeat_rule'], $php_date));
 
+			var_export($php_date);
+			var_export($mysql_date);
+
 			$this->db->update('practices as t', "t.next_date = '$mysql_date'", "t.id = {$row['id']}");
 		}
 
