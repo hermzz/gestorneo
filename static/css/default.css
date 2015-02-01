@@ -2,14 +2,6 @@ html {
 	overflow-y: scroll;
 }
 
-
-@media (min-width: 980px) {
-	body {
-		padding-top: 60px !important;
-		margin-bottom: 0 !important;
-	}
-}
-
 h2, h3, h4 {
 	line-height: 2em;
 }
