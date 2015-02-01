@@ -21,7 +21,7 @@ class Practice extends GS_Controller {
 	function index()
 	{
 		// $this->data['future_tournaments'] = $this->tournament_model->getAll('future', $this->tank_auth->get_user_id());
-		$this->data['practices'] = $this->practice_model->getUpcoming();
+		$this->data['practices'] = $this->practice_model->updateRecurring()->getUpcoming();
 
 		$this->data['title'] = _('Practices');
 		$this->data['content_view'] = 'practice/index';

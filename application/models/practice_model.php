@@ -10,6 +10,35 @@ class Practice_model extends CI_Model
 		return $query->num_rows > 0 ? $query->row() : FALSE;
 	}
 
+	/**
+	* Sets next_date to the next programmed time
+	*/
+	function updateRecurring()
+	{
+		$this->db
+			->select('t.*')
+			->from('practices AS t')
+			->where('t.next_date < NOW()')
+			->where('t.recurring', true)
+			->order_by('t.next_date', 'DESC');
+
+		$query = $this->db->get();
+
+		foreach ($query as $row)
+		{
+			$php_date = mysql_to_unix($row['next_date']);
+			// 2015-02-01 00:00:00
+			$mysql_date = date('Y-m-d H:i:s', strtotime($row['repeat_rule'], $php_date));
+
+			$this->db
+				->update('practices as t')
+				->set('t.next_date', $mysql_date)
+				->where('t.id', $row['id']);
+		}
+
+		return $this;
+	}
+
 	function getUpcoming()
 	{
 		$this->db->select('t.*')
