@@ -22,5 +22,3 @@ class Misc extends GS_Controller
 		$this->output->set_output(markdown($md));
 	}
 }
-
-?>

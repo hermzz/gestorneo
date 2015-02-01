@@ -137,5 +137,3 @@ class Player extends GS_Controller {
 		header('Location: /player/view/'.$player_id);
 	}
 }
-
-?>

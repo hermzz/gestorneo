@@ -6,28 +6,28 @@ class Team_model extends CI_Model
 	{
 		$query = $this->db->query(
 			'SELECT * FROM teams WHERE id='.$id);
-		
+
 		return $query->num_rows > 0 ? $query->row() : FALSE;
 	}
-	
+
 	function getAll()
 	{
-		
+
 		$sql = 'SELECT * FROM teams ORDER BY name ASC';
 		$teams = $this->db->query($sql);
-		
+
 		return $teams->num_rows > 0 ? $teams->result() : FALSE;
 	}
-	
+
 	function create($name, $description)
 	{
 		$this->db->query('INSERT INTO teams (name, description) VALUES (?, ?)',
 			array($name, $description));
 	}
-	
+
 	function edit($id, $name, $description)
 	{
-		$this->db->query('UPDATE teams SET name=?, description=? WHERE id=?', 
+		$this->db->query('UPDATE teams SET name=?, description=? WHERE id=?',
 			array($name, $description, $id));
 	}
 
@@ -40,7 +40,7 @@ class Team_model extends CI_Model
 					tournament_teams AS tt
 				WHERE
 					t.id = tt.tid AND
-					tt.teid = ? 
+					tt.teid = ?
 				ORDER BY
 					t.start_date DESC';
 
@@ -49,7 +49,7 @@ class Team_model extends CI_Model
 
 		return $query->num_rows > 0 ? $query->result() : FALSE;
 	}
-	
+
 	function getTournamentPlayers($tournament_id, $team_id)
 	{
 		$players = $this->db->query(
@@ -65,18 +65,16 @@ class Team_model extends CI_Model
 			ORDER BY
 				u.username ASC'
 		);
-		
+
 		return $players->num_rows > 0 ? $players->result() : FALSE;
 	}
-	
+
 	function search($name)
 	{
 		$query = $this->db->query(
 			'SELECT * FROM teams WHERE name LIKE "%'.$this->db->escape_like_str($name).'%"'
 		);
-		
+
 		return $query->num_rows > 0 ? $query->result() : FALSE;
 	}
-} 
-
-?>
+}

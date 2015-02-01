@@ -12,7 +12,7 @@
 		<link rel="stylesheet" type="text/css" href="<?= base_url(); ?>static/css/default.css" />
 
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+		<script src="//code.jquery.com/jquery-migrate-1.2.1.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 
 	</head>

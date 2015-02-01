@@ -332,5 +332,3 @@ class Tournament_model extends CI_Model
 		$this->db->query('DELETE FROM tournament_payments WHERE tpid=?', array($tpid));
 	}
 }
-
-?>

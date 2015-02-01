@@ -129,5 +129,3 @@ class Ajax extends GS_Controller
 		echo $params['callback'].'('.json_encode(array('success' => true)).')';
 	}
 }
-
-?>

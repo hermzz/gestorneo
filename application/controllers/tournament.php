@@ -2,8 +2,8 @@
 
 class Tournament extends GS_Controller {
 
-	var $_date_regex = '/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/';
-	var $_datetime_regex = '/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4}) ([0-9]{1,2}):([0-9]{2,2})/';
+	protected $_date_regex = '/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4})/';
+	protected $_datetime_regex = '/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4,4}) ([0-9]{1,2}):([0-9]{2,2})/';
 
 	function __construct()
 	{
@@ -39,7 +39,7 @@ class Tournament extends GS_Controller {
 	{
 		$this->load->helper('markdown');
 
-		if($this->input->post('signupToTrip'))
+		if ($this->input->post('signupToTrip'))
 		{
 			$this->tripleg_model->addPlayer(
 				$this->input->post('tlid'),
@@ -47,7 +47,7 @@ class Tournament extends GS_Controller {
 			);
 		}
 
-		if($this->input->post('signoffFromTrip'))
+		if ($this->input->post('signoffFromTrip'))
 		{
 			$this->tripleg_model->removePlayer(
 				$this->input->post('tlid'),
@@ -59,11 +59,11 @@ class Tournament extends GS_Controller {
 
 		// player lists
 		$this->data['teams'] = $this->tournament_model->getTeams($tournament_id);
-		foreach($this->data['teams'] as $team)
+		foreach ($this->data['teams'] as $team)
 		{
 			$team->players = $this->team_model->getTournamentPlayers($tournament_id, $team->id);
 
-			if($team->players)
+			if ($team->players)
 			{
 				$team->males = count(array_filter($team->players, function($p) { return $p->sex == 'M'; }));
 				$team->females = count(array_filter($team->players, function($p) { return $p->sex == 'F'; }));
@@ -74,7 +74,7 @@ class Tournament extends GS_Controller {
 		}
 
 		$this->data['unassigned']['players'] = $this->tournament_model->getUnassignedPlayers($tournament_id);
-		if($this->data['unassigned']['players'])
+		if ($this->data['unassigned']['players'])
 		{
 			$this->data['unassigned']['males'] = count(array_filter($this->data['unassigned']['players'], function($p) { return $p->sex == 'M'; }));
 			$this->data['unassigned']['females'] = count(array_filter($this->data['unassigned']['players'], function($p) { return $p->sex == 'F'; }));
@@ -84,7 +84,7 @@ class Tournament extends GS_Controller {
 		}
 
 		$this->data['waiting']['players'] = $this->tournament_model->getPlayers($tournament_id, false);
-		if($this->data['waiting']['players'])
+		if ($this->data['waiting']['players'])
 		{
 			$this->data['waiting']['males'] = count(array_filter($this->data['waiting']['players'], function($p) { return $p->sex == 'M'; }));
 			$this->data['waiting']['females'] = count(array_filter($this->data['waiting']['players'], function($p) { return $p->sex == 'F'; }));
@@ -103,10 +103,10 @@ class Tournament extends GS_Controller {
 			date('Y', $u_end_date)
 		);
 
-		$trips= $this->tripleg_model->getTripsForTournament($tournament_id);
-		if($trips)
+		$trips = $this->tripleg_model->getTripsForTournament($tournament_id);
+		if ($trips)
 		{
-			foreach($trips as $trip)
+			foreach ($trips as $trip)
 			{
 				$trip->passengers = $this->tripleg_model->getTripPassengers($trip->leg_id);
 				$trip->player_on_it  =$this->tripleg_model->isPlayerOnIt($trip->leg_id, $this->tank_auth->get_user_id());
